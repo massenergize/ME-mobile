@@ -2,13 +2,14 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import WelcomePage from "./components/Pages/WelcomePage/WelcomePage";
+import WelcomePage from "./components/Pages/Auth/WelcomePage";
+import LoginPage from "./components/Pages/Auth/LoginPage";
+import SignupPage from "./components/Pages/Auth/SignupPage";
 import AboutPage from "./components/Pages/AboutPage/AboutPage";
 import ActionsPage from "./components/Pages/ActionsPage/ActionsPage";
 import CommunityPage from "./components/Pages/CommunityPage/CommunityPage";
 import TestimonialsPage from "./components/Pages/TestimonialsPage/TestimonialsPage";
 import TeamsPage from "./components/Pages/TeamsPage/TeamsPage";
-import LoginPage from "./components/Pages/LoginPage/LoginPage";
 import UserProfilePage from "./components/Pages/UserProfilePage/UserProfilePage";
 import EventsPage from "./components/Pages/EventsPage/EventsPage";
 import { NativeBaseProvider } from "native-base";
@@ -19,9 +20,14 @@ export default function App() {
   return (
     <NativeBaseProvider>
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
           <Stack.Screen name="welcome" component={WelcomePage} />
           <Stack.Screen name="login" component={LoginPage} />
+          <Stack.Screen name="signup" component={SignupPage} />
           <Stack.Screen name="userProfile" component={UserProfilePage} />
           <Stack.Screen name="about" component={AboutPage} />
           <Stack.Screen name="actions" component={ActionsPage} />

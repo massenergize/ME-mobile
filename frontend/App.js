@@ -13,12 +13,13 @@ import TeamsPage from "./components/Pages/TeamsPage/TeamsPage";
 import UserProfilePage from "./components/Pages/UserProfilePage/UserProfilePage";
 import EventsPage from "./components/Pages/EventsPage/EventsPage";
 import { NativeBaseProvider, StatusBar } from "native-base";
+import Theme from "./components/Theme";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NativeBaseProvider>
+    <NativeBaseProvider theme={Theme}>
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{

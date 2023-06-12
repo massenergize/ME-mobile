@@ -12,7 +12,7 @@ import TestimonialsPage from "./components/Pages/TestimonialsPage/TestimonialsPa
 import TeamsPage from "./components/Pages/TeamsPage/TeamsPage";
 import UserProfilePage from "./components/Pages/UserProfilePage/UserProfilePage";
 import EventsPage from "./components/Pages/EventsPage/EventsPage";
-import { NativeBaseProvider } from "native-base";
+import { NativeBaseProvider, StatusBar } from "native-base";
 
 const Stack = createNativeStackNavigator();
 
@@ -37,6 +37,7 @@ export default function App() {
           <Stack.Screen name="teams" component={TeamsPage} />
         </Stack.Navigator>
       </NavigationContainer>
+      <StatusBar style="auto" />
     </NativeBaseProvider>
   );
 }

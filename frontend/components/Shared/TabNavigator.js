@@ -6,8 +6,8 @@ import CommunityPage from "../Pages/CommunityPage/CommunityPage";
 import ActionsPage from "../Pages/ActionsPage/ActionsPage";
 import EventsPage from "../Pages/EventsPage/EventsPage";
 import UserProfilePage from "../Pages/UserProfilePage/UserProfilePage";
+import AboidersPage from "../Pages/ServiceProvidersPage/ServiceProvidersPage";
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {PersonIcon} from '@expo/vector-icons'
 
 const Tab = createBottomTabNavigator();
 
@@ -18,16 +18,16 @@ export default function CommunityNavigation() {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
-          if (route.name === "community") {
+          if (route.name === "COMMUNITY") {
             iconName = "home";
           }
-          else if (route.name === "actions") {
+          else if (route.name === "ACTIONS") {
             iconName = "flash";
           }
-          else if (route.name === "events") {
+          else if (route.name === "EVENTS") {
             iconName = "calendar";
           }
-          else if (route.name === "userProfile") {
+          else if (route.name === "PROFILE") {
             iconName = "person-circle";
           }
 
@@ -36,13 +36,14 @@ export default function CommunityNavigation() {
         tabBarActiveTintColor: "#64B058",
         tabBarInactiveTintColor: "#B3B2BD",
         tabBarShowLabel: false,
+        headerShown: false,
       })
     }
     >
-      <Tab.Screen name="community" component={CommunityPage} />
-      <Tab.Screen name="actions" component={ActionsPage} />
-      <Tab.Screen name="events" component={EventsPage} />
-      <Tab.Screen name="userProfile" component={UserProfilePage} />
-    </Tab.Navigator>
+      <Tab.Screen name="COMMUNITY" component={CommunityPage} />
+      <Tab.Screen name="ACTIONS" component={ActionsPage} />
+      <Tab.Screen name="EVENTS" component={EventsPage} />
+      <Tab.Screen name="PROFILE" component={UserProfilePage} />
+  </Tab.Navigator>
   );
 }

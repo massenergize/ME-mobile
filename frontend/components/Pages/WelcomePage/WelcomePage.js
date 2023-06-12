@@ -7,7 +7,7 @@ export default function WelcomePage({ navigation }) {
     <View>
       <Text>WelcomePage</Text>
       <Button onPress={() => navigation.navigate("login")}>Login</Button>
-      <Button onPress={() => navigation.navigate("communityNavigation")}>Community</Button>
+      <Button onPress={() => navigation.navigate("drawer")}>Community</Button>
     </View>
   );
 }

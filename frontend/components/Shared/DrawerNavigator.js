@@ -13,6 +13,10 @@ import { Button } from "native-base";
 
 const Drawer = createDrawerNavigator();
 
+const dataArray = [
+    {title: 'Resources', content: 'Test'}
+];
+
 function CustomDrawerContent(props) {
     return (
         <SafeAreaView style={{flex: 1}} forceInset={{top: "always", horizontal: "never"}}> 
@@ -40,6 +44,7 @@ export default function CommunityNavigation() {
         <Drawer.Screen name="About" component={AboutPage} />
         <Drawer.Screen name="Testimonials" component={TestimonialsPage} />
         <Drawer.Screen name="Teams" component={TeamsPage} />
+        <Drawer.Screen name="Service Providers" component={ServiceProvidersPage} />
     </Drawer.Navigator>
   );
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Image, Container, Center, Button, Flex } from "native-base";
+import { Box, Image, Center, Button, Flex } from "native-base";
 
 export default function WelcomePage({ navigation }) {
   return (
@@ -7,19 +7,26 @@ export default function WelcomePage({ navigation }) {
       <Image
         source={require("../../../assets/images/welcome-background.jpg")}
         alt="Welcome Background Image"
-        resizeMode="cover"
-        height="100%"
-        width="100%"
+        resizeMode="stretch"
+        height="full"
+        width="full"
       />
-      <Center position="absolute" alignSelf="center">
-        <Container>
+      <Box
+        width="100%"
+        height="100%"
+        position="absolute"
+        backgroundColor="primary.100"
+        opacity="30"
+      ></Box>
+      <Center position="absolute" height="full" width="full" alignSelf="center">
+        <Box width="90%">
           <Image
             source={require("../../../assets/images/logo.png")}
             alt="MassEnergize's logo"
             resizeMode="contain"
           />
-        </Container>
-        <Flex direction="column" alignSelf="center" width="80%">
+        </Box>
+        <Flex direction="column" alignSelf="center" width="90%">
           <Button
             mb="10"
             onPress={() => navigation.navigate("login")}

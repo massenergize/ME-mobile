@@ -46,6 +46,8 @@ export default function IntroductionPage({ navigation }) {
   const handleNext = () => {
     if (currentStep < STEPS.length - 1) {
       setCurrentStep(currentStep + 1);
+    } else {
+      navigation.navigate("welcome");
     }
   };
 
@@ -79,7 +81,7 @@ export default function IntroductionPage({ navigation }) {
         width="100%"
         height="100%"
         position="absolute"
-        backgroundColor="primary.100"
+        backgroundColor="primary.400"
         opacity="30"
       ></Box>
       <Center
@@ -142,10 +144,6 @@ export default function IntroductionPage({ navigation }) {
                 variant="ghost"
                 _text={{ fontWeight: "bold" }}
                 onPress={handleNext}
-                colorScheme={
-                  currentStep === STEPS.length - 1 ? "muted" : "primary"
-                }
-                disabled={currentStep === STEPS.length - 1}
               >
                 Next
               </Button>

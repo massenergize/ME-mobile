@@ -89,6 +89,15 @@ export default function IntroductionPage({ navigation }) {
         pt="10"
         borderTopRadius="30"
         backgroundColor="white"
+        style={{
+          shadowColor: "#000",
+          shadowRadius: 5,
+          shadowOpacity: 0.2,
+          shadowOffset: {
+            width: 0,
+            height: -10,
+          },
+        }}
       >
         <Container>
           <Heading alignSelf="center" color="primary.600">

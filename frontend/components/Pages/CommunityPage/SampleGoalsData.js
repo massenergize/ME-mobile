@@ -1,3 +1,4 @@
+// placeholder data for the community page graphs
 export const goals = [
     { 
       nameLong: "Individual Actions Completed",
@@ -19,6 +20,7 @@ export const goals = [
     }
   ]
 
+// colors for the graphs (maximum of three on the community page)
 export const colors = [
     "#DC4E34",
     "#64B058",

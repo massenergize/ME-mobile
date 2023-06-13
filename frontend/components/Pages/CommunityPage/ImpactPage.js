@@ -12,6 +12,8 @@ import {
   Center
 } from "native-base";
 import { goals, colors } from "./SampleGoalsData";
+
+// pie charts that are displayed on the impact page - more detailed than the smaller pie charts
 function BigPieChart({ goal, color }) {
   return (
     <VStack alignItems="center">
@@ -31,6 +33,7 @@ function BigPieChart({ goal, color }) {
   )
 }
 
+// currently contains placeholder data provided by the package
 function BigBarChart() {
     return (
         <VStack alignItems="center">
@@ -47,11 +50,13 @@ function BigBarChart() {
     )
 }
 
-export default function CommunityPage() {
+export default function ImpactPage() {
   return (
     <ScrollView>
       <VStack alignItems="center" space={3} p={3} bg="white">
-        {goals.map((goal, index) => <BigPieChart goal={goal} color={colors[index]} key={index}/>)}
+        { // show the three sample goals on the impact page
+            goals.map((goal, index) => <BigPieChart goal={goal} color={colors[index]} key={index}/>)
+        }
         <BigBarChart />
       </VStack>
     </ScrollView>

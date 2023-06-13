@@ -13,10 +13,7 @@ import { Button } from "native-base";
 
 const Drawer = createDrawerNavigator();
 
-const dataArray = [
-    {title: 'Resources', content: 'Test'}
-];
-
+// custom drawer in order to have the "switch communities" button at the bottom
 function CustomDrawerContent(props) {
     return (
         <SafeAreaView style={{flex: 1}} forceInset={{top: "always", horizontal: "never"}}> 
@@ -34,7 +31,7 @@ export default function CommunityNavigation() {
         screenOptions={({ navigation, route, options }) => ({
             drawerActiveTintColor: "#64B058",
             headerTintColor: "#000000",
-            headerTitle: getFocusedRouteNameFromRoute(route),
+            headerTitle: getFocusedRouteNameFromRoute(route), // make header title that of the current tab
             headerTitleAlign: "center",
         })}
 

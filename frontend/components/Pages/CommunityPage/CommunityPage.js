@@ -14,6 +14,7 @@ import {
 } from "native-base";
 import { goals, colors } from "./SampleGoalsData.js";
 
+// small pie charts that are part of the goal card
 function SmallChart({ goal, color }) {
   return (
     <VStack alignItems="center">
@@ -32,6 +33,7 @@ function SmallChart({ goal, color }) {
   )
 }
 
+// the card that shows up to three goals on the community page
 function GoalsCard({ navigation }) {
   return (
     <Pressable onPress={() => navigation.navigate("impact")}>
@@ -46,7 +48,9 @@ function GoalsCard({ navigation }) {
         p="3"
         >
         <HStack>
-          {goals.map((goal, index) => <SmallChart goal={goal} color={colors[index]} key={index}/>)}
+          { // show the three sample goals on the community page
+            goals.map((goal, index) => <SmallChart goal={goal} color={colors[index]} key={index}/>)
+          }
         </HStack>
       </Box>
       }}

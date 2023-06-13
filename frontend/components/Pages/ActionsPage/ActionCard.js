@@ -34,15 +34,17 @@ const ActionCard = () => {
               Impact | Cost | Difficulty
             </Text>
           </Stack>
+          {/*
           <Text fontWeight="400">
             Learn something cool about this task here!
           </Text>
+        */}
           <HStack alignItems="center" space={4} justifyContent="space-between">
             <HStack alignItems="center">
               <Text color="coolGray.600" _dark={{
               color: "warmGray.200"
             }} fontWeight="400">
-                5 completed recently...
+                5 completed recently.
               </Text>
             </HStack>
           </HStack>

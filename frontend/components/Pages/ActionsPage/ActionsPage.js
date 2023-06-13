@@ -10,17 +10,17 @@ export default function ActionsPage() {
     
     <ScrollView>
       <Text style={styles.category}>One-Time Actions</Text>
-      <HStack space={2} justifyContent="center">
+      <HStack space={2} justifyContent="center" mx="15">
         <ActionCard/>
         <ActionCard/>
       </HStack>
       <Text style={styles.category}>Recurring Actions</Text>
-      <HStack space={2} justifyContent="center">
+      <HStack space={2} justifyContent="center" mx="15">
         <ActionCard/>
         <ActionCard/>
       </HStack>
       <Text style={styles.category}>Other Actions</Text>
-      <HStack space={2} justifyContent="center">
+      <HStack space={2} justifyContent="center" mx="15">
         <ActionCard/>
         <ActionCard/>
       </HStack>
@@ -35,7 +35,8 @@ const styles = StyleSheet.create({
     height: "80",
   },
   category: {
-    fontSize: 25,
+    padding: 15,
+    fontSize: 23,
     fontWeight: "bold",
   }
 });

@@ -1,14 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Text,
-  Image,
-  Container,
-  Center,
-  Button,
-  VStack,
-  Flex,
-} from "native-base";
+import { Box, Image, Container, Center, Button, Flex } from "native-base";
 
 export default function WelcomePage({ navigation }) {
   return (

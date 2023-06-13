@@ -11,6 +11,7 @@ import TeamsPage from "./components/Pages/TeamsPage/TeamsPage";
 import LoginPage from "./components/Pages/LoginPage/LoginPage";
 import UserProfilePage from "./components/Pages/UserProfilePage/UserProfilePage";
 import EventsPage from "./components/Pages/EventsPage/EventsPage";
+import ImpactPage from "./components/Pages/CommunityPage/ImpactPage";
 import DrawerNavigator from "./components/Shared/DrawerNavigator";
 import { NativeBaseProvider } from "native-base";
 import Theme from "./components/Shared/Theme";
@@ -32,6 +33,7 @@ export default function App() {
           <Stack.Screen name="community" component={CommunityPage} />
           <Stack.Screen name="teams" component={TeamsPage} />
           <Stack.Screen name="drawer" component={DrawerNavigator} options={{headerShown: false}} />
+          <Stack.Screen name="impact" component={ImpactPage} options={{headerTitle: "IMPACT", headerTitleAlign: "center"}} />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>

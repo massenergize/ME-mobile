@@ -13,12 +13,13 @@ import UserProfilePage from "./components/Pages/UserProfilePage/UserProfilePage"
 import EventsPage from "./components/Pages/EventsPage/EventsPage";
 import DrawerNavigator from "./components/Shared/DrawerNavigator";
 import { NativeBaseProvider } from "native-base";
+import Theme from "./components/Shared/Theme";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NativeBaseProvider>
+    <NativeBaseProvider theme={Theme}>
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="welcome" component={WelcomePage} />

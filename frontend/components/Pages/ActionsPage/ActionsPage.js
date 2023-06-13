@@ -4,7 +4,7 @@ import React from "react";
 export default function ActionsPage() {
   return (
     <View>
-      <Text>ActionsPage</Text>
+      <Text>ActionsPages</Text>
     </View>
   );
 }

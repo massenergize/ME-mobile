@@ -11,7 +11,8 @@ import TeamsPage from "./components/Pages/TeamsPage/TeamsPage";
 import LoginPage from "./components/Pages/LoginPage/LoginPage";
 import UserProfilePage from "./components/Pages/UserProfilePage/UserProfilePage";
 import EventsPage from "./components/Pages/EventsPage/EventsPage";
-import { NativeBaseProvider } from "native-base";
+import { NativeBaseProvider, StatusBar } from "native-base";
+import ChooseCommunityPage from "./components/Pages/ChooseCommunityPage/ChooseCommunityPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -19,10 +20,18 @@ export default function App() {
   return (
     <NativeBaseProvider>
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
           <Stack.Screen name="welcome" component={WelcomePage} />
           <Stack.Screen name="login" component={LoginPage} />
           <Stack.Screen name="userProfile" component={UserProfilePage} />
+          <Stack.Screen
+            name="chooseCommunity"
+            component={ChooseCommunityPage}
+          />
           <Stack.Screen name="about" component={AboutPage} />
           <Stack.Screen name="actions" component={ActionsPage} />
           <Stack.Screen name="testimonials" component={TestimonialsPage} />
@@ -31,6 +40,7 @@ export default function App() {
           <Stack.Screen name="teams" component={TeamsPage} />
         </Stack.Navigator>
       </NavigationContainer>
+      <StatusBar barStyle="dark-content" />
     </NativeBaseProvider>
   );
 }

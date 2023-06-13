@@ -1,7 +1,11 @@
 import React from "react";
+
+import { SafeAreaView } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NativeBaseProvider } from "native-base";
 
+import Theme from "./components/Theme";
 import WelcomePage from "./components/Pages/Auth/WelcomePage";
 import LoginPage from "./components/Pages/Auth/LoginPage";
 import SignupPage from "./components/Pages/Auth/SignupPage";
@@ -12,8 +16,7 @@ import TestimonialsPage from "./components/Pages/TestimonialsPage/TestimonialsPa
 import TeamsPage from "./components/Pages/TeamsPage/TeamsPage";
 import UserProfilePage from "./components/Pages/UserProfilePage/UserProfilePage";
 import EventsPage from "./components/Pages/EventsPage/EventsPage";
-import { NativeBaseProvider, StatusBar } from "native-base";
-import Theme from "./components/Theme";
+import IntroductionPage from "./components/Pages/IntroductionPage/IntroductionPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +29,7 @@ export default function App() {
             headerShown: false,
           }}
         >
+          <Stack.Screen name="intro" component={IntroductionPage} />
           <Stack.Screen name="welcome" component={WelcomePage} />
           <Stack.Screen name="login" component={LoginPage} />
           <Stack.Screen name="signup" component={SignupPage} />
@@ -38,7 +42,6 @@ export default function App() {
           <Stack.Screen name="teams" component={TeamsPage} />
         </Stack.Navigator>
       </NavigationContainer>
-      <StatusBar style="auto" />
     </NativeBaseProvider>
   );
 }

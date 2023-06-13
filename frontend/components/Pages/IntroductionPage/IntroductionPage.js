@@ -15,26 +15,23 @@ import {
 const STEPS = [
   {
     title: "Title #1",
-    description:
-      "A brief description about the <bold>purpose</bold> of this step",
+    description: "A brief description about the purpose of this step",
     image: require("../../../assets/images/intro-step-1.png"),
   },
   {
     title: "Title #2",
-    description:
-      "A brief description about the <bold>purpose</bold> of this step",
+    description: "A brief description about the purpose of this step",
     image: require("../../../assets/images/intro-step-2.png"),
   },
   {
     title: "Title #3",
-    description:
-      "A brief description about the <bold>purpose</bold> of this step",
+    description: "A brief description about the purpose of this step",
     image: require("../../../assets/images/intro-step-3.png"),
   },
   {
     title: "Take Local Climate Action",
     description:
-      "<bold>MassEnergize</bold> works with community organizers and local leaders to scale household and community-level <bold>climate actions</bold>.",
+      "MassEnergize works with community organizers and local leaders to scale household and community-level climate actions.",
     image: require("../../../assets/images/intro-step-4.png"),
   },
 ];
@@ -105,7 +102,7 @@ export default function IntroductionPage({ navigation }) {
             color="muted.400"
             fontSize="md"
             lineHeight="xl"
-            dangerouslySetInnerHTML={{ __html: STEPS[currentStep].description }}
+            alignSelf="center"
           >
             {STEPS[currentStep].description}
           </Text>

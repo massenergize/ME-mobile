@@ -23,11 +23,12 @@ export default function LoginPage({ navigation }) {
 
         <VStack space={3} mt="5">
           <FormControl>
-            <Input variant="rounded" placeholder="Email address..." />
+            <Input variant="rounded" size="lg" placeholder="Email address..." />
           </FormControl>
           <FormControl>
             <Input
               variant="rounded"
+              size="lg"
               placeholder="Password..."
               type="password"
             />
@@ -41,10 +42,10 @@ export default function LoginPage({ navigation }) {
               mt="1"
               mr="2"
             >
-              Forget Password?
+              Forgot Password?
             </Link>
           </FormControl>
-          <Button mt="2" _text={{ color: "white" }}>
+          <Button mt="10" _text={{ color: "white" }}>
             Sign in
           </Button>
           <HStack mt="6" justifyContent="center" alignItems="center">

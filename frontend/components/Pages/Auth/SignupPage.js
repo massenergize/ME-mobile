@@ -23,11 +23,12 @@ export default function SignupPage({ navigation }) {
 
         <VStack space={3} mt="5">
           <FormControl>
-            <Input variant="rounded" placeholder="Email address..." />
+            <Input variant="rounded" size="lg" placeholder="Email address..." />
           </FormControl>
           <FormControl>
             <Input
               variant="rounded"
+              size="lg"
               placeholder="Password..."
               type="password"
             />
@@ -35,11 +36,12 @@ export default function SignupPage({ navigation }) {
           <FormControl>
             <Input
               variant="rounded"
+              size="lg"
               placeholder="Confirm password..."
               type="password"
             />
           </FormControl>
-          <Button mt="2" _text={{ color: "white" }}>
+          <Button mt="10" _text={{ color: "white" }}>
             Sign up
           </Button>
           <HStack mt="6" justifyContent="center" alignItems="center">

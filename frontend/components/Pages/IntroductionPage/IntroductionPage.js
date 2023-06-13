@@ -39,7 +39,7 @@ const STEPS = [
   },
 ];
 
-export default function IntroductionPage() {
+export default function IntroductionPage({ navigation }) {
   const [currentStep, setCurrentStep] = useState(0);
   const [imgSrc, setImgSrc] = useState(STEPS[currentStep].image);
 
@@ -61,6 +61,17 @@ export default function IntroductionPage() {
 
   return (
     <Box width="100%" flex="1">
+      <Button
+        position="absolute"
+        variant="ghost"
+        top="10"
+        right="5"
+        zIndex={1}
+        _text={{ fontWeight: "bold", color: "white", fontSize: "lg" }}
+        onPress={() => navigation.navigate("welcome")}
+      >
+        Skip
+      </Button>
       <AspectRatio>
         <Image source={imgSrc} key={imgSrc} alt="image" />
       </AspectRatio>

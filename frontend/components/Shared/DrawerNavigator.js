@@ -8,6 +8,7 @@ import ServiceProvidersPage from "../Pages/ServiceProvidersPage/ServiceProviders
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import TabNavigator from "./TabNavigator";
 import { getHeaderTitle } from "@react-navigation/elements";
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native'
 
 const Drawer = createDrawerNavigator();
 
@@ -20,11 +21,14 @@ export default function CommunityNavigation() {
             // return title;
             drawerActiveTintColor: "#64B058",
             headerTintColor: "#000000",
+            headerTitle: getFocusedRouteNameFromRoute(route),
+            headerTitleAlign: "center",
         })}
     >
-        <Drawer.Screen name="Community" component={TabNavigator} />
+        <Drawer.Screen name="Community" component={TabNavigator} screenOptions={{headerTitle: "COMMUNITY"}} />
         <Drawer.Screen name="About" component={AboutPage} />
         <Drawer.Screen name="Testimonials" component={TestimonialsPage} />
+        <Drawer.Screen name="Teams" component={TeamsPage} />
      
     </Drawer.Navigator>
   );

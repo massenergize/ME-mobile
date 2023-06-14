@@ -2,7 +2,7 @@ import { View, Text, Pressable } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import React from "react";
 import { Box, Center, Heading, HStack, AspectRatio, Image, Stack } from "native-base";
-
+//import WelcomePage from "./components/Pages/WelcomePage/WelcomePage";
 
 const investigateAction = ( navigation ) => {
     navigation.navigate("welcome")

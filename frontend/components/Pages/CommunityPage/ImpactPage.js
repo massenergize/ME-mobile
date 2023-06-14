@@ -16,7 +16,7 @@ import { goals, colors } from "./SampleGoalsData";
 // pie charts that are displayed on the impact page - more detailed than the smaller pie charts
 function BigPieChart({ goal, color }) {
   return (
-    <VStack alignItems="center">
+    <VStack alignItems="center" m={3}>
       <Text bold fontSize="lg">{goal.nameLong}</Text>
       <VictoryPie 
           data={[{x: "current", y: goal.current}, {x: "remaining", y: goal.goal - goal.current}]} 

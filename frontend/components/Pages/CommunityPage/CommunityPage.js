@@ -85,7 +85,7 @@ export default function CommunityPage({ navigation }) {
           <Spacer/>
           <ShowMore navigation={navigation} page="ACTIONS"/>
         </HStack>
-        <HStack>
+        <HStack alignItems="center">
           <HeaderText text="Upcoming Events"/>
           <Spacer/>
           <ShowMore navigation={navigation} page="EVENTS"/>

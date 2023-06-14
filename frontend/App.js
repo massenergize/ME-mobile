@@ -1,13 +1,16 @@
 import React from "react";
 
-import { NavigationContainer } from "@react-navigation/native";
+import {
+  NavigationContainer,
+  getFocusedRouteNameFromRoute,
+} from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NativeBaseProvider } from "native-base";
 
-import Theme from "./components/Theme";
 import WelcomePage from "./components/Pages/Auth/WelcomePage";
 import LoginPage from "./components/Pages/Auth/LoginPage";
 import SignupPage from "./components/Pages/Auth/SignupPage";
+import "react-native-gesture-handler";
 import AboutPage from "./components/Pages/AboutPage/AboutPage";
 import ActionsPage from "./components/Pages/ActionsPage/ActionsPage";
 import CommunityPage from "./components/Pages/CommunityPage/CommunityPage";
@@ -16,6 +19,8 @@ import TeamsPage from "./components/Pages/TeamsPage/TeamsPage";
 import UserProfilePage from "./components/Pages/UserProfilePage/UserProfilePage";
 import EventsPage from "./components/Pages/EventsPage/EventsPage";
 import IntroductionPage from "./components/Pages/IntroductionPage/IntroductionPage";
+import DrawerNavigator from "./components/Shared/DrawerNavigator";
+import Theme from "./components/Shared/Theme";
 
 const Stack = createNativeStackNavigator();
 
@@ -39,6 +44,11 @@ export default function App() {
           <Stack.Screen name="events" component={EventsPage} />
           <Stack.Screen name="community" component={CommunityPage} />
           <Stack.Screen name="teams" component={TeamsPage} />
+          <Stack.Screen
+            name="drawer"
+            component={DrawerNavigator}
+            options={{ headerShown: false }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>

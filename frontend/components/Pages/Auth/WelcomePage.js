@@ -44,6 +44,9 @@ export default function WelcomePage({ navigation }) {
           >
             Create A Profile
           </Button>
+          <Button onPress={() => navigation.navigate("drawer")}>
+            Community
+          </Button>
         </Flex>
       </Center>
     </Box>

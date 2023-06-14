@@ -1,11 +1,19 @@
 import { View, Text } from "react-native";
+import { useNavigation } from '@react-navigation/native';
 import React from "react";
-import { Box, Center, Heading, HStack, AspectRatio, Image, Stack } from "native-base";
+import { Box, Center, Heading, HStack, AspectRatio, Image, Stack, Pressable } from "native-base";
+
+
+const investigateAction = ({navigation}) => {
+    //navigation.navigate("login")
+}
 
 const ActionCard = () => {
+  const navigation = useNavigation();
   return (
     <Box alignItems="center" width = "50%">
-      <Box maxW="80" rounded="lg" overflow="hidden" borderColor="coolGray.200" borderWidth="1" _dark={{
+    
+      <Pressable onPress={() => {console.log("Action clicked"), investigateAction(), navigation.navigate("login")}} maxW="80" rounded="lg" overflow="hidden" borderColor="coolGray.200" borderWidth="1" _dark={{
       borderColor: "coolGray.600",
       backgroundColor: "gray.700"
     }} _web={{
@@ -49,7 +57,7 @@ const ActionCard = () => {
             </HStack>
           </HStack>
         </Stack>
-      </Box>
+      </Pressable>
     </Box>
     
   );

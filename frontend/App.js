@@ -12,6 +12,7 @@ import LoginPage from "./components/Pages/LoginPage/LoginPage";
 import UserProfilePage from "./components/Pages/UserProfilePage/UserProfilePage";
 import EventsPage from "./components/Pages/EventsPage/EventsPage";
 import { NativeBaseProvider } from "native-base";
+import ActionCard from "./components/Pages/ActionsPage/ActionCard";
 
 const Stack = createNativeStackNavigator();
 

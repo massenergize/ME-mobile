@@ -26,6 +26,7 @@ export default function App() {
           <Stack.Screen name="userProfile" component={UserProfilePage} />
           <Stack.Screen name="about" component={AboutPage} />
           <Stack.Screen name="actions" component={ActionsPage} />
+          <Stack.Screen name="actioncard" component={ActionCard} />
           <Stack.Screen name="testimonials" component={TestimonialsPage} />
           <Stack.Screen name="events" component={EventsPage} />
           <Stack.Screen name="community" component={CommunityPage} />

@@ -67,16 +67,16 @@ export default function ChooseCommunityPage() {
       >
         <Container alignSelf="center">
           <VStack space="5" mt="10">
-            <HStack space="2" alignItems="center">
-              <Text fontSize="xs" fontWeight="bold">
+            <HStack space="2" justifyContent="center">
+              <Text fontSize="10px" fontWeight="bold">
                 ALL
               </Text>
               <Divider orientation="vertical" />
-              <Text fontSize="xs">CITIES & TOWNS</Text>
+              <Text fontSize="10px">CITIES & TOWNS</Text>
               <Divider orientation="vertical" />
-              <Text fontSize="xs">OTHER COMMUNITIES</Text>
+              <Text fontSize="10px">OTHER COMMUNITIES</Text>
               <Divider orientation="vertical" />
-              <Text fontSize="xs">SCHOOLS</Text>
+              <Text fontSize="10px">SCHOOLS</Text>
             </HStack>
             <Input
               placeholder="Search for a community..."

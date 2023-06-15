@@ -11,19 +11,19 @@ export default function ActionsPage({ navigation }) {
     <ScrollView>
       <Text style={styles.category}>One-Time Actions</Text>
       <HStack space={2} justifyContent="center" mx="15">
-        <ActionCard navigation = { navigation }/>
-        <ActionCard/>
+        <ActionCard navigation={ navigation } />
+        <ActionCard navigation={ navigation } />
         {/*<Button onPress={() => navigation.navigate("welcome")}>Take Action</Button>*/}
       </HStack>
       <Text style={styles.category}>Recurring Actions</Text>
       <HStack space={2} justifyContent="center" mx="15">
-        <ActionCard/>
-        <ActionCard/>
+        <ActionCard navigation={ navigation } />
+        <ActionCard navigation={ navigation } />
       </HStack>
       <Text style={styles.category}>Other Actions</Text>
       <HStack space={2} justifyContent="center" mx="15">
-        <ActionCard/>
-        <ActionCard/>
+        <ActionCard navigation={ navigation } />
+        <ActionCard navigation={ navigation } />
       </HStack>
       
     </ScrollView>

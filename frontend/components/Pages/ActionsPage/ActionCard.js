@@ -1,20 +1,20 @@
-import { View, Text, Pressable } from "react-native";
+import { useState, View, Text, Pressable } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import React from "react";
 import { Box, Center, Heading, HStack, AspectRatio, Image, Stack } from "native-base";
-//import WelcomePage from "./components/Pages/WelcomePage/WelcomePage";
 
-const investigateAction = ( navigation ) => {
-    navigation.navigate("welcome")
-    console.log("hello")
+
+const investigateAction = () => {
+  // const [actionCard, setActionCard] = useState();
+
+    // setActionCard(true);
 }
 
-const ActionCard = ( navigation ) => {
-  // const navigation = useNavigation();
+function ActionCard({ navigation }) {
   return (
     <Box alignItems="center" width = "50%">
     
-      <Pressable onPress={() => {console.log("Action clicked"), investigateAction( navigation )}} maxW="80" rounded="lg" overflow="hidden" borderColor="coolGray.200" borderWidth="1" _dark={{
+      <Pressable onPress={() => {console.log("Action clicked"), investigateAction(), navigation.navigate("login")}} maxW="80" rounded="lg" overflow="hidden" borderColor="coolGray.200" borderWidth="1" _dark={{
       borderColor: "coolGray.600",
       backgroundColor: "gray.700"
     }} _web={{

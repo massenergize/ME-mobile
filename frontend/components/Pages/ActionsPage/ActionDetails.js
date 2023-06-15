@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 import React from "react";
-import { Center, Box, AspectRatio, Image, VStack } from "native-base";
+import { Center, Box, AspectRatio, Image, VStack, HStack } from "native-base";
 
 export default function ActionDetails() {
   return (
@@ -14,7 +14,10 @@ export default function ActionDetails() {
         </View>
         <Box bg="white" rounded = "xl">
             <VStack>
-                <Text style={styles.actionname}>Recurring Actions</Text>
+                <Text style={styles.actionname}>Change to LED</Text>
+                <HStack>
+                    <Text style = {styles.header}>Cost</Text>
+                </HStack>
             </VStack>
         </Box>
     </VStack>
@@ -31,5 +34,11 @@ const styles = StyleSheet.create({
     },
     container: {
         padding: 50,
+    },
+    header: 
+    {
+        padding: 15,
+        fontSize: 18,
+        fontWeight: "bold",
     }
   });

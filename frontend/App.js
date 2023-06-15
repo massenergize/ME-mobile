@@ -19,6 +19,7 @@ import EventsPage from "./components/Pages/EventsPage/EventsPage";
 import IntroductionPage from "./components/Pages/IntroductionPage/IntroductionPage";
 import DrawerNavigator from "./components/Shared/DrawerNavigator";
 import WithEmailOnlyPage from "./components/Pages/Auth/WithEmailOnlyPage";
+import CreateProfile from "./components/Pages/UserProfilePage/CreateProfile";
 
 const Stack = createNativeStackNavigator();
 
@@ -31,6 +32,7 @@ export default function App() {
             headerShown: false,
           }}
         >
+          <Stack.Screen name="createProfile" component={CreateProfile} />
           <Stack.Screen name="intro" component={IntroductionPage} />
           <Stack.Screen name="welcome" component={WelcomePage} />
           <Stack.Screen name="login" component={LoginPage} />

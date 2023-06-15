@@ -70,7 +70,7 @@ export default function WelcomePage({ navigation }) {
             </Button>
           </VStack>
           <Text color="white" textAlign="center">
-            When you join, we can count your impace. We do not collect sensitive
+            When you join, we can count your impact. We do not collect sensitive
             personal data and do not share data.
           </Text>
         </VStack>

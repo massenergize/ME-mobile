@@ -11,12 +11,13 @@ import {
   HStack,
   Icon,
   Divider,
+  Button,
 } from "native-base";
 
 export default function EventDetailsPage() {
   return (
     <ScrollView>
-      <VStack space={2} mx="3">
+      <VStack space={2} mx="3" mb="20">
         <Box my="3" height="200" shadow="5">
           <Image
             source={{
@@ -49,8 +50,11 @@ export default function EventDetailsPage() {
             Conservations Lands, Parks, and Yards, Acton, MA
           </Text>
         </HStack>
+        <Button size="lg" _text={{ fontWeight: "bold" }}>
+          RSVP
+        </Button>
         <Divider my="2" />
-        <Box backgroundColor="white" shadow="5" p="4" borderRadius="10" mb="40">
+        <Box backgroundColor="white" shadow="5" p="4" borderRadius="10">
           <Text
             fontWeight="bold"
             fontSize="lg"

@@ -20,7 +20,6 @@ const COMMUNITIES = [
     id: 1,
     name: "Cooler Concord",
     location: "Concord, MA",
-    totalMembers: 128,
     image:
       "https://massenergize-prod-files.s3.amazonaws.com/media/coolerconcord.jpg",
   },
@@ -28,7 +27,6 @@ const COMMUNITIES = [
     id: 2,
     name: "Energize Framingham",
     location: "Framingham, MA",
-    totalMembers: 62,
     image:
       "https://massenergize-prod-files.s3.amazonaws.com/media/Framingham2020_smaller.jpg",
   },
@@ -36,7 +34,6 @@ const COMMUNITIES = [
     id: 3,
     name: "Energize Wayland",
     location: "Wayland, MA",
-    totalMembers: 173,
     image:
       "https://www.massenergize.org/wp-content/uploads/2021/08/energize-wayland.jpg",
   },
@@ -44,7 +41,6 @@ const COMMUNITIES = [
     id: 4,
     name: "Energize Boxborough",
     location: "Boxborough, MA",
-    totalMembers: 28,
     image: "https://massenergize-prod-files.s3.amazonaws.com/media/bsclogo.jpg",
   },
 ];
@@ -71,6 +67,17 @@ export default function ChooseCommunityPage() {
       >
         <Container alignSelf="center">
           <VStack space="5" mt="10">
+            <HStack space="2" alignItems="center">
+              <Text fontSize="xs" fontWeight="bold">
+                ALL
+              </Text>
+              <Divider orientation="vertical" />
+              <Text fontSize="xs">CITIES & TOWNS</Text>
+              <Divider orientation="vertical" />
+              <Text fontSize="xs">OTHER COMMUNITIES</Text>
+              <Divider orientation="vertical" />
+              <Text fontSize="xs">SCHOOLS</Text>
+            </HStack>
             <Input
               placeholder="Search for a community..."
               variant="rounded"
@@ -104,7 +111,7 @@ export default function ChooseCommunityPage() {
             <Divider />
             <ScrollView mb="10">
               {COMMUNITIES.map((community) => (
-                <HStack key={community.id} space="5" mb="2">
+                <HStack key={community.id} space="5" mb="2" alignItems="center">
                   <Image
                     source={{ uri: community.image }}
                     alt={community.name}
@@ -118,10 +125,6 @@ export default function ChooseCommunityPage() {
                       </Text>
                       <Text fontSize="sm" color="muted.400">
                         {community.location}
-                      </Text>
-                      <Text fontSize="md">0.4 miles away</Text>
-                      <Text fontSize="md">
-                        {community.totalMembers} members
                       </Text>
                     </Box>
                   </Box>

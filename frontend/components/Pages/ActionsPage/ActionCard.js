@@ -14,7 +14,7 @@ function ActionCard({ navigation }) {
   return (
     <Box alignItems="center" width = "50%">
     
-      <Pressable onPress={() => {console.log("Action clicked"), investigateAction(), navigation.navigate("login")}} maxW="80" rounded="lg" overflow="hidden" borderColor="coolGray.200" borderWidth="1" _dark={{
+      <Pressable onPress={() => {console.log("Action clicked"), investigateAction(), navigation.navigate("actiondetails")}} maxW="80" rounded="lg" overflow="hidden" borderColor="coolGray.200" borderWidth="1" _dark={{
       borderColor: "coolGray.600",
       backgroundColor: "gray.700"
     }} _web={{

@@ -29,17 +29,33 @@ export default function App() {
   return (
     <NativeBaseProvider theme={Theme}>
       <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerShown: false,
-          }}
-        >
-          <Stack.Screen name="intro" component={IntroductionPage} />
-          <Stack.Screen name="welcome" component={WelcomePage} />
-          <Stack.Screen name="login" component={LoginPage} />
+        <Stack.Navigator>
+          <Stack.Screen
+            name="intro"
+            component={IntroductionPage}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="welcome"
+            component={WelcomePage}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="login"
+            component={LoginPage}
+            options={{ title: "Profile" }}
+          />
           <Stack.Screen name="signup" component={SignupPage} />
           <Stack.Screen name="userProfile" component={UserProfilePage} />
           <Stack.Screen name="about" component={AboutPage} />
+          <Stack.Screen name="events" component={EventsPage} />
+          <Stack.Screen
+            name="eventDetails"
+            component={EventDetailsPage}
+            options={{ title: "" }}
+          />
           <Stack.Screen name="actions" component={ActionsPage} />
           <Stack.Screen name="testimonials" component={TestimonialsPage} />
           <Stack.Screen name="community" component={CommunityPage} />

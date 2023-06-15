@@ -21,6 +21,7 @@ import EventsPage from "./components/Pages/EventsPage/EventsPage";
 import IntroductionPage from "./components/Pages/IntroductionPage/IntroductionPage";
 import DrawerNavigator from "./components/Shared/DrawerNavigator";
 import Theme from "./components/Shared/Theme";
+import ServiceProvidersPage from "./components/Pages/ServiceProvidersPage/ServiceProvidersPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -33,6 +34,11 @@ export default function App() {
             headerShown: false,
           }}
         >
+          <Stack.Screen
+            name="drawer"
+            component={DrawerNavigator}
+            options={{ headerShown: false }}
+          />
           <Stack.Screen name="intro" component={IntroductionPage} />
           <Stack.Screen name="welcome" component={WelcomePage} />
           <Stack.Screen name="login" component={LoginPage} />
@@ -42,13 +48,12 @@ export default function App() {
           <Stack.Screen name="actions" component={ActionsPage} />
           <Stack.Screen name="testimonials" component={TestimonialsPage} />
           <Stack.Screen name="events" component={EventsPage} />
+          <Stack.Screen
+            name="serviceProviders"
+            component={ServiceProvidersPage}
+          />
           <Stack.Screen name="community" component={CommunityPage} />
           <Stack.Screen name="teams" component={TeamsPage} />
-          <Stack.Screen
-            name="drawer"
-            component={DrawerNavigator}
-            options={{ headerShown: false }}
-          />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>

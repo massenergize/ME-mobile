@@ -1,7 +1,7 @@
 import React from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import {
-  View,
+  Button,
   Text,
   Box,
   Image,
@@ -38,7 +38,7 @@ const EVENTS = [
   },
 ];
 
-export default function EventsPage() {
+export default function EventsPage({ navigation }) {
   return (
     <ScrollView>
       {EVENTS.map((event) => (
@@ -66,15 +66,15 @@ export default function EventsPage() {
               opacity="60"
             ></Box>
           </Box>
-          <Icon
-            as={FontAwesome}
-            name="angle-right"
-            size={6}
-            color="white"
+          <Button
+            onPress={() => navigation.navigate("eventDetails")}
+            variant="ghost"
             position="absolute"
             top="5"
             right="2"
-          />
+          >
+            <Icon as={FontAwesome} name="angle-right" size={6} color="white" />
+          </Button>
           <Box p="5" position="absolute" bottom="0">
             <Heading color="white">
               {event.title.length > 35

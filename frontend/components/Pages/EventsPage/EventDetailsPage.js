@@ -7,7 +7,6 @@ import {
   Box,
   Image,
   VStack,
-  Flex,
   HStack,
   Icon,
   Divider,

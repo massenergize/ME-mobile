@@ -10,22 +10,26 @@ import {
   Circle,
   Button,
   AspectRatio,
+  HStack,
 } from "native-base";
 
 const STEPS = [
   {
-    title: "Title #1",
-    description: "A brief description about the purpose of this step",
+    title: "Find A Community Near You",
+    description:
+      "Connect with local communities to foster social connections, promote engagement, and achieve one common goal: take climate actions.",
     image: require("../../../assets/images/intro-step-1.png"),
   },
   {
-    title: "Title #2",
-    description: "A brief description about the purpose of this step",
+    title: "Get Involved In Actions",
+    description:
+      "Access a diverse range of climate actions tailored to your community.",
     image: require("../../../assets/images/intro-step-2.png"),
   },
   {
-    title: "Title #3",
-    description: "A brief description about the purpose of this step",
+    title: "Witness Your Impact",
+    description:
+      "MassEnergize offers you access to compelling and inspirational data, presenting the number of households actively engaged in diverse actions.",
     image: require("../../../assets/images/intro-step-3.png"),
   },
   {
@@ -115,20 +119,20 @@ export default function IntroductionPage({ navigation }) {
           >
             {STEPS[currentStep].description}
           </Text>
-          <Flex flexDirection="row" alignSelf="center" mb="5">
+          <HStack space="5" alignSelf="center" mb="5">
             {STEPS.map((_, index) => {
               return (
                 <Circle
                   key={index}
                   mr="0.5"
-                  size="10px"
+                  size="5px"
                   backgroundColor={
                     index === currentStep ? "primary.400" : "muted.200"
                   }
                 />
               );
             })}
-          </Flex>
+          </HStack>
           <Box>
             <Flex
               flexDirection="row"
@@ -147,11 +151,11 @@ export default function IntroductionPage({ navigation }) {
               </Button>
               <Button
                 size="lg"
-                variant="ghost"
+                variant={currentStep === STEPS.length - 1 ? "solid" : "ghost"}
                 _text={{ fontWeight: "bold" }}
                 onPress={handleNext}
               >
-                Next
+                {currentStep === STEPS.length - 1 ? "Get Started" : "Next"}
               </Button>
             </Flex>
           </Box>

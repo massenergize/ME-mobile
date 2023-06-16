@@ -1,0 +1,352 @@
+{
+    "data": {
+        "id": 165,
+        "title": "An awesome vegetarian recipe",
+        "body": "<p>Something that often prevents me from eating vegetarian is that I don't know how to cook as well without meat. All the recipes I learned from my parents are meat-centric, but this winter I learned an awesome recipe from my friend who is a fantastic vegetarian cook. &bull;Coconut Milk &bull;Cauliflower &bull;Carrots &bull;Onions &bull;Garlic &bull;Ginger &bull;Lime zest and juice &bull;Brown sugar &bull;Fish sauce &bull;Thai Curry Paste Steam veggies in big covered pan for 5 min, then uncover and brown on pretty high heat for 10. Meanwhile, whisk together a can of coconut milk, about a tablespoon of fishsauce and thai red or green curry paste and however much red pepper you want When the veggies are done saut&eacute; three cloves of garlic and a tbs of shredded ginger root in the center of the pan for a minute and then pour in the sauce. Simmer for 5 minutes and taste test it. You can add paprika, curry powder or chili powder if you'd like to. Also you can add cilantro to pretty much any meal and it will taste good. Sometimes I put a scoop of greek yogurt on the side as a sort of creamy sauce and protein boost. Enjoy!</p>",
+        "is_approved": true,
+        "user": {
+            "id": "f62cf94c-5dc7-48d9-a4b9-dcf7d3b77ec4",
+            "full_name": "Kieran O'Day",
+            "preferred_name": "Kieran",
+            "email": "kieran.oday@gmail.com",
+            "is_super_admin": false,
+            "is_community_admin": false,
+            "joined": "2021-02-13",
+            "user_info": null,
+            "profile_picture": null,
+            "communities": [
+                "Energize Wayland"
+            ],
+            "households": [
+                {
+                    "id": 476,
+                    "name": "Home",
+                    "unit_type": "RESIDENTIAL",
+                    "community": null,
+                    "location": {
+                        "id": 131,
+                        "location_type": "FULL_ADDRESS",
+                        "street": " ",
+                        "unit_number": "",
+                        "zipcode": "02476",
+                        "city": "Arlington",
+                        "county": "",
+                        "is_deleted": false,
+                        "state": "MA",
+                        "country": "US",
+                        "more_info": null
+                    },
+                    "address": 131,
+                    "is_deleted": false
+                }
+            ],
+            "is_guest": false,
+            "preferences": {
+                "user_portal_settings": {
+                    "communication_prefs": {
+                        "update_frequency": {
+                            "per_week": {
+                                "value": true
+                            }
+                        },
+                        "news_letter": {
+                            "as_posted": {
+                                "value": true
+                            }
+                        },
+                        "messaging": {
+                            "yes": {
+                                "value": true
+                            }
+                        }
+                    },
+                    "notifications": {
+                        "upcoming_events": {
+                            "never": {
+                                "value": true
+                            }
+                        },
+                        "upcoming_actions": {
+                            "never": {
+                                "value": true
+                            }
+                        },
+                        "news_teams": {
+                            "never": {
+                                "value": true
+                            }
+                        },
+                        "new_testimonials": {
+                            "never": {
+                                "value": true
+                            }
+                        },
+                        "your_activity_updates": {
+                            "never": {
+                                "value": true
+                            }
+                        }
+                    }
+                },
+                "admin_portal_settings": {
+                    "communication_prefs": {
+                        "reports_frequency": {
+                            "weekly": {
+                                "value": true
+                            }
+                        },
+                        "user_updates": {
+                            "by_email_only": {
+                                "value": true
+                            }
+                        },
+                        "specific_notifications": {
+                            "new_member_update": {
+                                "value": true
+                            },
+                            "new_action_creation_update": {
+                                "value": true
+                            },
+                            "event_RSVP_update": {
+                                "value": false
+                            },
+                            "new_event_creation_update": {
+                                "value": true
+                            },
+                            "new_testimonial_submission_update": {
+                                "value": true
+                            },
+                            "new_team_submission_update": {
+                                "value": true
+                            }
+                        }
+                    }
+                }
+            },
+            "accepts_terms_and_conditions": true
+        },
+        "action": {
+            "id": 415,
+            "title": "Eat less meat and dairy",
+            "is_global": false,
+            "featured_summary": "Reduce Meat and Dairy Consumption\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t",
+            "steps_to_take": "<ol>\r\n<li>Review the <a href=\"https://www.ewg.org/meateatersguide/a-meat-eaters-guide-to-climate-change-health-what-you-eat-matters/climate-and-environmental-impacts/\" target=\"_blank\" rel=\"noopener\">list of climate impact of various foods</a> from the Environmental Working Group or other similar charts.</li>\r\n<li>Reduce or eliminate beef first and try to move on down the list of those foods with the highest impacts. Lamb, cheese, and pork also rank high on impact.&nbsp;</li>\r\n<li>Commit to going vegetarian one or more times a week and stick with it. Make meatless Mondays a tradition.</li>\r\n<li>Keep your pantry stocked with &lsquo;go to&rsquo; vegetarian ingredients and favorite recipes handy.</li>\r\n<li>Once your family has routinely incorporated vegetarian meals, introduce some vegan recipes that have no dairy or eggs.</li>\r\n<li>Spread the word and get support from others who are reducing their meat consumption. &nbsp;Cook vegetarian at your next dinner party. Very few people understand the climate impact of their food choices.</li>\r\n</ol>",
+            "deep_dive": "<p><strong>What&rsquo;s the difference between vegetarian and vegan? </strong>&nbsp;&nbsp;Vegetarian is a broader term for excluding animal products from your diet. A vegetarian diet will exclude meat but may include eggs and dairy (lacto-ovo vegetarian). A vegan diet strictly avoids any food that contains animal products, including dairy and eggs. Once you become familiar with meatless recipes, try adding vegan recipes into your repertoire as well. Dairy is another food category with a big environmental footprint.</p>\r\n<p>&nbsp;</p>\r\n<p><strong>What are good plant-based protein sources?</strong> &nbsp;&nbsp;As you increase the number of vegan meals you eat, it&rsquo;s a good idea to include recipes with plant-based protein sources. Lentils, beans, chickpeas, &nbsp;peas, nuts, seeds, tofu, tempeh and edamame, and seitan (made from wheat) are all good sources of protein. Don&rsquo;t limit these ingredients to main dishes. You can get your protein in salad, soups, snacks, and even in desserts!</p>\r\n<p>&nbsp;</p>\r\n<p>According to a <a href=\"https://www.pnas.org/content/early/2016/03/16/1523119113\" target=\"_blank\" rel=\"noopener\">2016 study</a> , business-as-usual emissions could be reduced by as much as 70% through adopting a vegan diet and 63 percent for a vegetarian diet, which includes cheese, milk, and eggs. These changes woudl save $1 trillion in annual health-care costs and lost productivity.</p>",
+            "about": "<p>Eating meat and dairy products have a large impact on climate change, with livestock producing about 14.5 % of the world's greenhouse gases each year. Scientists warn that the current system of production and pattern of consumption cannot be sustained, and the adoption of a more plant-based diet must be a part of the answer (see <a href=\"https://science.sciencemag.org/content/360/6392/987\" target=\"_blank\" rel=\"noopener\">Poore and Nemecek, Science</a> ). Making changes to your eating habit can be done at your own pace and with little financial investment--but have a big climate impact. &nbsp;</p>\r\n<p>&nbsp;</p>\r\n<p><strong>Start with less beef. </strong>&nbsp;The list below of common protein sources from the <a href=\"https://www.ewg.org/meateatersguide/a-meat-eaters-guide-to-climate-change-health-what-you-eat-matters/climate-and-environmental-impacts/\" target=\"_blank\" rel=\"noopener\">Environmental Working Group</a> shows the climate &nbsp;impact of various foods. Taking into account production emissions and post farm emissions like processing, transport, retail, cooking, and waste disposal, it is clear that getting meat to the dinner table generates a lot more greenhouse gases per kilogram than plant-based proteins. &nbsp;Just reducing the amount of beef the average American consumes can make a big difference. Make the commitment to reducing or the foods with higher climate impact and incorporate more plant based dishes into your meals.</p>\r\n<p>&nbsp;</p>\r\n<ol>\r\n<li>Lamb &nbsp;39.2 kg CO2e</li>\r\n<li>Beef &nbsp;27.0</li>\r\n<li>Cheese &nbsp;13.5</li>\r\n<li>Pork &nbsp;12.1</li>\r\n<li>Farmed Salmon &nbsp;11.9</li>\r\n<li>Turkey &nbsp;10.9</li>\r\n<li>Chicken &nbsp;6.9</li>\r\n<li>Eggs &nbsp;4.8</li>\r\n<li>Peanut Butter &nbsp;2.5</li>\r\n<li>Yogurt &nbsp;2.2</li>\r\n<li>Tofu &nbsp;2.0</li>\r\n<li>Dry Beans &nbsp;2.0</li>\r\n<li>Milk (2%) &nbsp;1.9</li>\r\n<li>Lentils &nbsp;0.9</li>\r\n</ol>\r\n<p>&nbsp;</p>\r\n<p>Like any good 'diet', you should consider the commitment to eating fewer animal products a lifestyle change that you can maintain over the long run. Go at your own pace but don't be afraid to challenge yourself, and remember the benefits you derive are not only for the planet, but also for your own health.</p>",
+            "icon": "",
+            "average_carbon_score": "",
+            "rank": 102,
+            "is_deleted": false,
+            "is_published": true,
+            "is_approved": true,
+            "image": {
+                "id": 3357,
+                "name": "Media library upload-(1684439016531)",
+                "url": "https://massenergize-prod-files.s3.amazonaws.com/media/Eat_a_More_Plant_Based_Diet-230518-194336.jpg"
+            },
+            "calculator_action": {
+                "id": 31,
+                "name": "low_carbon_diet",
+                "title": "",
+                "category": "",
+                "description": "Adopt a lower carbon diet",
+                "average_points": 1417
+            },
+            "tags": [
+                {
+                    "id": 17,
+                    "name": "0",
+                    "points": 0,
+                    "icon": "",
+                    "tag_collection": 2,
+                    "rank": 1,
+                    "is_deleted": false,
+                    "is_published": false,
+                    "order": 1,
+                    "tag_collection_name": "Cost"
+                },
+                {
+                    "id": 29,
+                    "name": "Homeowner",
+                    "points": null,
+                    "icon": "",
+                    "tag_collection": 4,
+                    "rank": 1,
+                    "is_deleted": false,
+                    "is_published": false,
+                    "order": 1,
+                    "tag_collection_name": "I am a..."
+                },
+                {
+                    "id": 30,
+                    "name": "Renter",
+                    "points": null,
+                    "icon": "",
+                    "tag_collection": 4,
+                    "rank": 2,
+                    "is_deleted": false,
+                    "is_published": false,
+                    "order": 2,
+                    "tag_collection_name": "I am a..."
+                },
+                {
+                    "id": 31,
+                    "name": "Condo",
+                    "points": null,
+                    "icon": "",
+                    "tag_collection": 4,
+                    "rank": 3,
+                    "is_deleted": false,
+                    "is_published": false,
+                    "order": 3,
+                    "tag_collection_name": "I am a..."
+                },
+                {
+                    "id": 22,
+                    "name": "High",
+                    "points": 3,
+                    "icon": "",
+                    "tag_collection": 3,
+                    "rank": 3,
+                    "is_deleted": false,
+                    "is_published": false,
+                    "order": 3,
+                    "tag_collection_name": "Impact"
+                },
+                {
+                    "id": 3,
+                    "name": "Food",
+                    "points": null,
+                    "icon": "",
+                    "tag_collection": 1,
+                    "rank": 5,
+                    "is_deleted": false,
+                    "is_published": false,
+                    "order": 5,
+                    "tag_collection_name": "Category"
+                }
+            ],
+            "community": {
+                "id": 3,
+                "name": "Energize Wayland",
+                "subdomain": "wayland"
+            },
+            "created_at": "2020-02-22T18:47:34.090Z",
+            "updated_at": "2023-05-18T19:43:37.866Z",
+            "vendors": []
+        },
+        "vendor": {
+            "id": 1,
+            "name": "Drive Green - Green Energy Consumers Alliance",
+            "phone_number": "617-524-3950",
+            "email": "hello@greenenergyconsumers.org",
+            "key_contact": {
+                "name": "Anna Vanderspek",
+                "email": "anna@greenenergyconsumers.org "
+            },
+            "service_area": "statewide",
+            "logo": {
+                "id": 2723,
+                "name": "Logo-drive-green-green-energy-consumers-alliance",
+                "url": "https://massenergize-prod-files.s3.amazonaws.com/media/logo_40th_hr..png"
+            }
+        },
+        "community": {
+            "id": 3,
+            "name": "Energize Wayland",
+            "subdomain": "wayland",
+            "owner_name": "Kaat Vander Straeten",
+            "owner_email": "KAATvds@gmail.com",
+            "owner_phone_number": null,
+            "is_geographically_focused": true,
+            "location": {
+                "city": "Wayland",
+                "unit": null,
+                "state": "Massachusetts",
+                "address": null,
+                "country": "US",
+                "zipcode": "01778"
+            },
+            "is_approved": true,
+            "more_info": "{\"wants_socials\":\"true\",\"facebook_link\":\"https://www.facebook.com/EnergizeWayland\"}",
+            "is_published": true,
+            "logo": {
+                "id": 5,
+                "name": "Energize Wayland CommunityLogo",
+                "url": "https://massenergize-prod-files.s3.amazonaws.com/media/energizewayland_resized.jpg"
+            },
+            "favicon": null,
+            "feature_flags": [
+                {
+                    "id": 7,
+                    "name": "weekly_event_nudge",
+                    "scope": "BACKEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "weekly_event_nudge-feature-flag",
+                    "notes": "Send a weekly nudge to cadmins",
+                    "expires_on": null,
+                    "communities": [
+                        {
+                            "id": 3,
+                            "name": "Energize Wayland"
+                        },
+                        {
+                            "id": 7,
+                            "name": "Energize Framingham"
+                        },
+                        {
+                            "id": 6,
+                            "name": "Cooler Concord"
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "name": "new-user-engagement-view",
+                    "scope": "ADMIN_FRONTEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "new-user-engagement-view-feature-flag",
+                    "notes": "Admin portal shows new user engagement view",
+                    "expires_on": null,
+                    "communities": []
+                }
+            ]
+        },
+        "rank": 0,
+        "is_deleted": false,
+        "is_published": true,
+        "anonymous": false,
+        "preferred_name": "Kieran",
+        "other_vendor": null,
+        "created_at": "2021-02-13",
+        "file": {
+            "id": 1773,
+            "name": "Buy food from local farms-Action-Image",
+            "url": "https://massenergize-prod-files.s3.amazonaws.com/media/farmshare_1.jpg"
+        },
+        "tags": [
+            {
+                "id": 3,
+                "name": "Food",
+                "points": null,
+                "icon": "",
+                "tag_collection": 1,
+                "rank": 5,
+                "is_deleted": false,
+                "is_published": false,
+                "order": 5,
+                "tag_collection_name": "Category"
+            }
+        ],
+        "image": {
+            "id": 1773,
+            "name": "Buy food from local farms-Action-Image",
+            "url": "https://massenergize-prod-files.s3.amazonaws.com/media/farmshare_1.jpg"
+        }
+    },
+    "error": null,
+    "success": true,
+    "cursor": {}
+}

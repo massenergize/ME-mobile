@@ -1,16 +1,14 @@
 import React from "react";
 
-import {
-  NavigationContainer,
-  getFocusedRouteNameFromRoute,
-} from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NativeBaseProvider } from "native-base";
+import "react-native-gesture-handler";
 
+import Theme from "./components/Shared/Theme";
 import WelcomePage from "./components/Pages/Auth/WelcomePage";
 import LoginPage from "./components/Pages/Auth/LoginPage";
 import SignupPage from "./components/Pages/Auth/SignupPage";
-import "react-native-gesture-handler";
 import AboutPage from "./components/Pages/AboutPage/AboutPage";
 import ActionsPage from "./components/Pages/ActionsPage/ActionsPage";
 import CommunityPage from "./components/Pages/CommunityPage/CommunityPage";
@@ -22,7 +20,9 @@ import ActionDetails from "./components/Pages/ActionsPage/ActionDetails";
 import EventDetailsPage from "./components/Pages/EventsPage/EventDetailsPage";
 import IntroductionPage from "./components/Pages/IntroductionPage/IntroductionPage";
 import DrawerNavigator from "./components/Shared/DrawerNavigator";
-import Theme from "./components/Shared/Theme";
+import WithEmailOnlyPage from "./components/Pages/Auth/WithEmailOnlyPage";
+import CreateProfile from "./components/Pages/UserProfilePage/CreateProfile";
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -47,7 +47,13 @@ export default function App() {
             component={LoginPage}
             options={{ title: "Profile" }}
           />
+          <Stack.Screen
+            name="createProfile"
+            component={CreateProfile}
+            options={{ headerShown: false }}
+          />
           <Stack.Screen name="signup" component={SignupPage} />
+          <Stack.Screen name="withEmailOnly" component={WithEmailOnlyPage} />
           <Stack.Screen name="userProfile" component={UserProfilePage} />
           <Stack.Screen name="about" component={AboutPage} />
           <Stack.Screen name="events" component={EventsPage} />

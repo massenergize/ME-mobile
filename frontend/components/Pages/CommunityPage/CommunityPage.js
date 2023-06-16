@@ -10,9 +10,11 @@ import {
   Spacer,
   Container,
   Center,
-  Pressable
+  Pressable,
+  Image
 } from "native-base";
 import { goals, colors } from "./SampleGoalsData.js";
+import ActionCard from "./../ActionsPage/ActionCard";
 
 // small pie charts that are part of the goal card
 function SmallChart({ goal, color }) {
@@ -72,9 +74,20 @@ function ShowMore({ navigation, page }) {
 
 export default function CommunityPage({ navigation }) {
   return (
-    <ScrollView>
+    <ScrollView nestedScrollEnabled = {true}>
       <VStack alignItems="center" space={3} p={3} bg="white">
-        < Text bold fontSize="2xl">Community Name</Text>
+        {/* <Text bold fontSize="2xl">Community Name</Text> */}
+        <Container maxHeight={200} width="100%">
+          <Image
+              source={require("./../../../assets/images/cooler-concord.png")}
+              alt="Community Logo"
+              resizeMode="contain"
+              height="full"
+              // maxHeight={200}
+              width="full"
+          />
+        </Container>
+        {/* <Container height="300px"/> */}
         <HStack>
           <HeaderText text="Goals"/>
           <Spacer/>
@@ -85,8 +98,17 @@ export default function CommunityPage({ navigation }) {
           <Spacer/>
           <ShowMore navigation={navigation} page="ACTIONS"/>
         </HStack>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          <HStack>
+            <ActionCard navigation={navigation}/>
+            <Container width="10px"/>
+            <ActionCard navigation={navigation}/>
+            <Container width="10px"/>
+            <ActionCard navigation={navigation}/>
+          </HStack>
+        </ScrollView>
         <HStack alignItems="center">
-          <HeaderText text="Upcoming Events"/>
+          <HeaderText text="Upcoming Event"/>
           <Spacer/>
           <ShowMore navigation={navigation} page="EVENTS"/>
         </HStack>

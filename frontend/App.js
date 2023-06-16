@@ -22,6 +22,7 @@ import IntroductionPage from "./components/Pages/IntroductionPage/IntroductionPa
 import DrawerNavigator from "./components/Shared/DrawerNavigator";
 import Theme from "./components/Shared/Theme";
 import ServiceProvidersPage from "./components/Pages/ServiceProvidersPage/ServiceProvidersPage";
+import ServiceProviderDetailsPage from "./components/Pages/ServiceProvidersPage/ServiceProviderDetailsPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -51,6 +52,10 @@ export default function App() {
           <Stack.Screen
             name="serviceProviders"
             component={ServiceProvidersPage}
+          />
+          <Stack.Screen
+            name="serviceProviderDetails"
+            component={ServiceProviderDetailsPage}
           />
           <Stack.Screen name="community" component={CommunityPage} />
           <Stack.Screen name="teams" component={TeamsPage} />

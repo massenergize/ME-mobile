@@ -93,7 +93,7 @@ export default function ActionDetails() {
                         </Button>
                         
                     </ScrollView>
-                    <Text style = {{margin: 15}}> A Brief Description about the action, why it matters, what impact it has, any statistics abotu usage, how many people have switched, how easy it is, cost, etc.</Text>
+                    <Text style = {{margin: 15}}> A Brief Description about the action, why it matters, what impact it has, any statistics about usage, how many people have switched, how easy it is, cost, etc.</Text>
                 </VStack>
                 <View style={{flexDirection: 'row', position: 'absolute', bottom: 35}}>
                     <Button size = "md" variant="outline" _text={{

@@ -11,6 +11,13 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Tab = createBottomTabNavigator();
 
+const tabBarLabels = {
+  "COMMUNITY": "Community",
+  "ACTIONS": "Actions",
+  "EVENTS": "Events",
+  "PROFILE": "Profile"
+}
+
 export default function CommunityNavigation() {
   return (
     <Tab.Navigator
@@ -35,8 +42,8 @@ export default function CommunityNavigation() {
         },
         tabBarActiveTintColor: "#64B058",
         tabBarInactiveTintColor: "#B3B2BD",
-        tabBarShowLabel: false,
-        headerShown: false,
+        tabBarLabel: tabBarLabels[route.name],
+        headerShown: false
       })
     }
     >

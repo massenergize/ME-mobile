@@ -17,7 +17,14 @@ export default function EventDetailsPage() {
   return (
     <ScrollView>
       <VStack space={2} mx="3" mb="20">
-        <Box my="3" height="200" shadow="5">
+        <Box
+          my="3"
+          height="200"
+          shadow="5"
+          backgroundColor="white"
+          borderRadius="2xl"
+          overflow="hidden"
+        >
           <Image
             source={{
               uri: "https://massenergize-prod-files.s3.amazonaws.com/media/Acton_Boxborough__BioBlitz_2023_A-230529-160415.jpg",
@@ -26,7 +33,6 @@ export default function EventDetailsPage() {
             h="full"
             w="full"
             resizeMode="cover"
-            borderRadius="2xl"
           />
         </Box>
         <HStack space={2} alignItems="center">

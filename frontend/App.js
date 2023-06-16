@@ -16,6 +16,8 @@ import TestimonialsPage from "./components/Pages/TestimonialsPage/TestimonialsPa
 import TeamsPage from "./components/Pages/TeamsPage/TeamsPage";
 import UserProfilePage from "./components/Pages/UserProfilePage/UserProfilePage";
 import EventsPage from "./components/Pages/EventsPage/EventsPage";
+import ActionDetails from "./components/Pages/ActionsPage/ActionDetails";
+import EventDetailsPage from "./components/Pages/EventsPage/EventDetailsPage";
 import IntroductionPage from "./components/Pages/IntroductionPage/IntroductionPage";
 import DrawerNavigator from "./components/Shared/DrawerNavigator";
 import WithEmailOnlyPage from "./components/Pages/Auth/WithEmailOnlyPage";
@@ -27,22 +29,42 @@ export default function App() {
   return (
     <NativeBaseProvider theme={Theme}>
       <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerShown: false,
-          }}
-        >
-          <Stack.Screen name="createProfile" component={CreateProfile} />
-          <Stack.Screen name="intro" component={IntroductionPage} />
-          <Stack.Screen name="welcome" component={WelcomePage} />
-          <Stack.Screen name="login" component={LoginPage} />
+        <Stack.Navigator>
+          <Stack.Screen
+            name="intro"
+            component={IntroductionPage}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="welcome"
+            component={WelcomePage}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="login"
+            component={LoginPage}
+            options={{ title: "Profile" }}
+          />
+          <Stack.Screen
+            name="createProfile"
+            component={CreateProfile}
+            options={{ headerShown: false }}
+          />
           <Stack.Screen name="signup" component={SignupPage} />
           <Stack.Screen name="withEmailOnly" component={WithEmailOnlyPage} />
           <Stack.Screen name="userProfile" component={UserProfilePage} />
           <Stack.Screen name="about" component={AboutPage} />
-          <Stack.Screen name="actions" component={ActionsPage} />
-          <Stack.Screen name="testimonials" component={TestimonialsPage} />
           <Stack.Screen name="events" component={EventsPage} />
+          <Stack.Screen
+            name="eventDetails"
+            component={EventDetailsPage}
+            options={{ title: "" }}
+          />
+          <Stack.Screen name="actions" component={ActionsPage} />
+          <Stack.Screen name="actiondetails" component={ActionDetails} />
+          <Stack.Screen name="testimonials" component={TestimonialsPage} />
           <Stack.Screen name="community" component={CommunityPage} />
           <Stack.Screen name="teams" component={TeamsPage} />
           <Stack.Screen

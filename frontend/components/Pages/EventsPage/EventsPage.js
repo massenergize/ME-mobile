@@ -9,6 +9,7 @@ import {
   Heading,
   Flex,
   ScrollView,
+  Pressable,
 } from "native-base";
 
 const EVENTS = [
@@ -50,67 +51,68 @@ export default function EventsPage({ navigation }) {
           backgroundColor="white"
           borderRadius="2xl"
         >
-          <Box borderRadius="2xl" overflow="hidden">
-            <Image
-              source={{ uri: event.image }}
-              alt="image"
-              h="full"
-              w="full"
-              resizeMode="cover"
-            />
-            <Box
-              w="full"
-              h="full"
-              position="absolute"
-              backgroundColor="primary.400"
-              opacity="60"
-            ></Box>
-          </Box>
-          <Button
-            onPress={() => navigation.navigate("eventDetails")}
-            variant="ghost"
-            position="absolute"
-            top="5"
-            right="2"
-          >
-            <Icon as={FontAwesome} name="angle-right" size={6} color="white" />
-          </Button>
-          <Box p="5" position="absolute" bottom="0">
-            <Heading color="white">
-              {event.title.length > 35
-                ? event.title.slice(0, 35) + "..."
-                : event.title}
-            </Heading>
-            <Flex flexDirection="row" alignItems="center" mt="2">
+          <Pressable onPress={() => navigation.navigate("eventDetails")}>
+            <Box borderRadius="2xl" overflow="hidden">
+              <Image
+                source={{ uri: event.image }}
+                alt="image"
+                h="full"
+                w="full"
+                resizeMode="cover"
+              />
+              <Box
+                w="full"
+                h="full"
+                position="absolute"
+                backgroundColor="primary.400"
+                opacity="60"
+              ></Box>
+            </Box>
+            <Button variant="ghost" position="absolute" top="5" right="2">
               <Icon
                 as={FontAwesome}
-                name="calendar-o"
-                size={4}
+                name="angle-right"
+                size={6}
                 color="white"
-                mr="2"
               />
-              <Text color="white" fontWeight="bold">
-                {event.date}
-              </Text>
-            </Flex>
-            <Flex flexDirection="row" alignItems="center" mt="2">
-              <Icon
-                as={FontAwesome}
-                name="location-arrow"
-                size={4}
-                color="white"
-                mr="2"
-                alignSelf="flex-end"
-              />
-              <Text color="white" fontWeight="bold">
-                {event.location
-                  ? event.location.length > 30
-                    ? event.location.slice(0, 30) + "..."
-                    : event.location
-                  : "N/A"}
-              </Text>
-            </Flex>
-          </Box>
+            </Button>
+            <Box p="5" position="absolute" bottom="0">
+              <Heading color="white">
+                {event.title.length > 35
+                  ? event.title.slice(0, 35) + "..."
+                  : event.title}
+              </Heading>
+              <Flex flexDirection="row" alignItems="center" mt="2">
+                <Icon
+                  as={FontAwesome}
+                  name="calendar-o"
+                  size={4}
+                  color="white"
+                  mr="2"
+                />
+                <Text color="white" fontWeight="bold">
+                  {event.date}
+                </Text>
+              </Flex>
+              <Flex flexDirection="row" alignItems="center" mt="2">
+                <Icon
+                  as={FontAwesome}
+                  name="location-arrow"
+                  size={4}
+                  color="white"
+                  mr="2"
+                  alignSelf="flex-end"
+                />
+                <Text color="white" fontWeight="bold">
+                  {event.location
+                    ? event.location.length > 30
+                      ? event.location.slice(0, 30) + "..."
+                      : event.location
+                    : "N/A"}
+                </Text>
+              </Flex>
+            </Box>
+          </Pressable>
         </Box>
       ))}
     </ScrollView>

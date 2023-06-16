@@ -50,7 +50,7 @@ function CustomDrawerContent(props) {
                     drawerItems.map((item, index) => {
                         if (item.dropdown) {
                             return (
-                                <VStack>
+                                <VStack key={index}>
                                     <Pressable onPress={() => {setExpanded({"About Us": item.name === "About Us" ? !expanded["About Us"] : expanded["About Us"], "Resources": item.name === "Resources" ? !expanded["Resources"] : expanded["Resources"]})}}>
                                         <HStack alignItems="center">
                                             <DrawerItem 
@@ -70,7 +70,7 @@ function CustomDrawerContent(props) {
                                         </HStack>
                                     </Pressable>
                                 {
-                                    item.dropdownItems.map((dropdownItem, index) => {
+                                    item.dropdownItems.map((dropdownItem, index2) => {
                                             if (expanded[item.name]) {
                                                 return (
                                                     <DrawerItem 
@@ -78,6 +78,7 @@ function CustomDrawerContent(props) {
                                                         onPress={() => props.navigation.navigate(dropdownItem.route)}
                                                         style={{flex: 1, marginLeft: 65}}
                                                         // focused={({ focused, color }) => focused}
+                                                        key={index2}
                                                     />
                                                 )
                                         }
@@ -96,6 +97,7 @@ function CustomDrawerContent(props) {
                                             <Ionicons name={item.icon} size={size} color={color} />
                                         )
                                     }}
+                                    key={index}
                                     // focused={({ focused, color }) => focused}
                                 />
                             )

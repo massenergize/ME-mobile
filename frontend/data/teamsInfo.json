@@ -1,0 +1,164 @@
+{
+    "data": {
+        "id": 33,
+        "name": "Backyard Growers",
+        "tagline": "Tomatoes, potatoes, corn and mushrooms...",
+        "description": "Asparagi!\r\nWe grow veggies, fruit and other things in backyards and community garden plots, keep chickens and bees, and more!",
+        "primary_community": {
+            "id": 3,
+            "name": "Energize Wayland",
+            "subdomain": "wayland",
+            "owner_name": "Kaat Vander Straeten",
+            "owner_email": "KAATvds@gmail.com",
+            "owner_phone_number": null,
+            "is_geographically_focused": true,
+            "location": {
+                "city": "Wayland",
+                "unit": null,
+                "state": "Massachusetts",
+                "address": null,
+                "country": "US",
+                "zipcode": "01778"
+            },
+            "is_approved": true,
+            "more_info": "{\"wants_socials\":\"true\",\"facebook_link\":\"https://www.facebook.com/EnergizeWayland\"}",
+            "is_published": true,
+            "logo": {
+                "id": 5,
+                "name": "Energize Wayland CommunityLogo",
+                "url": "https://massenergize-prod-files.s3.amazonaws.com/media/energizewayland_resized.jpg"
+            },
+            "favicon": null,
+            "feature_flags": [
+                {
+                    "id": 7,
+                    "name": "weekly_event_nudge",
+                    "scope": "BACKEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "weekly_event_nudge-feature-flag",
+                    "notes": "Send a weekly nudge to cadmins",
+                    "expires_on": null,
+                    "communities": [
+                        {
+                            "id": 3,
+                            "name": "Energize Wayland"
+                        },
+                        {
+                            "id": 7,
+                            "name": "Energize Framingham"
+                        },
+                        {
+                            "id": 6,
+                            "name": "Cooler Concord"
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "name": "new-user-engagement-view",
+                    "scope": "ADMIN_FRONTEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "new-user-engagement-view-feature-flag",
+                    "notes": "Admin portal shows new user engagement view",
+                    "expires_on": null,
+                    "communities": []
+                }
+            ]
+        },
+        "logo": null,
+        "is_closed": false,
+        "is_published": true,
+        "parent": null,
+        "admins": [
+            {
+                "id": 104,
+                "is_admin": true,
+                "team": {
+                    "id": 33,
+                    "name": "Backyard Growers",
+                    "tagline": "Tomatoes, potatoes, corn and mushrooms...",
+                    "description": "Asparagi!\r\nWe grow veggies, fruit and other things in backyards and community garden plots, keep chickens and bees, and more!"
+                },
+                "user": {
+                    "id": "d0e6ca3e-413b-4dba-b139-6fdbaff58e6a",
+                    "full_name": "Kaat Vander Straeten",
+                    "preferred_name": "Kaat-alyst",
+                    "email": "kaat@transitionwayland.org"
+                }
+            }
+        ],
+        "communities": [
+            {
+                "id": 3,
+                "name": "Energize Wayland",
+                "subdomain": "wayland",
+                "owner_name": "Kaat Vander Straeten",
+                "owner_email": "KAATvds@gmail.com",
+                "owner_phone_number": null,
+                "is_geographically_focused": true,
+                "location": {
+                    "city": "Wayland",
+                    "unit": null,
+                    "state": "Massachusetts",
+                    "address": null,
+                    "country": "US",
+                    "zipcode": "01778"
+                },
+                "is_approved": true,
+                "more_info": "{\"wants_socials\":\"true\",\"facebook_link\":\"https://www.facebook.com/EnergizeWayland\"}",
+                "is_published": true,
+                "logo": {
+                    "id": 5,
+                    "name": "Energize Wayland CommunityLogo",
+                    "url": "https://massenergize-prod-files.s3.amazonaws.com/media/energizewayland_resized.jpg"
+                },
+                "favicon": null,
+                "feature_flags": [
+                    {
+                        "id": 7,
+                        "name": "weekly_event_nudge",
+                        "scope": "BACKEND",
+                        "audience": "EVERYONE",
+                        "user_audience": "EVERYONE",
+                        "key": "weekly_event_nudge-feature-flag",
+                        "notes": "Send a weekly nudge to cadmins",
+                        "expires_on": null,
+                        "communities": [
+                            {
+                                "id": 3,
+                                "name": "Energize Wayland"
+                            },
+                            {
+                                "id": 7,
+                                "name": "Energize Framingham"
+                            },
+                            {
+                                "id": 6,
+                                "name": "Cooler Concord"
+                            }
+                        ]
+                    },
+                    {
+                        "id": 8,
+                        "name": "new-user-engagement-view",
+                        "scope": "ADMIN_FRONTEND",
+                        "audience": "EVERYONE",
+                        "user_audience": "EVERYONE",
+                        "key": "new-user-engagement-view-feature-flag",
+                        "notes": "Admin portal shows new user engagement view",
+                        "expires_on": null,
+                        "communities": []
+                    }
+                ]
+            }
+        ],
+        "members": [],
+        "goal": null,
+        "banner": null
+    },
+    "error": null,
+    "success": true,
+    "cursor": {}
+}

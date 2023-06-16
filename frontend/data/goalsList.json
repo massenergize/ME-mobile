@@ -1,0 +1,26 @@
+{
+    "data": [
+        {
+            "id": 2,
+            "name": "Energize Wayland-Goal",
+            "description": "",
+            "target_number_of_households": 1200,
+            "target_number_of_actions": 5000,
+            "target_carbon_footprint_reduction": 3000000,
+            "initial_number_of_households": 131,
+            "initial_number_of_actions": 0,
+            "initial_carbon_footprint_reduction": 0,
+            "attained_number_of_households": 360,
+            "attained_number_of_actions": 1769,
+            "attained_carbon_footprint_reduction": 0,
+            "organic_attained_number_of_households": 0,
+            "organic_attained_number_of_actions": 0,
+            "organic_attained_carbon_footprint_reduction": 0,
+            "target_date": null,
+            "more_info": null
+        }
+    ],
+    "error": null,
+    "success": true,
+    "cursor": {}
+}

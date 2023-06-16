@@ -1,0 +1,136 @@
+{
+    "data": {
+        "id": 1047,
+        "name": "Carbon Countdown with Climate Chief Hoffer and Senator Barrett",
+        "featured_summary": "Reaching Our 2030 Climate Targets",
+        "description": "<p><a href=\"https://www.eventbrite.com/e/carbon-countdown-2023-onward-reaching-our-2030-climate-targets-tickets-618476348407\" target=\"_blank\" rel=\"noopener\">Register here.</a>&nbsp;</p>\r\n<p>All are welcome. The event is FREE.&nbsp;</p>\r\n<p>&nbsp;</p>\r\n<p>Hear from Massachusetts<strong> Climate Chief Melissa Hoffer </strong>about an equitable and sustainable vision for Massachusetts.</p>\r\n<p><strong>Senator Mike Barrett </strong>will talk about connecting citizen activists to the legislative process, and connecting the Executive Branch to the work of the Legislature. Following Senator Barrett&rsquo;s talk, choose from breakout sessions to learn about local initiatives that create a pathway to our 2030 climate targets.</p>\r\n<p>&nbsp;</p>\r\n<p><em>Sponsored by Sustainable Middlesex.</em></p>",
+        "start_date_and_time": "2023-05-20T13:00:00Z",
+        "end_date_and_time": "2023-05-20T15:00:00Z",
+        "location": null,
+        "archive": false,
+        "is_global": false,
+        "external_link": "",
+        "rsvp_enabled": false,
+        "rsvp_email": false,
+        "rsvp_message": "",
+        "more_info": null,
+        "is_deleted": false,
+        "is_published": true,
+        "rank": 0,
+        "is_recurring": false,
+        "recurring_details": "false",
+        "is_approved": true,
+        "publicity": "OPEN",
+        "published_at": null,
+        "tags": [
+            {
+                "id": 1,
+                "name": "Activism & Education",
+                "points": null,
+                "icon": "",
+                "tag_collection": 1,
+                "rank": 6,
+                "is_deleted": false,
+                "is_published": false,
+                "order": 6,
+                "tag_collection_name": "Category"
+            }
+        ],
+        "community": {
+            "id": 36,
+            "name": "EcoNatick",
+            "subdomain": "EcoNatick",
+            "owner_name": "EcoNatick Project Team",
+            "owner_email": "econatick@gmail.com",
+            "owner_phone_number": null,
+            "is_geographically_focused": true,
+            "location": {
+                "city": "Natick",
+                "unit": null,
+                "state": "Massachusetts",
+                "address": null,
+                "country": "US",
+                "zipcode": "01760"
+            },
+            "is_approved": true,
+            "more_info": "{\"wants_socials\":\"false\"}",
+            "is_published": true,
+            "logo": {
+                "id": 1910,
+                "name": "EcoNatick CommunityLogo",
+                "url": "https://massenergize-prod-files.s3.amazonaws.com/media/EcoNatick-highRes.jpg"
+            },
+            "favicon": null,
+            "feature_flags": [
+                {
+                    "id": 7,
+                    "name": "weekly_event_nudge",
+                    "scope": "BACKEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "weekly_event_nudge-feature-flag",
+                    "notes": "Send a weekly nudge to cadmins",
+                    "expires_on": null,
+                    "communities": [
+                        {
+                            "id": 3,
+                            "name": "Energize Wayland"
+                        },
+                        {
+                            "id": 7,
+                            "name": "Energize Framingham"
+                        },
+                        {
+                            "id": 6,
+                            "name": "Cooler Concord"
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "name": "new-user-engagement-view",
+                    "scope": "ADMIN_FRONTEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "new-user-engagement-view-feature-flag",
+                    "notes": "Admin portal shows new user engagement view",
+                    "expires_on": null,
+                    "communities": []
+                }
+            ]
+        },
+        "image": {
+            "id": 3342,
+            "name": "Media library upload-(1684199915555)",
+            "url": "https://massenergize-prod-files.s3.amazonaws.com/media/Hoffer-Bsarrett-230516-011835.png",
+            "media_type": "",
+            "tags": []
+        },
+        "invited_communities": [],
+        "is_open": true,
+        "is_open_to": false,
+        "is_closed_to": false,
+        "communities_under_publicity": [],
+        "user_email": "debinnatick@gmail.com",
+        "shared_to": [
+            {
+                "id": 3,
+                "name": "Energize Wayland",
+                "subdomain": "wayland"
+            },
+            {
+                "id": 48,
+                "name": "Green Pepperell",
+                "subdomain": "PepperellMA"
+            },
+            {
+                "id": 7,
+                "name": "Energize Framingham",
+                "subdomain": "Framingham"
+            }
+        ]
+    },
+    "error": null,
+    "success": true,
+    "cursor": {}
+}

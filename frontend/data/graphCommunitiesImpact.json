@@ -1,0 +1,102 @@
+{
+    "data": {
+        "id": 1,
+        "title": "Communities Impact",
+        "graph_type": "bar_chart",
+        "data": [
+            {
+                "community": {
+                    "id": 3,
+                    "name": "Energize Wayland"
+                },
+                "actions_completed": 3150,
+                "households_engaged": 678,
+                "carbon_footprint_reduction": 2108429
+            },
+            {
+                "community": {
+                    "id": 21,
+                    "name": "Cooler Communities"
+                },
+                "actions_completed": 204,
+                "households_engaged": 3,
+                "carbon_footprint_reduction": 17948
+            },
+            {
+                "community": {
+                    "id": 48,
+                    "name": "Green Pepperell"
+                },
+                "actions_completed": 71,
+                "households_engaged": 26,
+                "carbon_footprint_reduction": 11909
+            },
+            {
+                "community": {
+                    "id": 27,
+                    "name": "Energize Acton"
+                },
+                "actions_completed": 1048,
+                "households_engaged": 175,
+                "carbon_footprint_reduction": 1328976
+            },
+            {
+                "community": {
+                    "id": 35,
+                    "name": "Demo 2023"
+                },
+                "actions_completed": 1755,
+                "households_engaged": 453,
+                "carbon_footprint_reduction": 176636
+            },
+            {
+                "community": {
+                    "id": 56,
+                    "name": "Energize Franklin"
+                },
+                "actions_completed": 815,
+                "households_engaged": 430,
+                "carbon_footprint_reduction": 117276
+            },
+            {
+                "community": {
+                    "id": 7,
+                    "name": "Energize Framingham"
+                },
+                "actions_completed": 2307,
+                "households_engaged": 1178,
+                "carbon_footprint_reduction": 459299
+            },
+            {
+                "community": {
+                    "id": 31,
+                    "name": "Sustainable Sherborn"
+                },
+                "actions_completed": 610,
+                "households_engaged": 97,
+                "carbon_footprint_reduction": 93563
+            },
+            {
+                "community": {
+                    "id": 5,
+                    "name": "Jewish Climate Action Network -- JCAN-MA"
+                },
+                "actions_completed": 392,
+                "households_engaged": 77,
+                "carbon_footprint_reduction": 655289
+            },
+            {
+                "community": {
+                    "id": 49,
+                    "name": "Solarize Eastie"
+                },
+                "actions_completed": 3,
+                "households_engaged": 25,
+                "carbon_footprint_reduction": 0
+            }
+        ]
+    },
+    "error": null,
+    "success": true,
+    "cursor": {}
+}

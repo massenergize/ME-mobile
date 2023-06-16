@@ -1,0 +1,1006 @@
+{
+    "data": [
+        {
+            "id": 33,
+            "name": "Backyard Growers",
+            "tagline": "Tomatoes, potatoes, corn and mushrooms...",
+            "description": "Asparagi!\r\nWe grow veggies, fruit and other things in backyards and community garden plots, keep chickens and bees, and more!",
+            "primary_community": {
+                "id": 3,
+                "name": "Energize Wayland",
+                "subdomain": "wayland",
+                "owner_name": "Kaat Vander Straeten",
+                "owner_email": "KAATvds@gmail.com",
+                "owner_phone_number": null,
+                "is_geographically_focused": true,
+                "location": {
+                    "city": "Wayland",
+                    "unit": null,
+                    "state": "Massachusetts",
+                    "address": null,
+                    "country": "US",
+                    "zipcode": "01778"
+                },
+                "is_approved": true,
+                "more_info": "{\"wants_socials\":\"true\",\"facebook_link\":\"https://www.facebook.com/EnergizeWayland\"}",
+                "is_published": true,
+                "logo": {
+                    "id": 5,
+                    "name": "Energize Wayland CommunityLogo",
+                    "url": "https://massenergize-prod-files.s3.amazonaws.com/media/energizewayland_resized.jpg"
+                },
+                "favicon": null,
+                "feature_flags": [
+                    {
+                        "id": 7,
+                        "name": "weekly_event_nudge",
+                        "scope": "BACKEND",
+                        "audience": "EVERYONE",
+                        "user_audience": "EVERYONE",
+                        "key": "weekly_event_nudge-feature-flag",
+                        "notes": "Send a weekly nudge to cadmins",
+                        "expires_on": null,
+                        "communities": [
+                            {
+                                "id": 3,
+                                "name": "Energize Wayland"
+                            },
+                            {
+                                "id": 7,
+                                "name": "Energize Framingham"
+                            },
+                            {
+                                "id": 6,
+                                "name": "Cooler Concord"
+                            }
+                        ]
+                    },
+                    {
+                        "id": 8,
+                        "name": "new-user-engagement-view",
+                        "scope": "ADMIN_FRONTEND",
+                        "audience": "EVERYONE",
+                        "user_audience": "EVERYONE",
+                        "key": "new-user-engagement-view-feature-flag",
+                        "notes": "Admin portal shows new user engagement view",
+                        "expires_on": null,
+                        "communities": []
+                    }
+                ]
+            },
+            "logo": null,
+            "is_closed": false,
+            "is_published": true,
+            "parent": null,
+            "admins": [
+                {
+                    "id": 104,
+                    "is_admin": true,
+                    "team": {
+                        "id": 33,
+                        "name": "Backyard Growers",
+                        "tagline": "Tomatoes, potatoes, corn and mushrooms...",
+                        "description": "Asparagi!\r\nWe grow veggies, fruit and other things in backyards and community garden plots, keep chickens and bees, and more!"
+                    },
+                    "user": {
+                        "id": "d0e6ca3e-413b-4dba-b139-6fdbaff58e6a",
+                        "full_name": "Kaat Vander Straeten",
+                        "preferred_name": "Kaat-alyst",
+                        "email": "kaat@transitionwayland.org"
+                    }
+                }
+            ]
+        },
+        {
+            "id": 45,
+            "name": "Earthworms",
+            "tagline": "",
+            "description": "We compost! Food scraps, fall leaves, you name it: we either compost ourselves (pun intended) or use Black Earth Compost curbside pickup to do it for us.  ",
+            "primary_community": {
+                "id": 3,
+                "name": "Energize Wayland",
+                "subdomain": "wayland",
+                "owner_name": "Kaat Vander Straeten",
+                "owner_email": "KAATvds@gmail.com",
+                "owner_phone_number": null,
+                "is_geographically_focused": true,
+                "location": {
+                    "city": "Wayland",
+                    "unit": null,
+                    "state": "Massachusetts",
+                    "address": null,
+                    "country": "US",
+                    "zipcode": "01778"
+                },
+                "is_approved": true,
+                "more_info": "{\"wants_socials\":\"true\",\"facebook_link\":\"https://www.facebook.com/EnergizeWayland\"}",
+                "is_published": true,
+                "logo": {
+                    "id": 5,
+                    "name": "Energize Wayland CommunityLogo",
+                    "url": "https://massenergize-prod-files.s3.amazonaws.com/media/energizewayland_resized.jpg"
+                },
+                "favicon": null,
+                "feature_flags": [
+                    {
+                        "id": 7,
+                        "name": "weekly_event_nudge",
+                        "scope": "BACKEND",
+                        "audience": "EVERYONE",
+                        "user_audience": "EVERYONE",
+                        "key": "weekly_event_nudge-feature-flag",
+                        "notes": "Send a weekly nudge to cadmins",
+                        "expires_on": null,
+                        "communities": [
+                            {
+                                "id": 3,
+                                "name": "Energize Wayland"
+                            },
+                            {
+                                "id": 7,
+                                "name": "Energize Framingham"
+                            },
+                            {
+                                "id": 6,
+                                "name": "Cooler Concord"
+                            }
+                        ]
+                    },
+                    {
+                        "id": 8,
+                        "name": "new-user-engagement-view",
+                        "scope": "ADMIN_FRONTEND",
+                        "audience": "EVERYONE",
+                        "user_audience": "EVERYONE",
+                        "key": "new-user-engagement-view-feature-flag",
+                        "notes": "Admin portal shows new user engagement view",
+                        "expires_on": null,
+                        "communities": []
+                    }
+                ]
+            },
+            "logo": {
+                "id": 691,
+                "name": "earthworms-TeamLogo",
+                "url": "https://massenergize-prod-files.s3.amazonaws.com/media/Copy_of_pickup_food_scraps.jpg"
+            },
+            "is_closed": false,
+            "is_published": true,
+            "parent": null,
+            "admins": [
+                {
+                    "id": 160,
+                    "is_admin": true,
+                    "team": {
+                        "id": 45,
+                        "name": "Earthworms",
+                        "tagline": "",
+                        "description": "We compost! Food scraps, fall leaves, you name it: we either compost ourselves (pun intended) or use Black Earth Compost curbside pickup to do it for us.  "
+                    },
+                    "user": {
+                        "id": "d0e6ca3e-413b-4dba-b139-6fdbaff58e6a",
+                        "full_name": "Kaat Vander Straeten",
+                        "preferred_name": "Kaat-alyst",
+                        "email": "kaat@transitionwayland.org"
+                    }
+                }
+            ]
+        },
+        {
+            "id": 34,
+            "name": "Forest Hill Green",
+            "tagline": "",
+            "description": "Neighbors living on Forest Hill Road.",
+            "primary_community": {
+                "id": 3,
+                "name": "Energize Wayland",
+                "subdomain": "wayland",
+                "owner_name": "Kaat Vander Straeten",
+                "owner_email": "KAATvds@gmail.com",
+                "owner_phone_number": null,
+                "is_geographically_focused": true,
+                "location": {
+                    "city": "Wayland",
+                    "unit": null,
+                    "state": "Massachusetts",
+                    "address": null,
+                    "country": "US",
+                    "zipcode": "01778"
+                },
+                "is_approved": true,
+                "more_info": "{\"wants_socials\":\"true\",\"facebook_link\":\"https://www.facebook.com/EnergizeWayland\"}",
+                "is_published": true,
+                "logo": {
+                    "id": 5,
+                    "name": "Energize Wayland CommunityLogo",
+                    "url": "https://massenergize-prod-files.s3.amazonaws.com/media/energizewayland_resized.jpg"
+                },
+                "favicon": null,
+                "feature_flags": [
+                    {
+                        "id": 7,
+                        "name": "weekly_event_nudge",
+                        "scope": "BACKEND",
+                        "audience": "EVERYONE",
+                        "user_audience": "EVERYONE",
+                        "key": "weekly_event_nudge-feature-flag",
+                        "notes": "Send a weekly nudge to cadmins",
+                        "expires_on": null,
+                        "communities": [
+                            {
+                                "id": 3,
+                                "name": "Energize Wayland"
+                            },
+                            {
+                                "id": 7,
+                                "name": "Energize Framingham"
+                            },
+                            {
+                                "id": 6,
+                                "name": "Cooler Concord"
+                            }
+                        ]
+                    },
+                    {
+                        "id": 8,
+                        "name": "new-user-engagement-view",
+                        "scope": "ADMIN_FRONTEND",
+                        "audience": "EVERYONE",
+                        "user_audience": "EVERYONE",
+                        "key": "new-user-engagement-view-feature-flag",
+                        "notes": "Admin portal shows new user engagement view",
+                        "expires_on": null,
+                        "communities": []
+                    }
+                ]
+            },
+            "logo": null,
+            "is_closed": false,
+            "is_published": true,
+            "parent": null,
+            "admins": [
+                {
+                    "id": 109,
+                    "is_admin": true,
+                    "team": {
+                        "id": 34,
+                        "name": "Forest Hill Green",
+                        "tagline": "",
+                        "description": "Neighbors living on Forest Hill Road."
+                    },
+                    "user": {
+                        "id": "864ab9cd-e238-42db-84b5-bcd5b4b9218d",
+                        "full_name": "Michele Trucksis",
+                        "preferred_name": "Shelley",
+                        "email": "mtrucksis@gmail.com"
+                    }
+                }
+            ]
+        },
+        {
+            "id": 136,
+            "name": "Garden to Save Our Ecosystem ",
+            "tagline": "Save the Pollinators & Sequester Carbon with Native Plants",
+            "description": "Inspired by the research of Dr. Doug Tallamy and his colleagues, we encourage ecologically sound landscaping practices and legislation that supports those practices in our communities and in our Commonwealth.",
+            "primary_community": {
+                "id": 3,
+                "name": "Energize Wayland",
+                "subdomain": "wayland",
+                "owner_name": "Kaat Vander Straeten",
+                "owner_email": "KAATvds@gmail.com",
+                "owner_phone_number": null,
+                "is_geographically_focused": true,
+                "location": {
+                    "city": "Wayland",
+                    "unit": null,
+                    "state": "Massachusetts",
+                    "address": null,
+                    "country": "US",
+                    "zipcode": "01778"
+                },
+                "is_approved": true,
+                "more_info": "{\"wants_socials\":\"true\",\"facebook_link\":\"https://www.facebook.com/EnergizeWayland\"}",
+                "is_published": true,
+                "logo": {
+                    "id": 5,
+                    "name": "Energize Wayland CommunityLogo",
+                    "url": "https://massenergize-prod-files.s3.amazonaws.com/media/energizewayland_resized.jpg"
+                },
+                "favicon": null,
+                "feature_flags": [
+                    {
+                        "id": 7,
+                        "name": "weekly_event_nudge",
+                        "scope": "BACKEND",
+                        "audience": "EVERYONE",
+                        "user_audience": "EVERYONE",
+                        "key": "weekly_event_nudge-feature-flag",
+                        "notes": "Send a weekly nudge to cadmins",
+                        "expires_on": null,
+                        "communities": [
+                            {
+                                "id": 3,
+                                "name": "Energize Wayland"
+                            },
+                            {
+                                "id": 7,
+                                "name": "Energize Framingham"
+                            },
+                            {
+                                "id": 6,
+                                "name": "Cooler Concord"
+                            }
+                        ]
+                    },
+                    {
+                        "id": 8,
+                        "name": "new-user-engagement-view",
+                        "scope": "ADMIN_FRONTEND",
+                        "audience": "EVERYONE",
+                        "user_audience": "EVERYONE",
+                        "key": "new-user-engagement-view-feature-flag",
+                        "notes": "Admin portal shows new user engagement view",
+                        "expires_on": null,
+                        "communities": []
+                    }
+                ]
+            },
+            "logo": null,
+            "is_closed": false,
+            "is_published": true,
+            "parent": null,
+            "admins": [
+                {
+                    "id": 367,
+                    "is_admin": true,
+                    "team": {
+                        "id": 136,
+                        "name": "Garden to Save Our Ecosystem ",
+                        "tagline": "Save the Pollinators & Sequester Carbon with Native Plants",
+                        "description": "Inspired by the research of Dr. Doug Tallamy and his colleagues, we encourage ecologically sound landscaping practices and legislation that supports those practices in our communities and in our Commonwealth."
+                    },
+                    "user": {
+                        "id": "12ea7359-4c42-4369-b311-19528ee09f47",
+                        "full_name": "Phyllis Jean Milburn",
+                        "preferred_name": "Jean",
+                        "email": "39york@gmail.com"
+                    }
+                }
+            ]
+        },
+        {
+            "id": 12,
+            "name": "Happy Hollow Neighborhood",
+            "tagline": "",
+            "description": "Cool people in the Happy Hollow Neighborhood, Wayland, MA",
+            "primary_community": {
+                "id": 3,
+                "name": "Energize Wayland",
+                "subdomain": "wayland",
+                "owner_name": "Kaat Vander Straeten",
+                "owner_email": "KAATvds@gmail.com",
+                "owner_phone_number": null,
+                "is_geographically_focused": true,
+                "location": {
+                    "city": "Wayland",
+                    "unit": null,
+                    "state": "Massachusetts",
+                    "address": null,
+                    "country": "US",
+                    "zipcode": "01778"
+                },
+                "is_approved": true,
+                "more_info": "{\"wants_socials\":\"true\",\"facebook_link\":\"https://www.facebook.com/EnergizeWayland\"}",
+                "is_published": true,
+                "logo": {
+                    "id": 5,
+                    "name": "Energize Wayland CommunityLogo",
+                    "url": "https://massenergize-prod-files.s3.amazonaws.com/media/energizewayland_resized.jpg"
+                },
+                "favicon": null,
+                "feature_flags": [
+                    {
+                        "id": 7,
+                        "name": "weekly_event_nudge",
+                        "scope": "BACKEND",
+                        "audience": "EVERYONE",
+                        "user_audience": "EVERYONE",
+                        "key": "weekly_event_nudge-feature-flag",
+                        "notes": "Send a weekly nudge to cadmins",
+                        "expires_on": null,
+                        "communities": [
+                            {
+                                "id": 3,
+                                "name": "Energize Wayland"
+                            },
+                            {
+                                "id": 7,
+                                "name": "Energize Framingham"
+                            },
+                            {
+                                "id": 6,
+                                "name": "Cooler Concord"
+                            }
+                        ]
+                    },
+                    {
+                        "id": 8,
+                        "name": "new-user-engagement-view",
+                        "scope": "ADMIN_FRONTEND",
+                        "audience": "EVERYONE",
+                        "user_audience": "EVERYONE",
+                        "key": "new-user-engagement-view-feature-flag",
+                        "notes": "Admin portal shows new user engagement view",
+                        "expires_on": null,
+                        "communities": []
+                    }
+                ]
+            },
+            "logo": {
+                "id": 347,
+                "name": "happy-hollow-neighborhood-TeamLogo",
+                "url": "https://massenergize-prod-files.s3.amazonaws.com/media/happyhollowstreetsign.jpg"
+            },
+            "is_closed": false,
+            "is_published": true,
+            "parent": null,
+            "admins": []
+        },
+        {
+            "id": 48,
+            "name": "Reeves Hill Neighborhood",
+            "tagline": "Livin' on the hill!",
+            "description": "<p>Greenie folks living on and around Reeve's Hill: Shaw Drive, Fox Meadow, Deer Path, Woodridge...&nbsp;</p>",
+            "primary_community": {
+                "id": 3,
+                "name": "Energize Wayland",
+                "subdomain": "wayland",
+                "owner_name": "Kaat Vander Straeten",
+                "owner_email": "KAATvds@gmail.com",
+                "owner_phone_number": null,
+                "is_geographically_focused": true,
+                "location": {
+                    "city": "Wayland",
+                    "unit": null,
+                    "state": "Massachusetts",
+                    "address": null,
+                    "country": "US",
+                    "zipcode": "01778"
+                },
+                "is_approved": true,
+                "more_info": "{\"wants_socials\":\"true\",\"facebook_link\":\"https://www.facebook.com/EnergizeWayland\"}",
+                "is_published": true,
+                "logo": {
+                    "id": 5,
+                    "name": "Energize Wayland CommunityLogo",
+                    "url": "https://massenergize-prod-files.s3.amazonaws.com/media/energizewayland_resized.jpg"
+                },
+                "favicon": null,
+                "feature_flags": [
+                    {
+                        "id": 7,
+                        "name": "weekly_event_nudge",
+                        "scope": "BACKEND",
+                        "audience": "EVERYONE",
+                        "user_audience": "EVERYONE",
+                        "key": "weekly_event_nudge-feature-flag",
+                        "notes": "Send a weekly nudge to cadmins",
+                        "expires_on": null,
+                        "communities": [
+                            {
+                                "id": 3,
+                                "name": "Energize Wayland"
+                            },
+                            {
+                                "id": 7,
+                                "name": "Energize Framingham"
+                            },
+                            {
+                                "id": 6,
+                                "name": "Cooler Concord"
+                            }
+                        ]
+                    },
+                    {
+                        "id": 8,
+                        "name": "new-user-engagement-view",
+                        "scope": "ADMIN_FRONTEND",
+                        "audience": "EVERYONE",
+                        "user_audience": "EVERYONE",
+                        "key": "new-user-engagement-view-feature-flag",
+                        "notes": "Admin portal shows new user engagement view",
+                        "expires_on": null,
+                        "communities": []
+                    }
+                ]
+            },
+            "logo": {
+                "id": 750,
+                "name": "reeves-hill-neighborhood-TeamLogo",
+                "url": "https://massenergize-prod-files.s3.amazonaws.com/media/Reeves_Hill.jpg"
+            },
+            "is_closed": false,
+            "is_published": true,
+            "parent": null,
+            "admins": [
+                {
+                    "id": 166,
+                    "is_admin": true,
+                    "team": {
+                        "id": 48,
+                        "name": "Reeves Hill Neighborhood",
+                        "tagline": "Livin' on the hill!",
+                        "description": "<p>Greenie folks living on and around Reeve's Hill: Shaw Drive, Fox Meadow, Deer Path, Woodridge...&nbsp;</p>"
+                    },
+                    "user": {
+                        "id": "d0e6ca3e-413b-4dba-b139-6fdbaff58e6a",
+                        "full_name": "Kaat Vander Straeten",
+                        "preferred_name": "Kaat-alyst",
+                        "email": "kaat@transitionwayland.org"
+                    }
+                }
+            ]
+        },
+        {
+            "id": 49,
+            "name": "Turkey Hill Village",
+            "tagline": "Aiming to be the greenest condos in Wayland!",
+            "description": "We all live in the condo development, Turkey Hill Village, part of the Mainstone Villages.",
+            "primary_community": {
+                "id": 3,
+                "name": "Energize Wayland",
+                "subdomain": "wayland",
+                "owner_name": "Kaat Vander Straeten",
+                "owner_email": "KAATvds@gmail.com",
+                "owner_phone_number": null,
+                "is_geographically_focused": true,
+                "location": {
+                    "city": "Wayland",
+                    "unit": null,
+                    "state": "Massachusetts",
+                    "address": null,
+                    "country": "US",
+                    "zipcode": "01778"
+                },
+                "is_approved": true,
+                "more_info": "{\"wants_socials\":\"true\",\"facebook_link\":\"https://www.facebook.com/EnergizeWayland\"}",
+                "is_published": true,
+                "logo": {
+                    "id": 5,
+                    "name": "Energize Wayland CommunityLogo",
+                    "url": "https://massenergize-prod-files.s3.amazonaws.com/media/energizewayland_resized.jpg"
+                },
+                "favicon": null,
+                "feature_flags": [
+                    {
+                        "id": 7,
+                        "name": "weekly_event_nudge",
+                        "scope": "BACKEND",
+                        "audience": "EVERYONE",
+                        "user_audience": "EVERYONE",
+                        "key": "weekly_event_nudge-feature-flag",
+                        "notes": "Send a weekly nudge to cadmins",
+                        "expires_on": null,
+                        "communities": [
+                            {
+                                "id": 3,
+                                "name": "Energize Wayland"
+                            },
+                            {
+                                "id": 7,
+                                "name": "Energize Framingham"
+                            },
+                            {
+                                "id": 6,
+                                "name": "Cooler Concord"
+                            }
+                        ]
+                    },
+                    {
+                        "id": 8,
+                        "name": "new-user-engagement-view",
+                        "scope": "ADMIN_FRONTEND",
+                        "audience": "EVERYONE",
+                        "user_audience": "EVERYONE",
+                        "key": "new-user-engagement-view-feature-flag",
+                        "notes": "Admin portal shows new user engagement view",
+                        "expires_on": null,
+                        "communities": []
+                    }
+                ]
+            },
+            "logo": {
+                "id": 842,
+                "name": "turkey-hill-village-TeamLogo",
+                "url": "https://massenergize-prod-files.s3.amazonaws.com/media/THV_Sign_2.jpg"
+            },
+            "is_closed": false,
+            "is_published": true,
+            "parent": null,
+            "admins": [
+                {
+                    "id": 168,
+                    "is_admin": true,
+                    "team": {
+                        "id": 49,
+                        "name": "Turkey Hill Village",
+                        "tagline": "Aiming to be the greenest condos in Wayland!",
+                        "description": "We all live in the condo development, Turkey Hill Village, part of the Mainstone Villages."
+                    },
+                    "user": {
+                        "id": "3994ec2a-0d6a-4065-b8e5-892aad24ce25",
+                        "full_name": "Jane Kelly",
+                        "preferred_name": "Jane",
+                        "email": "janeekelly@comcast.net"
+                    }
+                }
+            ]
+        },
+        {
+            "id": 75,
+            "name": "Wayland activists ",
+            "tagline": "We're passionate and committed!",
+            "description": "We're those folks in town you meet at the Farmer's Market for a chat, or who send you newsletters, or who work behind the scenes to bring Waylanders information and actions.",
+            "primary_community": {
+                "id": 3,
+                "name": "Energize Wayland",
+                "subdomain": "wayland",
+                "owner_name": "Kaat Vander Straeten",
+                "owner_email": "KAATvds@gmail.com",
+                "owner_phone_number": null,
+                "is_geographically_focused": true,
+                "location": {
+                    "city": "Wayland",
+                    "unit": null,
+                    "state": "Massachusetts",
+                    "address": null,
+                    "country": "US",
+                    "zipcode": "01778"
+                },
+                "is_approved": true,
+                "more_info": "{\"wants_socials\":\"true\",\"facebook_link\":\"https://www.facebook.com/EnergizeWayland\"}",
+                "is_published": true,
+                "logo": {
+                    "id": 5,
+                    "name": "Energize Wayland CommunityLogo",
+                    "url": "https://massenergize-prod-files.s3.amazonaws.com/media/energizewayland_resized.jpg"
+                },
+                "favicon": null,
+                "feature_flags": [
+                    {
+                        "id": 7,
+                        "name": "weekly_event_nudge",
+                        "scope": "BACKEND",
+                        "audience": "EVERYONE",
+                        "user_audience": "EVERYONE",
+                        "key": "weekly_event_nudge-feature-flag",
+                        "notes": "Send a weekly nudge to cadmins",
+                        "expires_on": null,
+                        "communities": [
+                            {
+                                "id": 3,
+                                "name": "Energize Wayland"
+                            },
+                            {
+                                "id": 7,
+                                "name": "Energize Framingham"
+                            },
+                            {
+                                "id": 6,
+                                "name": "Cooler Concord"
+                            }
+                        ]
+                    },
+                    {
+                        "id": 8,
+                        "name": "new-user-engagement-view",
+                        "scope": "ADMIN_FRONTEND",
+                        "audience": "EVERYONE",
+                        "user_audience": "EVERYONE",
+                        "key": "new-user-engagement-view-feature-flag",
+                        "notes": "Admin portal shows new user engagement view",
+                        "expires_on": null,
+                        "communities": []
+                    }
+                ]
+            },
+            "logo": {
+                "id": 1108,
+                "name": "wayland-activists-TeamLogo",
+                "url": "https://massenergize-prod-files.s3.amazonaws.com/media/Climate_Activism.jpg"
+            },
+            "is_closed": false,
+            "is_published": true,
+            "parent": null,
+            "admins": [
+                {
+                    "id": 285,
+                    "is_admin": true,
+                    "team": {
+                        "id": 75,
+                        "name": "Wayland activists ",
+                        "tagline": "We're passionate and committed!",
+                        "description": "We're those folks in town you meet at the Farmer's Market for a chat, or who send you newsletters, or who work behind the scenes to bring Waylanders information and actions."
+                    },
+                    "user": {
+                        "id": "d0e6ca3e-413b-4dba-b139-6fdbaff58e6a",
+                        "full_name": "Kaat Vander Straeten",
+                        "preferred_name": "Kaat-alyst",
+                        "email": "kaat@transitionwayland.org"
+                    }
+                }
+            ]
+        },
+        {
+            "id": 46,
+            "name": "Wayland Drives Electric!",
+            "tagline": "",
+            "description": "EV drivers are a funny bunch! They're generally happy people since their zippy cars can beat any fancy car at the red lights! Also, they can legally idle when they're picking up their kids from school.  They love bragging about their range and their miles per kilowatt. ",
+            "primary_community": {
+                "id": 3,
+                "name": "Energize Wayland",
+                "subdomain": "wayland",
+                "owner_name": "Kaat Vander Straeten",
+                "owner_email": "KAATvds@gmail.com",
+                "owner_phone_number": null,
+                "is_geographically_focused": true,
+                "location": {
+                    "city": "Wayland",
+                    "unit": null,
+                    "state": "Massachusetts",
+                    "address": null,
+                    "country": "US",
+                    "zipcode": "01778"
+                },
+                "is_approved": true,
+                "more_info": "{\"wants_socials\":\"true\",\"facebook_link\":\"https://www.facebook.com/EnergizeWayland\"}",
+                "is_published": true,
+                "logo": {
+                    "id": 5,
+                    "name": "Energize Wayland CommunityLogo",
+                    "url": "https://massenergize-prod-files.s3.amazonaws.com/media/energizewayland_resized.jpg"
+                },
+                "favicon": null,
+                "feature_flags": [
+                    {
+                        "id": 7,
+                        "name": "weekly_event_nudge",
+                        "scope": "BACKEND",
+                        "audience": "EVERYONE",
+                        "user_audience": "EVERYONE",
+                        "key": "weekly_event_nudge-feature-flag",
+                        "notes": "Send a weekly nudge to cadmins",
+                        "expires_on": null,
+                        "communities": [
+                            {
+                                "id": 3,
+                                "name": "Energize Wayland"
+                            },
+                            {
+                                "id": 7,
+                                "name": "Energize Framingham"
+                            },
+                            {
+                                "id": 6,
+                                "name": "Cooler Concord"
+                            }
+                        ]
+                    },
+                    {
+                        "id": 8,
+                        "name": "new-user-engagement-view",
+                        "scope": "ADMIN_FRONTEND",
+                        "audience": "EVERYONE",
+                        "user_audience": "EVERYONE",
+                        "key": "new-user-engagement-view-feature-flag",
+                        "notes": "Admin portal shows new user engagement view",
+                        "expires_on": null,
+                        "communities": []
+                    }
+                ]
+            },
+            "logo": {
+                "id": 692,
+                "name": "wayland-drives-electric-TeamLogo",
+                "url": "https://massenergize-prod-files.s3.amazonaws.com/media/170908_Mass-Energize_Arthur_Tesla_21_Leah_LaRiccia_small.jpg"
+            },
+            "is_closed": false,
+            "is_published": true,
+            "parent": null,
+            "admins": [
+                {
+                    "id": 161,
+                    "is_admin": true,
+                    "team": {
+                        "id": 46,
+                        "name": "Wayland Drives Electric!",
+                        "tagline": "",
+                        "description": "EV drivers are a funny bunch! They're generally happy people since their zippy cars can beat any fancy car at the red lights! Also, they can legally idle when they're picking up their kids from school.  They love bragging about their range and their miles per kilowatt. "
+                    },
+                    "user": {
+                        "id": "d0e6ca3e-413b-4dba-b139-6fdbaff58e6a",
+                        "full_name": "Kaat Vander Straeten",
+                        "preferred_name": "Kaat-alyst",
+                        "email": "kaat@transitionwayland.org"
+                    }
+                }
+            ]
+        },
+        {
+            "id": 39,
+            "name": "Wayland High Green Team",
+            "tagline": "",
+            "description": "This is where the Wayland High School Green Team makes things happen!",
+            "primary_community": {
+                "id": 3,
+                "name": "Energize Wayland",
+                "subdomain": "wayland",
+                "owner_name": "Kaat Vander Straeten",
+                "owner_email": "KAATvds@gmail.com",
+                "owner_phone_number": null,
+                "is_geographically_focused": true,
+                "location": {
+                    "city": "Wayland",
+                    "unit": null,
+                    "state": "Massachusetts",
+                    "address": null,
+                    "country": "US",
+                    "zipcode": "01778"
+                },
+                "is_approved": true,
+                "more_info": "{\"wants_socials\":\"true\",\"facebook_link\":\"https://www.facebook.com/EnergizeWayland\"}",
+                "is_published": true,
+                "logo": {
+                    "id": 5,
+                    "name": "Energize Wayland CommunityLogo",
+                    "url": "https://massenergize-prod-files.s3.amazonaws.com/media/energizewayland_resized.jpg"
+                },
+                "favicon": null,
+                "feature_flags": [
+                    {
+                        "id": 7,
+                        "name": "weekly_event_nudge",
+                        "scope": "BACKEND",
+                        "audience": "EVERYONE",
+                        "user_audience": "EVERYONE",
+                        "key": "weekly_event_nudge-feature-flag",
+                        "notes": "Send a weekly nudge to cadmins",
+                        "expires_on": null,
+                        "communities": [
+                            {
+                                "id": 3,
+                                "name": "Energize Wayland"
+                            },
+                            {
+                                "id": 7,
+                                "name": "Energize Framingham"
+                            },
+                            {
+                                "id": 6,
+                                "name": "Cooler Concord"
+                            }
+                        ]
+                    },
+                    {
+                        "id": 8,
+                        "name": "new-user-engagement-view",
+                        "scope": "ADMIN_FRONTEND",
+                        "audience": "EVERYONE",
+                        "user_audience": "EVERYONE",
+                        "key": "new-user-engagement-view-feature-flag",
+                        "notes": "Admin portal shows new user engagement view",
+                        "expires_on": null,
+                        "communities": []
+                    }
+                ]
+            },
+            "logo": {
+                "id": 584,
+                "name": "wayland-high-green-team-TeamLogo",
+                "url": "https://massenergize-prod-files.s3.amazonaws.com/media/GReenTeam.jpg"
+            },
+            "is_closed": false,
+            "is_published": true,
+            "parent": null,
+            "admins": [
+                {
+                    "id": 132,
+                    "is_admin": true,
+                    "team": {
+                        "id": 39,
+                        "name": "Wayland High Green Team",
+                        "tagline": "",
+                        "description": "This is where the Wayland High School Green Team makes things happen!"
+                    },
+                    "user": {
+                        "id": "0c2d3694-edd6-4975-923b-4f23ce9a9499",
+                        "full_name": "Sara  Snow",
+                        "preferred_name": "Sara",
+                        "email": "sara_snow@wayland.k12.ma.us"
+                    }
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Wayland Solarizers",
+            "tagline": "Solar PV and Solar Hot Water!",
+            "description": "<p>Waylanders who installed solar photovoltaics or solar hot water during, before and after and in between our two Solarize Mass campaigns.</p>",
+            "primary_community": {
+                "id": 3,
+                "name": "Energize Wayland",
+                "subdomain": "wayland",
+                "owner_name": "Kaat Vander Straeten",
+                "owner_email": "KAATvds@gmail.com",
+                "owner_phone_number": null,
+                "is_geographically_focused": true,
+                "location": {
+                    "city": "Wayland",
+                    "unit": null,
+                    "state": "Massachusetts",
+                    "address": null,
+                    "country": "US",
+                    "zipcode": "01778"
+                },
+                "is_approved": true,
+                "more_info": "{\"wants_socials\":\"true\",\"facebook_link\":\"https://www.facebook.com/EnergizeWayland\"}",
+                "is_published": true,
+                "logo": {
+                    "id": 5,
+                    "name": "Energize Wayland CommunityLogo",
+                    "url": "https://massenergize-prod-files.s3.amazonaws.com/media/energizewayland_resized.jpg"
+                },
+                "favicon": null,
+                "feature_flags": [
+                    {
+                        "id": 7,
+                        "name": "weekly_event_nudge",
+                        "scope": "BACKEND",
+                        "audience": "EVERYONE",
+                        "user_audience": "EVERYONE",
+                        "key": "weekly_event_nudge-feature-flag",
+                        "notes": "Send a weekly nudge to cadmins",
+                        "expires_on": null,
+                        "communities": [
+                            {
+                                "id": 3,
+                                "name": "Energize Wayland"
+                            },
+                            {
+                                "id": 7,
+                                "name": "Energize Framingham"
+                            },
+                            {
+                                "id": 6,
+                                "name": "Cooler Concord"
+                            }
+                        ]
+                    },
+                    {
+                        "id": 8,
+                        "name": "new-user-engagement-view",
+                        "scope": "ADMIN_FRONTEND",
+                        "audience": "EVERYONE",
+                        "user_audience": "EVERYONE",
+                        "key": "new-user-engagement-view-feature-flag",
+                        "notes": "Admin portal shows new user engagement view",
+                        "expires_on": null,
+                        "communities": []
+                    }
+                ]
+            },
+            "logo": {
+                "id": 693,
+                "name": "wayland-solarizers-TeamLogo",
+                "url": "https://massenergize-prod-files.s3.amazonaws.com/media/DSC_8203_1000.JPG"
+            },
+            "is_closed": false,
+            "is_published": true,
+            "parent": null,
+            "admins": []
+        }
+    ],
+    "error": null,
+    "success": true,
+    "cursor": {}
+}

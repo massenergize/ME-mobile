@@ -18,14 +18,11 @@ import TestimonialsPage from "./components/Pages/TestimonialsPage/TestimonialsPa
 import TeamsPage from "./components/Pages/TeamsPage/TeamsPage";
 import UserProfilePage from "./components/Pages/UserProfilePage/UserProfilePage";
 import EventsPage from "./components/Pages/EventsPage/EventsPage";
-import { NativeBaseProvider } from "native-base";
 import ActionDetails from "./components/Pages/ActionsPage/ActionDetails";
 import EventDetailsPage from "./components/Pages/EventsPage/EventDetailsPage";
 import IntroductionPage from "./components/Pages/IntroductionPage/IntroductionPage";
 import DrawerNavigator from "./components/Shared/DrawerNavigator";
 import Theme from "./components/Shared/Theme";
-import ActionCard from "./components/Pages/ActionsPage/ActionCard";
-import ActionDetails from "./components/Pages/ActionsPage/ActionDetails";
 const Stack = createNativeStackNavigator();
 
 export default function App() {

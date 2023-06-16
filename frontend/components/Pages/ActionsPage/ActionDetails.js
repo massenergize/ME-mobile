@@ -61,31 +61,31 @@ export default function ActionDetails() {
                         <Text style = {[styles.textStyle,{marginRight:25, textAlign:'right', color:'#edb809'}]}>{'\u0024   \u0024   '}</Text>
                     </View>
                     <ScrollView horizontal={true} style={styles.menu}>
-                        <Button size = "md" variant="outline" _text={{
+                        <Button size = "md" variant="outline" marginRight="15" _text={{
                             color: 'black',
                             fontWeight: 'bold',
                         }} ref={buttonMenu}>
                             Description
                         </Button>
-                        <Button size = "md" variant="outline" _text={{
+                        <Button size = "md" variant="outline" marginRight="15" _text={{
                             color: 'black',
                             fontWeight: 'bold',
                         }} ref={buttonMenu}>
                             Steps
                         </Button>
-                        <Button size = "md" variant="outline" _text={{
+                        <Button size = "md" variant="outline"  marginRight="15" _text={{
                             color: 'black',
                             fontWeight: 'bold',
                         }} ref={buttonMenu}>
                             Testimonials
                         </Button>
-                        <Button size = "md" variant="outline" _text={{
+                        <Button size = "md" variant="outline"  marginRight="15" _text={{
                             color: 'black',
                             fontWeight: 'bold',
                         }} ref={buttonMenu}>
                             Service Providers
                         </Button>
-                        <Button size = "md" variant="outline" _text={{
+                        <Button size = "md" variant="outline"  marginRight="15" _text={{
                             color: 'black',
                             fontWeight: 'bold',
                         }} ref={buttonMenu}>

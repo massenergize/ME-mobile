@@ -7,28 +7,33 @@ import {
   Image,
   ScrollView,
   HStack,
+  Pressable,
 } from "native-base";
 
-export default function ServiceProvidersPage() {
+export default function ServiceProvidersPage({ navigation }) {
   const generateSProvider = () => {
     let sProvider = [];
     for (let i = 0; i < 3; i++) {
       sProvider.push(
         <Box mx="3">
-          <Image
-            source={require("../../../assets/images/logo.png")}
-            resizeMode="contain"
-            alt="image"
-            size="40"
-            backgroundColor="gray.200"
-            borderRadius="20"
-          />
-          <Box>
-            <Text fontWeight="bold" fontSize="lg">
-              Provider A
-            </Text>
-            <Text fontWeight="thin">This could be a brief cr...</Text>
-          </Box>
+          <Pressable
+            onPress={() => navigation.navigate("serviceProviderDetails")}
+          >
+            <Image
+              source={require("../../../assets/images/logo.png")}
+              resizeMode="contain"
+              alt="image"
+              size="40"
+              backgroundColor="gray.200"
+              borderRadius="20"
+            />
+            <Box>
+              <Text fontWeight="bold" fontSize="lg">
+                Provider A
+              </Text>
+              <Text fontWeight="thin">This could be a brief cr...</Text>
+            </Box>
+          </Pressable>
         </Box>
       );
     }

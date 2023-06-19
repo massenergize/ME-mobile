@@ -61,7 +61,10 @@ export default function App() {
           />
           <Stack.Screen name="signup" component={SignupPage} />
           <Stack.Screen name="withEmailOnly" component={WithEmailOnlyPage} />
-          <Stack.Screen name="userProfile" component={UserProfilePage} />
+          <Stack.Screen 
+            name="userProfile" 
+            component={UserProfilePage}
+            options={{ headerTransparent: true }} />
           <Stack.Screen name="about" component={AboutPage} />
           <Stack.Screen name="events" component={EventsPage} />
           <Stack.Screen
@@ -70,7 +73,10 @@ export default function App() {
             options={{ title: "" }}
           />
           <Stack.Screen name="actions" component={ActionsPage} />
-          <Stack.Screen name="actiondetails" component={ActionDetails} options={{ headerShown: false }} />
+          <Stack.Screen 
+            name="actiondetails" 
+            component={ActionDetails} 
+            options={{ title: ""}} />
           <Stack.Screen name="testimonials" component={TestimonialsPage} />
           <Stack.Screen name="community" component={CommunityPage} />
           <Stack.Screen name="teams" component={TeamsPage} />

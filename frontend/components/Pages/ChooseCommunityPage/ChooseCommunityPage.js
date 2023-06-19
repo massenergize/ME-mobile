@@ -14,6 +14,7 @@ import {
   Divider,
 } from "native-base";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { Pressable } from "react-native";
 
 const COMMUNITIES = [
   {
@@ -45,7 +46,7 @@ const COMMUNITIES = [
   },
 ];
 
-export default function ChooseCommunityPage() {
+export default function ChooseCommunityPage({ navigation }) {
   return (
     <SafeAreaView height="100%" width="100%">
       <Center>
@@ -111,24 +112,33 @@ export default function ChooseCommunityPage() {
             <Divider />
             <ScrollView mb="10">
               {COMMUNITIES.map((community) => (
-                <HStack key={community.id} space="5" mb="2" alignItems="center">
-                  <Image
-                    source={{ uri: community.image }}
-                    alt={community.name}
-                    size="128px"
-                    resizeMode="contain"
-                  />
-                  <Box shadow="md" rounded="lg">
-                    <Box>
-                      <Text fontSize="lg" fontWeight="bold" color="primary.400">
-                        {community.name}
-                      </Text>
-                      <Text fontSize="sm" color="muted.400">
-                        {community.location}
-                      </Text>
+                <Pressable
+                  key={community.id}
+                  onPress={() => navigation.navigate("drawer")}
+                >
+                  <HStack space="5" mb="2" alignItems="center">
+                    <Image
+                      source={{ uri: community.image }}
+                      alt={community.name}
+                      size="128px"
+                      resizeMode="contain"
+                    />
+                    <Box shadow="md" rounded="lg">
+                      <Box>
+                        <Text
+                          fontSize="lg"
+                          fontWeight="bold"
+                          color="primary.400"
+                        >
+                          {community.name}
+                        </Text>
+                        <Text fontSize="sm" color="muted.400">
+                          {community.location}
+                        </Text>
+                      </Box>
                     </Box>
-                  </Box>
-                </HStack>
+                  </HStack>
+                </Pressable>
               ))}
             </ScrollView>
           </VStack>

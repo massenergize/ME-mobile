@@ -35,21 +35,23 @@ function SmallChart({ goal, color }) {
 // pie charts that are displayed on the impact page - more detailed than the smaller pie charts
 function BigPieChart({ goal, color }) {
     return (
-        <HStack alignItems="center" ml={3} mr={3}>
+        <HStack alignItems="center">
             <VictoryPie 
                 data={[{x: "current", y: goal.current}, {x: "remaining", y: goal.goal - goal.current}]} 
                 containerComponent={<VictoryContainer standalone={false} responsive={true}/>}
-                innerRadius={Dimensions.get('window').width / 10}
-                height={Dimensions.get('window').width / 2.5}
-                width={Dimensions.get('window').width / 2.5}
+                innerRadius={Dimensions.get('window').width / 12}
+                height={Dimensions.get('window').width / 2.7}
+                width={Dimensions.get('window').width / 2.7}
                 padding={10}
                 labels={() => null} 
                 colorScale={[color, "#f2f2f2"]}/>
-            <VStack alignItems="center" m={3} width={Dimensions.get('window').width - (Dimensions.get('window').width / 2.5)}>
-                <Text bold fontSize="lg">{goal.nameLong}</Text>
-                <Text bold fontSize="md">{goal.current} / {goal.goal} {goal.nameShort}</Text>
-                <Text fontSize="md">({(goal.current / goal.goal * 100).toFixed(1)}% of Goal)</Text>
-            </VStack>
+            <Container width={Dimensions.get('window').width - (Dimensions.get('window').width / 2.5)}>
+                <VStack>
+                    <Text bold fontSize="lg">{goal.nameLong}</Text>
+                    <Text bold fontSize="md">{goal.current} / {goal.goal} {goal.nameShort}</Text>
+                    <Text fontSize="md">({(goal.current / goal.goal * 100).toFixed(1)}% of Goal)</Text>
+                </VStack>
+            </Container>
         </HStack>
     )
 }

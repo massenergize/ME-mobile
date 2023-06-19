@@ -1,0 +1,1370 @@
+{
+    "data": [
+        {
+            "id": 3,
+            "name": "Energize Wayland",
+            "subdomain": "wayland",
+            "owner_name": "Kaat Vander Straeten",
+            "owner_email": "KAATvds@gmail.com",
+            "owner_phone_number": null,
+            "is_geographically_focused": true,
+            "location": {
+                "city": "Wayland",
+                "unit": null,
+                "state": "Massachusetts",
+                "address": null,
+                "country": "US",
+                "zipcode": "01778"
+            },
+            "is_approved": true,
+            "more_info": "{\"wants_socials\":\"true\",\"facebook_link\":\"https://www.facebook.com/EnergizeWayland\"}",
+            "is_published": true,
+            "logo": {
+                "id": 5,
+                "name": "Energize Wayland CommunityLogo",
+                "url": "https://massenergize-prod-files.s3.amazonaws.com/media/energizewayland_resized.jpg"
+            },
+            "favicon": null,
+            "feature_flags": [
+                {
+                    "id": 7,
+                    "name": "weekly_event_nudge",
+                    "scope": "BACKEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "weekly_event_nudge-feature-flag",
+                    "notes": "Send a weekly nudge to cadmins",
+                    "expires_on": null,
+                    "communities": [
+                        {
+                            "id": 3,
+                            "name": "Energize Wayland"
+                        },
+                        {
+                            "id": 7,
+                            "name": "Energize Framingham"
+                        },
+                        {
+                            "id": 6,
+                            "name": "Cooler Concord"
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "name": "new-user-engagement-view",
+                    "scope": "ADMIN_FRONTEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "new-user-engagement-view-feature-flag",
+                    "notes": "Admin portal shows new user engagement view",
+                    "expires_on": null,
+                    "communities": []
+                }
+            ]
+        },
+        {
+            "id": 21,
+            "name": "Cooler Communities",
+            "subdomain": "Coolercommunities",
+            "owner_name": "Uli Nagel",
+            "owner_email": "education@Ener-G-Save.com",
+            "owner_phone_number": null,
+            "is_geographically_focused": false,
+            "location": {
+                "city": "Berkshires",
+                "unit": null,
+                "state": "Massachusetts",
+                "address": "",
+                "country": "US",
+                "zipcode": "01201"
+            },
+            "is_approved": true,
+            "more_info": "{\"wants_socials\":\"false\"}",
+            "is_published": true,
+            "logo": {
+                "id": 1431,
+                "name": "Cooler Communities CommunityLogo",
+                "url": "https://massenergize-prod-files.s3.amazonaws.com/media/Cooler_2_Communities.png"
+            },
+            "favicon": null,
+            "feature_flags": [
+                {
+                    "id": 7,
+                    "name": "weekly_event_nudge",
+                    "scope": "BACKEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "weekly_event_nudge-feature-flag",
+                    "notes": "Send a weekly nudge to cadmins",
+                    "expires_on": null,
+                    "communities": [
+                        {
+                            "id": 3,
+                            "name": "Energize Wayland"
+                        },
+                        {
+                            "id": 7,
+                            "name": "Energize Framingham"
+                        },
+                        {
+                            "id": 6,
+                            "name": "Cooler Concord"
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "name": "new-user-engagement-view",
+                    "scope": "ADMIN_FRONTEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "new-user-engagement-view-feature-flag",
+                    "notes": "Admin portal shows new user engagement view",
+                    "expires_on": null,
+                    "communities": []
+                }
+            ]
+        },
+        {
+            "id": 48,
+            "name": "Green Pepperell",
+            "subdomain": "PepperellMA",
+            "owner_name": "Pepperell Climate Change Committee",
+            "owner_email": "climate@town.pepperell.ma.us",
+            "owner_phone_number": "",
+            "is_geographically_focused": true,
+            "location": {
+                "city": "Pepperell",
+                "unit": null,
+                "state": "Massachusetts",
+                "address": "1 Main St",
+                "country": "US",
+                "zipcode": "01463"
+            },
+            "is_approved": true,
+            "more_info": "{\"wants_socials\":\"true\",\"facebook_link\":\"https://www.facebook.com/groups/4927171240683080/\"}",
+            "is_published": true,
+            "logo": {
+                "id": 2423,
+                "name": "Green Pepperell CommunityLogo",
+                "url": "https://massenergize-prod-files.s3.amazonaws.com/media/Logo_GreenPep620X110.png"
+            },
+            "favicon": null,
+            "feature_flags": [
+                {
+                    "id": 7,
+                    "name": "weekly_event_nudge",
+                    "scope": "BACKEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "weekly_event_nudge-feature-flag",
+                    "notes": "Send a weekly nudge to cadmins",
+                    "expires_on": null,
+                    "communities": [
+                        {
+                            "id": 3,
+                            "name": "Energize Wayland"
+                        },
+                        {
+                            "id": 7,
+                            "name": "Energize Framingham"
+                        },
+                        {
+                            "id": 6,
+                            "name": "Cooler Concord"
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "name": "new-user-engagement-view",
+                    "scope": "ADMIN_FRONTEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "new-user-engagement-view-feature-flag",
+                    "notes": "Admin portal shows new user engagement view",
+                    "expires_on": null,
+                    "communities": []
+                }
+            ]
+        },
+        {
+            "id": 27,
+            "name": "Energize Acton",
+            "subdomain": "ActonMA",
+            "owner_name": "Town of Acton and Acton Climate Coalition",
+            "owner_email": "EnergizeActonContact@ActonClimateCoalition.org",
+            "owner_phone_number": null,
+            "is_geographically_focused": true,
+            "location": {
+                "city": "Acton",
+                "unit": null,
+                "state": "Massachusetts",
+                "address": "472 Main St",
+                "country": "US",
+                "zipcode": "01720"
+            },
+            "is_approved": true,
+            "more_info": "{\"wants_socials\":\"true\",\"instagram_link\":\"https://www.instagram.com/actonclimatecoalition\",\"twitter_link\":\"https://www.twitter.com/ClimateActon\",\"facebook_link\":\"https://www.facebook.com/actonclimatecoalition\"}",
+            "is_published": true,
+            "logo": {
+                "id": 1361,
+                "name": "Energize Acton CommunityLogo",
+                "url": "https://massenergize-prod-files.s3.amazonaws.com/media/EnergizeActon.logo.draft.1_p.2.jpeg"
+            },
+            "favicon": null,
+            "feature_flags": [
+                {
+                    "id": 7,
+                    "name": "weekly_event_nudge",
+                    "scope": "BACKEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "weekly_event_nudge-feature-flag",
+                    "notes": "Send a weekly nudge to cadmins",
+                    "expires_on": null,
+                    "communities": [
+                        {
+                            "id": 3,
+                            "name": "Energize Wayland"
+                        },
+                        {
+                            "id": 7,
+                            "name": "Energize Framingham"
+                        },
+                        {
+                            "id": 6,
+                            "name": "Cooler Concord"
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "name": "new-user-engagement-view",
+                    "scope": "ADMIN_FRONTEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "new-user-engagement-view-feature-flag",
+                    "notes": "Admin portal shows new user engagement view",
+                    "expires_on": null,
+                    "communities": []
+                }
+            ]
+        },
+        {
+            "id": 35,
+            "name": "Demo 2023",
+            "subdomain": "Demo2",
+            "owner_name": "Demo 2023 Team",
+            "owner_email": "info@massenergize.org",
+            "owner_phone_number": null,
+            "is_geographically_focused": false,
+            "location": {
+                "city": "Boston",
+                "unit": null,
+                "state": "Massachusetts",
+                "address": null,
+                "country": "US",
+                "zipcode": null
+            },
+            "is_approved": true,
+            "more_info": "{\"wants_socials\":\"false\"}",
+            "is_published": true,
+            "logo": {
+                "id": 3072,
+                "name": "Media library upload-(1676050516348)",
+                "url": "https://massenergize-prod-files.s3.amazonaws.com/media/DEMO-230210-173516.jpeg"
+            },
+            "favicon": null,
+            "feature_flags": [
+                {
+                    "id": 7,
+                    "name": "weekly_event_nudge",
+                    "scope": "BACKEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "weekly_event_nudge-feature-flag",
+                    "notes": "Send a weekly nudge to cadmins",
+                    "expires_on": null,
+                    "communities": [
+                        {
+                            "id": 3,
+                            "name": "Energize Wayland"
+                        },
+                        {
+                            "id": 7,
+                            "name": "Energize Framingham"
+                        },
+                        {
+                            "id": 6,
+                            "name": "Cooler Concord"
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "name": "new-user-engagement-view",
+                    "scope": "ADMIN_FRONTEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "new-user-engagement-view-feature-flag",
+                    "notes": "Admin portal shows new user engagement view",
+                    "expires_on": null,
+                    "communities": []
+                }
+            ]
+        },
+        {
+            "id": 56,
+            "name": "Energize Franklin",
+            "subdomain": "FranklinMA",
+            "owner_name": "David Rittenhouse",
+            "owner_email": "dsritt@gmail.com",
+            "owner_phone_number": null,
+            "is_geographically_focused": true,
+            "location": {
+                "city": "Franklin",
+                "unit": null,
+                "state": "Massachusetts",
+                "address": null,
+                "country": "US",
+                "zipcode": null
+            },
+            "is_approved": true,
+            "more_info": "{\"wants_socials\":\"false\"}",
+            "is_published": true,
+            "logo": {
+                "id": 2991,
+                "name": "Media library upload-(1673105880000)",
+                "url": "https://massenergize-prod-files.s3.amazonaws.com/media/Franklin2022-230107-153759.png"
+            },
+            "favicon": null,
+            "feature_flags": [
+                {
+                    "id": 7,
+                    "name": "weekly_event_nudge",
+                    "scope": "BACKEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "weekly_event_nudge-feature-flag",
+                    "notes": "Send a weekly nudge to cadmins",
+                    "expires_on": null,
+                    "communities": [
+                        {
+                            "id": 3,
+                            "name": "Energize Wayland"
+                        },
+                        {
+                            "id": 7,
+                            "name": "Energize Framingham"
+                        },
+                        {
+                            "id": 6,
+                            "name": "Cooler Concord"
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "name": "new-user-engagement-view",
+                    "scope": "ADMIN_FRONTEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "new-user-engagement-view-feature-flag",
+                    "notes": "Admin portal shows new user engagement view",
+                    "expires_on": null,
+                    "communities": []
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "name": "Energize Framingham",
+            "subdomain": "Framingham",
+            "owner_name": "Aimee Powelka",
+            "owner_email": "EnergizeFramingham@gmail.com",
+            "owner_phone_number": null,
+            "is_geographically_focused": true,
+            "location": {
+                "city": "Framingham",
+                "unit": null,
+                "state": "Massachusetts",
+                "address": null,
+                "country": "US",
+                "zipcode": "01701"
+            },
+            "is_approved": true,
+            "more_info": "{\"wants_socials\":\"false\"}",
+            "is_published": true,
+            "logo": {
+                "id": 159,
+                "name": "Energize Framingham CommunityLogo",
+                "url": "https://massenergize-prod-files.s3.amazonaws.com/media/Framingham2020_smaller.jpg"
+            },
+            "favicon": null,
+            "feature_flags": [
+                {
+                    "id": 7,
+                    "name": "weekly_event_nudge",
+                    "scope": "BACKEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "weekly_event_nudge-feature-flag",
+                    "notes": "Send a weekly nudge to cadmins",
+                    "expires_on": null,
+                    "communities": [
+                        {
+                            "id": 3,
+                            "name": "Energize Wayland"
+                        },
+                        {
+                            "id": 7,
+                            "name": "Energize Framingham"
+                        },
+                        {
+                            "id": 6,
+                            "name": "Cooler Concord"
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "name": "new-user-engagement-view",
+                    "scope": "ADMIN_FRONTEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "new-user-engagement-view-feature-flag",
+                    "notes": "Admin portal shows new user engagement view",
+                    "expires_on": null,
+                    "communities": []
+                }
+            ]
+        },
+        {
+            "id": 31,
+            "name": "Sustainable Sherborn",
+            "subdomain": "SherbornMA",
+            "owner_name": "Dorothea von Herder",
+            "owner_email": "dvonherder@sherbornma.org",
+            "owner_phone_number": null,
+            "is_geographically_focused": true,
+            "location": {
+                "city": "Sherborn",
+                "unit": null,
+                "state": "Massachusetts",
+                "address": null,
+                "country": "US",
+                "zipcode": "01770"
+            },
+            "is_approved": true,
+            "more_info": "{\"wants_socials\":\"false\"}",
+            "is_published": true,
+            "logo": {
+                "id": 1103,
+                "name": "Sustainable Sherborn CommunityLogo",
+                "url": "https://massenergize-prod-files.s3.amazonaws.com/media/Sustainable_Sherborn_logo-1___.jpg"
+            },
+            "favicon": null,
+            "feature_flags": [
+                {
+                    "id": 7,
+                    "name": "weekly_event_nudge",
+                    "scope": "BACKEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "weekly_event_nudge-feature-flag",
+                    "notes": "Send a weekly nudge to cadmins",
+                    "expires_on": null,
+                    "communities": [
+                        {
+                            "id": 3,
+                            "name": "Energize Wayland"
+                        },
+                        {
+                            "id": 7,
+                            "name": "Energize Framingham"
+                        },
+                        {
+                            "id": 6,
+                            "name": "Cooler Concord"
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "name": "new-user-engagement-view",
+                    "scope": "ADMIN_FRONTEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "new-user-engagement-view-feature-flag",
+                    "notes": "Admin portal shows new user engagement view",
+                    "expires_on": null,
+                    "communities": []
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "name": "Jewish Climate Action Network -- JCAN-MA",
+            "subdomain": "JCAN",
+            "owner_name": "Ellen Tohn",
+            "owner_email": "ellen@massenergize.org",
+            "owner_phone_number": "xxx-xxx-xxxx",
+            "is_geographically_focused": false,
+            "location": {
+                "city": "",
+                "unit": null,
+                "state": "",
+                "address": null,
+                "country": "US",
+                "zipcode": null
+            },
+            "is_approved": true,
+            "more_info": "{\"wants_socials\":\"false\"}",
+            "is_published": true,
+            "logo": {
+                "id": 1561,
+                "name": "JCAN CommunityLogo",
+                "url": "https://massenergize-prod-files.s3.amazonaws.com/media/JCAN-MA_logo_2021.jpeg"
+            },
+            "favicon": null,
+            "feature_flags": [
+                {
+                    "id": 7,
+                    "name": "weekly_event_nudge",
+                    "scope": "BACKEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "weekly_event_nudge-feature-flag",
+                    "notes": "Send a weekly nudge to cadmins",
+                    "expires_on": null,
+                    "communities": [
+                        {
+                            "id": 3,
+                            "name": "Energize Wayland"
+                        },
+                        {
+                            "id": 7,
+                            "name": "Energize Framingham"
+                        },
+                        {
+                            "id": 6,
+                            "name": "Cooler Concord"
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "name": "new-user-engagement-view",
+                    "scope": "ADMIN_FRONTEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "new-user-engagement-view-feature-flag",
+                    "notes": "Admin portal shows new user engagement view",
+                    "expires_on": null,
+                    "communities": []
+                }
+            ]
+        },
+        {
+            "id": 49,
+            "name": "Solarize Eastie",
+            "subdomain": "GreenEastie",
+            "owner_name": "John Walkey",
+            "owner_email": "johnw@greenrootschelsea.org",
+            "owner_phone_number": "6174663076 ext.4",
+            "is_geographically_focused": true,
+            "location": {
+                "city": "East Boston",
+                "unit": null,
+                "state": "Massachusetts",
+                "address": null,
+                "country": "US",
+                "zipcode": "02128"
+            },
+            "is_approved": true,
+            "more_info": "{\"wants_socials\":\"true\"}",
+            "is_published": true,
+            "logo": {
+                "id": 2557,
+                "name": "Solarize Eastie CommunityLogo",
+                "url": "https://massenergize-prod-files.s3.amazonaws.com/media/Solarize_Eastie_logo.png"
+            },
+            "favicon": null,
+            "feature_flags": [
+                {
+                    "id": 7,
+                    "name": "weekly_event_nudge",
+                    "scope": "BACKEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "weekly_event_nudge-feature-flag",
+                    "notes": "Send a weekly nudge to cadmins",
+                    "expires_on": null,
+                    "communities": [
+                        {
+                            "id": 3,
+                            "name": "Energize Wayland"
+                        },
+                        {
+                            "id": 7,
+                            "name": "Energize Framingham"
+                        },
+                        {
+                            "id": 6,
+                            "name": "Cooler Concord"
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "name": "new-user-engagement-view",
+                    "scope": "ADMIN_FRONTEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "new-user-engagement-view-feature-flag",
+                    "notes": "Admin portal shows new user engagement view",
+                    "expires_on": null,
+                    "communities": []
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "name": "Cooler Concord",
+            "subdomain": "ConcordMA",
+            "owner_name": "Brad Hubbard-Nelson",
+            "owner_email": "coolerconcord@gmail.com",
+            "owner_phone_number": "978-505-7128",
+            "is_geographically_focused": true,
+            "location": {
+                "city": "Concord",
+                "unit": null,
+                "state": "Massachusetts",
+                "address": "",
+                "country": "US",
+                "zipcode": "01742"
+            },
+            "is_approved": true,
+            "more_info": "{\"wants_socials\":\"true\",\"facebook_link\":\"https://www.facebook.com/coolerconcord\",\"instagram_link\":\"https://www.instagram.com/coolerconcord/\"}",
+            "is_published": true,
+            "logo": {
+                "id": 545,
+                "name": "Cooler Concord CommunityLogo",
+                "url": "https://massenergize-prod-files.s3.amazonaws.com/media/coolerconcord.jpg"
+            },
+            "favicon": null,
+            "feature_flags": [
+                {
+                    "id": 7,
+                    "name": "weekly_event_nudge",
+                    "scope": "BACKEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "weekly_event_nudge-feature-flag",
+                    "notes": "Send a weekly nudge to cadmins",
+                    "expires_on": null,
+                    "communities": [
+                        {
+                            "id": 3,
+                            "name": "Energize Wayland"
+                        },
+                        {
+                            "id": 7,
+                            "name": "Energize Framingham"
+                        },
+                        {
+                            "id": 6,
+                            "name": "Cooler Concord"
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "name": "new-user-engagement-view",
+                    "scope": "ADMIN_FRONTEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "new-user-engagement-view-feature-flag",
+                    "notes": "Admin portal shows new user engagement view",
+                    "expires_on": null,
+                    "communities": []
+                },
+                {
+                    "id": 5,
+                    "name": "Guest Authentication",
+                    "scope": "USER_FRONTEND",
+                    "audience": "SPECIFIC",
+                    "user_audience": "EVERYONE",
+                    "key": "guest-authentication-feature-flag",
+                    "notes": "Allow guest users on the site",
+                    "expires_on": null,
+                    "communities": [
+                        {
+                            "id": 6,
+                            "name": "Cooler Concord"
+                        },
+                        {
+                            "id": 34,
+                            "name": "Energize Boxborough"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 50,
+            "name": "EnergizeNewburyport",
+            "subdomain": "NewburyportMA",
+            "owner_name": "Wendy Wilkerson",
+            "owner_email": "NewburyportEAC@gmail.com",
+            "owner_phone_number": null,
+            "is_geographically_focused": true,
+            "location": {
+                "city": "Newburyport",
+                "unit": null,
+                "state": "Massachusetts",
+                "address": null,
+                "country": "US",
+                "zipcode": null
+            },
+            "is_approved": true,
+            "more_info": "{\"wants_socials\":\"true\"}",
+            "is_published": true,
+            "logo": {
+                "id": 3070,
+                "name": "Media library upload-(1676000708343)",
+                "url": "https://massenergize-prod-files.s3.amazonaws.com/media/Newburyport2-230210-034508.png"
+            },
+            "favicon": null,
+            "feature_flags": [
+                {
+                    "id": 7,
+                    "name": "weekly_event_nudge",
+                    "scope": "BACKEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "weekly_event_nudge-feature-flag",
+                    "notes": "Send a weekly nudge to cadmins",
+                    "expires_on": null,
+                    "communities": [
+                        {
+                            "id": 3,
+                            "name": "Energize Wayland"
+                        },
+                        {
+                            "id": 7,
+                            "name": "Energize Framingham"
+                        },
+                        {
+                            "id": 6,
+                            "name": "Cooler Concord"
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "name": "new-user-engagement-view",
+                    "scope": "ADMIN_FRONTEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "new-user-engagement-view-feature-flag",
+                    "notes": "Admin portal shows new user engagement view",
+                    "expires_on": null,
+                    "communities": []
+                }
+            ]
+        },
+        {
+            "id": 45,
+            "name": "Fairmount Indigo Collab.",
+            "subdomain": "fairmount-boston",
+            "owner_name": "Kendra Beaver",
+            "owner_email": "kbeaver@dbedc.org ",
+            "owner_phone_number": null,
+            "is_geographically_focused": false,
+            "location": {
+                "city": "Boston",
+                "unit": null,
+                "state": "Massachusetts",
+                "address": null,
+                "country": "US",
+                "zipcode": "02125"
+            },
+            "is_approved": true,
+            "more_info": "{\"wants_socials\":\"false\"}",
+            "is_published": true,
+            "logo": {
+                "id": 1933,
+                "name": "Fairmount Indigo CommunityLogo",
+                "url": "https://massenergize-prod-files.s3.amazonaws.com/media/FICC_logo.png"
+            },
+            "favicon": null,
+            "feature_flags": [
+                {
+                    "id": 7,
+                    "name": "weekly_event_nudge",
+                    "scope": "BACKEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "weekly_event_nudge-feature-flag",
+                    "notes": "Send a weekly nudge to cadmins",
+                    "expires_on": null,
+                    "communities": [
+                        {
+                            "id": 3,
+                            "name": "Energize Wayland"
+                        },
+                        {
+                            "id": 7,
+                            "name": "Energize Framingham"
+                        },
+                        {
+                            "id": 6,
+                            "name": "Cooler Concord"
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "name": "new-user-engagement-view",
+                    "scope": "ADMIN_FRONTEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "new-user-engagement-view-feature-flag",
+                    "notes": "Admin portal shows new user engagement view",
+                    "expires_on": null,
+                    "communities": []
+                }
+            ]
+        },
+        {
+            "id": 30,
+            "name": "Sustainable Medfield",
+            "subdomain": "MedfieldMA",
+            "owner_name": "Catherine White",
+            "owner_email": "sustainablemedfield@gmail.com",
+            "owner_phone_number": null,
+            "is_geographically_focused": true,
+            "location": {
+                "city": "Medfield",
+                "unit": null,
+                "state": "Massachusetts",
+                "address": null,
+                "country": "US",
+                "zipcode": "02052"
+            },
+            "is_approved": true,
+            "more_info": "{\"wants_socials\":\"false\",\"facebook_link\":\"https://www.facebook.com/SustainableMedfield/\"}",
+            "is_published": true,
+            "logo": {
+                "id": 1562,
+                "name": "Sustainable Medfield CommunityLogo",
+                "url": "https://massenergize-prod-files.s3.amazonaws.com/media/SM_Logo_ALT3_RGB.jpg"
+            },
+            "favicon": null,
+            "feature_flags": [
+                {
+                    "id": 7,
+                    "name": "weekly_event_nudge",
+                    "scope": "BACKEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "weekly_event_nudge-feature-flag",
+                    "notes": "Send a weekly nudge to cadmins",
+                    "expires_on": null,
+                    "communities": [
+                        {
+                            "id": 3,
+                            "name": "Energize Wayland"
+                        },
+                        {
+                            "id": 7,
+                            "name": "Energize Framingham"
+                        },
+                        {
+                            "id": 6,
+                            "name": "Cooler Concord"
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "name": "new-user-engagement-view",
+                    "scope": "ADMIN_FRONTEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "new-user-engagement-view-feature-flag",
+                    "notes": "Admin portal shows new user engagement view",
+                    "expires_on": null,
+                    "communities": []
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "name": "Green Newton",
+            "subdomain": "greennewton",
+            "owner_name": "Marcia Cooper",
+            "owner_email": "info@greennewton.org",
+            "owner_phone_number": "617-965-1995",
+            "is_geographically_focused": true,
+            "location": {
+                "city": "Newton",
+                "unit": null,
+                "state": "Massachusetts",
+                "address": null,
+                "country": "US",
+                "zipcode": "02460"
+            },
+            "is_approved": true,
+            "more_info": "{\"wants_socials\":\"false\"}",
+            "is_published": true,
+            "logo": {
+                "id": 1843,
+                "name": "Green Newton CommunityLogo",
+                "url": "https://massenergize-prod-files.s3.amazonaws.com/media/GNTakeActionLogo11.10.jpg"
+            },
+            "favicon": null,
+            "feature_flags": [
+                {
+                    "id": 7,
+                    "name": "weekly_event_nudge",
+                    "scope": "BACKEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "weekly_event_nudge-feature-flag",
+                    "notes": "Send a weekly nudge to cadmins",
+                    "expires_on": null,
+                    "communities": [
+                        {
+                            "id": 3,
+                            "name": "Energize Wayland"
+                        },
+                        {
+                            "id": 7,
+                            "name": "Energize Framingham"
+                        },
+                        {
+                            "id": 6,
+                            "name": "Cooler Concord"
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "name": "new-user-engagement-view",
+                    "scope": "ADMIN_FRONTEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "new-user-engagement-view-feature-flag",
+                    "notes": "Admin portal shows new user engagement view",
+                    "expires_on": null,
+                    "communities": []
+                }
+            ]
+        },
+        {
+            "id": 36,
+            "name": "EcoNatick",
+            "subdomain": "EcoNatick",
+            "owner_name": "EcoNatick Project Team",
+            "owner_email": "econatick@gmail.com",
+            "owner_phone_number": null,
+            "is_geographically_focused": true,
+            "location": {
+                "city": "Natick",
+                "unit": null,
+                "state": "Massachusetts",
+                "address": null,
+                "country": "US",
+                "zipcode": "01760"
+            },
+            "is_approved": true,
+            "more_info": "{\"wants_socials\":\"false\"}",
+            "is_published": true,
+            "logo": {
+                "id": 1910,
+                "name": "EcoNatick CommunityLogo",
+                "url": "https://massenergize-prod-files.s3.amazonaws.com/media/EcoNatick-highRes.jpg"
+            },
+            "favicon": null,
+            "feature_flags": [
+                {
+                    "id": 7,
+                    "name": "weekly_event_nudge",
+                    "scope": "BACKEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "weekly_event_nudge-feature-flag",
+                    "notes": "Send a weekly nudge to cadmins",
+                    "expires_on": null,
+                    "communities": [
+                        {
+                            "id": 3,
+                            "name": "Energize Wayland"
+                        },
+                        {
+                            "id": 7,
+                            "name": "Energize Framingham"
+                        },
+                        {
+                            "id": 6,
+                            "name": "Cooler Concord"
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "name": "new-user-engagement-view",
+                    "scope": "ADMIN_FRONTEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "new-user-engagement-view-feature-flag",
+                    "notes": "Admin portal shows new user engagement view",
+                    "expires_on": null,
+                    "communities": []
+                }
+            ]
+        },
+        {
+            "id": 33,
+            "name": "Sustainable Milton",
+            "subdomain": "sustainablemilton",
+            "owner_name": "Sustainable Milton",
+            "owner_email": "info@sustainablemilton.org",
+            "owner_phone_number": null,
+            "is_geographically_focused": true,
+            "location": {
+                "city": "Milton",
+                "unit": null,
+                "state": "Massachusetts",
+                "address": null,
+                "country": "US",
+                "zipcode": "02186"
+            },
+            "is_approved": true,
+            "more_info": "{\"wants_socials\":\"false\"}",
+            "is_published": true,
+            "logo": {
+                "id": 1304,
+                "name": "Sustainable Milton CommunityLogo",
+                "url": "https://massenergize-prod-files.s3.amazonaws.com/media/susmilton.jpg"
+            },
+            "favicon": null,
+            "feature_flags": [
+                {
+                    "id": 7,
+                    "name": "weekly_event_nudge",
+                    "scope": "BACKEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "weekly_event_nudge-feature-flag",
+                    "notes": "Send a weekly nudge to cadmins",
+                    "expires_on": null,
+                    "communities": [
+                        {
+                            "id": 3,
+                            "name": "Energize Wayland"
+                        },
+                        {
+                            "id": 7,
+                            "name": "Energize Framingham"
+                        },
+                        {
+                            "id": 6,
+                            "name": "Cooler Concord"
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "name": "new-user-engagement-view",
+                    "scope": "ADMIN_FRONTEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "new-user-engagement-view-feature-flag",
+                    "notes": "Admin portal shows new user engagement view",
+                    "expires_on": null,
+                    "communities": []
+                }
+            ]
+        },
+        {
+            "id": 11,
+            "name": "Energize Lexington",
+            "subdomain": "Lexington",
+            "owner_name": "Energize Lexington Team",
+            "owner_email": "cindyaren@gmail.com",
+            "owner_phone_number": null,
+            "is_geographically_focused": true,
+            "location": {
+                "city": "Lexington",
+                "unit": null,
+                "state": "Massachusetts",
+                "address": null,
+                "country": "US",
+                "zipcode": "02420"
+            },
+            "is_approved": true,
+            "more_info": "{\"wants_socials\":\"false\"}",
+            "is_published": true,
+            "logo": {
+                "id": 1068,
+                "name": "Energize Lexington CommunityLogo",
+                "url": "https://massenergize-prod-files.s3.amazonaws.com/media/Lexington.jpg"
+            },
+            "favicon": null,
+            "feature_flags": [
+                {
+                    "id": 7,
+                    "name": "weekly_event_nudge",
+                    "scope": "BACKEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "weekly_event_nudge-feature-flag",
+                    "notes": "Send a weekly nudge to cadmins",
+                    "expires_on": null,
+                    "communities": [
+                        {
+                            "id": 3,
+                            "name": "Energize Wayland"
+                        },
+                        {
+                            "id": 7,
+                            "name": "Energize Framingham"
+                        },
+                        {
+                            "id": 6,
+                            "name": "Cooler Concord"
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "name": "new-user-engagement-view",
+                    "scope": "ADMIN_FRONTEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "new-user-engagement-view-feature-flag",
+                    "notes": "Admin portal shows new user engagement view",
+                    "expires_on": null,
+                    "communities": []
+                }
+            ]
+        },
+        {
+            "id": 37,
+            "name": "HarvardEnergize",
+            "subdomain": "HarvardMA",
+            "owner_name": "Ellen Sachs Leicher",
+            "owner_email": "esachsleicher@gmail.com ",
+            "owner_phone_number": null,
+            "is_geographically_focused": true,
+            "location": {
+                "city": "Harvard",
+                "unit": null,
+                "state": "Massachusetts",
+                "address": null,
+                "country": "US",
+                "zipcode": "01451"
+            },
+            "is_approved": true,
+            "more_info": "{\"wants_socials\":\"false\"}",
+            "is_published": true,
+            "logo": {
+                "id": 1567,
+                "name": "Harvard Actions CommunityLogo",
+                "url": "https://massenergize-prod-files.s3.amazonaws.com/media/Final_Logo_311738_JPG.jpg"
+            },
+            "favicon": null,
+            "feature_flags": [
+                {
+                    "id": 7,
+                    "name": "weekly_event_nudge",
+                    "scope": "BACKEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "weekly_event_nudge-feature-flag",
+                    "notes": "Send a weekly nudge to cadmins",
+                    "expires_on": null,
+                    "communities": [
+                        {
+                            "id": 3,
+                            "name": "Energize Wayland"
+                        },
+                        {
+                            "id": 7,
+                            "name": "Energize Framingham"
+                        },
+                        {
+                            "id": 6,
+                            "name": "Cooler Concord"
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "name": "new-user-engagement-view",
+                    "scope": "ADMIN_FRONTEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "new-user-engagement-view-feature-flag",
+                    "notes": "Admin portal shows new user engagement view",
+                    "expires_on": null,
+                    "communities": []
+                }
+            ]
+        },
+        {
+            "id": 46,
+            "name": "Melrose Climate Action",
+            "subdomain": "MelroseMA",
+            "owner_name": "Gary Lamothe",
+            "owner_email": "Glamothe@yahoo.com",
+            "owner_phone_number": null,
+            "is_geographically_focused": true,
+            "location": {
+                "city": "Melrose",
+                "unit": null,
+                "state": "Massachusetts",
+                "address": null,
+                "country": "US",
+                "zipcode": "02148, 02176, 02180"
+            },
+            "is_approved": true,
+            "more_info": "{\"wants_socials\":\"true\"}",
+            "is_published": true,
+            "logo": {
+                "id": 2210,
+                "name": "Melrose CommunityLogo",
+                "url": "https://massenergize-prod-files.s3.amazonaws.com/media/Melrose_Climate_Action_logo_-_cropped-mca_logo_final-4.jpeg"
+            },
+            "favicon": null,
+            "feature_flags": [
+                {
+                    "id": 7,
+                    "name": "weekly_event_nudge",
+                    "scope": "BACKEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "weekly_event_nudge-feature-flag",
+                    "notes": "Send a weekly nudge to cadmins",
+                    "expires_on": null,
+                    "communities": [
+                        {
+                            "id": 3,
+                            "name": "Energize Wayland"
+                        },
+                        {
+                            "id": 7,
+                            "name": "Energize Framingham"
+                        },
+                        {
+                            "id": 6,
+                            "name": "Cooler Concord"
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "name": "new-user-engagement-view",
+                    "scope": "ADMIN_FRONTEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "new-user-engagement-view-feature-flag",
+                    "notes": "Admin portal shows new user engagement view",
+                    "expires_on": null,
+                    "communities": []
+                }
+            ]
+        },
+        {
+            "id": 34,
+            "name": "Energize Boxborough",
+            "subdomain": "BoxboroughMA",
+            "owner_name": "Suresh Jasrasaria",
+            "owner_email": "suresh.Jasrasaria@gmail.com",
+            "owner_phone_number": "",
+            "is_geographically_focused": true,
+            "location": {
+                "city": "Boxborough",
+                "unit": null,
+                "state": "Massachusetts",
+                "address": null,
+                "country": "US",
+                "zipcode": "01719"
+            },
+            "is_approved": true,
+            "more_info": "{\"wants_socials\":\"true\",\"facebook_link\":\"www.facebook.com/boxsustainability\"}",
+            "is_published": true,
+            "logo": {
+                "id": 2813,
+                "name": " Media library upload - (1660358174740)",
+                "url": "https://massenergize-prod-files.s3.amazonaws.com/media/bsclogo.jpg"
+            },
+            "favicon": null,
+            "feature_flags": [
+                {
+                    "id": 7,
+                    "name": "weekly_event_nudge",
+                    "scope": "BACKEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "weekly_event_nudge-feature-flag",
+                    "notes": "Send a weekly nudge to cadmins",
+                    "expires_on": null,
+                    "communities": [
+                        {
+                            "id": 3,
+                            "name": "Energize Wayland"
+                        },
+                        {
+                            "id": 7,
+                            "name": "Energize Framingham"
+                        },
+                        {
+                            "id": 6,
+                            "name": "Cooler Concord"
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "name": "new-user-engagement-view",
+                    "scope": "ADMIN_FRONTEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "new-user-engagement-view-feature-flag",
+                    "notes": "Admin portal shows new user engagement view",
+                    "expires_on": null,
+                    "communities": []
+                },
+                {
+                    "id": 5,
+                    "name": "Guest Authentication",
+                    "scope": "USER_FRONTEND",
+                    "audience": "SPECIFIC",
+                    "user_audience": "EVERYONE",
+                    "key": "guest-authentication-feature-flag",
+                    "notes": "Allow guest users on the site",
+                    "expires_on": null,
+                    "communities": [
+                        {
+                            "id": 6,
+                            "name": "Cooler Concord"
+                        },
+                        {
+                            "id": 34,
+                            "name": "Energize Boxborough"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "error": null,
+    "success": true,
+    "cursor": {}
+}

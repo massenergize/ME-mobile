@@ -1,4 +1,3 @@
-import { Text } from "react-native";
 import React from "react";
 import {
   Center,
@@ -10,7 +9,7 @@ import {
   Link,
   Button,
   HStack,
-  Divider,
+  Text,
 } from "native-base";
 
 export default function LoginPage({ navigation }) {
@@ -64,23 +63,6 @@ export default function LoginPage({ navigation }) {
             </Link>
           </HStack>
         </VStack>
-        <Divider my="6" />
-        <HStack justifyContent="center" mt="6">
-          <Button
-            variant="outline"
-            colorScheme="muted"
-            _text={{ color: "muted.700", bold: true }}
-          >
-            Sign In with Google
-          </Button>
-          <Button
-            variant="outline"
-            colorScheme="muted"
-            _text={{ color: "muted.700", bold: true }}
-          >
-            Sign In As Guest
-          </Button>
-        </HStack>
       </Box>
     </Center>
   );

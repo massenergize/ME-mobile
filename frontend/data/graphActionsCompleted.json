@@ -1,0 +1,58 @@
+{
+    "data": {
+        "title": "Number of Actions Completed",
+        "community": {
+            "id": 3,
+            "name": "Energize Wayland",
+            "subdomain": "wayland"
+        },
+        "is_published": false,
+        "data": [
+            {
+                "id": 12,
+                "name": "Activism & Education",
+                "value": 127,
+                "reported_value": 168
+            },
+            {
+                "id": 11,
+                "name": "Food",
+                "value": 245,
+                "reported_value": 0
+            },
+            {
+                "id": 9,
+                "name": "Home Energy",
+                "value": 510,
+                "reported_value": 413
+            },
+            {
+                "id": 26,
+                "name": "Land, Soil & Water",
+                "value": 92,
+                "reported_value": 29
+            },
+            {
+                "id": 52,
+                "name": "Solar",
+                "value": 90,
+                "reported_value": 360
+            },
+            {
+                "id": 24,
+                "name": "Transportation",
+                "value": 111,
+                "reported_value": 599
+            },
+            {
+                "id": 25,
+                "name": "Waste & Recycling",
+                "value": 202,
+                "reported_value": 200
+            }
+        ]
+    },
+    "error": null,
+    "success": true,
+    "cursor": {}
+}

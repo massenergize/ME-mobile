@@ -15,25 +15,26 @@ import {
 } from "native-base";
 import { goals, colors } from "./SampleGoalsData.js";
 import ActionCard from "./../ActionsPage/ActionCard";
+import { SmallChart } from "./Charts.js";
 
 // small pie charts that are part of the goal card
-function SmallChart({ goal, color }) {
-  return (
-    <VStack alignItems="center">
-      <Text bold fontSize="lg">{goal.nameShort}</Text>
-      <VictoryPie 
-          data={[{x: "current", y: goal.current}, {x: "remaining", y: goal.goal - goal.current}]} 
-          containerComponent={<VictoryContainer disableContainerEvents standalone={false} responsive={true}/>}
-          innerRadius={Dimensions.get('window').width / 15}
-          height={Dimensions.get('window').width / 3.5}
-          width={Dimensions.get('window').width / 3.5}
-          padding={10}
-          labels={() => null} 
-          colorScale={[color, "#f2f2f2"]}/>
-      <Text fontSize="md">{goal.current} / {goal.goal}</Text>
-    </VStack>
-  )
-}
+// function SmallChart({ goal, color }) {
+//   return (
+//     <VStack alignItems="center">
+//       <Text bold fontSize="lg">{goal.nameShort}</Text>
+//       <VictoryPie 
+//           data={[{x: "current", y: goal.current}, {x: "remaining", y: goal.goal - goal.current}]} 
+//           containerComponent={<VictoryContainer disableContainerEvents standalone={false} responsive={true}/>}
+//           innerRadius={Dimensions.get('window').width / 15}
+//           height={Dimensions.get('window').width / 3.5}
+//           width={Dimensions.get('window').width / 3.5}
+//           padding={10}
+//           labels={() => null} 
+//           colorScale={[color, "#f2f2f2"]}/>
+//       <Text fontSize="md">{goal.current} / {goal.goal}</Text>
+//     </VStack>
+//   )
+// }
 
 // the card that shows up to three goals on the community page
 function GoalsCard({ navigation }) {
@@ -83,11 +84,9 @@ export default function CommunityPage({ navigation }) {
               alt="Community Logo"
               resizeMode="contain"
               height="full"
-              // maxHeight={200}
               width="full"
           />
         </Container>
-        {/* <Container height="300px"/> */}
         <HStack>
           <HeaderText text="Goals"/>
           <Spacer/>

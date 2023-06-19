@@ -48,8 +48,8 @@ function BigPieChart({ goal, color }) {
             <Container width={Dimensions.get('window').width - (Dimensions.get('window').width / 2.5)}>
                 <VStack>
                     <Text bold fontSize="lg">{goal.nameLong}</Text>
-                    <Text bold fontSize="md">{goal.current} / {goal.goal} {goal.nameShort}</Text>
-                    <Text fontSize="md">({(goal.current / goal.goal * 100).toFixed(1)}% of Goal)</Text>
+                    <Text fontSize="md">{goal.current} / {goal.goal} {goal.nameShort}</Text>
+                    <Text fontSize="sm">({(goal.current / goal.goal * 100).toFixed(1)}% of Goal)</Text>
                 </VStack>
             </Container>
         </HStack>

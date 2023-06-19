@@ -15,7 +15,7 @@ export default function ServiceProvidersPage({ navigation }) {
     let sProvider = [];
     for (let i = 0; i < 3; i++) {
       sProvider.push(
-        <Box mx="3">
+        <Box mx="3" key={i}>
           <Pressable
             onPress={() => navigation.navigate("serviceProviderDetails")}
           >
@@ -44,7 +44,7 @@ export default function ServiceProvidersPage({ navigation }) {
     let sProvider = [];
     for (let i = 0; i < 3; i++) {
       sProvider.push(
-        <HStack space="5" my="2" alignItems="center">
+        <HStack space="5" my="2" alignItems="center" key={i}>
           <Image
             source={require("../../../assets/images/logo.png")}
             resizeMode="contain"

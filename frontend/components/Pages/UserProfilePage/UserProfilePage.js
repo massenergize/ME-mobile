@@ -1,8 +1,10 @@
 import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import { Center, Box, AspectRatio, Image, VStack, ScrollView, Button, HStack } from "native-base";
+import ActionCard from '../ActionsPage/ActionCard';
 
-export default function ActionDetails() {
+
+export default function UserProfilePage({ navigation }) {
     
     return (
         <VStack style={{flex: 1}}>
@@ -12,23 +14,38 @@ export default function ActionDetails() {
                   uri: "https://images.unsplash.com/photo-1642572285001-20d5d570c7d2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE1fHx8ZW58MHx8fHx8&w=1000&q=80"
                 }} alt="image"/>
               </AspectRatio>
-              <Text style={{position: 'absolute', bottom: 15, left: 25, color: "white", fontWeight: 'bold', fontSize: 25}}>Name</Text>
+              <Text style={{position: 'absolute', bottom: 20, left: 25, color: "white", fontWeight: 'bold', fontSize: 25}}>Name</Text>
             </View>
-            <Box bg="white" rounded = "xl" flex="0.4">
+            <Box bg="white" rounded = "xl" flex="0.5">
+              <HStack padding={23} justifyContent="space-evenly">
                 <VStack>
-                    <HStack space={4} padding={23} paddingTop={28} justifyContent="space-evenly">
-                        <Text style={styles.stats}> 12 </Text>
-                        <Text style={styles.stats}> 986 </Text>
-                        <Text style={styles.stats}> 128 </Text>
-                        <Text style={styles.stats}> 45 </Text>
-                    </HStack>
-                    <HStack space={4} margin={18} justifyContent="space-evenly">
-                        <Text style={styles.stats}> 12 </Text>
-                        <Text style={styles.stats}> 986 </Text>
-                        <Text style={styles.stats}> 128 </Text>
-                        <Text style={styles.stats}> 45 </Text>
-                    </HStack>
+                  <Text style={styles.stats}> 12 </Text>
+                  <Text> CO2 Saved </Text>
                 </VStack>
+                <VStack>
+                  <Text style={styles.stats}> 986 </Text>
+                  <Text> Trees </Text>
+                </VStack>
+                <VStack>
+                  <Text style={styles.stats}> 128 </Text>
+                  <Text> Actions </Text>
+                </VStack>
+                <VStack>
+                  <Text style={styles.stats}> 45 </Text>
+                  <Text> Points </Text>
+                </VStack>
+              </HStack>
+              <ScrollView>
+                <Text style={{fontWeight: 'bold', paddingLeft: 20, paddingBottom: 15, fontSize: 20}}>Actions To Do</Text>
+                <HStack space={2} justifyContent="center" mx="15" marginBottom="15">
+                  <ActionCard navigation={ navigation } />
+                  <ActionCard navigation={ navigation } />
+                </HStack>
+                <HStack space={2} justifyContent="center" mx="15" marginBottom="15">
+                  <ActionCard navigation={ navigation } />
+                  <ActionCard navigation={ navigation } />
+                </HStack>
+              </ScrollView>
             </Box>
         </VStack>
   );
@@ -50,7 +67,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",    
   },
   container: {
-    flex: 0.6,
+    flex: 0.5,
     justifyContent: "center",
     alignItems: "center"
     

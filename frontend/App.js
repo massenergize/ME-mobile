@@ -21,8 +21,10 @@ import ActionDetails from "./components/Pages/ActionsPage/ActionDetails";
 import EventDetailsPage from "./components/Pages/EventsPage/EventDetailsPage";
 import IntroductionPage from "./components/Pages/IntroductionPage/IntroductionPage";
 import DrawerNavigator from "./components/Shared/DrawerNavigator";
+import ChooseCommunityPage from "./components/Pages/ChooseCommunityPage/ChooseCommunityPage";
 import WithEmailOnlyPage from "./components/Pages/Auth/WithEmailOnlyPage";
 import CreateProfile from "./components/Pages/UserProfilePage/CreateProfile";
+import TabNavigator from "./components/Shared/TabNavigator";
 
 const Stack = createNativeStackNavigator();
 
@@ -53,6 +55,11 @@ export default function App() {
             component={CreateProfile}
             options={{ headerShown: false }}
           />
+          <Stack.Screen
+            name="chooseCommunity"
+            component={ChooseCommunityPage}
+            options={{ headerShown: false }}
+          />
           <Stack.Screen name="signup" component={SignupPage} />
           <Stack.Screen name="withEmailOnly" component={WithEmailOnlyPage} />
           <Stack.Screen name="userProfile" component={UserProfilePage} />
@@ -73,6 +80,10 @@ export default function App() {
             name="drawer"
             component={DrawerNavigator}
             options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="tab"
+            component={TabNavigator}
           />
         </Stack.Navigator>
       </NavigationContainer>

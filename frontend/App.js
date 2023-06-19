@@ -20,6 +20,7 @@ import ActionDetails from "./components/Pages/ActionsPage/ActionDetails";
 import EventDetailsPage from "./components/Pages/EventsPage/EventDetailsPage";
 import IntroductionPage from "./components/Pages/IntroductionPage/IntroductionPage";
 import DrawerNavigator from "./components/Shared/DrawerNavigator";
+import ChooseCommunityPage from "./components/Pages/ChooseCommunityPage/ChooseCommunityPage";
 import WithEmailOnlyPage from "./components/Pages/Auth/WithEmailOnlyPage";
 import CreateProfile from "./components/Pages/UserProfilePage/CreateProfile";
 import TabNavigator from "./components/Shared/TabNavigator";
@@ -51,6 +52,11 @@ export default function App() {
           <Stack.Screen
             name="createProfile"
             component={CreateProfile}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="chooseCommunity"
+            component={ChooseCommunityPage}
             options={{ headerShown: false }}
           />
           <Stack.Screen name="signup" component={SignupPage} />

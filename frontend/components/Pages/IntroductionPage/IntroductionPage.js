@@ -48,7 +48,7 @@ export default function IntroductionPage({ navigation }) {
     if (currentStep < STEPS.length - 1) {
       setCurrentStep(currentStep + 1);
     } else {
-      navigation.navigate("welcome");
+      navigation.navigate("chooseCommunity");
     }
   };
 

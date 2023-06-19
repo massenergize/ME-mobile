@@ -5,7 +5,7 @@ import AboutPage from "../Pages/AboutPage/AboutPage";
 import TestimonialsPage from "../Pages/TestimonialsPage/TestimonialsPage";
 import TeamsPage from "../Pages/TeamsPage/TeamsPage";
 import ServiceProvidersPage from "../Pages/ServiceProvidersPage/ServiceProvidersPage";
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import Ionicons from "react-native-vector-icons/Ionicons";
 import TabNavigator from "./TabNavigator";
 import { getHeaderTitle } from "@react-navigation/elements";
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
@@ -105,28 +105,35 @@ function CustomDrawerContent(props) {
                     })
                 }
             </DrawerContentScrollView>
-            <Button m="4" bg="primary.400" onPress={() => props.navigation.navigate("welcome")}>Login/Signup</Button>
+            <Button m="4" bg="primary.400" onPress={() => props.navigation.navigate("welcome")}>LOGIN</Button>
+            <Button m="4" variety="outline" onPress={() => props.navigation.navigate("welcome")}>SWITCH COMMUNITIES</Button>
         </SafeAreaView>
     )
 }
 
 export default function CommunityNavigation() {
   return (
-    <Drawer.Navigator 
-        screenOptions={({ navigation, route, options }) => ({
-            drawerActiveTintColor: "#64B058",
-            headerTintColor: "#000000",
-            headerTitle: getFocusedRouteNameFromRoute(route),
-            headerTitleAlign: "center",
-        })}
-
-        drawerContent={props => <CustomDrawerContent {...props} />}
+    <Drawer.Navigator
+      screenOptions={({ navigation, route, options }) => ({
+        drawerActiveTintColor: "#64B058",
+        headerTintColor: "#000000",
+        headerTitle: getFocusedRouteNameFromRoute(route),
+        headerTitleAlign: "center",
+      })}
+      drawerContent={(props) => <CustomDrawerContent {...props} />}
     >
-        <Drawer.Screen name="Community" component={TabNavigator} screenOptions={{headerTitle: "COMMUNITY"}} />
-        <Drawer.Screen name="About" component={AboutPage} />
-        <Drawer.Screen name="Testimonials" component={TestimonialsPage} />
-        <Drawer.Screen name="Teams" component={TeamsPage} />
-        <Drawer.Screen name="Service Providers" component={ServiceProvidersPage} />
+      <Drawer.Screen
+        name="Community"
+        component={TabNavigator}
+        screenOptions={{ headerTitle: "COMMUNITY" }}
+      />
+      <Drawer.Screen name="About" component={AboutPage} />
+      <Drawer.Screen name="Testimonials" component={TestimonialsPage} />
+      <Drawer.Screen name="Teams" component={TeamsPage} />
+      <Drawer.Screen
+        name="Service Providers"
+        component={ServiceProvidersPage}
+      />
     </Drawer.Navigator>
   );
 }

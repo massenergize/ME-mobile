@@ -5,6 +5,7 @@ import AboutPage from "../Pages/AboutPage/AboutPage";
 import TestimonialsPage from "../Pages/TestimonialsPage/TestimonialsPage";
 import TeamsPage from "../Pages/TeamsPage/TeamsPage";
 import ServiceProvidersPage from "../Pages/ServiceProvidersPage/ServiceProvidersPage";
+import ContactUsPage from "../Pages/ContactUsPage/ContactUsPage";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import TabNavigator from "./TabNavigator";
 import { getHeaderTitle } from "@react-navigation/elements";
@@ -23,11 +24,11 @@ const drawerItems = [
         {"name": "Our Mission", "icon": "", "dropdown": false, "route": "About", "dropdownItems": []},
     ]},
     {"name": "Testimonials", "icon": "chatbox-outline", "dropdown": false, "route": "Testimonials", "dropdownItems": []},
-    {"name": "Teams", "icon": "people-outline", "dropdown": false, "route": "About", "dropdownItems": []},
+    {"name": "Teams", "icon": "people-outline", "dropdown": false, "route": "Teams", "dropdownItems": []},
     {"name": "Resources", "icon": "document-text-outline", "dropdown": true, "route": "", "dropdownItems": [
         {"name": "Service Providers", "icon": "", "dropdown": false, "route": "Service Providers", "dropdownItems": []},
     ]},
-    {"name": "Contact Us", "icon": "at-circle-outline", "dropdown": false, "route": "About", "dropdownItems": []},
+    {"name": "Contact Us", "icon": "at-circle-outline", "dropdown": false, "route": "Contact Us", "dropdownItems": []},
 ]
 
 function CustomDrawerContent(props) {
@@ -51,7 +52,9 @@ function CustomDrawerContent(props) {
                         if (item.dropdown) {
                             return (
                                 <VStack key={index}>
-                                    <Pressable onPress={() => {setExpanded({"About Us": item.name === "About Us" ? !expanded["About Us"] : expanded["About Us"], "Resources": item.name === "Resources" ? !expanded["Resources"] : expanded["Resources"]})}}>
+                                    <Pressable 
+                                      onPress={() => {setExpanded({"About Us": item.name === "About Us" ? !expanded["About Us"] : expanded["About Us"], "Resources": item.name === "Resources" ? !expanded["Resources"] : expanded["Resources"]})}}
+                                    >
                                         <HStack alignItems="center">
                                             <DrawerItem 
                                                 label={item.name} 
@@ -62,7 +65,6 @@ function CustomDrawerContent(props) {
                                                     )
                                                 }}
                                                 style={{flex: 1}}
-                                                // focused={({ focused, color }) => focused}
                                                 />
                                             <Center p={3}>
                                                 <Ionicons name={expanded[item.name] ? "chevron-up-outline" : "chevron-down-outline"} color="black"/>
@@ -77,7 +79,6 @@ function CustomDrawerContent(props) {
                                                         label={dropdownItem.name} 
                                                         onPress={() => props.navigation.navigate(dropdownItem.route)}
                                                         style={{flex: 1, marginLeft: 65}}
-                                                        // focused={({ focused, color }) => focused}
                                                         key={index2}
                                                     />
                                                 )
@@ -98,15 +99,14 @@ function CustomDrawerContent(props) {
                                         )
                                     }}
                                     key={index}
-                                    // focused={({ focused, color }) => focused}
                                 />
                             )
                         }
                     })
                 }
             </DrawerContentScrollView>
-            <Button m="4" bg="primary.400" onPress={() => props.navigation.navigate("welcome")}>LOGIN</Button>
-            <Button m="4" variety="outline" onPress={() => props.navigation.navigate("welcome")}>SWITCH COMMUNITIES</Button>
+            <Button mb={2} mt={0} m={4} bg="primary.400" onPress={() => props.navigation.navigate("welcome")}>LOGIN</Button>
+            <Button mb={2} mt={0} m={4} variant="outline" onPress={() => props.navigation.navigate("chooseCommunity")}>SWITCH COMMUNITIES</Button>
         </SafeAreaView>
     )
 }
@@ -134,6 +134,7 @@ export default function CommunityNavigation() {
         name="Service Providers"
         component={ServiceProvidersPage}
       />
+      <Drawer.Screen name="Contact Us" component={ContactUsPage} />
     </Drawer.Navigator>
   );
 }

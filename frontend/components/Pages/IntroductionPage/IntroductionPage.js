@@ -71,7 +71,7 @@ export default function IntroductionPage({ navigation }) {
         right="5"
         zIndex={1}
         _text={{ fontWeight: "bold", color: "white", fontSize: "lg" }}
-        onPress={() => navigation.navigate("welcome")}
+        onPress={() => navigation.navigate("chooseCommunity")}
       >
         Skip
       </Button>

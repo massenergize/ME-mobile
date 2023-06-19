@@ -65,7 +65,7 @@ export default function WelcomePage({ navigation }) {
             <Button shadow="5" size="lg" backgroundColor="blue.400">
               With Facebook
             </Button>
-            <Button size="lg" variant="ghost" _text={{ color: "white" }} onPress={() => navigation.navigate("drawer")}>
+            <Button size="lg" variant="ghost" _text={{ color: "white" }} onPress={() => navigation.navigate("chooseCommunity")}>
               Proceed as guest
             </Button>
           </VStack>

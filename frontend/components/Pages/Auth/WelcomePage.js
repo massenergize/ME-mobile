@@ -69,7 +69,7 @@ export default function WelcomePage({ navigation }) {
               Proceed as guest
             </Button>
           </VStack>
-          <Text color="white" textAlign="center">
+          <Text color="white" textAlign="center" px="3">
             When you join, we can count your impact. We do not collect sensitive
             personal data and do not share data.
           </Text>

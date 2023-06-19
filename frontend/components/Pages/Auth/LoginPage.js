@@ -44,7 +44,11 @@ export default function LoginPage({ navigation }) {
               Forgot Password?
             </Link>
           </FormControl>
-          <Button mt="10" _text={{ color: "white" }}>
+          <Button
+            mt="10"
+            _text={{ color: "white" }}
+            onPress={() => navigation.navigate("chooseCommunity")}
+          >
             Sign in
           </Button>
           <HStack mt="6" justifyContent="center" alignItems="center">

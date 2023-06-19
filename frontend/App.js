@@ -22,6 +22,7 @@ import IntroductionPage from "./components/Pages/IntroductionPage/IntroductionPa
 import DrawerNavigator from "./components/Shared/DrawerNavigator";
 import WithEmailOnlyPage from "./components/Pages/Auth/WithEmailOnlyPage";
 import CreateProfile from "./components/Pages/UserProfilePage/CreateProfile";
+import TeamDetailsPage from "./components/Pages/TeamsPage/TeamDetailsPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +31,8 @@ export default function App() {
     <NativeBaseProvider theme={Theme}>
       <NavigationContainer>
         <Stack.Navigator>
+          <Stack.Screen name="teamDetails" component={TeamDetailsPage} />
+          <Stack.Screen name="teams" component={TeamsPage} />
           <Stack.Screen
             name="intro"
             component={IntroductionPage}
@@ -66,7 +69,6 @@ export default function App() {
           <Stack.Screen name="actiondetails" component={ActionDetails} />
           <Stack.Screen name="testimonials" component={TestimonialsPage} />
           <Stack.Screen name="community" component={CommunityPage} />
-          <Stack.Screen name="teams" component={TeamsPage} />
           <Stack.Screen
             name="drawer"
             component={DrawerNavigator}

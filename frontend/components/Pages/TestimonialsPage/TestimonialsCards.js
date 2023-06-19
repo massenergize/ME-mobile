@@ -5,7 +5,7 @@ import { Box, HStack, VStack, Text, Pressable, Container, Image } from "native-b
 function TestimonialCardWithPic({ navigation }) {
   return (
     <Pressable onPress={() => navigation.navigate("testimonial")}>
-        <Box mx={3} mt={2} bg="white" borderRadius="xl" shadow={1}>
+        <Box mx={3} mt={2} bg="white" borderRadius="xl" shadow={1} borderTopLeftRadius="lg" borderBottomLeftRadius="lg" overflow="hidden">
             <HStack alignItems="center">
                 <Container width="30%" maxHeight={160}>
                 <Image
@@ -16,7 +16,6 @@ function TestimonialCardWithPic({ navigation }) {
                     w="full"
                     resizeMode="cover"
                     h="full"
-                    borderTopLeftRadius="lg" borderBottomLeftRadius="lg"
                 />
                 </Container>
                 <Container p={3} width="70%">

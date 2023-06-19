@@ -157,8 +157,15 @@ export default function TeamDetailsPage() {
   };
   return (
     <ScrollView>
+      <Center my="5">
+        <Image
+          source={require("../../../assets/images/team-1.jpeg")}
+          alt="image"
+          size="xl"
+        />
+      </Center>
       <VStack space="3">
-        <Heading>Team Name</Heading>
+        <Heading alignSelf="center">Team Name</Heading>
         <Center mx="5">
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             <HStack space="2">
@@ -205,9 +212,5 @@ export default function TeamDetailsPage() {
 }
 
 const Tab = ({ children }) => {
-  return (
-    <Box p="5" backgroundColor={"amber.100"}>
-      {children}
-    </Box>
-  );
+  return <Box p="5">{children}</Box>;
 };

@@ -63,7 +63,7 @@ export default function App() {
             options={{ title: "" }}
           />
           <Stack.Screen name="actions" component={ActionsPage} />
-          <Stack.Screen name="actiondetails" component={ActionDetails} />
+          <Stack.Screen name="actiondetails" component={ActionDetails} options={{ headerShown: false }} />
           <Stack.Screen name="testimonials" component={TestimonialsPage} />
           <Stack.Screen name="community" component={CommunityPage} />
           <Stack.Screen name="teams" component={TeamsPage} />

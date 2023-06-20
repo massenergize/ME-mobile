@@ -65,11 +65,11 @@ export default function WelcomePage({ navigation }) {
             <Button shadow="5" size="lg" backgroundColor="blue.400">
               With Facebook
             </Button>
-            <Button size="lg" variant="ghost" _text={{ color: "white" }}>
+            <Button size="lg" variant="ghost" _text={{ color: "white" }} onPress={() => navigation.navigate("chooseCommunity")}>
               Proceed as guest
             </Button>
           </VStack>
-          <Text color="white" textAlign="center">
+          <Text color="white" textAlign="center" px="3">
             When you join, we can count your impact. We do not collect sensitive
             personal data and do not share data.
           </Text>

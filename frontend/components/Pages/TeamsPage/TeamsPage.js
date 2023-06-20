@@ -71,7 +71,7 @@ export default function TeamsPage({ navigation }) {
     return teams;
   };
   return (
-    <ScrollView>
+    <ScrollView showsVerticalScrollIndicator={false}>
       <VStack space="5" p="5">
         {generateTeams()}
       </VStack>

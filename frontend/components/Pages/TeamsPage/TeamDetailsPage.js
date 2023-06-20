@@ -44,7 +44,7 @@ export default function TeamDetailsPage() {
       let members = [];
       for (let i = 0; i < 10; i++) {
         members.push(
-          <HStack space="2" alignItems="center">
+          <HStack key={i} space="2" alignItems="center">
             <Image
               source={{}}
               alt="Member Image"

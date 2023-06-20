@@ -31,8 +31,6 @@ export default function App() {
     <NativeBaseProvider theme={Theme}>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="teamDetails" component={TeamDetailsPage} />
-          <Stack.Screen name="teams" component={TeamsPage} />
           <Stack.Screen
             name="intro"
             component={IntroductionPage}
@@ -69,6 +67,8 @@ export default function App() {
           <Stack.Screen name="actiondetails" component={ActionDetails} />
           <Stack.Screen name="testimonials" component={TestimonialsPage} />
           <Stack.Screen name="community" component={CommunityPage} />
+          <Stack.Screen name="teamDetails" component={TeamDetailsPage} />
+          <Stack.Screen name="teams" component={TeamsPage} />
           <Stack.Screen
             name="drawer"
             component={DrawerNavigator}

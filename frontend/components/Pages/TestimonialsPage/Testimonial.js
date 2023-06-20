@@ -2,9 +2,12 @@ import { ScrollView } from "react-native";
 import React from "react";
 import { Box, VStack, Image, Text } from "native-base";
 import ActionCard from "./../ActionsPage/ActionCard.js";
+import { RenderHTML } from "react-native-render-html";
+import { useWindowDimensions } from "react-native";
 
 export default function Testimonial({ route, navigation }) {
     const { data } = route.params;
+    const { width } = useWindowDimensions();
 
   return (
     <ScrollView>
@@ -34,7 +37,10 @@ export default function Testimonial({ route, navigation }) {
             }
             <Text bold fontSize="2xl" mt={3}>{data.title}</Text>
             <Text fontSize="md" color="#BAB9C0">By {data.preferred_name} | {data.created_at}</Text>
-            <Text fontSize="md" mb={4}>{data.body}</Text>
+            {/* <Text fontSize="md" mb={4}>{data.body}</Text> */}
+            <RenderHTML 
+                contentWidth={width}
+                source={{html: data.body}}/>
             <Text bold fontSize="lg">Action Associated With</Text>
             <ActionCard navigation={navigation} />
         </VStack>

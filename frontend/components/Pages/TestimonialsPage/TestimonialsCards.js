@@ -25,7 +25,7 @@ function TestimonialCardWithPic({ navigation, data }) {
                     {
                         (data.action != null) ? <Text fontSize="sm" color="primary.400">{data.action.title}</Text> : <></>
                     }
-                    <Text isTruncated={true} noOfLines={3}>{data.body}</Text>
+                    <Text isTruncated={true} noOfLines={3}>{data.body.replace(/(<([^>]+)>)/gi, "")}</Text>
                 </Container>
             </HStack>
         </Box>
@@ -43,7 +43,7 @@ function TestimonialCardWithoutPic({ navigation, data }) {
                     {
                         (data.action != null) ? <Text fontSize="sm" color="primary.400">{data.action.title}</Text> : <></>
                     }
-                    <Text isTruncated={true} noOfLines={3}>{data.body}</Text>
+                    <Text isTruncated={true} noOfLines={3}>{data.body.replace(/(<([^>]+)>)/gi, "")}</Text>
                 </Box>
             </Box>
         </Pressable>

@@ -66,6 +66,7 @@ export default function TeamDetailsPage() {
       for (let i = 0; i < 5; i++) {
         subTeams.push(
           <Flex
+            key={i}
             direction="row"
             borderRadius="2xl"
             shadow="5"

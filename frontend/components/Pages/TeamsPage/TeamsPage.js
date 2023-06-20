@@ -14,9 +14,8 @@ export default function TeamsPage({ navigation }) {
     let teams = [];
     for (let i = 0; i < 5; i++) {
       teams.push(
-        <Pressable onPress={() => navigation.navigate("teamDetails")}>
+        <Pressable key={i} onPress={() => navigation.navigate("teamDetails")}>
           <Flex
-            key={i}
             direction="row"
             borderRadius={"2xl"}
             shadow="5"

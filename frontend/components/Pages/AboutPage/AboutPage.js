@@ -1,10 +1,11 @@
-import { View, Text } from "react-native";
 import React from "react";
+import Page from "../../Shared/Page";
+import { Text } from "native-base";
 
 export default function AboutPage() {
   return (
-    <View>
+    <Page>
       <Text>AboutPage</Text>
-    </View>
+    </Page>
   );
 }

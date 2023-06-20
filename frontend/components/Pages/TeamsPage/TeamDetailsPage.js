@@ -16,7 +16,7 @@ import {
 
 import { Text as TextSVG } from "react-native-svg";
 
-import { BarChart, XAxis, YAxis } from "react-native-svg-charts";
+import { BarChart, Grid } from "react-native-svg-charts";
 
 const fill = "#DC4E34";
 const data = [
@@ -72,23 +72,22 @@ export default function TeamDetailsPage() {
   };
   const generateActionsTab = () => {
     const CUT_OFF = 250;
+    const chartData = data.map((item) => item.value);
+    const chartLabels = data.map((item) => item.name);
     const Labels = ({ x, y, bandwidth, data }) =>
       data.map((value, index) => (
         <TextSVG
           key={index}
-          x={x(index) + bandwidth / 2}
-          y={value < CUT_OFF ? y(value) - 10 : y(value) + 15}
+          x={value > CUT_OFF ? x(0) + 10 : x(value) + 10}
+          y={y(index) + bandwidth / 2}
           fontSize={14}
-          fill={value >= CUT_OFF ? "white" : "black"}
+          fill={value > CUT_OFF ? "white" : "black"}
           alignmentBaseline={"middle"}
-          textAnchor={"middle"}
         >
-          {value}
+          {`${value}, ${chartLabels[index]}`}
         </TextSVG>
       ));
 
-    const chartData = data.map((item) => item.value);
-    const chartLabels = data.map((item) => item.name);
     return (
       <VStack space="5">
         <Text alignSelf="center">
@@ -99,55 +98,20 @@ export default function TeamDetailsPage() {
           <Text fontWeight="bold">5679.8 </Text>
           Number of Trees
         </Text>
-        <View style={{ height: 200, padding: 20, flexDirection: "row" }}>
-          <YAxis
-            data={chartData}
-            contentInset={{ top: 20, bottom: 20 }}
-            svg={{ fontSize: 10, fill: "black" }}
-            numberOfTicks={5}
-            formatLabel={(value) => `${value}`}
-          />
+        <View style={{ height: 400, padding: 20, flexDirection: "row" }}>
           <View style={{ flex: 1, marginLeft: 10 }}>
             <BarChart
               style={{ flex: 1 }}
               data={chartData}
               svg={{ fill }}
-              contentInset={{ top: 20, bottom: 20 }}
               gridMin={0}
+              horizontal={true}
             >
               <Labels />
+              <Grid direction="VERTICAL" />
             </BarChart>
-            <XAxis
-              style={{ marginTop: 10 }}
-              data={chartData}
-              formatLabel={(value, index) => chartLabels[index]}
-              contentInset={{ left: 10, right: 10 }}
-              svg={{ fontSize: 10, fill: "black" }}
-            />
           </View>
         </View>
-        {/* <BarChart
-          style={{ height: 200 }}
-          data={data.map((item) => item.value)}
-          svg={{ fill }}
-          gridMin={0}
-        >
-          <Grid />
-          <Labels />
-        </BarChart>
-        <XAxis
-          data={data.map((item) => item.value)}
-          formatLabel={(value, index) => index}
-          svg={{ fontSize: 10, fill: "black" }}
-          contentInset={{ left: 10, right: 10 }}
-          xAccessor={({ item }) => item.value}
-        /> */}
-        {/* <Image
-          source={require("../../../assets/images/actions-chart.png")}
-          alt="image"
-          resizeMode="contain"
-          w="full"
-        /> */}
       </VStack>
     );
   };

@@ -32,6 +32,24 @@ function SmallChart({ goal, color }) {
     )
 }
 
+function SmallChart2({ goal, color }) {
+    return (
+      <VStack alignItems="center">
+        <Text bold fontSize="lg">{goal.nameShort}</Text>
+        <VictoryPie 
+            data={[{x: "current", y: goal.current}, {x: "remaining", y: goal.goal - goal.current}]} 
+            containerComponent={<VictoryContainer disableContainerEvents standalone={false} responsive={true}/>}
+            innerRadius={Dimensions.get('window').width / 15}
+            height={Dimensions.get('window').width / 3.5}
+            width={Dimensions.get('window').width / 3.5}
+            padding={10}
+            labels={() => null} 
+            colorScale={[color, "#f2f2f2"]}/>
+        <Text fontSize="md">{goal.current} / {goal.goal}</Text>
+      </VStack>
+    )
+}
+
 // pie charts that are displayed on the impact page - more detailed than the smaller pie charts
 function BigPieChart({ goal, color }) {
     return (
@@ -73,4 +91,4 @@ function BigBarChart() {
     )
 }
 
-export { SmallChart, BigPieChart, BigBarChart }
+export { SmallChart, SmallChart2, BigPieChart, BigBarChart }

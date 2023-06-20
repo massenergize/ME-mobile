@@ -15,7 +15,7 @@ import {
 } from "native-base";
 import { goals, colors } from "./SampleGoalsData.js";
 import ActionCard from "./../ActionsPage/ActionCard";
-import { SmallChart } from "../../Shared/Charts.js";
+import { SmallChart, SmallChart2 } from "../../Shared/Charts.js";
 
 // the card that shows up to three goals on the community page
 function GoalsCard({ navigation }) {
@@ -34,6 +34,30 @@ function GoalsCard({ navigation }) {
         <HStack>
           { // show the three sample goals on the community page
             goals.map((goal, index) => <SmallChart goal={goal} color={colors[index]} key={index}/>)
+          }
+        </HStack>
+      </Box>
+      }}
+    </Pressable>
+  );
+}
+
+function GoalsCard2({ navigation }) {
+  return (
+    <Pressable onPress={() => navigation.navigate("impact")}>
+      {({ isHovered, isFocused, isPressed }) => {
+      return <Box 
+        // bg={isPressed ? "coolGray.200" : "white"}
+        shadow="1" 
+        bg="white" 
+        width="100%" 
+        alignItems="center" 
+        rounded="xl" 
+        p="3"
+        >
+        <HStack>
+          { // show the three sample goals on the community page
+            goals.map((goal, index) => <SmallChart2 goal={goal} color={colors[index]} key={index}/>)
           }
         </HStack>
       </Box>
@@ -72,7 +96,7 @@ export default function CommunityPage({ navigation }) {
           <HeaderText text="Goals"/>
           <Spacer/>
         </HStack>
-        <GoalsCard navigation={navigation}/>
+        <GoalsCard2 navigation={navigation}/>
         <HStack alignItems="center">
           <HeaderText text="Recommended Actions"/>
           <Spacer/>

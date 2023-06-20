@@ -25,6 +25,7 @@ import WithEmailOnlyPage from "./components/Pages/Auth/WithEmailOnlyPage";
 import CreateProfile from "./components/Pages/UserProfilePage/CreateProfile";
 import TabNavigator from "./components/Shared/TabNavigator";
 import ProfileExpanded from "./components/Pages/UserProfilePage/ProfileExpanded";
+import ProfilePageAlternate from "./components/Pages/UserProfilePage/ProfilePageAlternate";
 
 const Stack = createNativeStackNavigator();
 
@@ -67,6 +68,7 @@ export default function App() {
             component={UserProfilePage}
             options={{ headerTransparent: true }} />
           <Stack.Screen name="profileExpanded" component={ProfileExpanded} options={{ title: "PROFILE"}}/>
+          <Stack.Screen name="profileAlternate" component={ProfilePageAlternate} options={{ title: "PROFILE"}}/>
           <Stack.Screen name="about" component={AboutPage} />
           <Stack.Screen name="events" component={EventsPage} />
           <Stack.Screen

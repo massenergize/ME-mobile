@@ -8,6 +8,7 @@ import {
   Box,
   Pressable,
 } from "native-base";
+import Page from "../../Shared/Page";
 
 export default function TeamsPage({ navigation }) {
   const generateTeams = () => {
@@ -71,10 +72,12 @@ export default function TeamsPage({ navigation }) {
     return teams;
   };
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <VStack space="5" p="5">
-        {generateTeams()}
-      </VStack>
-    </ScrollView>
+    <Page>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <VStack space="5" p="5">
+          {generateTeams()}
+        </VStack>
+      </ScrollView>
+    </Page>
   );
 }

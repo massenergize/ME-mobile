@@ -17,6 +17,7 @@ import {
 import { Text as TextSVG } from "react-native-svg";
 
 import { BarChart, Grid } from "react-native-svg-charts";
+import Page from "../../Shared/Page";
 
 const fill = "#DC4E34";
 const data = [
@@ -233,58 +234,63 @@ export default function TeamDetailsPage() {
     }
   };
   return (
-    <ScrollView>
-      <Center my="5">
-        <Image
-          source={require("../../../assets/images/team-1.jpeg")}
-          alt="image"
-          size="xl"
-        />
-      </Center>
-      <VStack space="3">
-        <Heading alignSelf="center">Team Name</Heading>
-        <Center mx="5">
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            <HStack space="2">
-              <Button
-                variant={activeTab === "about" ? "solid" : "outline"}
-                onPress={() => setActiveTab("about")}
-              >
-                About
-              </Button>
-              <Button
-                variant={activeTab === "actions" ? "solid" : "outline"}
-                onPress={() => setActiveTab("actions")}
-              >
-                Actions
-              </Button>
-              <Button
-                variant={activeTab === "members" ? "solid" : "outline"}
-                onPress={() => setActiveTab("members")}
-              >
-                Members (65)
-              </Button>
-              <Button
-                variant={activeTab === "subTeams" ? "solid" : "outline"}
-                onPress={() => setActiveTab("subTeams")}
-              >
-                Sub-teams
-              </Button>
-              <Button
-                variant={activeTab === "contact" ? "solid" : "outline"}
-                onPress={() => setActiveTab("contact")}
-              >
-                Contact
-              </Button>
-            </HStack>
-          </ScrollView>
+    <Page>
+      <ScrollView>
+        <Center my="5">
+          <Image
+            source={require("../../../assets/images/team-1.jpeg")}
+            alt="image"
+            size="xl"
+          />
         </Center>
-        <Tab>
-          {renderTabContent()}
-          <Button my="5">JOIN</Button>
-        </Tab>
-      </VStack>
-    </ScrollView>
+        <VStack space="3">
+          <Heading alignSelf="center">Team Name</Heading>
+          <Center mx="5">
+            <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+            >
+              <HStack space="2">
+                <Button
+                  variant={activeTab === "about" ? "solid" : "outline"}
+                  onPress={() => setActiveTab("about")}
+                >
+                  About
+                </Button>
+                <Button
+                  variant={activeTab === "actions" ? "solid" : "outline"}
+                  onPress={() => setActiveTab("actions")}
+                >
+                  Actions
+                </Button>
+                <Button
+                  variant={activeTab === "members" ? "solid" : "outline"}
+                  onPress={() => setActiveTab("members")}
+                >
+                  Members (65)
+                </Button>
+                <Button
+                  variant={activeTab === "subTeams" ? "solid" : "outline"}
+                  onPress={() => setActiveTab("subTeams")}
+                >
+                  Sub-teams
+                </Button>
+                <Button
+                  variant={activeTab === "contact" ? "solid" : "outline"}
+                  onPress={() => setActiveTab("contact")}
+                >
+                  Contact
+                </Button>
+              </HStack>
+            </ScrollView>
+          </Center>
+          <Tab>
+            {renderTabContent()}
+            <Button my="5">JOIN</Button>
+          </Tab>
+        </VStack>
+      </ScrollView>
+    </Page>
   );
 }
 

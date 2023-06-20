@@ -1,10 +1,11 @@
-import { View, Text } from "react-native";
 import React from "react";
+import { Text } from "native-base";
+import Page from "../../Shared/Page";
 
 export default function ContactUsPage({ navigation }) {
   return (
-    <View>
+    <Page>
       <Text>Contact Us Page</Text>
-    </View>
+    </Page>
   );
 }

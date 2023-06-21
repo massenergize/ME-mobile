@@ -18,7 +18,11 @@ export default function ServiceProvidersPage({ navigation }) {
       sProvider.push(
         <Box mx="3" width="40" key={i}>
           <Pressable
-            onPress={() => navigation.navigate("serviceProviderDetails")}
+            onPress={() =>
+              navigation.navigate("serviceProviderDetails", {
+                title: `Provider ${i}`,
+              })
+            }
           >
             <Image
               source={require("../../../assets/images/logo.png")}
@@ -30,7 +34,7 @@ export default function ServiceProvidersPage({ navigation }) {
             />
             <Box>
               <Text fontWeight="bold" fontSize="lg">
-                Provider A
+                Provider {i}
               </Text>
               <Text fontWeight="thin">
                 This could be a brief description of...

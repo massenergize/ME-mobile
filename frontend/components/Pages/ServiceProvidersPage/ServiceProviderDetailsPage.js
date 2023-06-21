@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   Center,
@@ -13,7 +13,10 @@ import {
 } from "native-base";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
-export default function ServiceProviderDetailsPage() {
+export default function ServiceProviderDetailsPage({ route, navigation }) {
+  useEffect(() => {
+    navigation.setOptions({ title: route.params.title });
+  }, []);
   return (
     <ScrollView mb="20" showsVerticalScrollIndicator={false}>
       <Center py="20" px="5">

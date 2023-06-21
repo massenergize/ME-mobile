@@ -2,10 +2,10 @@ import React from "react";
 import { Text } from "native-base";
 import Page from "../../Shared/Page";
 
-export default function CommunityPage() {
+export default function ContactUsPage({ navigation }) {
   return (
     <Page>
-      <Text>Community Page</Text>
+      <Text>Contact Us Page</Text>
     </Page>
   );
 }

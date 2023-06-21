@@ -1,18 +1,10 @@
 import React from "react";
-import {
-  Box,
-  Image,
-  Center,
-  Button,
-  View,
-  VStack,
-  Text,
-  Heading,
-} from "native-base";
+import { Box, Image, Center, Button, VStack, Text, Heading } from "native-base";
+import Page from "../../Shared/Page";
 
 export default function WelcomePage({ navigation }) {
   return (
-    <View>
+    <Page>
       <Image
         source={require("../../../assets/images/welcome-background.jpg")}
         alt="Welcome Background Image"
@@ -65,48 +57,21 @@ export default function WelcomePage({ navigation }) {
             <Button shadow="5" size="lg" backgroundColor="blue.400">
               With Facebook
             </Button>
-            <Button size="lg" variant="ghost" _text={{ color: "white" }}>
+            <Button
+              size="lg"
+              variant="ghost"
+              _text={{ color: "white" }}
+              onPress={() => navigation.navigate("chooseCommunity")}
+            >
               Proceed as guest
             </Button>
           </VStack>
-          <Text color="white" textAlign="center">
+          <Text color="white" textAlign="center" px="3">
             When you join, we can count your impact. We do not collect sensitive
             personal data and do not share data.
           </Text>
         </VStack>
       </Center>
-
-      {/* <Center position="absolute" height="full" width="full" alignSelf="center">
-        <Box width="90%">
-          <Image
-            source={require("../../../assets/images/logo.png")}
-            alt="MassEnergize's logo"
-            resizeMode="contain"
-          />
-        </Box>
-        <Flex direction="column" alignSelf="center" width="90%">
-          <Button
-            mb="10"
-            onPress={() => navigation.navigate("login")}
-            _text={{
-              fontSize: "md",
-            }}
-          >
-            Sign In
-          </Button>
-          <Button
-            onPress={() => navigation.navigate("signup")}
-            _text={{
-              fontSize: "md",
-            }}
-          >
-            Create A Profile
-          </Button>
-          <Button onPress={() => navigation.navigate("drawer")}>
-            Community
-          </Button>
-        </Flex>
-      </Center> */}
-    </View>
+    </Page>
   );
 }

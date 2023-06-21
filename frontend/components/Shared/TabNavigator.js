@@ -8,6 +8,7 @@ import EventsPage from "../Pages/EventsPage/EventsPage";
 import UserProfilePage from "../Pages/UserProfilePage/UserProfilePage";
 import AboidersPage from "../Pages/ServiceProvidersPage/ServiceProvidersPage";
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import ProfilePageAlternate from "../Pages/UserProfilePage/ProfilePageAlternate";
 
 const Tab = createBottomTabNavigator();
 
@@ -50,7 +51,7 @@ export default function CommunityNavigation() {
       <Tab.Screen name="COMMUNITY" component={CommunityPage} />
       <Tab.Screen name="ACTIONS" component={ActionsPage} />
       <Tab.Screen name="EVENTS" component={EventsPage} />
-      <Tab.Screen name="PROFILE" component={UserProfilePage} />
+      <Tab.Screen name="PROFILE" component={ProfilePageAlternate} />
   </Tab.Navigator>
   );
 }

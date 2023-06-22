@@ -1,1428 +1,487 @@
 {
-    "data": [
-        {
-            "data": {
-                "id": 3,
-                "name": "Energize Wayland",
-                "subdomain": "wayland",
-                "website": "www.energizewayland.org",
-                "owner_name": "Kaat Vander Straeten",
-                "owner_email": "KAATvds@gmail.com",
-                "owner_phone_number": null,
-                "goal": {
-                    "id": 2,
-                    "name": "Energize Wayland-Goal",
-                    "description": "",
-                    "target_number_of_households": 1200,
-                    "target_number_of_actions": 5000,
-                    "target_carbon_footprint_reduction": 3000000,
-                    "initial_number_of_households": 131,
-                    "initial_number_of_actions": 0,
-                    "initial_carbon_footprint_reduction": 0,
-                    "attained_number_of_households": 360,
-                    "attained_number_of_actions": 1769,
-                    "attained_carbon_footprint_reduction": 0,
-                    "organic_attained_number_of_households": 295,
-                    "organic_attained_number_of_actions": 1381,
-                    "organic_attained_carbon_footprint_reduction": 2108429,
-                    "target_date": null,
-                    "more_info": null
-                },
-                "about_community": "If anyone can do it, Wayland can!",
-                "logo": {
-                    "id": 5,
-                    "name": "Energize Wayland CommunityLogo",
-                    "url": "https://massenergize-prod-files.s3.amazonaws.com/media/energizewayland_resized.jpg"
-                },
-                "favicon": null,
-                "location": {
-                    "city": "Wayland",
-                    "unit": null,
-                    "state": "Massachusetts",
-                    "address": null,
-                    "country": "US",
-                    "zipcode": "01778"
-                },
-                "is_approved": true,
-                "is_published": true,
-                "is_geographically_focused": true,
-                "banner": null,
-                "created_at": "2019-12-17T15:03:49.115Z",
-                "updated_at": "2021-02-05T22:50:09.647Z",
-                "more_info": "{\"wants_socials\":\"true\",\"facebook_link\":\"https://www.facebook.com/EnergizeWayland\"}",
-                "admins": [
-                    {
-                        "id": "d0e6ca3e-413b-4dba-b139-6fdbaff58e6a",
-                        "full_name": "Kaat Vander Straeten",
-                        "preferred_name": "Kaat-alyst",
-                        "email": "kaat@transitionwayland.org",
-                        "is_super_admin": false,
-                        "is_community_admin": true,
-                        "joined": "2019-12-19",
-                        "user_info": null,
-                        "profile_picture": null,
-                        "communities": [
-                            "Global Climate Corps",
-                            "EcoNatick",
-                            "Demo 2023",
-                            "Energize Wayland"
-                        ],
-                        "households": [
-                            {
-                                "id": 11,
-                                "name": "MWED",
-                                "unit_type": "RESIDENTIAL",
-                                "community": 3,
-                                "location": {
-                                    "id": 5,
-                                    "location_type": "ZIP_CODE_ONLY",
-                                    "street": "",
-                                    "unit_number": "",
-                                    "zipcode": "01778",
-                                    "city": "Wayland",
-                                    "county": "",
-                                    "is_deleted": false,
-                                    "state": "",
-                                    "country": "US",
-                                    "more_info": null
-                                },
-                                "address": 5,
-                                "is_deleted": false
-                            },
-                            {
-                                "id": 351,
-                                "name": "RSL",
-                                "unit_type": "RESIDENTIAL",
-                                "community": 3,
-                                "location": {
-                                    "id": 5,
-                                    "location_type": "ZIP_CODE_ONLY",
-                                    "street": "",
-                                    "unit_number": "",
-                                    "zipcode": "01778",
-                                    "city": "Wayland",
-                                    "county": "",
-                                    "is_deleted": false,
-                                    "state": "",
-                                    "country": "US",
-                                    "more_info": null
-                                },
-                                "address": 5,
-                                "is_deleted": false
-                            }
-                        ],
-                        "is_guest": false,
-                        "preferences": {
-                            "user_portal_settings": {
-                                "communication_prefs": {
-                                    "update_frequency": {
-                                        "per_week": {
-                                            "value": true
-                                        }
-                                    },
-                                    "news_letter": {
-                                        "as_posted": {
-                                            "value": true
-                                        }
-                                    },
-                                    "messaging": {
-                                        "yes": {
-                                            "value": true
-                                        }
-                                    }
-                                },
-                                "notifications": {
-                                    "upcoming_events": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "upcoming_actions": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "news_teams": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "new_testimonials": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "your_activity_updates": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    }
-                                }
-                            },
-                            "admin_portal_settings": {
-                                "communication_prefs": {
-                                    "reports_frequency": {
-                                        "weekly": {
-                                            "value": true
-                                        }
-                                    },
-                                    "user_updates": {
-                                        "by_email_only": {
-                                            "value": true
-                                        }
-                                    },
-                                    "specific_notifications": {
-                                        "new_member_update": {
-                                            "value": true
-                                        },
-                                        "new_action_creation_update": {
-                                            "value": true
-                                        },
-                                        "event_RSVP_update": {
-                                            "value": false
-                                        },
-                                        "new_event_creation_update": {
-                                            "value": true
-                                        },
-                                        "new_testimonial_submission_update": {
-                                            "value": true
-                                        },
-                                        "new_team_submission_update": {
-                                            "value": true
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "accepts_terms_and_conditions": true
-                    },
-                    {
-                        "id": "43929ba4-ad30-4c82-89c8-b1751740f61f",
-                        "full_name": "Stephen Breit",
-                        "preferred_name": "Steve",
-                        "email": "steve.breit@outlook.com",
-                        "is_super_admin": false,
-                        "is_community_admin": true,
-                        "joined": "2019-12-18",
-                        "user_info": null,
-                        "profile_picture": null,
-                        "communities": [
-                            "Jewish Climate Action Network -- JCAN-MA",
-                            "EnergizeUs",
-                            "Energize Wayland"
-                        ],
-                        "households": [
-                            {
-                                "id": 8,
-                                "name": "54RVR",
-                                "unit_type": "RESIDENTIAL",
-                                "community": 3,
-                                "location": {
-                                    "id": 226,
-                                    "location_type": "FULL_ADDRESS",
-                                    "street": "54 rich valley rd",
-                                    "unit_number": "",
-                                    "zipcode": "01778",
-                                    "city": "Wayland",
-                                    "county": "",
-                                    "is_deleted": false,
-                                    "state": "MA",
-                                    "country": "US",
-                                    "more_info": null
-                                },
-                                "address": 226,
-                                "is_deleted": false
-                            }
-                        ],
-                        "is_guest": false,
-                        "preferences": {
-                            "user_portal_settings": {
-                                "communication_prefs": {
-                                    "update_frequency": {
-                                        "per_week": {
-                                            "value": true
-                                        }
-                                    },
-                                    "news_letter": {
-                                        "as_posted": {
-                                            "value": true
-                                        }
-                                    },
-                                    "messaging": {
-                                        "yes": {
-                                            "value": true
-                                        }
-                                    }
-                                },
-                                "notifications": {
-                                    "upcoming_events": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "upcoming_actions": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "news_teams": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "new_testimonials": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "your_activity_updates": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    }
-                                }
-                            },
-                            "admin_portal_settings": {
-                                "communication_prefs": {
-                                    "reports_frequency": {
-                                        "weekly": {
-                                            "value": true
-                                        }
-                                    },
-                                    "user_updates": {
-                                        "by_email_only": {
-                                            "value": true
-                                        }
-                                    },
-                                    "specific_notifications": {
-                                        "new_member_update": {
-                                            "value": true
-                                        },
-                                        "new_action_creation_update": {
-                                            "value": true
-                                        },
-                                        "event_RSVP_update": {
-                                            "value": false
-                                        },
-                                        "new_event_creation_update": {
-                                            "value": true
-                                        },
-                                        "new_testimonial_submission_update": {
-                                            "value": true
-                                        },
-                                        "new_team_submission_update": {
-                                            "value": true
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "accepts_terms_and_conditions": true
-                    },
-                    {
-                        "id": "c3bc9499-d344-4512-aa06-3200894b3dab",
-                        "full_name": "Ellen Tohn",
-                        "preferred_name": "Ellen T.",
-                        "email": "ellentohn@gmail.com",
-                        "is_super_admin": false,
-                        "is_community_admin": false,
-                        "joined": "2019-12-17",
-                        "user_info": null,
-                        "profile_picture": null,
-                        "communities": [
-                            "Jewish Climate Action Network -- JCAN-MA",
-                            "Energize Wayland"
-                        ],
-                        "households": [
-                            {
-                                "id": 4,
-                                "name": "Home",
-                                "unit_type": "RESIDENTIAL",
-                                "community": 3,
-                                "location": {
-                                    "id": 5,
-                                    "location_type": "ZIP_CODE_ONLY",
-                                    "street": "",
-                                    "unit_number": "",
-                                    "zipcode": "01778",
-                                    "city": "Wayland",
-                                    "county": "",
-                                    "is_deleted": false,
-                                    "state": "",
-                                    "country": "US",
-                                    "more_info": null
-                                },
-                                "address": 5,
-                                "is_deleted": false
-                            }
-                        ],
-                        "is_guest": false,
-                        "preferences": {
-                            "user_portal_settings": {
-                                "communication_prefs": {
-                                    "update_frequency": {
-                                        "per_week": {
-                                            "value": true
-                                        }
-                                    },
-                                    "news_letter": {
-                                        "as_posted": {
-                                            "value": true
-                                        }
-                                    },
-                                    "messaging": {
-                                        "yes": {
-                                            "value": true
-                                        }
-                                    }
-                                },
-                                "notifications": {
-                                    "upcoming_events": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "upcoming_actions": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "news_teams": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "new_testimonials": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "your_activity_updates": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    }
-                                }
-                            },
-                            "admin_portal_settings": {
-                                "communication_prefs": {
-                                    "reports_frequency": {
-                                        "weekly": {
-                                            "value": true
-                                        }
-                                    },
-                                    "user_updates": {
-                                        "by_email_only": {
-                                            "value": true
-                                        }
-                                    },
-                                    "specific_notifications": {
-                                        "new_member_update": {
-                                            "value": true
-                                        },
-                                        "new_action_creation_update": {
-                                            "value": true
-                                        },
-                                        "event_RSVP_update": {
-                                            "value": false
-                                        },
-                                        "new_event_creation_update": {
-                                            "value": true
-                                        },
-                                        "new_testimonial_submission_update": {
-                                            "value": true
-                                        },
-                                        "new_team_submission_update": {
-                                            "value": true
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "accepts_terms_and_conditions": true
-                    }
-                ],
-                "geography_type": "ZIPCODE",
-                "locations": "01778",
-                "feature_flags": [
-                    {
-                        "id": 7,
-                        "name": "weekly_event_nudge",
-                        "scope": "BACKEND",
-                        "audience": "EVERYONE",
-                        "user_audience": "EVERYONE",
-                        "key": "weekly_event_nudge-feature-flag",
-                        "notes": "Send a weekly nudge to cadmins",
-                        "expires_on": null,
-                        "communities": [
-                            {
-                                "id": 3,
-                                "name": "Energize Wayland"
-                            },
-                            {
-                                "id": 7,
-                                "name": "Energize Framingham"
-                            },
-                            {
-                                "id": 6,
-                                "name": "Cooler Concord"
-                            }
-                        ]
-                    },
-                    {
-                        "id": 8,
-                        "name": "new-user-engagement-view",
-                        "scope": "ADMIN_FRONTEND",
-                        "audience": "EVERYONE",
-                        "user_audience": "EVERYONE",
-                        "key": "new-user-engagement-view-feature-flag",
-                        "notes": "Admin portal shows new user engagement view",
-                        "expires_on": null,
-                        "communities": []
-                    }
-                ],
-                "is_demo": false
-            },
-            "error": null,
-            "success": true,
-            "cursor": {}
+    "data": {
+        "id": 3,
+        "name": "Energize Wayland",
+        "subdomain": "wayland",
+        "website": "www.energizewayland.org",
+        "owner_name": "Kaat Vander Straeten",
+        "owner_email": "KAATvds@gmail.com",
+        "owner_phone_number": null,
+        "goal": {
+            "id": 2,
+            "name": "Energize Wayland-Goal",
+            "description": "",
+            "target_number_of_households": 1200,
+            "target_number_of_actions": 5000,
+            "target_carbon_footprint_reduction": 3000000,
+            "initial_number_of_households": 131,
+            "initial_number_of_actions": 0,
+            "initial_carbon_footprint_reduction": 0,
+            "attained_number_of_households": 360,
+            "attained_number_of_actions": 1769,
+            "attained_carbon_footprint_reduction": 0,
+            "organic_attained_number_of_households": 295,
+            "organic_attained_number_of_actions": 1381,
+            "organic_attained_carbon_footprint_reduction": 2108429,
+            "target_date": null,
+            "more_info": null
         },
-        {
-            "data": {
-                "id": 27,
-                "name": "Energize Acton",
-                "subdomain": "ActonMA",
-                "website": "www.energizeacton.org",
-                "owner_name": "Town of Acton and Acton Climate Coalition",
-                "owner_email": "EnergizeActonContact@ActonClimateCoalition.org",
-                "owner_phone_number": null,
-                "goal": {
-                    "id": 19,
-                    "name": "Acton Climate Coalition-Goal",
-                    "description": "",
-                    "target_number_of_households": 300,
-                    "target_number_of_actions": 2080,
-                    "target_carbon_footprint_reduction": 6000000,
-                    "initial_number_of_households": 0,
-                    "initial_number_of_actions": 0,
-                    "initial_carbon_footprint_reduction": 0,
-                    "attained_number_of_households": 0,
-                    "attained_number_of_actions": 480,
-                    "attained_carbon_footprint_reduction": 0,
-                    "organic_attained_number_of_households": 173,
-                    "organic_attained_number_of_actions": 568,
-                    "organic_attained_carbon_footprint_reduction": 1328976,
-                    "target_date": null,
-                    "more_info": null
-                },
-                "about_community": "Welcome to Energize Acton \u2014 a joint collaboration between the Town of Acton and the Acton Climate Coalition. ",
-                "logo": {
-                    "id": 1361,
-                    "name": "Energize Acton CommunityLogo",
-                    "url": "https://massenergize-prod-files.s3.amazonaws.com/media/EnergizeActon.logo.draft.1_p.2.jpeg"
-                },
-                "favicon": null,
-                "location": {
-                    "city": "Acton",
-                    "unit": null,
-                    "state": "Massachusetts",
-                    "address": "472 Main St",
-                    "country": "US",
-                    "zipcode": "01720"
-                },
-                "is_approved": true,
-                "is_published": true,
-                "is_geographically_focused": true,
-                "banner": null,
-                "created_at": "2020-12-30T17:57:24.190Z",
-                "updated_at": "2021-04-30T20:14:53.015Z",
-                "more_info": "{\"wants_socials\":\"true\",\"instagram_link\":\"https://www.instagram.com/actonclimatecoalition\",\"twitter_link\":\"https://www.twitter.com/ClimateActon\",\"facebook_link\":\"https://www.facebook.com/actonclimatecoalition\"}",
-                "admins": [
+        "about_community": "If anyone can do it, Wayland can!",
+        "logo": {
+            "id": 5,
+            "name": "Energize Wayland CommunityLogo",
+            "url": "https://massenergize-prod-files.s3.amazonaws.com/media/energizewayland_resized.jpg"
+        },
+        "favicon": null,
+        "location": {
+            "city": "Wayland",
+            "unit": null,
+            "state": "Massachusetts",
+            "address": null,
+            "country": "US",
+            "zipcode": "01778"
+        },
+        "is_approved": true,
+        "is_published": true,
+        "is_geographically_focused": true,
+        "banner": null,
+        "created_at": "2019-12-17T15:03:49.115Z",
+        "updated_at": "2021-02-05T22:50:09.647Z",
+        "more_info": "{\"wants_socials\":\"true\",\"facebook_link\":\"https://www.facebook.com/EnergizeWayland\"}",
+        "admins": [
+            {
+                "id": "d0e6ca3e-413b-4dba-b139-6fdbaff58e6a",
+                "full_name": "Kaat Vander Straeten",
+                "preferred_name": "Kaat-alyst",
+                "email": "kaat@transitionwayland.org",
+                "is_super_admin": false,
+                "is_community_admin": true,
+                "joined": "2019-12-19",
+                "user_info": null,
+                "profile_picture": null,
+                "communities": [
+                    "Global Climate Corps",
+                    "EcoNatick",
+                    "Demo 2023",
+                    "Energize Wayland"
+                ],
+                "households": [
                     {
-                        "id": "445b6a95-b45e-47b4-a4c0-e750b76fa220",
-                        "full_name": "Karen Root Watkins",
-                        "preferred_name": "KRW",
-                        "email": "k.root.watkins@gmail.com",
-                        "is_super_admin": false,
-                        "is_community_admin": true,
-                        "joined": "2021-07-02",
-                        "user_info": null,
-                        "profile_picture": null,
-                        "communities": [
-                            "Energize Boxborough",
-                            "Energize Acton"
-                        ],
-                        "households": [
-                            {
-                                "id": 874,
-                                "name": "Home",
-                                "unit_type": "residential",
-                                "community": 27,
-                                "location": null,
-                                "address": null,
-                                "is_deleted": false
-                            }
-                        ],
-                        "is_guest": false,
-                        "preferences": {
-                            "user_portal_settings": {
-                                "communication_prefs": {
-                                    "update_frequency": {
-                                        "per_week": {
-                                            "value": true
-                                        }
-                                    },
-                                    "news_letter": {
-                                        "as_posted": {
-                                            "value": true
-                                        }
-                                    },
-                                    "messaging": {
-                                        "yes": {
-                                            "value": true
-                                        }
-                                    }
-                                },
-                                "notifications": {
-                                    "upcoming_events": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "upcoming_actions": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "news_teams": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "new_testimonials": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "your_activity_updates": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    }
-                                }
-                            },
-                            "admin_portal_settings": {
-                                "communication_prefs": {
-                                    "reports_frequency": {
-                                        "weekly": {
-                                            "value": true
-                                        }
-                                    },
-                                    "user_updates": {
-                                        "by_email_only": {
-                                            "value": true
-                                        }
-                                    },
-                                    "specific_notifications": {
-                                        "new_member_update": {
-                                            "value": true
-                                        },
-                                        "new_action_creation_update": {
-                                            "value": true
-                                        },
-                                        "event_RSVP_update": {
-                                            "value": false
-                                        },
-                                        "new_event_creation_update": {
-                                            "value": true
-                                        },
-                                        "new_testimonial_submission_update": {
-                                            "value": true
-                                        },
-                                        "new_team_submission_update": {
-                                            "value": true
-                                        }
-                                    }
-                                }
-                            }
+                        "id": 11,
+                        "name": "MWED",
+                        "unit_type": "RESIDENTIAL",
+                        "community": 3,
+                        "location": {
+                            "id": 5,
+                            "location_type": "ZIP_CODE_ONLY",
+                            "street": "",
+                            "unit_number": "",
+                            "zipcode": "01778",
+                            "city": "Wayland",
+                            "county": "",
+                            "is_deleted": false,
+                            "state": "",
+                            "country": "US",
+                            "more_info": null
                         },
-                        "accepts_terms_and_conditions": true
+                        "address": 5,
+                        "is_deleted": false
                     },
                     {
-                        "id": "1101129e-c97f-46f9-bd27-71e5f3e23522",
-                        "full_name": "Debra Simes",
-                        "preferred_name": "Debra",
-                        "email": "debra.simes@gmail.com",
-                        "is_super_admin": false,
-                        "is_community_admin": true,
-                        "joined": "2021-05-07",
-                        "user_info": null,
-                        "profile_picture": null,
-                        "communities": [
-                            "Energize Acton"
-                        ],
-                        "households": [
-                            {
-                                "id": 774,
-                                "name": "Home",
-                                "unit_type": "residential",
-                                "community": 27,
-                                "location": {
-                                    "id": 37,
-                                    "location_type": "FULL_ADDRESS",
-                                    "street": " ",
-                                    "unit_number": "",
-                                    "zipcode": "01720",
-                                    "city": "Acton",
-                                    "county": "",
-                                    "is_deleted": false,
-                                    "state": "MA",
-                                    "country": "US",
-                                    "more_info": null
-                                },
-                                "address": 37,
-                                "is_deleted": false
-                            }
-                        ],
-                        "is_guest": false,
-                        "preferences": {
-                            "user_portal_settings": {
-                                "communication_prefs": {
-                                    "update_frequency": {
-                                        "per_week": {
-                                            "value": true
-                                        }
-                                    },
-                                    "news_letter": {
-                                        "as_posted": {
-                                            "value": true
-                                        }
-                                    },
-                                    "messaging": {
-                                        "yes": {
-                                            "value": true
-                                        }
-                                    }
-                                },
-                                "notifications": {
-                                    "upcoming_events": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "upcoming_actions": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "news_teams": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "new_testimonials": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "your_activity_updates": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    }
-                                }
-                            },
-                            "admin_portal_settings": {
-                                "communication_prefs": {
-                                    "reports_frequency": {
-                                        "weekly": {
-                                            "value": true
-                                        }
-                                    },
-                                    "user_updates": {
-                                        "by_email_only": {
-                                            "value": true
-                                        }
-                                    },
-                                    "specific_notifications": {
-                                        "new_member_update": {
-                                            "value": true
-                                        },
-                                        "new_action_creation_update": {
-                                            "value": true
-                                        },
-                                        "event_RSVP_update": {
-                                            "value": false
-                                        },
-                                        "new_event_creation_update": {
-                                            "value": true
-                                        },
-                                        "new_testimonial_submission_update": {
-                                            "value": true
-                                        },
-                                        "new_team_submission_update": {
-                                            "value": true
-                                        }
-                                    }
-                                }
-                            }
+                        "id": 351,
+                        "name": "RSL",
+                        "unit_type": "RESIDENTIAL",
+                        "community": 3,
+                        "location": {
+                            "id": 5,
+                            "location_type": "ZIP_CODE_ONLY",
+                            "street": "",
+                            "unit_number": "",
+                            "zipcode": "01778",
+                            "city": "Wayland",
+                            "county": "",
+                            "is_deleted": false,
+                            "state": "",
+                            "country": "US",
+                            "more_info": null
                         },
-                        "accepts_terms_and_conditions": true
-                    },
-                    {
-                        "id": "7e967bd4-a5e8-48c9-ae7a-a98c450e96ee",
-                        "full_name": "Judith Aronstein",
-                        "preferred_name": "Jude",
-                        "email": "juditharonst@gmail.com",
-                        "is_super_admin": false,
-                        "is_community_admin": true,
-                        "joined": "2021-05-05",
-                        "user_info": null,
-                        "profile_picture": null,
-                        "communities": [
-                            "Energize Acton"
-                        ],
-                        "households": [
-                            {
-                                "id": 766,
-                                "name": "Home",
-                                "unit_type": "residential",
-                                "community": 27,
-                                "location": {
-                                    "id": 37,
-                                    "location_type": "FULL_ADDRESS",
-                                    "street": " ",
-                                    "unit_number": "",
-                                    "zipcode": "01720",
-                                    "city": "Acton",
-                                    "county": "",
-                                    "is_deleted": false,
-                                    "state": "MA",
-                                    "country": "US",
-                                    "more_info": null
-                                },
-                                "address": 37,
-                                "is_deleted": false
-                            }
-                        ],
-                        "is_guest": false,
-                        "preferences": {
-                            "user_portal_settings": {
-                                "communication_prefs": {
-                                    "update_frequency": {
-                                        "per_week": {
-                                            "value": true
-                                        }
-                                    },
-                                    "news_letter": {
-                                        "as_posted": {
-                                            "value": true
-                                        }
-                                    },
-                                    "messaging": {
-                                        "yes": {
-                                            "value": true
-                                        }
-                                    }
-                                },
-                                "notifications": {
-                                    "upcoming_events": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "upcoming_actions": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "news_teams": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "new_testimonials": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "your_activity_updates": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    }
-                                }
-                            },
-                            "admin_portal_settings": {
-                                "communication_prefs": {
-                                    "reports_frequency": {
-                                        "weekly": {
-                                            "value": true
-                                        }
-                                    },
-                                    "user_updates": {
-                                        "by_email_only": {
-                                            "value": true
-                                        }
-                                    },
-                                    "specific_notifications": {
-                                        "new_member_update": {
-                                            "value": true
-                                        },
-                                        "new_action_creation_update": {
-                                            "value": true
-                                        },
-                                        "event_RSVP_update": {
-                                            "value": false
-                                        },
-                                        "new_event_creation_update": {
-                                            "value": true
-                                        },
-                                        "new_testimonial_submission_update": {
-                                            "value": true
-                                        },
-                                        "new_team_submission_update": {
-                                            "value": true
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "accepts_terms_and_conditions": true
-                    },
-                    {
-                        "id": "14d1e901-2d9f-4e02-820c-cb8403071955",
-                        "full_name": "Karen Herther   ",
-                        "preferred_name": "Karen at Market Dynamics ",
-                        "email": "karen@marketdynamics.info",
-                        "is_super_admin": false,
-                        "is_community_admin": true,
-                        "joined": "2021-05-05",
-                        "user_info": null,
-                        "profile_picture": null,
-                        "communities": [
-                            "Energize Acton"
-                        ],
-                        "households": [
-                            {
-                                "id": 764,
-                                "name": "Home",
-                                "unit_type": "residential",
-                                "community": 27,
-                                "location": {
-                                    "id": 37,
-                                    "location_type": "FULL_ADDRESS",
-                                    "street": " ",
-                                    "unit_number": "",
-                                    "zipcode": "01720",
-                                    "city": "Acton",
-                                    "county": "",
-                                    "is_deleted": false,
-                                    "state": "MA",
-                                    "country": "US",
-                                    "more_info": null
-                                },
-                                "address": 37,
-                                "is_deleted": false
-                            }
-                        ],
-                        "is_guest": false,
-                        "preferences": {
-                            "user_portal_settings": {
-                                "communication_prefs": {
-                                    "update_frequency": {
-                                        "per_week": {
-                                            "value": true
-                                        }
-                                    },
-                                    "news_letter": {
-                                        "as_posted": {
-                                            "value": true
-                                        }
-                                    },
-                                    "messaging": {
-                                        "yes": {
-                                            "value": true
-                                        }
-                                    }
-                                },
-                                "notifications": {
-                                    "upcoming_events": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "upcoming_actions": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "news_teams": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "new_testimonials": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "your_activity_updates": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    }
-                                }
-                            },
-                            "admin_portal_settings": {
-                                "communication_prefs": {
-                                    "reports_frequency": {
-                                        "weekly": {
-                                            "value": true
-                                        }
-                                    },
-                                    "user_updates": {
-                                        "by_email_only": {
-                                            "value": true
-                                        }
-                                    },
-                                    "specific_notifications": {
-                                        "new_member_update": {
-                                            "value": true
-                                        },
-                                        "new_action_creation_update": {
-                                            "value": true
-                                        },
-                                        "event_RSVP_update": {
-                                            "value": false
-                                        },
-                                        "new_event_creation_update": {
-                                            "value": true
-                                        },
-                                        "new_testimonial_submission_update": {
-                                            "value": true
-                                        },
-                                        "new_team_submission_update": {
-                                            "value": true
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "accepts_terms_and_conditions": true
-                    },
-                    {
-                        "id": "0d4d5479-c90a-4875-9e57-f6d1136e7c38",
-                        "full_name": "Jim Snyder-Grant",
-                        "preferred_name": "jim s-g",
-                        "email": "jimsg@greenacton.org",
-                        "is_super_admin": false,
-                        "is_community_admin": true,
-                        "joined": "2021-02-09",
-                        "user_info": null,
-                        "profile_picture": null,
-                        "communities": [
-                            "Energize Acton"
-                        ],
-                        "households": [
-                            {
-                                "id": 472,
-                                "name": "Home",
-                                "unit_type": "residential",
-                                "community": 27,
-                                "location": {
-                                    "id": 37,
-                                    "location_type": "FULL_ADDRESS",
-                                    "street": " ",
-                                    "unit_number": "",
-                                    "zipcode": "01720",
-                                    "city": "Acton",
-                                    "county": "",
-                                    "is_deleted": false,
-                                    "state": "MA",
-                                    "country": "US",
-                                    "more_info": null
-                                },
-                                "address": 37,
-                                "is_deleted": false
-                            }
-                        ],
-                        "is_guest": false,
-                        "preferences": {
-                            "user_portal_settings": {
-                                "communication_prefs": {
-                                    "update_frequency": {
-                                        "per_week": {
-                                            "value": true
-                                        }
-                                    },
-                                    "news_letter": {
-                                        "as_posted": {
-                                            "value": true
-                                        }
-                                    },
-                                    "messaging": {
-                                        "yes": {
-                                            "value": true
-                                        }
-                                    }
-                                },
-                                "notifications": {
-                                    "upcoming_events": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "upcoming_actions": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "news_teams": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "new_testimonials": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "your_activity_updates": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    }
-                                }
-                            },
-                            "admin_portal_settings": {
-                                "communication_prefs": {
-                                    "reports_frequency": {
-                                        "weekly": {
-                                            "value": true
-                                        }
-                                    },
-                                    "user_updates": {
-                                        "by_email_only": {
-                                            "value": true
-                                        }
-                                    },
-                                    "specific_notifications": {
-                                        "new_member_update": {
-                                            "value": true
-                                        },
-                                        "new_action_creation_update": {
-                                            "value": true
-                                        },
-                                        "event_RSVP_update": {
-                                            "value": false
-                                        },
-                                        "new_event_creation_update": {
-                                            "value": true
-                                        },
-                                        "new_testimonial_submission_update": {
-                                            "value": true
-                                        },
-                                        "new_team_submission_update": {
-                                            "value": true
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "accepts_terms_and_conditions": true
-                    },
-                    {
-                        "id": "7aa217ec-ccdf-470b-8ef5-2089af2e4341",
-                        "full_name": "Andrea Becerra",
-                        "preferred_name": "Andrea E.",
-                        "email": "abecerra@actonma.gov",
-                        "is_super_admin": false,
-                        "is_community_admin": true,
-                        "joined": "2021-02-09",
-                        "user_info": null,
-                        "profile_picture": null,
-                        "communities": [
-                            "Energize Acton"
-                        ],
-                        "households": [
-                            {
-                                "id": 471,
-                                "name": "Home",
-                                "unit_type": "residential",
-                                "community": 27,
-                                "location": {
-                                    "id": 37,
-                                    "location_type": "FULL_ADDRESS",
-                                    "street": " ",
-                                    "unit_number": "",
-                                    "zipcode": "01720",
-                                    "city": "Acton",
-                                    "county": "",
-                                    "is_deleted": false,
-                                    "state": "MA",
-                                    "country": "US",
-                                    "more_info": null
-                                },
-                                "address": 37,
-                                "is_deleted": false
-                            }
-                        ],
-                        "is_guest": false,
-                        "preferences": {
-                            "user_portal_settings": {
-                                "communication_prefs": {
-                                    "update_frequency": {
-                                        "per_week": {
-                                            "value": true
-                                        }
-                                    },
-                                    "news_letter": {
-                                        "as_posted": {
-                                            "value": true
-                                        }
-                                    },
-                                    "messaging": {
-                                        "yes": {
-                                            "value": true
-                                        }
-                                    }
-                                },
-                                "notifications": {
-                                    "upcoming_events": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "upcoming_actions": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "news_teams": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "new_testimonials": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "your_activity_updates": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    }
-                                }
-                            },
-                            "admin_portal_settings": {
-                                "communication_prefs": {
-                                    "reports_frequency": {
-                                        "weekly": {
-                                            "value": true
-                                        }
-                                    },
-                                    "user_updates": {
-                                        "by_email_only": {
-                                            "value": true
-                                        }
-                                    },
-                                    "specific_notifications": {
-                                        "new_member_update": {
-                                            "value": true
-                                        },
-                                        "new_action_creation_update": {
-                                            "value": true
-                                        },
-                                        "event_RSVP_update": {
-                                            "value": false
-                                        },
-                                        "new_event_creation_update": {
-                                            "value": true
-                                        },
-                                        "new_testimonial_submission_update": {
-                                            "value": true
-                                        },
-                                        "new_team_submission_update": {
-                                            "value": true
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "accepts_terms_and_conditions": true
-                    },
-                    {
-                        "id": "216a1147-0d1b-44eb-a53c-c18d788b46e3",
-                        "full_name": "Fran Cummings",
-                        "preferred_name": "Fran",
-                        "email": "fcummings@gmail.com",
-                        "is_super_admin": false,
-                        "is_community_admin": true,
-                        "joined": "2020-12-10",
-                        "user_info": null,
-                        "profile_picture": {
-                            "id": 2909,
-                            "name": "Fran Cummings profpic",
-                            "url": "https://massenergize-prod-files.s3.amazonaws.com/media/Fran_wine-bar-copy.jpeg"
-                        },
-                        "communities": [
-                            "Energize Acton"
-                        ],
-                        "households": [
-                            {
-                                "id": 401,
-                                "name": "Home",
-                                "unit_type": "RESIDENTIAL",
-                                "community": 27,
-                                "location": {
-                                    "id": 37,
-                                    "location_type": "FULL_ADDRESS",
-                                    "street": " ",
-                                    "unit_number": "",
-                                    "zipcode": "01720",
-                                    "city": "Acton",
-                                    "county": "",
-                                    "is_deleted": false,
-                                    "state": "MA",
-                                    "country": "US",
-                                    "more_info": null
-                                },
-                                "address": 37,
-                                "is_deleted": false
-                            }
-                        ],
-                        "is_guest": false,
-                        "preferences": {
-                            "user_portal_settings": {
-                                "communication_prefs": {
-                                    "update_frequency": {
-                                        "per_week": {
-                                            "value": true
-                                        }
-                                    },
-                                    "news_letter": {
-                                        "as_posted": {
-                                            "value": true
-                                        }
-                                    },
-                                    "messaging": {
-                                        "yes": {
-                                            "value": true
-                                        }
-                                    }
-                                },
-                                "notifications": {
-                                    "upcoming_events": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "upcoming_actions": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "news_teams": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "new_testimonials": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    },
-                                    "your_activity_updates": {
-                                        "never": {
-                                            "value": true
-                                        }
-                                    }
-                                }
-                            },
-                            "admin_portal_settings": {
-                                "communication_prefs": {
-                                    "reports_frequency": {
-                                        "weekly": {
-                                            "value": true
-                                        }
-                                    },
-                                    "user_updates": {
-                                        "by_email_only": {
-                                            "value": true
-                                        }
-                                    },
-                                    "specific_notifications": {
-                                        "new_member_update": {
-                                            "value": true
-                                        },
-                                        "new_action_creation_update": {
-                                            "value": true
-                                        },
-                                        "event_RSVP_update": {
-                                            "value": false
-                                        },
-                                        "new_event_creation_update": {
-                                            "value": true
-                                        },
-                                        "new_testimonial_submission_update": {
-                                            "value": true
-                                        },
-                                        "new_team_submission_update": {
-                                            "value": true
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "accepts_terms_and_conditions": true
+                        "address": 5,
+                        "is_deleted": false
                     }
                 ],
-                "geography_type": "ZIPCODE",
-                "locations": "01720",
-                "feature_flags": [
-                    {
-                        "id": 7,
-                        "name": "weekly_event_nudge",
-                        "scope": "BACKEND",
-                        "audience": "EVERYONE",
-                        "user_audience": "EVERYONE",
-                        "key": "weekly_event_nudge-feature-flag",
-                        "notes": "Send a weekly nudge to cadmins",
-                        "expires_on": null,
-                        "communities": [
-                            {
-                                "id": 3,
-                                "name": "Energize Wayland"
+                "is_guest": false,
+                "preferences": {
+                    "user_portal_settings": {
+                        "communication_prefs": {
+                            "update_frequency": {
+                                "per_week": {
+                                    "value": true
+                                }
                             },
-                            {
-                                "id": 7,
-                                "name": "Energize Framingham"
+                            "news_letter": {
+                                "as_posted": {
+                                    "value": true
+                                }
                             },
-                            {
-                                "id": 6,
-                                "name": "Cooler Concord"
+                            "messaging": {
+                                "yes": {
+                                    "value": true
+                                }
                             }
-                        ]
+                        },
+                        "notifications": {
+                            "upcoming_events": {
+                                "never": {
+                                    "value": true
+                                }
+                            },
+                            "upcoming_actions": {
+                                "never": {
+                                    "value": true
+                                }
+                            },
+                            "news_teams": {
+                                "never": {
+                                    "value": true
+                                }
+                            },
+                            "new_testimonials": {
+                                "never": {
+                                    "value": true
+                                }
+                            },
+                            "your_activity_updates": {
+                                "never": {
+                                    "value": true
+                                }
+                            }
+                        }
                     },
+                    "admin_portal_settings": {
+                        "communication_prefs": {
+                            "reports_frequency": {
+                                "weekly": {
+                                    "value": true
+                                }
+                            },
+                            "user_updates": {
+                                "by_email_only": {
+                                    "value": true
+                                }
+                            },
+                            "specific_notifications": {
+                                "new_member_update": {
+                                    "value": true
+                                },
+                                "new_action_creation_update": {
+                                    "value": true
+                                },
+                                "event_RSVP_update": {
+                                    "value": false
+                                },
+                                "new_event_creation_update": {
+                                    "value": true
+                                },
+                                "new_testimonial_submission_update": {
+                                    "value": true
+                                },
+                                "new_team_submission_update": {
+                                    "value": true
+                                }
+                            }
+                        }
+                    }
+                },
+                "accepts_terms_and_conditions": true
+            },
+            {
+                "id": "43929ba4-ad30-4c82-89c8-b1751740f61f",
+                "full_name": "Stephen Breit",
+                "preferred_name": "Steve",
+                "email": "steve.breit@outlook.com",
+                "is_super_admin": false,
+                "is_community_admin": true,
+                "joined": "2019-12-18",
+                "user_info": null,
+                "profile_picture": null,
+                "communities": [
+                    "Jewish Climate Action Network -- JCAN-MA",
+                    "EnergizeUs",
+                    "Energize Wayland"
+                ],
+                "households": [
                     {
                         "id": 8,
-                        "name": "new-user-engagement-view",
-                        "scope": "ADMIN_FRONTEND",
-                        "audience": "EVERYONE",
-                        "user_audience": "EVERYONE",
-                        "key": "new-user-engagement-view-feature-flag",
-                        "notes": "Admin portal shows new user engagement view",
-                        "expires_on": null,
-                        "communities": []
+                        "name": "54RVR",
+                        "unit_type": "RESIDENTIAL",
+                        "community": 3,
+                        "location": {
+                            "id": 226,
+                            "location_type": "FULL_ADDRESS",
+                            "street": "54 rich valley rd",
+                            "unit_number": "",
+                            "zipcode": "01778",
+                            "city": "Wayland",
+                            "county": "",
+                            "is_deleted": false,
+                            "state": "MA",
+                            "country": "US",
+                            "more_info": null
+                        },
+                        "address": 226,
+                        "is_deleted": false
                     }
                 ],
-                "is_demo": false
+                "is_guest": false,
+                "preferences": {
+                    "user_portal_settings": {
+                        "communication_prefs": {
+                            "update_frequency": {
+                                "per_week": {
+                                    "value": true
+                                }
+                            },
+                            "news_letter": {
+                                "as_posted": {
+                                    "value": true
+                                }
+                            },
+                            "messaging": {
+                                "yes": {
+                                    "value": true
+                                }
+                            }
+                        },
+                        "notifications": {
+                            "upcoming_events": {
+                                "never": {
+                                    "value": true
+                                }
+                            },
+                            "upcoming_actions": {
+                                "never": {
+                                    "value": true
+                                }
+                            },
+                            "news_teams": {
+                                "never": {
+                                    "value": true
+                                }
+                            },
+                            "new_testimonials": {
+                                "never": {
+                                    "value": true
+                                }
+                            },
+                            "your_activity_updates": {
+                                "never": {
+                                    "value": true
+                                }
+                            }
+                        }
+                    },
+                    "admin_portal_settings": {
+                        "communication_prefs": {
+                            "reports_frequency": {
+                                "weekly": {
+                                    "value": true
+                                }
+                            },
+                            "user_updates": {
+                                "by_email_only": {
+                                    "value": true
+                                }
+                            },
+                            "specific_notifications": {
+                                "new_member_update": {
+                                    "value": true
+                                },
+                                "new_action_creation_update": {
+                                    "value": true
+                                },
+                                "event_RSVP_update": {
+                                    "value": false
+                                },
+                                "new_event_creation_update": {
+                                    "value": true
+                                },
+                                "new_testimonial_submission_update": {
+                                    "value": true
+                                },
+                                "new_team_submission_update": {
+                                    "value": true
+                                }
+                            }
+                        }
+                    }
+                },
+                "accepts_terms_and_conditions": true
             },
-            "error": null,
-            "success": true,
-            "cursor": {}
-        }
-    ]
+            {
+                "id": "c3bc9499-d344-4512-aa06-3200894b3dab",
+                "full_name": "Ellen Tohn",
+                "preferred_name": "Ellen T.",
+                "email": "ellentohn@gmail.com",
+                "is_super_admin": false,
+                "is_community_admin": false,
+                "joined": "2019-12-17",
+                "user_info": null,
+                "profile_picture": null,
+                "communities": [
+                    "Jewish Climate Action Network -- JCAN-MA",
+                    "Energize Wayland"
+                ],
+                "households": [
+                    {
+                        "id": 4,
+                        "name": "Home",
+                        "unit_type": "RESIDENTIAL",
+                        "community": 3,
+                        "location": {
+                            "id": 5,
+                            "location_type": "ZIP_CODE_ONLY",
+                            "street": "",
+                            "unit_number": "",
+                            "zipcode": "01778",
+                            "city": "Wayland",
+                            "county": "",
+                            "is_deleted": false,
+                            "state": "",
+                            "country": "US",
+                            "more_info": null
+                        },
+                        "address": 5,
+                        "is_deleted": false
+                    }
+                ],
+                "is_guest": false,
+                "preferences": {
+                    "user_portal_settings": {
+                        "communication_prefs": {
+                            "update_frequency": {
+                                "per_week": {
+                                    "value": true
+                                }
+                            },
+                            "news_letter": {
+                                "as_posted": {
+                                    "value": true
+                                }
+                            },
+                            "messaging": {
+                                "yes": {
+                                    "value": true
+                                }
+                            }
+                        },
+                        "notifications": {
+                            "upcoming_events": {
+                                "never": {
+                                    "value": true
+                                }
+                            },
+                            "upcoming_actions": {
+                                "never": {
+                                    "value": true
+                                }
+                            },
+                            "news_teams": {
+                                "never": {
+                                    "value": true
+                                }
+                            },
+                            "new_testimonials": {
+                                "never": {
+                                    "value": true
+                                }
+                            },
+                            "your_activity_updates": {
+                                "never": {
+                                    "value": true
+                                }
+                            }
+                        }
+                    },
+                    "admin_portal_settings": {
+                        "communication_prefs": {
+                            "reports_frequency": {
+                                "weekly": {
+                                    "value": true
+                                }
+                            },
+                            "user_updates": {
+                                "by_email_only": {
+                                    "value": true
+                                }
+                            },
+                            "specific_notifications": {
+                                "new_member_update": {
+                                    "value": true
+                                },
+                                "new_action_creation_update": {
+                                    "value": true
+                                },
+                                "event_RSVP_update": {
+                                    "value": false
+                                },
+                                "new_event_creation_update": {
+                                    "value": true
+                                },
+                                "new_testimonial_submission_update": {
+                                    "value": true
+                                },
+                                "new_team_submission_update": {
+                                    "value": true
+                                }
+                            }
+                        }
+                    }
+                },
+                "accepts_terms_and_conditions": true
+            }
+        ],
+        "geography_type": "ZIPCODE",
+        "locations": "01778",
+        "feature_flags": [
+            {
+                "id": 7,
+                "name": "weekly_event_nudge",
+                "scope": "BACKEND",
+                "audience": "EVERYONE",
+                "user_audience": "EVERYONE",
+                "key": "weekly_event_nudge-feature-flag",
+                "notes": "Send a weekly nudge to cadmins",
+                "expires_on": null,
+                "communities": [
+                    {
+                        "id": 3,
+                        "name": "Energize Wayland"
+                    },
+                    {
+                        "id": 7,
+                        "name": "Energize Framingham"
+                    },
+                    {
+                        "id": 6,
+                        "name": "Cooler Concord"
+                    }
+                ]
+            },
+            {
+                "id": 8,
+                "name": "new-user-engagement-view",
+                "scope": "ADMIN_FRONTEND",
+                "audience": "EVERYONE",
+                "user_audience": "EVERYONE",
+                "key": "new-user-engagement-view-feature-flag",
+                "notes": "Admin portal shows new user engagement view",
+                "expires_on": null,
+                "communities": []
+            }
+        ],
+        "is_demo": false
+    },
+    "error": null,
+    "success": true,
+    "cursor": {}
 }

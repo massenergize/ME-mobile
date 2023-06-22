@@ -20,7 +20,7 @@ import { SmallChart, SmallChart2 } from "../../Shared/Charts.js";
 // the card that shows up to three goals on the community page
 function GoalsCard({ navigation }) {
   return (
-    <Pressable onPress={() => navigation.navigate("impact")}>
+    <Pressable onPress={() => navigation.navigate("impact")} width="100%">
       {({ isHovered, isFocused, isPressed }) => {
       return <Box 
         // bg={isPressed ? "coolGray.200" : "white"}
@@ -44,7 +44,7 @@ function GoalsCard({ navigation }) {
 
 function GoalsCard2({ navigation }) {
   return (
-    <Pressable onPress={() => navigation.navigate("impact")}>
+    <Pressable onPress={() => navigation.navigate("impact")} width="100%">
       {({ isHovered, isFocused, isPressed }) => {
       return <Box 
         // bg={isPressed ? "coolGray.200" : "white"}
@@ -55,11 +55,12 @@ function GoalsCard2({ navigation }) {
         rounded="xl" 
         p="3"
         >
-        <HStack>
+        {/* <HStack>
           { // show the three sample goals on the community page
             goals.map((goal, index) => <SmallChart2 goal={goal} color={colors[index]} key={index}/>)
           }
-        </HStack>
+        </HStack> */}
+        <SmallChart2 goal={goals[0]} color={colors[0]}/>
       </Box>
       }}
     </Pressable>
@@ -72,9 +73,9 @@ function HeaderText({ text }) {
   )
 }
 
-function ShowMore({ navigation, page }) {
+function ShowMore({ navigation, page, text }) {
   return (
-    <Text fontSize="sm" color="primary.400" onPress={() => navigation.navigate(page)}>Show More</Text>
+    <Text fontSize="sm" color="primary.400" onPress={() => navigation.navigate(page)}>{text}</Text>
   )
 }
 
@@ -95,12 +96,13 @@ export default function CommunityPage({ navigation }) {
         <HStack>
           <HeaderText text="Goals"/>
           <Spacer/>
+          <ShowMore navigation={navigation} page="impact" text={"Know More"}/>
         </HStack>
-        <GoalsCard2 navigation={navigation}/>
+        <GoalsCard navigation={navigation}/>
         <HStack alignItems="center">
           <HeaderText text="Recommended Actions"/>
           <Spacer/>
-          <ShowMore navigation={navigation} page="ACTIONS"/>
+          <ShowMore navigation={navigation} page="ACTIONS" text={"Show More"}/>
         </HStack>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           <HStack>
@@ -114,7 +116,7 @@ export default function CommunityPage({ navigation }) {
         <HStack alignItems="center">
           <HeaderText text="Upcoming Event"/>
           <Spacer/>
-          <ShowMore navigation={navigation} page="EVENTS"/>
+          <ShowMore navigation={navigation} page="EVENTS" text={"Show More"}/>
         </HStack>
       </VStack>
     </ScrollView>

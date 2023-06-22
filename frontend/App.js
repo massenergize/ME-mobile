@@ -65,8 +65,7 @@ export default function App() {
           <Stack.Screen name="withEmailOnly" component={WithEmailOnlyPage} />
           <Stack.Screen 
             name="userProfile" 
-            component={UserProfilePage}
-            options={{ headerTransparent: true }} />
+            component={UserProfilePage} options={{ title: "PROFILE"}}/>
           <Stack.Screen name="profileExpanded" component={ProfileExpanded} options={{ title: "PROFILE"}}/>
           <Stack.Screen name="profileAlternate" component={ProfilePageAlternate} options={{ title: "PROFILE"}}/>
           <Stack.Screen name="about" component={AboutPage} />

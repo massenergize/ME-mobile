@@ -2,14 +2,14 @@ import React from "react";
 import { StyleSheet, Text, View, SafeAreaView, Image, ScrollView, TouchableHighlight } from "react-native";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { Button } from "native-base";
-
+import ActionCard from '../ActionsPage/ActionCard';
 
 export default function ProfilePageAlternate({ navigation }) {
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.titleBar}>
-                    <Button style={styles.button} onPress={()=>{navigation.navigate("login")}}>
+                    <Button style={styles.button} onPress={()=>{navigation.navigate("userProfile")}}>
                         <View>
                             <Ionicons name="settings-outline" size={24} color="#52575D"></Ionicons>
                         </View>
@@ -52,7 +52,7 @@ export default function ProfilePageAlternate({ navigation }) {
 
                 <View style={{ marginTop: 32 }}>
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                        <View style={styles.mediaImageContainer}>
+                        {/*<View style={styles.mediaImageContainer}>
                             <Image source={{ uri: "https://images6.fanpop.com/image/photos/36800000/Beautiful-Landscapes-image-beautiful-landscapes-36803145-1920-1080.jpg"}} style={styles.image} resizeMode="cover"></Image>
                         </View>
                         <View style={styles.mediaImageContainer}>
@@ -61,6 +61,12 @@ export default function ProfilePageAlternate({ navigation }) {
                         <View style={styles.mediaImageContainer}>
                             <Image source={{ uri: "https://images6.fanpop.com/image/photos/36800000/Beautiful-Landscapes-image-beautiful-landscapes-36803145-1920-1080.jpg"}} style={styles.image} resizeMode="cover"></Image>
                         </View>
+                */}
+                        <View style={styles.actionContainer}>
+                            <ActionCard navigation={ navigation }/>
+                        </View>
+                            <ActionCard navigation={ navigation }/>
+                            <ActionCard navigation={ navigation }/>
                     </ScrollView>
                     <View style={styles.mediaCount}>
                         <Text style={[styles.text, { fontSize: 12, color: "#DFD8C8", textTransform: "uppercase" }]}>Actions</Text>
@@ -186,6 +192,12 @@ const styles = StyleSheet.create({
         borderRadius: 12,
         overflow: "hidden",
         marginHorizontal: 10
+    },
+    actionContainer: {
+        width: 300,
+        height: 300,
+        overflow: "hidden",
+        marginHorizontal: 10,
     },
     mediaCount: {
         backgroundColor: "#41444B",

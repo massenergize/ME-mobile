@@ -1,8 +1,11 @@
 import React from "react";
-import { StyleSheet, Text, View, SafeAreaView, Image, ScrollView, TouchableHighlight } from "react-native";
+import { StyleSheet, Text, View, SafeAreaView, Image, ScrollView, Center, TouchableHighlight, HStack } from "react-native";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
-import { Button } from "native-base";
+import { Button, Avatar } from "native-base";
 import ActionCard from '../ActionsPage/ActionCard';
+
+
+
 
 export default function ProfilePageAlternate({ navigation }) {
     return (
@@ -29,6 +32,9 @@ export default function ProfilePageAlternate({ navigation }) {
                     </View>
                     */}
                 </View>
+                
+            
+                
 
                 <View style={styles.infoContainer}>
                     <Text style={[styles.text, { fontWeight: "200", fontSize: 36 }]}>Your Name</Text>
@@ -52,25 +58,124 @@ export default function ProfilePageAlternate({ navigation }) {
 
                 <View style={{ marginTop: 32 }}>
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                        {/*<View style={styles.mediaImageContainer}>
-                            <Image source={{ uri: "https://images6.fanpop.com/image/photos/36800000/Beautiful-Landscapes-image-beautiful-landscapes-36803145-1920-1080.jpg"}} style={styles.image} resizeMode="cover"></Image>
+                    
+                    
+                        <View style={styles.mediaImageContainer}>
+                            <Image source={{ uri: "https://m.media-amazon.com/images/I/61JhlT09xiL._AC_SX679_.jpg"}} style={styles.image} resizeMode="cover"></Image>
                         </View>
                         <View style={styles.mediaImageContainer}>
-                            <Image source={{ uri: "https://images6.fanpop.com/image/photos/36800000/Beautiful-Landscapes-image-beautiful-landscapes-36803145-1920-1080.jpg"}} style={styles.image} resizeMode="cover"></Image>
+                            <Image source={{ uri: "https://m.media-amazon.com/images/I/61JhlT09xiL._AC_SX679_.jpg"}} style={styles.image} resizeMode="cover"></Image>
                         </View>
                         <View style={styles.mediaImageContainer}>
-                            <Image source={{ uri: "https://images6.fanpop.com/image/photos/36800000/Beautiful-Landscapes-image-beautiful-landscapes-36803145-1920-1080.jpg"}} style={styles.image} resizeMode="cover"></Image>
+                            <Image source={{ uri: "https://m.media-amazon.com/images/I/61JhlT09xiL._AC_SX679_.jpg"}} style={styles.image} resizeMode="cover"></Image>
                         </View>
-                */}
-                        <View style={styles.actionContainer}>
-                            <ActionCard navigation={ navigation }/>
-                        </View>
-                            <ActionCard navigation={ navigation }/>
-                            <ActionCard navigation={ navigation }/>
+
                     </ScrollView>
                     <View style={styles.mediaCount}>
                         <Text style={[styles.text, { fontSize: 12, color: "#DFD8C8", textTransform: "uppercase" }]}>Actions</Text>
                         <Text style={[styles.text, { fontSize: 24, color: "#DFD8C8", fontWeight: "300" }]}>To-Do</Text>
+                    </View>
+                </View>
+
+
+                <Text style={[styles.subText, styles.recent]}>Badges</Text>
+                
+    
+                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} justifyContent="center">
+                    <Avatar.Group _avatar={{
+                        size: "lg"
+                        }} max={4}>
+                            <Avatar bg="green.500" source={{
+                            uri: "https://cdn-icons-png.flaticon.com/512/7963/7963920.png"
+                        }}>
+                            1
+                            </Avatar>
+                            <Avatar bg="cyan.500" source={{
+                            uri: "https://cdn-icons-png.flaticon.com/512/7963/7963920.png"
+                        }}>
+                            2
+                            </Avatar>
+                            <Avatar bg="indigo.500" source={{
+                            uri: "https://cdn-icons-png.flaticon.com/512/7963/7963920.png"
+                        }}>
+                            3
+                            </Avatar>
+                            <Avatar bg="amber.500" source={{
+                            uri: "https://cdn-icons-png.flaticon.com/512/7963/7963920.png"
+                        }}>
+                            4
+                            </Avatar>
+                            <Avatar bg="green.500" source={{
+                            uri: "https://cdn-icons-png.flaticon.com/512/7963/7963920.png"
+                        }}>
+                            5
+                            </Avatar>
+                            <Avatar bg="cyan.500" source={{
+                            uri: "https://cdn-icons-png.flaticon.com/512/7963/7963920.png"
+                        }}>
+                            6
+                            </Avatar>
+                            <Avatar bg="indigo.500" source={{
+                            uri: "https://cdn-icons-png.flaticon.com/512/7963/7963920.png"
+                        }}>
+                            7
+                            </Avatar>
+                            <Avatar bg="amber.500" source={{
+                            uri: "https://cdn-icons-png.flaticon.com/512/7963/7963920.png"
+                        }}>
+                            8
+                            </Avatar>
+                    </Avatar.Group>
+                </ScrollView>
+
+
+                <Text style={[styles.subText, styles.recent]}>Teams</Text>
+                <View style={{flexDirection: 'row', paddingLeft: 78, paddingTop: 20, justifyContent: 'space-between'}}>
+                    <View flexDirection="row">
+                        <Ionicons name="people-outline" size={20} color="#52575D"></Ionicons>
+                        <Text style={[styles.text, { color: "#41444B", fontWeight: "300", fontSize: 20, paddingLeft: 8}]}>
+                            Team 1
+                        </Text>
+                    </View>
+                    <View flexDirection="row">
+                        <Ionicons name="add-circle-outline" size={20} color="#52575D" paddingRight={10}></Ionicons>
+                        <Ionicons name="remove-circle-outline" size={20} color="#52575D" paddingRight={60}></Ionicons>
+                    </View>
+                </View>
+
+                <Text style={[styles.subText, styles.recent]}>Household</Text>
+                <View style={{flexDirection: 'row', paddingLeft: 78, paddingTop: 20, justifyContent: 'space-between'}}>
+                    <View flexDirection="row">
+                        <Ionicons name="home-outline" size={20} color="#52575D"></Ionicons>
+                        <Text style={[styles.text, { color: "#41444B", fontWeight: "300", fontSize: 20, paddingLeft: 8}]}>
+                            Home
+                        </Text>
+                    </View>
+                    <View flexDirection="row">
+                        <Ionicons name="add-circle-outline" size={20} color="#52575D" paddingRight={10}></Ionicons>
+                        <Ionicons name="remove-circle-outline" size={20} color="#52575D" paddingRight={60}></Ionicons>
+                    </View>
+                </View>
+                
+
+                <Text style={[styles.subText, styles.recent]}>Community</Text>
+                <View flexDirection="row">
+                    <Image
+                        source={require("../../../assets/images/cooler-concord.png")}
+                        alt="Community Logo"
+                        resizeMode="contain"
+                        height="full"
+                        width="full"
+                        marginLeft={60}
+                        marginTop={20}
+                    />
+                    <View paddingTop={15}>
+                        <Text style={[styles.text, { color: "#41444B", fontWeight: "400", fontSize: 20, paddingLeft: 8}]}>
+                            Cooler Concord
+                        </Text>
+                        <Text style={[styles.text, { color: "#41444B", fontWeight: "300", fontSize: 12, paddingLeft: 8}]}>
+                            Concord, Massachusetts
+                        </Text>
                     </View>
                 </View>
                 <Text style={[styles.subText, styles.recent]}>Recent Activity</Text>
@@ -219,7 +324,7 @@ const styles = StyleSheet.create({
         marginLeft: 78,
         marginTop: 32,
         marginBottom: 6,
-        fontSize: 10
+        fontSize: 14
     },
     recentItem: {
         flexDirection: "row",

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, SafeAreaView, Image, ScrollView, Center, TouchableHighlight, HStack } from "react-native";
+import { Platform, StyleSheet, Text, View, SafeAreaView, Image, ScrollView, Center, TouchableHighlight, HStack } from "react-native";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { Button, Avatar } from "native-base";
 import ActionCard from '../ActionsPage/ActionCard';
@@ -164,8 +164,8 @@ export default function ProfilePageAlternate({ navigation }) {
                         source={require("../../../assets/images/cooler-concord.png")}
                         alt="Community Logo"
                         resizeMode="contain"
-                        height="full"
-                        width="full"
+                        height={null}
+                        width={null}
                         marginLeft={60}
                         marginTop={20}
                     />
@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#FFF"
     },
     text: {
-        fontFamily: "HelveticaNeue",
+        fontFamily: Platform.OS === 'ios' ? "HelveticaNeue" : "sans-serif-thin",
         color: "#52575D"
     },
     image: {

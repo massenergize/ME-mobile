@@ -24,6 +24,7 @@ const EVENTS = [
     image:
       "https://massenergize-prod-files.s3.amazonaws.com/media/Acton_Boxborough__BioBlitz_2023_A-230529-160415.jpg",
     can_rsvp: true,
+    is_rsvped: false,
     is_shared: true,
   },
   {
@@ -34,6 +35,7 @@ const EVENTS = [
     image:
       "https://massenergize-prod-files.s3.amazonaws.com/media/Acton_Clean_Energy_Coach-230216-135015.jpg",
     can_rsvp: false,
+    is_rsvped: false,
     is_shared: false,
   },
   {
@@ -44,6 +46,18 @@ const EVENTS = [
     image:
       "https://massenergize-prod-files.s3.amazonaws.com/media/hello_april_Flyer_Landscape-230328-194333.jpg",
     can_rsvp: false,
+    is_rsvped: false,
+    is_shared: true,
+  },
+  {
+    id: 4,
+    title: "(TEMP) Nature of Acton and Boxborough 2023 - A BioBlitz",
+    date: "June 15th, 4:00 AM - 11:00 PM",
+    location: "Hybrid",
+    image:
+      "https://massenergize-prod-files.s3.amazonaws.com/media/Acton_Boxborough__BioBlitz_2023_A-230529-160415.jpg",
+    can_rsvp: true,
+    is_rsvped: true,
     is_shared: true,
   },
 ];
@@ -91,13 +105,25 @@ export default function EventsPage({ navigation }) {
           <SearchBar py="5" filterOptions={filterOptions} />
           {/* events filter */}
           <Flex flexDirection="row">
-            <Button variant="solid" _text={{ fontSize: "xs" }}>
+            <Button
+              variant="solid"
+              _text={{ fontSize: "xs" }}
+              borderRadius="full"
+            >
               Upcoming Events
             </Button>
-            <Button variant="outline" _text={{ fontSize: "xs" }}>
+            <Button
+              variant="outline"
+              _text={{ fontSize: "xs" }}
+              borderRadius="full"
+            >
               Past Events
             </Button>
-            <Button variant="outline" _text={{ fontSize: "xs" }}>
+            <Button
+              variant="outline"
+              _text={{ fontSize: "xs" }}
+              borderRadius="full"
+            >
               Campaigns
             </Button>
           </Flex>
@@ -170,11 +196,15 @@ export default function EventsPage({ navigation }) {
                   </Text>
                 </Box>
                 {event.can_rsvp ? (
-                  <Box backgroundColor="primary.400" flexGrow={1}>
+                  <Box
+                    backgroundColor={
+                      event.is_rsvped ? "secondary.400" : "primary.400"
+                    }
+                    flexGrow={1}
+                  >
                     <Button
                       variant="ghost"
                       _text={{ fontSize: "xs", color: "white" }}
-                      _loading={{ backgroundColor: "white" }}
                     >
                       RSVP
                     </Button>

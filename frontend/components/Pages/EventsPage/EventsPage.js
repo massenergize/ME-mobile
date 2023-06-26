@@ -11,6 +11,7 @@ import {
   Flex,
   ScrollView,
   AspectRatio,
+  Pressable,
 } from "native-base";
 import Page from "../../Shared/Page";
 import SearchBar from "../../Shared/SearchBar";
@@ -101,8 +102,12 @@ export default function EventsPage({ navigation }) {
   return (
     <Page>
       <ScrollView>
+        <SearchBar
+          p="5"
+          filterOptions={filterOptions}
+          filterHeader="Category"
+        />
         <Container mx="auto">
-          <SearchBar py="5" filterOptions={filterOptions} />
           {/* events filter */}
           <Flex flexDirection="row">
             <Button
@@ -136,87 +141,89 @@ export default function EventsPage({ navigation }) {
               backgroundColor="white"
               shadow="5"
             >
-              <Box pt="2">
-                <AspectRatio w="100%" ratio={16 / 9}>
-                  <Image
-                    source={{
-                      uri: event.image,
-                    }}
-                    alt="image"
-                    resizeMode="contain"
-                  />
-                </AspectRatio>
-                {event.is_shared && (
-                  <Center
-                    bg="secondary.400"
-                    _text={{
-                      color: "white",
-                      fontWeight: "bold",
-                      fontSize: "xs",
-                    }}
-                    position="absolute"
-                    px="5"
-                    py="1.5"
-                    rounded="full"
-                    right="5"
-                    top="2"
-                  >
-                    SHARED
-                  </Center>
-                )}
-              </Box>
-              <Flex
-                px="4"
-                pt="4"
-                flexDirection="row"
-                justifyContent="space-between"
-              >
-                <Text fontWeight="bold" fontSize="md" w="80%" mr="3">
-                  {event.title}
-                </Text>
-                <Icon
-                  as={FontAwesome}
-                  name="arrow-right"
-                  size="md"
-                  color="primary.400"
-                />
-              </Flex>
-              <Flex
-                backgroundColor={"gray.100"}
-                flexDirection="row"
-                flexWrap={"wrap"}
-                justifyContent="space-between"
-                alignItems="center"
-                borderBottomRadius="lg"
-                overflow={"hidden"}
-              >
-                <Box pl="4" pr="4">
-                  <Text fontSize="sm" color="primary.400">
-                    {event.date}
-                  </Text>
-                </Box>
-                {event.can_rsvp ? (
-                  <Box
-                    backgroundColor={
-                      event.is_rsvped ? "secondary.400" : "primary.400"
-                    }
-                    flexGrow={1}
-                  >
-                    <Button
-                      variant="ghost"
-                      _text={{ fontSize: "xs", color: "white" }}
+              <Pressable onPress={() => navigation.navigate("eventDetails")}>
+                <Box pt="2">
+                  <AspectRatio w="100%" ratio={16 / 9}>
+                    <Image
+                      source={{
+                        uri: event.image,
+                      }}
+                      alt="image"
+                      resizeMode="contain"
+                    />
+                  </AspectRatio>
+                  {event.is_shared && (
+                    <Center
+                      bg="secondary.400"
+                      _text={{
+                        color: "white",
+                        fontWeight: "bold",
+                        fontSize: "xs",
+                      }}
+                      position="absolute"
+                      px="5"
+                      py="1.5"
+                      rounded="full"
+                      right="5"
+                      top="2"
                     >
-                      RSVP
-                    </Button>
-                  </Box>
-                ) : (
-                  <Box py="2" pr="4">
+                      SHARED
+                    </Center>
+                  )}
+                </Box>
+                <Flex
+                  px="4"
+                  pt="4"
+                  flexDirection="row"
+                  justifyContent="space-between"
+                >
+                  <Text fontWeight="bold" fontSize="md" w="80%" mr="3">
+                    {event.title}
+                  </Text>
+                  <Icon
+                    as={FontAwesome}
+                    name="arrow-right"
+                    size="md"
+                    color="primary.400"
+                  />
+                </Flex>
+                <Flex
+                  backgroundColor={"gray.100"}
+                  flexDirection="row"
+                  flexWrap={"wrap"}
+                  justifyContent="space-between"
+                  alignItems="center"
+                  borderBottomRadius="lg"
+                  overflow={"hidden"}
+                >
+                  <Box pl="4" pr="4">
                     <Text fontSize="sm" color="primary.400">
-                      {event.location}
+                      {event.date}
                     </Text>
                   </Box>
-                )}
-              </Flex>
+                  {event.can_rsvp ? (
+                    <Box
+                      backgroundColor={
+                        event.is_rsvped ? "secondary.400" : "primary.400"
+                      }
+                      flexGrow={1}
+                    >
+                      <Button
+                        variant="ghost"
+                        _text={{ fontSize: "xs", color: "white" }}
+                      >
+                        RSVP
+                      </Button>
+                    </Box>
+                  ) : (
+                    <Box py="2" pr="4">
+                      <Text fontSize="sm" color="primary.400">
+                        {event.location}
+                      </Text>
+                    </Box>
+                  )}
+                </Flex>
+              </Pressable>
             </Box>
           ))}
         </Container>

@@ -19,9 +19,30 @@ import { SmallChart } from "../../Shared/Charts.js";
 import data from "./../../../data/communitiesInfo.json";
 
 // the card that shows up to three goals on the community page
-function GoalsCard({ navigation }) {
+function GoalsCard({ navigation, goals }) {
+  const goalsList = [
+    { 
+      nameLong: "Individual Actions Completed",
+      nameShort: "Actions",
+      goal: goals.target_number_of_actions,
+      current: goals.initial_number_of_actions + goals.attained_number_of_actions
+    },
+    { 
+      nameLong: "Households Taking Action",
+      nameShort: "Households",
+      goal: goals.target_number_of_households,
+      current: goals.initial_number_of_households + goals.attained_number_of_households
+    },
+    { 
+      nameLong: "Carbon Reduction Impact",
+      nameShort: "Trees",
+      goal: goals.target_carbon_footprint_reduction,
+      current: goals.initial_carbon_footprint_reduction + goals.organic_attained_carbon_footprint_reduction
+    }
+  ]
+
   return (
-    <Pressable onPress={() => navigation.navigate("impact")} width="100%">
+    <Pressable onPress={() => navigation.navigate("impact", {goalsList: goalsList})} width="100%">
       {({ isHovered, isFocused, isPressed }) => {
       return <Box 
         // bg={isPressed ? "coolGray.200" : "white"}
@@ -34,10 +55,10 @@ function GoalsCard({ navigation }) {
         >
         <HStack>
           { // show the three sample goals on the community page
-            goals.map((goal, index) => <SmallChart goal={goal} color={colors[index]} key={index}/>)
+            goalsList.map((goal, index) => <SmallChart goal={goal} color={colors[index]} key={index}/>)
           }
         </HStack>
-        <Text alignSelf="flex-end" mr={2} fontSize="sm" color="primary.400" onPress={() => navigation.navigate(page)} mt={1}>Show More  ></Text>
+        <Text alignSelf="flex-end" mr={2} fontSize="sm" color="primary.400" mt={1}>Show More  ></Text>
       </Box>
       }}
     </Pressable>
@@ -77,7 +98,7 @@ export default function CommunityPage({ navigation }) {
           <Spacer/>
           <ShowMore navigation={navigation} page="impact" text={"Know More"}/>
         </HStack> */}
-        <GoalsCard navigation={navigation}/>
+        <GoalsCard navigation={navigation} goals={data.data.goal} />
         <HStack alignItems="center">
           <HeaderText text="Recommended Actions"/>
           <Spacer/>

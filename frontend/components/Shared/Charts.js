@@ -9,13 +9,14 @@ import {
     Center,
     Pressable,
     Image
-  } from "native-base";
-  import { Dimensions } from 'react-native';
-  import { VictoryPie, VictoryContainer, VictoryBar, VictoryChart, VictoryTheme } from 'victory-native';
+} from "native-base";
+import { Dimensions } from 'react-native';
+import { VictoryPie, VictoryContainer, VictoryBar, VictoryChart, VictoryTheme, VictoryLabel, VictoryAxis } from 'victory-native';
 
 
   // small pie charts that are part of the goal card
 function SmallChart({ goal, color }) {
+
     return (
       <VStack alignItems="center">
         <Text bold fontSize="lg">{goal.nameShort}</Text>
@@ -28,31 +29,10 @@ function SmallChart({ goal, color }) {
             padding={10}
             labels={() => null} 
             colorScale={[color, "#f2f2f2"]}/>
-        <Text fontSize="md">{goal.current} / {goal.goal}</Text>
+        <Text fontSize="md">{(goal.current < 10000) ? goal.current : (goal.current / 1000).toFixed(1) + "k" } / {(goal.goal < 10000) ? goal.goal : (goal.goal / 1000) + "k"}</Text>
       </VStack>
     )
 }
-
-// function SmallChart2({ goal, color }) {
-//     return (
-//       <VStack alignItems="center" m={2}>
-//         {/* <Text bold fontSize="lg">{goal.nameShort}</Text> */}
-//         <ProgressCircle 
-//             // data={[{x: "current", y: goal.current}, {x: "remaining", y: goal.goal - goal.current}]} 
-//             // containerComponent={<VictoryContainer disableContainerEvents standalone={false} responsive={true}/>}
-//             // innerRadius={Dimensions.get('window').width / 15}
-//             style={{height: Dimensions.get('window').width / 4, width: Dimensions.get('window').width / 4}}
-//             progress={0.7}
-//             strokeWidth={20}
-//             cornerRadius={0}
-//             // padding={10}
-//             // labels={() => null} 
-//             // colorScale={[color, "#f2f2f2"]}
-//             />
-//         {/* <Text fontSize="md">{goal.current} / {goal.goal}</Text> */}
-//       </VStack>
-//     )
-// }
 
 // pie charts that are displayed on the impact page - more detailed than the smaller pie charts
 function BigPieChart({ goal, color }) {
@@ -79,7 +59,7 @@ function BigPieChart({ goal, color }) {
 }
 
 // currently contains placeholder data provided by the package
-function BigBarChart() {
+function BigBarChart({ graphData}) {
     return (
         <VStack alignItems="center">
             <Text bold fontSize="lg">Number of Actions Completed</Text>
@@ -87,8 +67,19 @@ function BigBarChart() {
                 theme={VictoryTheme.material}
                 domainPadding={10}
                 >
+                <VictoryAxis dependentAxis />
+                <VictoryAxis style={{ 
+                    tickLabels: { fill:"transparent"} 
+                }} />
                 <VictoryBar
-                    style={{ data: { fill: "#c43a31" } }}
+                    data={graphData}
+                    x="name"
+                    y="reported_value"
+                    horizontal={true}
+                    style={{ data: { fill: "#DC4E34" }, labels: {fontSize: 15}}}
+                    labels={({ datum }) => datum.name}
+                    labelComponent={<VictoryLabel x={50}/>}
+                    barRatio={0.8}
                 />
             </VictoryChart>
         </VStack>

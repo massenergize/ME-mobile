@@ -13,15 +13,19 @@ import {
 } from "native-base";
 import { goals, colors } from "./SampleGoalsData";
 import { BigPieChart, BigBarChart } from "../../Shared/Charts.js";
+import graphData from "./../../../data/graphActionsCompleted.json";
 
-export default function ImpactPage() {
+export default function ImpactPage({ route, navigation }) {
+
+  const { goalsList } = route.params;
+
   return (
     <ScrollView>
       <VStack alignItems="center" space={3} p={3} bg="white">
         { // show the three sample goals on the impact page
-            goals.map((goal, index) => <BigPieChart goal={goal} color={colors[index]} key={index}/>)
+            goalsList.map((goal, index) => <BigPieChart goal={goal} color={colors[index]} key={index}/>)
         }
-        <BigBarChart />
+        <BigBarChart graphData={graphData.data.data} />
       </VStack>
     </ScrollView>
   );

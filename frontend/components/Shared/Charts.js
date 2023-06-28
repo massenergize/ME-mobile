@@ -11,7 +11,7 @@ import {
     Image
 } from "native-base";
 import { Dimensions } from 'react-native';
-import { VictoryPie, VictoryContainer, VictoryBar, VictoryChart, VictoryTheme, VictoryLabel, VictoryAxis } from 'victory-native';
+import { VictoryPie, VictoryContainer, VictoryBar, VictoryChart, VictoryTheme, VictoryLabel, VictoryAxis, VictoryGroup, VictoryLegend } from 'victory-native';
 
 
   // small pie charts that are part of the goal card
@@ -62,7 +62,7 @@ function BigPieChart({ goal, color }) {
 function BigBarChart({ graphData}) {
     return (
         <VStack alignItems="center">
-            <Text bold fontSize="lg">Number of Actions Completed</Text>
+            <Text bold fontSize="lg" mb={5}>Number of Actions Completed</Text>
             <VictoryChart
                 theme={VictoryTheme.material}
                 domainPadding={10}
@@ -71,15 +71,37 @@ function BigBarChart({ graphData}) {
                 <VictoryAxis style={{ 
                     tickLabels: { fill:"transparent"} 
                 }} />
-                <VictoryBar
-                    data={graphData}
-                    x="name"
-                    y="reported_value"
-                    horizontal={true}
-                    style={{ data: { fill: "#DC4E34" }, labels: {fontSize: 15}}}
-                    labels={({ datum }) => datum.name}
-                    labelComponent={<VictoryLabel x={50}/>}
-                    barRatio={0.8}
+                <VictoryGroup offset={10}>
+                    <VictoryBar
+                        data={graphData}
+                        x="name"
+                        y="reported_value"
+                        horizontal={true}
+                        style={{ data: { fill: "#DC4E34", fillOpacity: 0.9 }, labels: {fontSize: 15}}}
+                        // labels={({ datum }) => datum.name}
+                        // labelComponent={<VictoryLabel x={50}/>}
+                        barRatio={0.9}
+                    />
+                    <VictoryBar
+                        data={graphData}
+                        x="name"
+                        y="value"
+                        horizontal={true}
+                        style={{ data: { fill: "#DC4E34", fillOpacity: 0.5 }, labels: {fontSize: 15}}}
+                        labels={({ datum }) => datum.name}
+                        labelComponent={<VictoryLabel x={45} dy={-12}/>}
+                        barRatio={0.9}
+                    />
+                </VictoryGroup>
+                <VictoryLegend x={230} y={0}
+                    centerTitle
+                    // orientation="horizontal"
+                    gutter={20}
+                    style={{ border: { stroke: "black" }, title: {fontSize: 20 } }}
+                    data={[
+                    { name: "Value", symbol: { fill: "#DC4E34", type: "square", fillOpacity: 0.5 } },
+                    { name: "Reported Value", symbol: { fill: "#DC4E34", type: "square", fillOpacity: 0.8 } },
+                    ]}
                 />
             </VictoryChart>
         </VStack>

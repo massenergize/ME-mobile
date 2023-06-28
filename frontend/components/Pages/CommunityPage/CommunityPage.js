@@ -15,7 +15,8 @@ import {
 } from "native-base";
 import { goals, colors } from "./SampleGoalsData.js";
 import ActionCard from "./../ActionsPage/ActionCard";
-import { SmallChart, SmallChart2 } from "../../Shared/Charts.js";
+import { SmallChart } from "../../Shared/Charts.js";
+import data from "./../../../data/communitiesInfo.json";
 
 // the card that shows up to three goals on the community page
 function GoalsCard({ navigation }) {
@@ -36,36 +37,13 @@ function GoalsCard({ navigation }) {
             goals.map((goal, index) => <SmallChart goal={goal} color={colors[index]} key={index}/>)
           }
         </HStack>
+        <Text alignSelf="flex-end" mr={2} fontSize="sm" color="primary.400" onPress={() => navigation.navigate(page)} mt={1}>Show More  ></Text>
       </Box>
       }}
     </Pressable>
   );
 }
 
-function GoalsCard2({ navigation }) {
-  return (
-    <Pressable onPress={() => navigation.navigate("impact")} width="100%">
-      {({ isHovered, isFocused, isPressed }) => {
-      return <Box 
-        // bg={isPressed ? "coolGray.200" : "white"}
-        shadow="1" 
-        bg="white" 
-        width="100%" 
-        alignItems="center" 
-        rounded="xl" 
-        p="3"
-        >
-        {/* <HStack>
-          { // show the three sample goals on the community page
-            goals.map((goal, index) => <SmallChart2 goal={goal} color={colors[index]} key={index}/>)
-          }
-        </HStack> */}
-        <SmallChart2 goal={goals[0]} color={colors[0]}/>
-      </Box>
-      }}
-    </Pressable>
-  );
-}
 
 function HeaderText({ text }) {
   return (
@@ -86,18 +64,19 @@ export default function CommunityPage({ navigation }) {
         {/* <Text bold fontSize="2xl">Community Name</Text> */}
         <Container maxHeight={200} width="100%">
           <Image
-              source={require("./../../../assets/images/cooler-concord.png")}
+              // source={require("./../../../assets/images/cooler-concord.png")}
+              source={{uri: data.data.logo.url}}
               alt="Community Logo"
               resizeMode="contain"
               height="full"
               width="full"
           />
         </Container>
-        <HStack>
+        {/* <HStack>
           <HeaderText text="Goals"/>
           <Spacer/>
           <ShowMore navigation={navigation} page="impact" text={"Know More"}/>
-        </HStack>
+        </HStack> */}
         <GoalsCard navigation={navigation}/>
         <HStack alignItems="center">
           <HeaderText text="Recommended Actions"/>

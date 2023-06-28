@@ -12,7 +12,7 @@ import {
   } from "native-base";
   import { Dimensions } from 'react-native';
   import { VictoryPie, VictoryContainer, VictoryBar, VictoryChart, VictoryTheme } from 'victory-native';
-  import { ProgressCircle } from 'react-native-svg-charts';
+
 
   // small pie charts that are part of the goal card
 function SmallChart({ goal, color }) {
@@ -33,26 +33,26 @@ function SmallChart({ goal, color }) {
     )
 }
 
-function SmallChart2({ goal, color }) {
-    return (
-      <VStack alignItems="center" m={2}>
-        {/* <Text bold fontSize="lg">{goal.nameShort}</Text> */}
-        <ProgressCircle 
-            // data={[{x: "current", y: goal.current}, {x: "remaining", y: goal.goal - goal.current}]} 
-            // containerComponent={<VictoryContainer disableContainerEvents standalone={false} responsive={true}/>}
-            // innerRadius={Dimensions.get('window').width / 15}
-            style={{height: Dimensions.get('window').width / 4, width: Dimensions.get('window').width / 4}}
-            progress={0.7}
-            strokeWidth={20}
-            cornerRadius={0}
-            // padding={10}
-            // labels={() => null} 
-            // colorScale={[color, "#f2f2f2"]}
-            />
-        {/* <Text fontSize="md">{goal.current} / {goal.goal}</Text> */}
-      </VStack>
-    )
-}
+// function SmallChart2({ goal, color }) {
+//     return (
+//       <VStack alignItems="center" m={2}>
+//         {/* <Text bold fontSize="lg">{goal.nameShort}</Text> */}
+//         <ProgressCircle 
+//             // data={[{x: "current", y: goal.current}, {x: "remaining", y: goal.goal - goal.current}]} 
+//             // containerComponent={<VictoryContainer disableContainerEvents standalone={false} responsive={true}/>}
+//             // innerRadius={Dimensions.get('window').width / 15}
+//             style={{height: Dimensions.get('window').width / 4, width: Dimensions.get('window').width / 4}}
+//             progress={0.7}
+//             strokeWidth={20}
+//             cornerRadius={0}
+//             // padding={10}
+//             // labels={() => null} 
+//             // colorScale={[color, "#f2f2f2"]}
+//             />
+//         {/* <Text fontSize="md">{goal.current} / {goal.goal}</Text> */}
+//       </VStack>
+//     )
+// }
 
 // pie charts that are displayed on the impact page - more detailed than the smaller pie charts
 function BigPieChart({ goal, color }) {
@@ -95,4 +95,4 @@ function BigBarChart() {
     )
 }
 
-export { SmallChart, SmallChart2, BigPieChart, BigBarChart }
+export { SmallChart, BigPieChart, BigBarChart }

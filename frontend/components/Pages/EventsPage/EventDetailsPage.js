@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import {
+  Button,
   ScrollView,
   VStack,
   Text,
@@ -8,15 +9,26 @@ import {
   Box,
   Heading,
   Icon,
-  Select,
   AspectRatio,
   Image,
+  Actionsheet,
+  useDisclose,
 } from "native-base";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Page from "../../Shared/Page";
 
 export default function EventDetailsPage() {
   const [rsvp, setRsvp] = useState(""); // "Interested", "Going", "Not Going"
+  const { isOpen, onOpen, onClose } = useDisclose();
+
+  const handleAction = (action) => {
+    if (action === rsvp) {
+      setRsvp("");
+    } else {
+      setRsvp(action);
+    }
+    onClose();
+  };
 
   return (
     <Page>
@@ -50,29 +62,42 @@ export default function EventDetailsPage() {
           <Text fontSize="lg" fontWeight="bold" color="primary.400">
             Every Wednedsay through 2023-08-31
           </Text>
-          <Select
-            size="xl"
-            selectedValue={rsvp}
-            placeholder="RSVP for this event!"
-            onValueChange={setRsvp}
-            variant="unstyled"
-            bgColor={"primary.400"}
-            placeholderTextColor={"white"}
-            color="white"
-            _selectedItem={{
-              bg: "muted.200",
-            }}
-            dropdownCloseIcon={
-              <Icon as={FontAwesome} name="chevron-down" color="white" mr="5" />
-            }
-            dropdownOpenIcon={
-              <Icon as={FontAwesome} name="chevron-up" color="white" mr="5" />
-            }
+          <Button
+            backgroundColor={rsvp === "Going" ? "secondary.400" : "primary.600"}
+            onPress={onOpen}
           >
-            <Select.Item label="Interested" value="Interested" />
-            <Select.Item label="Going" value="Going" />
-            <Select.Item label="Not Going" value="Not Going" />
-          </Select>
+            <Text color="white" fontWeight="bold">
+              {rsvp || "RSVP for this event!"}
+              {"  "}
+              {isOpen ? (
+                <Icon as={FontAwesome} name="chevron-up" color="white" />
+              ) : (
+                <Icon as={FontAwesome} name="chevron-down" color="white" />
+              )}
+            </Text>
+          </Button>
+          <Actionsheet isOpen={isOpen} onClose={onClose} on>
+            <Actionsheet.Content>
+              <Actionsheet.Item
+                backgroundColor={rsvp === "Interested" ? "muted.200" : "white"}
+                onPress={() => handleAction("Interested")}
+              >
+                Interested
+              </Actionsheet.Item>
+              <Actionsheet.Item
+                backgroundColor={rsvp === "Going" ? "muted.200" : "white"}
+                onPress={() => handleAction("Going")}
+              >
+                Going
+              </Actionsheet.Item>
+              <Actionsheet.Item
+                backgroundColor={rsvp === "Not Going" ? "muted.200" : "white"}
+                onPress={() => handleAction("Not Going")}
+              >
+                Not Going
+              </Actionsheet.Item>
+            </Actionsheet.Content>
+          </Actionsheet>
         </VStack>
         <Divider my="4" />
         <Box>

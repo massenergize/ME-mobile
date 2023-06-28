@@ -10,6 +10,7 @@ function TestimonialCardWithPic({ navigation, data }) {
                 <Box 
                     width="100%"
                     maxHeight={150}
+                    mt={3}
                     > 
                     <Image
                         source={{
@@ -18,12 +19,11 @@ function TestimonialCardWithPic({ navigation, data }) {
                         }}
                         alt={data.file.url}
                         w="full"
-                        resizeMode="cover"
+                        resizeMode="contain"
                         h="full"
                     />
                 </Box>
-                <Box 
-                    p={3}>
+                <Box p={3}>
                     <Text bold fontSize="lg">{data.title}</Text>
                     <Text fontSize="sm" color="#BAB9C0">By {data.preferred_name} | {Moment(data.created_at).format('l')}</Text>
                     {

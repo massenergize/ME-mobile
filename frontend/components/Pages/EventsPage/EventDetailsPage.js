@@ -31,7 +31,7 @@ export default function EventDetailsPage() {
   };
 
   return (
-    <Page>
+    <Page py="5">
       <ScrollView showsVerticalScrollIndicator={false} mx="5">
         <VStack space="2">
           {/* event image */}

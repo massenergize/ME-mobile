@@ -1,7 +1,6 @@
 import React from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import {
-  Container,
   Center,
   Button,
   Text,
@@ -101,132 +100,135 @@ const filterOptions = [
 export default function EventsPage({ navigation }) {
   return (
     <Page>
-      <ScrollView>
+      <ScrollView
+        p="5"
+        contentContainerStyle={{
+          alignItems: "center",
+        }}
+      >
         <SearchBar
-          p="5"
+          pb="5"
+          w="full"
           filterOptions={filterOptions}
           filterHeader="Category"
         />
-        <Container mx="auto">
-          {/* events filter */}
-          <Flex flexDirection="row">
-            <Button
-              variant="solid"
-              _text={{ fontSize: "xs" }}
-              borderRadius="full"
-            >
-              Upcoming Events
-            </Button>
-            <Button
-              variant="outline"
-              _text={{ fontSize: "xs" }}
-              borderRadius="full"
-            >
-              Past Events
-            </Button>
-            <Button
-              variant="outline"
-              _text={{ fontSize: "xs" }}
-              borderRadius="full"
-            >
-              Campaigns
-            </Button>
-          </Flex>
-          {EVENTS.map((event) => (
-            <Box
-              key={event.id}
-              my="3"
-              maxW="80"
-              rounded="lg"
-              backgroundColor="white"
-              shadow="5"
-            >
-              <Pressable onPress={() => navigation.navigate("eventDetails")}>
-                <Box pt="2">
-                  <AspectRatio w="100%" ratio={16 / 9}>
-                    <Image
-                      source={{
-                        uri: event.image,
-                      }}
-                      alt="image"
-                      resizeMode="contain"
-                    />
-                  </AspectRatio>
-                  {event.is_shared && (
-                    <Center
-                      bg="secondary.400"
-                      _text={{
-                        color: "white",
-                        fontWeight: "bold",
-                        fontSize: "xs",
-                      }}
-                      position="absolute"
-                      px="5"
-                      py="1.5"
-                      rounded="full"
-                      right="5"
-                      top="2"
-                    >
-                      SHARED
-                    </Center>
-                  )}
-                </Box>
-                <Flex
-                  px="4"
-                  pt="4"
-                  flexDirection="row"
-                  justifyContent="space-between"
-                >
-                  <Text fontWeight="bold" fontSize="md" w="80%" mr="3">
-                    {event.title}
-                  </Text>
-                  <Icon
-                    as={FontAwesome}
-                    name="arrow-right"
-                    size="md"
-                    color="primary.400"
+        {/* events filter */}
+        <Flex flexDirection="row">
+          <Button
+            variant="solid"
+            _text={{ fontSize: "xs" }}
+            borderRadius="full"
+          >
+            Upcoming Events
+          </Button>
+          <Button
+            variant="outline"
+            _text={{ fontSize: "xs" }}
+            borderRadius="full"
+          >
+            Past Events
+          </Button>
+          <Button
+            variant="outline"
+            _text={{ fontSize: "xs" }}
+            borderRadius="full"
+          >
+            Campaigns
+          </Button>
+        </Flex>
+        {EVENTS.map((event) => (
+          <Box
+            key={event.id}
+            my="3"
+            rounded="lg"
+            backgroundColor="white"
+            shadow="5"
+          >
+            <Pressable onPress={() => navigation.navigate("eventDetails")}>
+              <Box pt="2">
+                <AspectRatio w="100%" ratio={16 / 9}>
+                  <Image
+                    source={{
+                      uri: event.image,
+                    }}
+                    alt="image"
+                    resizeMode="contain"
                   />
-                </Flex>
-                <Flex
-                  backgroundColor={"gray.100"}
-                  flexDirection="row"
-                  flexWrap={"wrap"}
-                  justifyContent="space-between"
-                  alignItems="center"
-                  borderBottomRadius="lg"
-                  overflow={"hidden"}
-                >
-                  <Box pl="4" pr="4">
+                </AspectRatio>
+                {event.is_shared && (
+                  <Center
+                    bg="secondary.400"
+                    _text={{
+                      color: "white",
+                      fontWeight: "bold",
+                      fontSize: "xs",
+                    }}
+                    position="absolute"
+                    px="5"
+                    py="1.5"
+                    rounded="full"
+                    right="5"
+                    top="2"
+                  >
+                    SHARED
+                  </Center>
+                )}
+              </Box>
+              <Flex
+                px="4"
+                pt="4"
+                flexDirection="row"
+                justifyContent="space-between"
+              >
+                <Text fontWeight="bold" fontSize="md" w="80%" mr="3">
+                  {event.title}
+                </Text>
+                <Icon
+                  as={FontAwesome}
+                  name="arrow-right"
+                  size="md"
+                  color="primary.400"
+                />
+              </Flex>
+              <Flex
+                backgroundColor={"gray.100"}
+                flexDirection="row"
+                flexWrap={"wrap"}
+                justifyContent="space-between"
+                alignItems="center"
+                borderBottomRadius="lg"
+                overflow={"hidden"}
+              >
+                <Box pl="4" pr="4">
+                  <Text fontSize="sm" color="primary.400">
+                    {event.date}
+                  </Text>
+                </Box>
+                {event.can_rsvp ? (
+                  <Box
+                    backgroundColor={
+                      event.is_rsvped ? "secondary.400" : "primary.400"
+                    }
+                    flexGrow={1}
+                  >
+                    <Button
+                      variant="ghost"
+                      _text={{ fontSize: "xs", color: "white" }}
+                    >
+                      RSVP
+                    </Button>
+                  </Box>
+                ) : (
+                  <Box py="2" px="4">
                     <Text fontSize="sm" color="primary.400">
-                      {event.date}
+                      {event.location}
                     </Text>
                   </Box>
-                  {event.can_rsvp ? (
-                    <Box
-                      backgroundColor={
-                        event.is_rsvped ? "secondary.400" : "primary.400"
-                      }
-                      flexGrow={1}
-                    >
-                      <Button
-                        variant="ghost"
-                        _text={{ fontSize: "xs", color: "white" }}
-                      >
-                        RSVP
-                      </Button>
-                    </Box>
-                  ) : (
-                    <Box py="2" pr="4">
-                      <Text fontSize="sm" color="primary.400">
-                        {event.location}
-                      </Text>
-                    </Box>
-                  )}
-                </Flex>
-              </Pressable>
-            </Box>
-          ))}
-        </Container>
+                )}
+              </Flex>
+            </Pressable>
+          </Box>
+        ))}
       </ScrollView>
     </Page>
   );

@@ -78,9 +78,9 @@ export default function ServiceProvidersPage({ navigation }) {
 
   return (
     <Page>
-      <ScrollView mt="10" mx="5" showsVerticalScrollIndicator={false}>
+      <ScrollView pt="10" px="5" showsVerticalScrollIndicator={false}>
         <SearchBar filterOptions={filterOptions} filterHeader="Category" />
-        <VStack space="10">
+        <VStack space="10" pb="10">
           <Box>
             <Heading>Suggested</Heading>
             <ScrollView horizontal={true} my="5" py="2">

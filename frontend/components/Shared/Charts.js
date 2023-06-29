@@ -58,54 +58,74 @@ function BigPieChart({ goal, color }) {
     )
 }
 
+const updatedNames = {
+    "Waste & Recycling": "Waste &\nRecycling",
+    "Transportation": "Transportation",
+    "Solar": "Solar",
+    "Land, Soil & Water": "Land, Soil &\nWater",
+    "Home Energy": "Home Energy",
+    "Food": "Food",
+    "Activism & Education": "Activism &\nEducation"
+}
+
 // currently contains placeholder data provided by the package
-function BigBarChart({ graphData}) {
+function ActionsChart({ graphData }) {
+    const getData = () => {
+        for (let i = 0; i < graphData.length; i++) {
+            if (updatedNames[graphData[i].name] !== undefined)
+                graphData[i].name = updatedNames[graphData[i].name];
+        }
+        // console.log(graphData)
+        return graphData;
+    }
+
     return (
         <VStack alignItems="center">
-            <Text bold fontSize="lg" mb={5}>Number of Actions Completed</Text>
             <VictoryChart
                 theme={VictoryTheme.material}
                 domainPadding={10}
+                padding={{top: 40, right: 20, bottom: 30, left:110}}
                 >
                 <VictoryAxis dependentAxis />
                 <VictoryAxis style={{ 
-                    tickLabels: { fill:"transparent"} 
+                    // tickLabels: { fill:"transparent"} 
                 }} />
                 <VictoryGroup offset={10}>
                     <VictoryBar
-                        data={graphData}
+                        data={getData()}
                         x="name"
                         y="reported_value"
                         horizontal={true}
-                        style={{ data: { fill: "#DC4E34", fillOpacity: 0.9 }, labels: {fontSize: 15}}}
+                        style={{ data: { fill: "#DC4E34", fillOpacity: 0.5 }, labels: {fontSize: 15}}}
                         // labels={({ datum }) => datum.name}
                         // labelComponent={<VictoryLabel x={50}/>}
                         barRatio={0.9}
                     />
                     <VictoryBar
-                        data={graphData}
+                        data={getData()}
                         x="name"
                         y="value"
                         horizontal={true}
-                        style={{ data: { fill: "#DC4E34", fillOpacity: 0.5 }, labels: {fontSize: 15}}}
-                        labels={({ datum }) => datum.name}
-                        labelComponent={<VictoryLabel x={45} dy={-12}/>}
+                        style={{ data: { fill: "#DC4E34", fillOpacity: 0.9 }, labels: {fontSize: 15}}}
+                        // labels={({ datum }) => datum.name}
+                        // labelComponent={<VictoryLabel x={45} dy={-12}/>}
                         barRatio={0.9}
                     />
                 </VictoryGroup>
-                <VictoryLegend x={230} y={0}
+                <VictoryLegend x={110} y={0}
                     centerTitle
-                    // orientation="horizontal"
+                    orientation="horizontal"
                     gutter={20}
                     style={{ border: { stroke: "black" }, title: {fontSize: 20 } }}
                     data={[
-                    { name: "Value", symbol: { fill: "#DC4E34", type: "square", fillOpacity: 0.5 } },
-                    { name: "Reported Value", symbol: { fill: "#DC4E34", type: "square", fillOpacity: 0.8 } },
+                    { name: "Value", symbol: { fill: "#DC4E34", type: "square", fillOpacity: 0.9 } },
+                    { name: "Reported Value", symbol: { fill: "#DC4E34", type: "square", fillOpacity: 0.5 } },
                     ]}
                 />
             </VictoryChart>
+            <Container h={10}/>
         </VStack>
     )
 }
 
-export { SmallChart, BigPieChart, BigBarChart }
+export { SmallChart, BigPieChart, ActionsChart }

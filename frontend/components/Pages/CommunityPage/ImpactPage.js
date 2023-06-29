@@ -1,7 +1,5 @@
 import { ScrollView } from "react-native";
 import React, { useState } from "react";
-import { VictoryPie, VictoryContainer, VictoryBar, VictoryChart, VictoryTheme } from 'victory-native';
-import { Dimensions } from 'react-native';
 import {
   VStack,
   HStack,
@@ -12,11 +10,18 @@ import {
   Center,
   View
 } from "native-base";
-import { goals, colors } from "./SampleGoalsData";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import { Dimensions } from 'react-native';
+import { VictoryPie, VictoryContainer, VictoryBar, VictoryChart, VictoryTheme } from 'victory-native';
 import { BigPieChart, ActionsChart } from "../../Shared/Charts.js";
 import graphData from "./../../../data/graphActionsCompleted.json";
 import listData from "./../../../data/communitiesActionsCompleted.json";
-import Ionicons from "react-native-vector-icons/Ionicons";
+
+const colors = [
+  "#DC4E34",
+  "#64B058",
+  "#000000"
+]
 
 function ActionsList({ listData }) {
   return (

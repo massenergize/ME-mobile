@@ -1,7 +1,5 @@
 import { ScrollView } from "react-native";
 import React from "react";
-import { VictoryPie, VictoryContainer } from 'victory-native';
-import { Dimensions } from 'react-native';
 import {
   VStack,
   HStack,
@@ -13,10 +11,30 @@ import {
   Pressable,
   Image
 } from "native-base";
-import { goals, colors } from "./SampleGoalsData.js";
+import { Dimensions } from 'react-native';
+import { VictoryPie, VictoryContainer } from 'victory-native';
 import ActionCard from "./../ActionsPage/ActionCard";
 import { SmallChart } from "../../Shared/Charts.js";
+import EventCard from "./../EventsPage/EventCard";
 import data from "./../../../data/communitiesInfo.json";
+
+const event = {
+  id: 1,
+  title: "Nature of Acton and Boxborough 2023 - A BioBlitz",
+  date: "June 15th, 4:00 AM - 11:00 PM",
+  location: "Hybrid",
+  image:
+    "https://massenergize-prod-files.s3.amazonaws.com/media/Acton_Boxborough__BioBlitz_2023_A-230529-160415.jpg",
+  can_rsvp: true,
+  is_rsvped: false,
+  is_shared: true,
+}
+
+const colors = [
+  "#DC4E34",
+  "#64B058",
+  "#000000"
+]
 
 // the card that shows up to three goals on the community page
 function GoalsCard({ navigation, goals }) {
@@ -81,11 +99,10 @@ function ShowMore({ navigation, page, text }) {
 export default function CommunityPage({ navigation }) {
   return (
     <ScrollView nestedScrollEnabled = {true}>
-      <VStack alignItems="center" space={3} p={3} bg="white">
+      <VStack alignItems="center" space={3} p={4} bg="white">
         {/* <Text bold fontSize="2xl">Community Name</Text> */}
         <Container maxHeight={200} width="100%">
           <Image
-              // source={require("./../../../assets/images/cooler-concord.png")}
               source={{uri: data.data.logo.url}}
               alt="Community Logo"
               resizeMode="contain"
@@ -99,7 +116,7 @@ export default function CommunityPage({ navigation }) {
           <ShowMore navigation={navigation} page="impact" text={"Know More"}/>
         </HStack> */}
         <GoalsCard navigation={navigation} goals={data.data.goal} />
-        <HStack alignItems="center">
+        <HStack alignItems="center" pb={2} pt={3}>
           <HeaderText text="Recommended Actions"/>
           <Spacer/>
           <ShowMore navigation={navigation} page="ACTIONS" text={"Show More"}/>
@@ -113,11 +130,24 @@ export default function CommunityPage({ navigation }) {
             <ActionCard navigation={navigation}/>
           </HStack>
         </ScrollView>
-        <HStack alignItems="center">
+        <HStack alignItems="center" pt={3}>
           <HeaderText text="Upcoming Event"/>
           <Spacer/>
           <ShowMore navigation={navigation} page="EVENTS" text={"Show More"}/>
         </HStack>
+        <EventCard
+            key={event.id}
+            title={event.title}
+            date={event.date}
+            location={event.location}
+            imageURI={event.image}
+            canRSVP={event.can_rsvp}
+            isRSVPED={event.is_rsvped}
+            isShared={event.is_shared}
+            onPress={() => navigation.navigate("eventDetails")}
+            my="2"
+            shadow="5"
+          />
       </VStack>
     </ScrollView>
   );

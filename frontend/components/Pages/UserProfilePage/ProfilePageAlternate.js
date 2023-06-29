@@ -10,8 +10,22 @@ export default function ProfilePageAlternate({ navigation }) {
     
 
     const [displayToDo, setdisplayToDo] = useState(true);
-    
-    const switchList = () => {
+    const ListText = props => {
+        if (displayToDo) {
+            return <View>
+                    <Text style={[styles.text, { fontSize: 12, color: "#DFD8C8", textTransform: "uppercase" }]}>Actions</Text>
+                    <Text style={[styles.text, { fontSize: 24, color: "#DFD8C8", fontWeight: "300" }]}>To-Do</Text>
+                </View>;
+        }
+        else {
+            return <View>
+                    <Text style={[styles.text, { fontSize: 12, color: "#DFD8C8", textTransform: "uppercase" }]}>Actions</Text>
+                    <Text style={[styles.text, { fontSize: 20, color: "#DFD8C8", fontWeight: "300" }]}>Completed</Text>
+                </View>;
+        }
+    }
+
+    const switchList = props => {
         console.log("testing")
         setdisplayToDo(current => !current);
         console.log(displayToDo)
@@ -97,9 +111,7 @@ export default function ProfilePageAlternate({ navigation }) {
                         shadowOpacity: 1, 
                         backgroundColor : displayToDo ? "#41444B" : "#64B058"}} 
                         onPress={() => {console.log("Switch view"), switchList()}}>
-                        <Text style={[styles.text, { fontSize: 12, color: "#DFD8C8", textTransform: "uppercase" }]}>Actions</Text>
-                        <Text style={[styles.text, { fontSize: 24, color: "#DFD8C8", fontWeight: "300" }]}>To-Do</Text>
-                        
+                        <ListText style={{color: 'blue'}}/>
 
                     </Pressable>
                 </View>

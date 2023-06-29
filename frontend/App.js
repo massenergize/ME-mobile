@@ -36,11 +36,6 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
-            name="drawer"
-            component={DrawerNavigator}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
             name="intro"
             component={IntroductionPage}
             options={{
@@ -92,6 +87,11 @@ export default function App() {
             component={ServiceProviderDetailsPage}
           />
           <Stack.Screen name="tab" component={TabNavigator} />
+          <Stack.Screen
+            name="drawer"
+            component={DrawerNavigator}
+            options={{ headerShown: false }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>

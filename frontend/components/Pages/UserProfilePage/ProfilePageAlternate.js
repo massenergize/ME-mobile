@@ -1,13 +1,23 @@
-import React from "react";
-import { Platform, StyleSheet, Text, View, SafeAreaView, Image, ScrollView, Center, TouchableHighlight, HStack } from "react-native";
+import { React, useState, useEffect } from "react";
+import { Platform, StyleSheet, Text, View, SafeAreaView, Image, ScrollView, Center, TouchableHighlight, HStack, Pressable } from "react-native";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { Button, Avatar } from "native-base";
 import ActionCard from '../ActionsPage/ActionCard';
 
 
 
-
 export default function ProfilePageAlternate({ navigation }) {
+    
+
+    const [displayToDo, setdisplayToDo] = useState(true);
+    
+    const switchList = () => {
+        console.log("testing")
+        setdisplayToDo(current => !current);
+        console.log(displayToDo)
+    }
+        
+    
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView showsVerticalScrollIndicator={false}>
@@ -71,10 +81,27 @@ export default function ProfilePageAlternate({ navigation }) {
                         </View>
 
                     </ScrollView>
-                    <View style={styles.mediaCount}>
+                    <Pressable style={{
+                        position: "absolute", 
+                        top: "50%", 
+                        marginTop: -50, 
+                        marginLeft: 30, 
+                        width: 100, 
+                        height: 100, 
+                        alignItems: "center", 
+                        justifyContent: "center", 
+                        borderRadius: 12, 
+                        shadowColor: "rgba(0, 0, 0, 0.38)", 
+                        shadowOffset: { width: 0, height: 10 },
+                        shadowRadius: 20,
+                        shadowOpacity: 1, 
+                        backgroundColor : displayToDo ? "#41444B" : "#64B058"}} 
+                        onPress={() => {console.log("Switch view"), switchList()}}>
                         <Text style={[styles.text, { fontSize: 12, color: "#DFD8C8", textTransform: "uppercase" }]}>Actions</Text>
                         <Text style={[styles.text, { fontSize: 24, color: "#DFD8C8", fontWeight: "300" }]}>To-Do</Text>
-                    </View>
+                        
+
+                    </Pressable>
                 </View>
 
 
@@ -82,8 +109,8 @@ export default function ProfilePageAlternate({ navigation }) {
                 
     
                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} justifyContent="center">
-                    <Avatar.Group _avatar={{
-                        size: "lg"
+                    <Avatar.Group paddingRight={35}_avatar={{
+                        size: "lg",
                         }} max={4}>
                             <Avatar bg="green.500" source={{
                             uri: "https://cdn-icons-png.flaticon.com/512/7963/7963920.png"
@@ -179,7 +206,7 @@ export default function ProfilePageAlternate({ navigation }) {
                     </View>
                 </View>
                 <Text style={[styles.subText, styles.recent]}>Recent Activity</Text>
-                <View style={{ alignItems: "center" }}>
+                <View style={{ alignItems: "center", paddingTop: 20 }}>
                     <View style={styles.recentItem}>
                         <View style={styles.activityIndicator}></View>
                         <View style={{ width: 250 }}>
@@ -305,20 +332,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
     },
     mediaCount: {
-        backgroundColor: "#41444B",
-        position: "absolute",
-        top: "50%",
-        marginTop: -50,
-        marginLeft: 30,
-        width: 100,
-        height: 100,
-        alignItems: "center",
-        justifyContent: "center",
-        borderRadius: 12,
-        shadowColor: "rgba(0, 0, 0, 0.38)",
-        shadowOffset: { width: 0, height: 10 },
-        shadowRadius: 20,
-        shadowOpacity: 1
+        
     },
     recent: {
         marginLeft: 78,

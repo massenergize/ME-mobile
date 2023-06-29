@@ -1,19 +1,8 @@
 import React from "react";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
-import {
-  Center,
-  Button,
-  Text,
-  Box,
-  Image,
-  Icon,
-  Flex,
-  ScrollView,
-  AspectRatio,
-  Pressable,
-} from "native-base";
+import { Button, Flex, ScrollView } from "native-base";
 import Page from "../../Shared/Page";
 import SearchBar from "../../Shared/SearchBar";
+import EventCard from "./EventCard";
 
 const EVENTS = [
   {
@@ -137,97 +126,19 @@ export default function EventsPage({ navigation }) {
           </Button>
         </Flex>
         {EVENTS.map((event) => (
-          <Box
+          <EventCard
             key={event.id}
+            title={event.title}
+            date={event.date}
+            location={event.location}
+            imageURI={event.image}
+            canRSVP={event.can_rsvp}
+            isRSVPED={event.is_rsvped}
+            isShared={event.is_shared}
+            onPress={() => navigation.navigate("eventDetails")}
             my="3"
-            rounded="lg"
-            backgroundColor="white"
             shadow="5"
-          >
-            <Pressable onPress={() => navigation.navigate("eventDetails")}>
-              <Box pt="2">
-                <AspectRatio w="100%" ratio={16 / 9}>
-                  <Image
-                    source={{
-                      uri: event.image,
-                    }}
-                    alt="image"
-                    resizeMode="contain"
-                  />
-                </AspectRatio>
-                {event.is_shared && (
-                  <Center
-                    bg="secondary.400"
-                    _text={{
-                      color: "white",
-                      fontWeight: "bold",
-                      fontSize: "xs",
-                    }}
-                    position="absolute"
-                    px="5"
-                    py="1.5"
-                    rounded="full"
-                    right="5"
-                    top="2"
-                  >
-                    SHARED
-                  </Center>
-                )}
-              </Box>
-              <Flex
-                px="4"
-                pt="4"
-                flexDirection="row"
-                justifyContent="space-between"
-              >
-                <Text fontWeight="bold" fontSize="md" w="80%" mr="3">
-                  {event.title}
-                </Text>
-                <Icon
-                  as={FontAwesome}
-                  name="arrow-right"
-                  size="md"
-                  color="primary.400"
-                />
-              </Flex>
-              <Flex
-                backgroundColor={"gray.100"}
-                flexDirection="row"
-                flexWrap={"wrap"}
-                justifyContent="space-between"
-                alignItems="center"
-                borderBottomRadius="lg"
-                overflow={"hidden"}
-              >
-                <Box pl="4" pr="4">
-                  <Text fontSize="sm" color="primary.400">
-                    {event.date}
-                  </Text>
-                </Box>
-                {event.can_rsvp ? (
-                  <Box
-                    backgroundColor={
-                      event.is_rsvped ? "secondary.400" : "primary.400"
-                    }
-                    flexGrow={1}
-                  >
-                    <Button
-                      variant="ghost"
-                      _text={{ fontSize: "xs", color: "white" }}
-                    >
-                      RSVP
-                    </Button>
-                  </Box>
-                ) : (
-                  <Box py="2" px="4">
-                    <Text fontSize="sm" color="primary.400">
-                      {event.location}
-                    </Text>
-                  </Box>
-                )}
-              </Flex>
-            </Pressable>
-          </Box>
+          />
         ))}
       </ScrollView>
     </Page>

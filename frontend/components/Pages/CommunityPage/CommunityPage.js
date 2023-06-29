@@ -1,10 +1,11 @@
-import { View, Text } from "react-native";
 import React from "react";
+import { Text } from "native-base";
+import Page from "../../Shared/Page";
 
 export default function CommunityPage() {
   return (
-    <View>
-
-    </View>
+    <Page>
+      <Text>Community Page</Text>
+    </Page>
   );
 }

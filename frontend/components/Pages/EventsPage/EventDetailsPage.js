@@ -1,75 +1,110 @@
-import React from "react";
+import React, { useState } from "react";
 
-import FontAwesome from "@expo/vector-icons/FontAwesome";
 import {
-  ScrollView,
-  Text,
-  Box,
-  Image,
-  VStack,
-  HStack,
-  Icon,
-  Divider,
   Button,
+  ScrollView,
+  VStack,
+  Text,
+  Divider,
+  Box,
+  Heading,
+  Icon,
+  AspectRatio,
+  Image,
+  Actionsheet,
+  useDisclose,
 } from "native-base";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import Page from "../../Shared/Page";
 
 export default function EventDetailsPage() {
+  const [rsvp, setRsvp] = useState(""); // "Interested", "Going", "Not Going"
+  const { isOpen, onOpen, onClose } = useDisclose();
+
+  const handleAction = (action) => {
+    if (action === rsvp) {
+      setRsvp("");
+    } else {
+      setRsvp(action);
+    }
+    onClose();
+  };
+
   return (
-    <ScrollView>
-      <VStack space={2} mx="3" mb="20">
-        <Box
-          my="3"
-          height="200"
-          shadow="5"
-          backgroundColor="white"
-          borderRadius="2xl"
-          overflow="hidden"
-        >
-          <Image
-            source={{
-              uri: "https://massenergize-prod-files.s3.amazonaws.com/media/Acton_Boxborough__BioBlitz_2023_A-230529-160415.jpg",
-            }}
-            alt="image"
-            h="full"
-            w="full"
-            resizeMode="cover"
-          />
-        </Box>
-        <HStack space={2} alignItems="center">
-          <Icon
-            color="primary.400"
-            as={<FontAwesome name="calendar-o" />}
-            size="sm"
-          />
-          <Text color="primary.400" fontWeight="bold">
-            June 15th, 4:00 AM - 11:00 PM
+    <Page py="5">
+      <ScrollView showsVerticalScrollIndicator={false} mx="5">
+        <VStack space="2">
+          {/* event image */}
+          <AspectRatio ratio={16 / 9}>
+            <Image
+              source={{
+                uri: "https://massenergize-prod-files.s3.amazonaws.com/media/Acton_Boxborough__BioBlitz_2023_A-230529-160415.jpg",
+              }}
+              alt="image"
+              resizeMode="contain"
+            />
+          </AspectRatio>
+          {/* event details */}
+          <VStack>
+            <Text fontSize="lg" fontWeight="bold" color="primary.400">
+              Date
+            </Text>
+            <Text>June 22nd, 4:45 PM - 6:00 PM</Text>
+          </VStack>
+          <VStack>
+            <Text fontSize="lg" fontWeight="bold" color="primary.400">
+              Venue
+            </Text>
+            <Text>
+              Village Works Picnic Tables, 541 Massachusetts Ave, Acton, MA
+            </Text>
+          </VStack>
+          <Text fontSize="lg" fontWeight="bold" color="primary.400">
+            Every Wednedsay through 2023-08-31
           </Text>
-        </HStack>
-        <HStack space={2} alignItems="center">
-          <Icon
-            color="primary.400"
-            as={<FontAwesome name="location-arrow" />}
-            size="sm"
-          />
-          <Text color="primary.400" fontWeight="bold">
-            Conservations Lands, Parks, and Yards, Acton, MA
-          </Text>
-        </HStack>
-        <Button size="lg" _text={{ fontWeight: "bold" }}>
-          RSVP
-        </Button>
-        <Divider my="2" />
-        <Box backgroundColor="white" shadow="5" p="4" borderRadius="10">
-          <Text
-            fontWeight="bold"
-            fontSize="lg"
-            textAlign="center"
-            mb="2"
-            mt="5"
+          <Button
+            backgroundColor={rsvp === "Going" ? "secondary.400" : "primary.600"}
+            onPress={onOpen}
           >
+            <Text color="white" fontWeight="bold">
+              {rsvp || "RSVP for this event!"}
+              {"  "}
+              {isOpen ? (
+                <Icon as={FontAwesome} name="chevron-up" color="white" />
+              ) : (
+                <Icon as={FontAwesome} name="chevron-down" color="white" />
+              )}
+            </Text>
+          </Button>
+          <Actionsheet isOpen={isOpen} onClose={onClose} on>
+            <Actionsheet.Content>
+              <Actionsheet.Item
+                backgroundColor={rsvp === "Interested" ? "muted.200" : "white"}
+                onPress={() => handleAction("Interested")}
+              >
+                Interested
+              </Actionsheet.Item>
+              <Actionsheet.Item
+                backgroundColor={rsvp === "Going" ? "muted.200" : "white"}
+                onPress={() => handleAction("Going")}
+              >
+                Going
+              </Actionsheet.Item>
+              <Actionsheet.Item
+                backgroundColor={rsvp === "Not Going" ? "muted.200" : "white"}
+                onPress={() => handleAction("Not Going")}
+              >
+                Not Going
+              </Actionsheet.Item>
+            </Actionsheet.Content>
+          </Actionsheet>
+        </VStack>
+        <Divider my="4" />
+        <Box>
+          <Heading textAlign="center">
             Nature of Acton and Boxborough 2023 - A BioBlitz
-          </Text>
-          <Text fontWeight="light" color="muted.600">
+          </Heading>
+          <Text mt="2">
             Hooray for biodiversity . . . and carbon storage! In order to keep
             carbon in the ground, we need to protect habitats. Here is an
             activity that helps people value these habitats. Please join us as
@@ -106,7 +141,7 @@ export default function EventDetailsPage() {
             EnergizeActon.org@gmail.com. Happy BioBlitzing!
           </Text>
         </Box>
-      </VStack>
-    </ScrollView>
+      </ScrollView>
+    </Page>
   );
 }

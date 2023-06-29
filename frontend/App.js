@@ -22,9 +22,12 @@ import ActionDetails from "./components/Pages/ActionsPage/ActionDetails";
 import EventDetailsPage from "./components/Pages/EventsPage/EventDetailsPage";
 import IntroductionPage from "./components/Pages/IntroductionPage/IntroductionPage";
 import DrawerNavigator from "./components/Shared/DrawerNavigator";
+import ServiceProvidersPage from "./components/Pages/ServiceProvidersPage/ServiceProvidersPage";
+import ServiceProviderDetailsPage from "./components/Pages/ServiceProvidersPage/ServiceProviderDetailsPage";
 import ChooseCommunityPage from "./components/Pages/ChooseCommunityPage/ChooseCommunityPage";
 import WithEmailOnlyPage from "./components/Pages/Auth/WithEmailOnlyPage";
 import CreateProfile from "./components/Pages/UserProfilePage/CreateProfile";
+import TeamDetailsPage from "./components/Pages/TeamsPage/TeamDetailsPage";
 import TabNavigator from "./components/Shared/TabNavigator";
 
 const Stack = createNativeStackNavigator();
@@ -77,15 +80,21 @@ export default function App() {
           <Stack.Screen name="testimonial" component={Testimonial} options={{ headerTitle: "TESTIMONIAL", headerTitleAlign: "center"}}/>
           <Stack.Screen name="addTestimonial" component={AddTestimonial} options={{ headerTitle: "TESTIMONIAL", headerTitleAlign: "center"}}/>
           <Stack.Screen name="community" component={CommunityPage} />
-          <Stack.Screen name="teams" component={TeamsPage}/>
+          <Stack.Screen name="teamDetails" component={TeamDetailsPage} />
+          <Stack.Screen name="teams" component={TeamsPage} />
+          <Stack.Screen
+            name="serviceProviders"
+            component={ServiceProvidersPage}
+          />
+          <Stack.Screen
+            name="serviceProviderDetails"
+            component={ServiceProviderDetailsPage}
+          />
+          <Stack.Screen name="tab" component={TabNavigator} />
           <Stack.Screen
             name="drawer"
             component={DrawerNavigator}
             options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="tab"
-            component={TabNavigator}
           />
         </Stack.Navigator>
       </NavigationContainer>

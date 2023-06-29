@@ -14,9 +14,6 @@ import {
   View,
 } from "native-base";
 
-import { Text as TextSVG } from "react-native-svg";
-
-import { BarChart, Grid } from "react-native-svg-charts";
 import Page from "../../Shared/Page";
 
 const fill = "#DC4E34";
@@ -72,23 +69,6 @@ export default function TeamDetailsPage() {
     return <Text>Description of the team.</Text>;
   };
   const generateActionsTab = () => {
-    const CUT_OFF = 250;
-    const chartData = data.map((item) => item.value);
-    const chartLabels = data.map((item) => item.name);
-    const Labels = ({ x, y, bandwidth, data }) =>
-      data.map((value, index) => (
-        <TextSVG
-          key={index}
-          x={value > CUT_OFF ? x(0) + 10 : x(value) + 10}
-          y={y(index) + bandwidth / 2}
-          fontSize={14}
-          fill={value > CUT_OFF ? "white" : "black"}
-          alignmentBaseline={"middle"}
-        >
-          {`${value}, ${chartLabels[index]}`}
-        </TextSVG>
-      ));
-
     return (
       <VStack space="5">
         <Text alignSelf="center">
@@ -99,20 +79,6 @@ export default function TeamDetailsPage() {
           <Text fontWeight="bold">5679.8 </Text>
           Number of Trees
         </Text>
-        <View style={{ height: 400, padding: 20, flexDirection: "row" }}>
-          <View style={{ flex: 1, marginLeft: 10 }}>
-            <BarChart
-              style={{ flex: 1 }}
-              data={chartData}
-              svg={{ fill }}
-              gridMin={0}
-              horizontal={true}
-            >
-              <Labels />
-              <Grid direction="VERTICAL" />
-            </BarChart>
-          </View>
-        </View>
       </VStack>
     );
   };

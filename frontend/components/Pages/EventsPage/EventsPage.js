@@ -1,26 +1,20 @@
 import React from "react";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
-import {
-  Button,
-  Text,
-  Box,
-  Image,
-  Icon,
-  Heading,
-  Flex,
-  ScrollView,
-  Pressable,
-} from "native-base";
+import { Button, Flex, ScrollView } from "native-base";
 import Page from "../../Shared/Page";
+import SearchBar from "../../Shared/SearchBar";
+import EventCard from "./EventCard";
 
 const EVENTS = [
   {
     id: 1,
     title: "Nature of Acton and Boxborough 2023 - A BioBlitz",
     date: "June 15th, 4:00 AM - 11:00 PM",
-    location: "Conservations Lands, Parks, and Yards, Acton, MA",
+    location: "Hybrid",
     image:
       "https://massenergize-prod-files.s3.amazonaws.com/media/Acton_Boxborough__BioBlitz_2023_A-230529-160415.jpg",
+    can_rsvp: true,
+    is_rsvped: false,
+    is_shared: true,
   },
   {
     id: 2,
@@ -29,6 +23,9 @@ const EVENTS = [
     location: "Online",
     image:
       "https://massenergize-prod-files.s3.amazonaws.com/media/Acton_Clean_Energy_Coach-230216-135015.jpg",
+    can_rsvp: false,
+    is_rsvped: false,
+    is_shared: false,
   },
   {
     id: 3,
@@ -37,85 +34,111 @@ const EVENTS = [
     location: null,
     image:
       "https://massenergize-prod-files.s3.amazonaws.com/media/hello_april_Flyer_Landscape-230328-194333.jpg",
+    can_rsvp: false,
+    is_rsvped: false,
+    is_shared: true,
+  },
+  {
+    id: 4,
+    title: "(TEMP) Nature of Acton and Boxborough 2023 - A BioBlitz",
+    date: "June 15th, 4:00 AM - 11:00 PM",
+    location: "Hybrid",
+    image:
+      "https://massenergize-prod-files.s3.amazonaws.com/media/Acton_Boxborough__BioBlitz_2023_A-230529-160415.jpg",
+    can_rsvp: true,
+    is_rsvped: true,
+    is_shared: true,
+  },
+];
+
+const filterOptions = [
+  {
+    value: "all",
+    label: "All",
+  },
+  {
+    value: "home energy",
+    label: "Home Energy",
+  },
+  {
+    value: "solar",
+    label: "Solar",
+  },
+  {
+    value: "transportation",
+    label: "Transportation",
+  },
+  {
+    value: "waste recycling",
+    label: "Waste & Recycling",
+  },
+  {
+    value: "food",
+    label: "Food",
+  },
+  {
+    value: "activism education",
+    label: "Activism & Education",
+  },
+  {
+    value: "land soil water",
+    label: "Land, Soil & Water",
   },
 ];
 
 export default function EventsPage({ navigation }) {
   return (
     <Page>
-      <ScrollView>
-        {EVENTS.map((event) => (
-          <Box
-            key={event.id}
-            m="3"
-            height="200"
-            shadow="5"
-            backgroundColor="white"
-            borderRadius="2xl"
+      <ScrollView
+        p="5"
+        contentContainerStyle={{
+          alignItems: "center",
+        }}
+      >
+        <SearchBar
+          pb="5"
+          w="full"
+          filterOptions={filterOptions}
+          filterHeader="Category"
+        />
+        {/* events filter */}
+        <Flex flexDirection="row">
+          <Button
+            variant="solid"
+            _text={{ fontSize: "xs" }}
+            borderRadius="full"
           >
-            <Pressable onPress={() => navigation.navigate("eventDetails")}>
-              <Box borderRadius="2xl" overflow="hidden">
-                <Image
-                  source={{ uri: event.image }}
-                  alt="image"
-                  h="full"
-                  w="full"
-                  resizeMode="cover"
-                />
-                <Box
-                  w="full"
-                  h="full"
-                  position="absolute"
-                  backgroundColor="primary.400"
-                  opacity="60"
-                ></Box>
-              </Box>
-              <Button variant="ghost" position="absolute" top="5" right="2">
-                <Icon
-                  as={FontAwesome}
-                  name="angle-right"
-                  size={6}
-                  color="white"
-                />
-              </Button>
-              <Box p="5" position="absolute" bottom="0">
-                <Heading color="white">
-                  {event.title.length > 35
-                    ? event.title.slice(0, 35) + "..."
-                    : event.title}
-                </Heading>
-                <Flex flexDirection="row" alignItems="center" mt="2">
-                  <Icon
-                    as={FontAwesome}
-                    name="calendar-o"
-                    size={4}
-                    color="white"
-                    mr="2"
-                  />
-                  <Text color="white" fontWeight="bold">
-                    {event.date}
-                  </Text>
-                </Flex>
-                <Flex flexDirection="row" alignItems="center" mt="2">
-                  <Icon
-                    as={FontAwesome}
-                    name="location-arrow"
-                    size={4}
-                    color="white"
-                    mr="2"
-                    alignSelf="flex-end"
-                  />
-                  <Text color="white" fontWeight="bold">
-                    {event.location
-                      ? event.location.length > 30
-                        ? event.location.slice(0, 30) + "..."
-                        : event.location
-                      : "N/A"}
-                  </Text>
-                </Flex>
-              </Box>
-            </Pressable>
-          </Box>
+            Upcoming Events
+          </Button>
+          <Button
+            variant="outline"
+            _text={{ fontSize: "xs" }}
+            borderRadius="full"
+          >
+            Past Events
+          </Button>
+          <Button
+            variant="outline"
+            _text={{ fontSize: "xs" }}
+            borderRadius="full"
+          >
+            Campaigns
+          </Button>
+        </Flex>
+        {EVENTS.map((event) => (
+          <EventCard
+            key={event.id}
+            title={event.title}
+            date={event.date}
+            location={event.location}
+            imageURI={event.image}
+            canRSVP={event.can_rsvp}
+            isRSVPED={event.is_rsvped}
+            isShared={event.is_shared}
+            onPress={() => navigation.navigate("eventDetails")}
+            my="3"
+            shadow="5"
+          />
         ))}
       </ScrollView>
     </Page>

@@ -17,7 +17,6 @@ import { BigPieChart, ActionsChart } from "../../Shared/Charts.js";
 import graphData from "./../../../data/graphActionsCompleted.json";
 import listData from "./../../../data/communitiesActionsCompleted.json";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { Table, Row, Rows, TableWrapper, Col, Cell } from 'react-native-table-component';
 
 function ActionsList({ listData }) {
   return (

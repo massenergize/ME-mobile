@@ -2,7 +2,7 @@ import { useWindowDimensions, StyleSheet } from "react-native";
 import React from "react";
 import HTMLRender from "react-native-render-html";
 
-export default function HTMLParser({ htmlString, baseStyle }) {
+export default HTMLParser = React.memo(({ htmlString, baseStyle }) => {
   const { width } = useWindowDimensions();
   const htmlConfig = {
     baseStyle: StyleSheet.flatten(baseStyle),
@@ -20,4 +20,4 @@ export default function HTMLParser({ htmlString, baseStyle }) {
       {...htmlConfig}
     />
   );
-}
+});

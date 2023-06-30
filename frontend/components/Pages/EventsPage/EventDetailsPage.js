@@ -134,12 +134,18 @@ export default function EventDetailsPage() {
           <Heading textAlign="center">
             {eventDetails.name || "Event Name"}
           </Heading>
-          <HTMLParser
-            htmlString={eventDetails.description || "Event Description"}
-            baseStyle={{ fontSize: "16px" }}
-          />
+          {eventDetails.description && (
+            <HTMLParser
+              htmlString={eventDetails.description}
+              baseStyle={textStyle}
+            />
+          )}
         </Box>
       </ScrollView>
     </Page>
   );
 }
+
+const textStyle = {
+  fontSize: "16px",
+};

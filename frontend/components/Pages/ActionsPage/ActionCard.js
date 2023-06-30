@@ -11,31 +11,18 @@ const investigateAction = () => {
 
 function ActionCard({ navigation }) {
   return (
-    <Box alignItems="center" width="50%">
-      <Pressable
-        onPress={() => {
-          console.log("Action clicked"),
-            investigateAction(),
-            navigation.navigate("actiondetails");
-        }}
-        maxW={80}
-        rounded="lg"
-        overflow="hidden"
-        borderRadius={15}
-        backgroundColor="white"
-        borderColor="coolGray.200"
-        _dark={{
-          borderColor: "coolGray.600",
-          backgroundColor: "white",
-        }}
-        _web={{
-          shadow: 2,
-          borderWidth: 0,
-        }}
-        _light={{
-          backgroundColor: "white",
-        }}
-      >
+    // <Box alignItems="center" width = "50%">
+    <Box alignItems="center" width={200} shadow={1} bg="white" rounded="lg" marginBottom={1}>
+    
+      <Pressable onPress={() => {console.log("Action clicked"), investigateAction(), navigation.navigate("actiondetails")}} maxW={80} rounded="lg" overflow="hidden" borderRadius= {15} backgroundColor = "white" borderColor="coolGray.200" _dark={{
+      borderColor: "coolGray.600",
+      backgroundColor: "white"
+    }} _web={{
+      shadow: 2,
+      borderWidth: 0
+    }} _light={{
+      backgroundColor: "white"
+    }}>
         <Box>
           <AspectRatio w="100%" ratio={16 / 9}>
             <Image

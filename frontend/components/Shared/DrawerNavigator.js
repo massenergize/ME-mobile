@@ -14,6 +14,7 @@ import { Button, Image, Container, Center, HStack, VStack, Spacer, Pressable } f
 
 const Drawer = createDrawerNavigator();
 
+// custom drawer in order to have the "switch communities" button at the bottom
 const dataArray = [
     {title: 'Resources', content: 'Test'}
 ];
@@ -113,14 +114,15 @@ function CustomDrawerContent(props) {
 
 export default function CommunityNavigation() {
   return (
-    <Drawer.Navigator
-      screenOptions={({ navigation, route, options }) => ({
-        drawerActiveTintColor: "#64B058",
-        headerTintColor: "#000000",
-        headerTitle: getFocusedRouteNameFromRoute(route),
-        headerTitleAlign: "center",
-      })}
-      drawerContent={(props) => <CustomDrawerContent {...props} />}
+    <Drawer.Navigator 
+        screenOptions={({ navigation, route, options }) => ({
+            drawerActiveTintColor: "#64B058",
+            headerTintColor: "#000000",
+            headerTitle: getFocusedRouteNameFromRoute(route), // make header title that of the current tab
+            headerTitleAlign: "center",
+        })}
+
+        drawerContent={props => <CustomDrawerContent {...props} />}S
     >
       <Drawer.Screen
         name="Community"
@@ -128,7 +130,16 @@ export default function CommunityNavigation() {
         screenOptions={{ headerTitle: "COMMUNITY" }}
       />
       <Drawer.Screen name="About" component={AboutPage} />
-      <Drawer.Screen name="Testimonials" component={TestimonialsPage} />
+      <Drawer.Screen 
+        name="Testimonials" 
+        component={TestimonialsPage} 
+        options={{
+          headerTitle: "TESTIMONIALS",
+          headerRight: () => (
+            <Ionicons name={"filter"} color="black" marginRight={15} size={20}/>
+          )
+        }}
+      />
       <Drawer.Screen name="Teams" component={TeamsPage} />
       <Drawer.Screen
         name="Service Providers"

@@ -97,7 +97,7 @@ export default function EventCard({
           ) : (
             <Box py="2" px="4">
               <Text fontSize="sm" color="primary.400">
-                {location}
+                {location ? `${location.city}, ${location.state}` : ""}
               </Text>
             </Box>
           )}

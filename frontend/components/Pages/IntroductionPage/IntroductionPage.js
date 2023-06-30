@@ -3,7 +3,6 @@ import {
   Center,
   Image,
   Box,
-  Text,
   Container,
   Heading,
   Flex,
@@ -12,30 +11,31 @@ import {
   AspectRatio,
   HStack,
 } from "native-base";
+import HTMLParser from "../../Shared/HTMLParser";
 
 const STEPS = [
   {
     title: "Find A Community Near You",
     description:
-      "Connect with local communities to foster social connections, promote engagement, and achieve one common goal: take climate actions.",
+      "<p><strong>Connect</strong> with local communities to foster social connections, promote engagement, and achieve one common goal: take climate actions.</p>",
     image: require("../../../assets/images/intro-step-1.png"),
   },
   {
     title: "Get Involved In Actions",
     description:
-      "Access a diverse range of climate actions tailored to your community.",
+      "<p><strong>Access</strong> a diverse range of climate actions tailored to your community.</p>",
     image: require("../../../assets/images/intro-step-2.png"),
   },
   {
     title: "Witness Your Impact",
     description:
-      "MassEnergize offers you access to compelling and inspirational data, presenting the number of households actively engaged in diverse actions.",
+      "<p><strong>MassEnergize</strong> offers you access to compelling and inspirational data, presenting the number of households actively engaged in diverse actions.</p>",
     image: require("../../../assets/images/intro-step-3.png"),
   },
   {
     title: "Take Local Climate Action",
     description:
-      "MassEnergize works with community organizers and local leaders to scale household and community-level climate actions.",
+      "<p><strong>MassEnergize</strong> works with community organizers and local leaders to scale household and community-level <strong>climate actions</strong>.</p>",
     image: require("../../../assets/images/intro-step-4.png"),
   },
 ];
@@ -107,18 +107,10 @@ export default function IntroductionPage({ navigation }) {
           <Heading alignSelf="center" color="primary.600">
             {STEPS[currentStep].title}
           </Heading>
-          <Text
-            textAlign="center"
-            pt="5"
-            mb="20"
-            height="40%"
-            color="muted.400"
-            fontSize="md"
-            lineHeight="xl"
-            alignSelf="center"
-          >
-            {STEPS[currentStep].description}
-          </Text>
+          <HTMLParser
+            htmlString={STEPS[currentStep].description}
+            baseStyle={textStyle}
+          />
           <HStack space="5" alignSelf="center" mb="5">
             {STEPS.map((_, index) => {
               return (
@@ -164,3 +156,14 @@ export default function IntroductionPage({ navigation }) {
     </Box>
   );
 }
+
+const textStyle = {
+  textAlign: "center",
+  paddingTop: "20px",
+  marginBottom: "80px",
+  height: "40%",
+  color: "#a3a3a3",
+  fontSize: "16px",
+  lineHeight: "2em",
+  alignSelf: "center",
+};

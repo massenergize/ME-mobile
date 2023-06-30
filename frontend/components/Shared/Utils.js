@@ -8,7 +8,6 @@ export function dateFormatString(startDate, endDate) {
   };
 
   const startDateString = startDate.toLocaleDateString("en-US", dateOptions);
-  const endDateString = endDate.toLocaleDateString("en-US", dateOptions);
 
   let dateRangeString;
 
@@ -19,8 +18,41 @@ export function dateFormatString(startDate, endDate) {
       { hour: "numeric", minute: "numeric", hour12: true }
     )}`;
   } else {
-    // Different day then display "mmmm dd, hh:mm AM/PM - mmmm dd, hh:mm AM/PM"
-    dateRangeString = `${startDateString} - ${endDateString}`;
+    // Same month
+    if (startDate.getMonth() === endDate.getMonth()) {
+      // Display "mmmm dd-dd yyyy"
+      dateRangeString = `${startDate.toLocaleDateString("en-US", {
+        month: "long",
+        day: "numeric",
+      })}-${endDate.toLocaleDateString("en-US", {
+        day: "numeric",
+        year: "numeric",
+      })}`;
+    } else {
+      // Same year
+      if (startDate.getFullYear() === endDate.getFullYear()) {
+        // Display "mmmm dd - mmmm dd, yyyy"
+        dateRangeString = `${startDate.toLocaleDateString("en-US", {
+          month: "long",
+          day: "numeric",
+        })} - ${endDate.toLocaleDateString("en-US", {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        })}`;
+      } else {
+        // Different year then display "mmmm dd, yyyy - mmmm dd, yyyy"
+        dateRangeString = `${startDate.toLocaleDateString("en-US", {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        })} - ${endDate.toLocaleDateString("en-US", {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        })}`;
+      }
+    }
   }
 
   return dateRangeString;

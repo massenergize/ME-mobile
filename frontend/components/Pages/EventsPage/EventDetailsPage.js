@@ -64,7 +64,7 @@ export default function EventDetailsPage() {
           <AspectRatio ratio={16 / 9}>
             <Image
               source={{
-                uri: eventDetails.imageURI || "",
+                uri: eventDetails.imageURI,
               }}
               alt="event's image"
               resizeMode="contain"

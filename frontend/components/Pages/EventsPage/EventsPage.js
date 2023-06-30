@@ -1,92 +1,84 @@
-import React from "react";
-import { Button, Flex, ScrollView } from "native-base";
+import React, { useState, useEffect } from "react";
+import { Button, Center, Flex, ScrollView } from "native-base";
 import Page from "../../Shared/Page";
 import SearchBar from "../../Shared/SearchBar";
 import EventCard from "./EventCard";
 
-const EVENTS = [
-  {
-    id: 1,
-    title: "Nature of Acton and Boxborough 2023 - A BioBlitz",
-    date: "June 15th, 4:00 AM - 11:00 PM",
-    location: "Hybrid",
-    image:
-      "https://massenergize-prod-files.s3.amazonaws.com/media/Acton_Boxborough__BioBlitz_2023_A-230529-160415.jpg",
-    can_rsvp: true,
-    is_rsvped: false,
-    is_shared: true,
-  },
-  {
-    id: 2,
-    title: "Acton Clean Energy Coach Program",
-    date: "June 15th 2023, 9:00 am-11:00 pm",
-    location: "Online",
-    image:
-      "https://massenergize-prod-files.s3.amazonaws.com/media/Acton_Clean_Energy_Coach-230216-135015.jpg",
-    can_rsvp: false,
-    is_rsvped: false,
-    is_shared: false,
-  },
-  {
-    id: 3,
-    title: "Acton Water Wise Nature Walk",
-    date: "April 26th 2023, 3:00 pm-4:30 pm",
-    location: null,
-    image:
-      "https://massenergize-prod-files.s3.amazonaws.com/media/hello_april_Flyer_Landscape-230328-194333.jpg",
-    can_rsvp: false,
-    is_rsvped: false,
-    is_shared: true,
-  },
-  {
-    id: 4,
-    title: "(TEMP) Nature of Acton and Boxborough 2023 - A BioBlitz",
-    date: "June 15th, 4:00 AM - 11:00 PM",
-    location: "Hybrid",
-    image:
-      "https://massenergize-prod-files.s3.amazonaws.com/media/Acton_Boxborough__BioBlitz_2023_A-230529-160415.jpg",
-    can_rsvp: true,
-    is_rsvped: true,
-    is_shared: true,
-  },
-];
+import DummyResponse from "../../../data/eventsList.json";
+import { dateFormatString } from "../../Shared/Utils";
 
 const filterOptions = [
   {
-    value: "all",
+    value: 0,
     label: "All",
   },
   {
-    value: "home energy",
+    value: 5,
     label: "Home Energy",
   },
   {
-    value: "solar",
+    value: 33,
     label: "Solar",
   },
   {
-    value: "transportation",
+    value: 7,
     label: "Transportation",
   },
   {
-    value: "waste recycling",
+    value: 8,
     label: "Waste & Recycling",
   },
   {
-    value: "food",
+    value: 3,
     label: "Food",
   },
   {
-    value: "activism education",
+    value: 1,
     label: "Activism & Education",
   },
   {
-    value: "land soil water",
+    value: 9,
     label: "Land, Soil & Water",
   },
 ];
 
 export default function EventsPage({ navigation }) {
+  const [events, setEvents] = useState([]);
+  const [eventFilterID, setEventFilterID] = useState(1); // 0 = upcoming, 1 = past, 2 = campaigns
+
+  useEffect(() => {
+    // TODO: make an API call here
+    // TODO: add loading state (maybe a spinner)
+    // TODO: a reallllly long delay whenever data is loading (potential solution: cache it)
+    if (DummyResponse.success) {
+      const data = DummyResponse.data;
+      // filter out events from Energize Wayland (id: 3)
+      const filteredEvents = data.filter((event) => event.community.id !== 3);
+      setEvents(filteredEvents);
+    }
+  }, []);
+
+  const getEventsByFilter = (id) => {
+    if (id === 0) {
+      // upcoming events
+      return events.filter((event) => {
+        const eventDate = new Date(event.start_date_and_time);
+        const now = new Date();
+        return eventDate > now;
+      });
+    } else if (id === 1) {
+      // past events
+      return events.filter((event) => {
+        const eventDate = new Date(event.start_date_and_time);
+        const now = new Date();
+        return eventDate < now;
+      });
+    }
+    // TODO: which field to filter by?
+    // campaigns
+    // return [];
+  };
+
   return (
     <Page>
       <ScrollView
@@ -104,16 +96,18 @@ export default function EventsPage({ navigation }) {
         {/* events filter */}
         <Flex flexDirection="row">
           <Button
-            variant="solid"
+            variant={eventFilterID === 0 ? "solid" : "outline"}
             _text={{ fontSize: "xs" }}
             borderRadius="full"
+            onPress={() => setEventFilterID(0)}
           >
             Upcoming Events
           </Button>
           <Button
-            variant="outline"
+            variant={eventFilterID === 1 ? "solid" : "outline"}
             _text={{ fontSize: "xs" }}
             borderRadius="full"
+            onPress={() => setEventFilterID(1)}
           >
             Past Events
           </Button>
@@ -121,25 +115,33 @@ export default function EventsPage({ navigation }) {
             variant="outline"
             _text={{ fontSize: "xs" }}
             borderRadius="full"
+            onPress={() => handleFilter(2)}
+            isDisabled
           >
             Campaigns
           </Button>
         </Flex>
-        {EVENTS.map((event) => (
-          <EventCard
-            key={event.id}
-            title={event.title}
-            date={event.date}
-            location={event.location}
-            imageURI={event.image}
-            canRSVP={event.can_rsvp}
-            isRSVPED={event.is_rsvped}
-            isShared={event.is_shared}
-            onPress={() => navigation.navigate("eventDetails")}
-            my="3"
-            shadow="5"
-          />
-        ))}
+        {/* events list */}
+        {getEventsByFilter(eventFilterID).length > 0 ? (
+          getEventsByFilter(eventFilterID).map((event) => (
+            <EventCard
+              key={event.id}
+              title={event.name}
+              date={dateFormatString(
+                new Date(event.start_date_and_time),
+                new Date(event.end_date_and_time)
+              )}
+              location={event.location}
+              imageURI={event.image.url}
+              canRSVP={event.rsvp_enabled}
+              onPress={() => navigation.navigate("eventDetails")}
+              my="3"
+              shadow="5"
+            />
+          ))
+        ) : (
+          <Center py="5">There are no more events.</Center>
+        )}
       </ScrollView>
     </Page>
   );

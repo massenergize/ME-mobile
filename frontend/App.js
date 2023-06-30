@@ -30,14 +30,21 @@ import WithEmailOnlyPage from "./components/Pages/Auth/WithEmailOnlyPage";
 import CreateProfile from "./components/Pages/UserProfilePage/CreateProfile";
 import TeamDetailsPage from "./components/Pages/TeamsPage/TeamDetailsPage";
 import TabNavigator from "./components/Shared/TabNavigator";
+import { StatusBar } from "react-native";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NativeBaseProvider theme={Theme} >
+    <NativeBaseProvider theme={Theme}>
+      <StatusBar barStyle="dark-content" />
       <NavigationContainer>
         <Stack.Navigator>
+          <Stack.Screen
+            name="chooseCommunity"
+            component={ChooseCommunityPage}
+            options={{ headerShown: false }}
+          />
           <Stack.Screen
             name="intro"
             component={IntroductionPage}
@@ -60,11 +67,6 @@ export default function App() {
             component={CreateProfile}
             options={{ headerShown: false }}
           />
-          <Stack.Screen
-            name="chooseCommunity"
-            component={ChooseCommunityPage}
-            options={{ headerShown: false }}
-          />
           <Stack.Screen name="signup" component={SignupPage} />
           <Stack.Screen name="withEmailOnly" component={WithEmailOnlyPage} />
           <Stack.Screen name="userProfile" component={UserProfilePage} />
@@ -78,12 +80,24 @@ export default function App() {
           <Stack.Screen name="actions" component={ActionsPage} />
           <Stack.Screen name="actiondetails" component={ActionDetails} />
           <Stack.Screen name="testimonials" component={TestimonialsPage} />
-          <Stack.Screen name="testimonial" component={Testimonial} options={{ headerTitle: "TESTIMONIAL", headerTitleAlign: "center"}}/>
-          <Stack.Screen name="addTestimonial" component={AddTestimonial} options={{ headerTitle: "TESTIMONIAL", headerTitleAlign: "center"}}/>
+          <Stack.Screen
+            name="testimonial"
+            component={Testimonial}
+            options={{ headerTitle: "TESTIMONIAL", headerTitleAlign: "center" }}
+          />
+          <Stack.Screen
+            name="addTestimonial"
+            component={AddTestimonial}
+            options={{ headerTitle: "TESTIMONIAL", headerTitleAlign: "center" }}
+          />
           <Stack.Screen name="community" component={CommunityPage} />
           <Stack.Screen name="teamDetails" component={TeamDetailsPage} />
           <Stack.Screen name="teams" component={TeamsPage} />
-          <Stack.Screen name="impact" component={ImpactPage} options={{headerTitle: "IMPACT", headerTitleAlign: "center"}} />
+          <Stack.Screen
+            name="impact"
+            component={ImpactPage}
+            options={{ headerTitle: "IMPACT", headerTitleAlign: "center" }}
+          />
           <Stack.Screen
             name="serviceProviders"
             component={ServiceProvidersPage}

@@ -130,7 +130,16 @@ export default function CommunityNavigation() {
         screenOptions={{ headerTitle: "COMMUNITY" }}
       />
       <Drawer.Screen name="About" component={AboutPage} />
-      <Drawer.Screen name="Testimonials" component={TestimonialsPage} />
+      <Drawer.Screen 
+        name="Testimonials" 
+        component={TestimonialsPage} 
+        options={{
+          headerTitle: "TESTIMONIALS",
+          headerRight: () => (
+            <Ionicons name={"filter"} color="black" marginRight={15} size={20}/>
+          )
+        }}
+      />
       <Drawer.Screen name="Teams" component={TeamsPage} />
       <Drawer.Screen
         name="Service Providers"

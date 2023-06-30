@@ -1,7 +1,5 @@
 import { ScrollView } from "react-native";
-import React from "react";
-import { VictoryPie, VictoryContainer, VictoryBar, VictoryChart, VictoryTheme } from 'victory-native';
-import { Dimensions } from 'react-native';
+import React, { useState } from "react";
 import {
   VStack,
   HStack,
@@ -9,56 +7,83 @@ import {
   Text,
   Spacer,
   Container,
-  Center
+  Center,
+  View
 } from "native-base";
-import { goals, colors } from "./SampleGoalsData";
-import { BigPieChart, BigBarChart } from "./Charts.js";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import { Dimensions } from 'react-native';
+import { VictoryPie, VictoryContainer, VictoryBar, VictoryChart, VictoryTheme } from 'victory-native';
+import { BigPieChart, ActionsChart } from "../../Shared/Charts.js";
+import graphData from "./../../../data/graphActionsCompleted.json";
+import listData from "./../../../data/communitiesActionsCompleted.json";
 
-// pie charts that are displayed on the impact page - more detailed than the smaller pie charts
-// function BigPieChart({ goal, color }) {
-//   return (
-//     <VStack alignItems="center" m={3}>
-//       <Text bold fontSize="lg">{goal.nameLong}</Text>
-//       <VictoryPie 
-//           data={[{x: "current", y: goal.current}, {x: "remaining", y: goal.goal - goal.current}]} 
-//           containerComponent={<VictoryContainer standalone={false} responsive={true}/>}
-//           innerRadius={Dimensions.get('window').width / 8}
-//           height={Dimensions.get('window').width / 2}
-//           width={Dimensions.get('window').width / 2}
-//           padding={10}
-//           labels={() => null} 
-//           colorScale={[color, "#f2f2f2"]}/>
-//         <Text bold fontSize="md">{goal.current} / {goal.goal} {goal.nameShort}</Text>
-//         <Text fontSize="md">({(goal.current / goal.goal * 100).toFixed(1)}% of Goal)</Text>
-//     </VStack>
-//   )
-// }
+const colors = [
+  "#DC4E34",
+  "#64B058",
+  "#000000"
+]
 
-// currently contains placeholder data provided by the package
-// function BigBarChart() {
-//     return (
-//         <VStack alignItems="center">
-//             <Text bold fontSize="lg">Number of Actions Completed</Text>
-//             <VictoryChart
-//                 theme={VictoryTheme.material}
-//                 domainPadding={10}
-//                 >
-//                 <VictoryBar
-//                     style={{ data: { fill: "#c43a31" } }}
-//                 />
-//             </VictoryChart>
-//         </VStack>
-//     )
-// }
+function ActionsList({ listData }) {
+  return (
+    <View width="100%" ml={3} p={3}>
+      <HStack width="100%" alignItems="center" justifyContent="space-between" mb={2}>
+        <Text bold fontSize="sm" width="25%" textAlign="center">Actions</Text>
+        <Text bold fontSize="sm" width="30%" textAlign="center">Category</Text>
+        <Text bold fontSize="sm" width="25%" textAlign="center">Carbon Saving</Text>
+        <Text bold fontSize="sm" width="20%" textAlign="center"># Done</Text>
+      </HStack>
+      {
+        listData.map((action, index) => (
 
-export default function ImpactPage() {
+            <HStack width="100%" alignItems="center" justifyContent="space-between" mb={4} key={index}>
+              <Text bold fontSize="sm" width="25%" textAlign="left" color="#64B058">{action.name}</Text>
+              <Text fontSize="sm" width="30%" textAlign="center">{action.category}</Text>
+              <Text fontSize="sm" width="25%" textAlign="center">{action.carbon_total}</Text>
+              <Text fontSize="sm" width="20%" textAlign="center">{action.done_count}</Text>
+            </HStack>
+
+        ))
+      }
+    </View>
+  )
+}
+
+export default function ImpactPage({ route, navigation }) {
+  const { goalsList } = route.params;
+  const [ actionDisplay, setActionDisplay ] = useState('chart');
+
   return (
     <ScrollView>
-      <VStack alignItems="center" space={3} p={3} bg="white">
+      <VStack alignItems="center" space={3} bg="white">
+        <Text bold fontSize="xl" mt={2}>Goals</Text>
         { // show the three sample goals on the impact page
-            goals.map((goal, index) => <BigPieChart goal={goal} color={colors[index]} key={index}/>)
+            goalsList.map((goal, index) => <BigPieChart goal={goal} color={colors[index]} key={index}/>)
         }
-        <BigBarChart />
+        <Text bold fontSize="xl" mb={2} mt={10}>Number of Actions Completed</Text>
+        <HStack width="100%">
+          <Spacer />
+          <Center>
+            <Ionicons 
+              name={"bar-chart-outline"} 
+              color={actionDisplay == "chart" ? '#64B058' : 'black'} 
+              padding={5} 
+              size={24} 
+              onPress={() => setActionDisplay('chart')}/>
+          </Center>
+          <Center pr={3}>
+            <Ionicons 
+              name={"list-outline"} 
+              color={actionDisplay == "list" ? '#64B058' : 'black'} 
+              padding={5} E
+              size={24} 
+              onPress={() => setActionDisplay('list')}/>
+          </Center>
+        </HStack>
+        {
+          (actionDisplay == "chart") ? 
+          <ActionsChart graphData={graphData.data.data} />:
+          <ActionsList listData={listData.data} />
+        }
       </VStack>
     </ScrollView>
   );

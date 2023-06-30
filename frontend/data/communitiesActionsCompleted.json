@@ -1,0 +1,887 @@
+{
+    "data": [
+        {
+            "id": 7,
+            "name": "Buy/lease an electric car/hybrid",
+            "category": "Transportation",
+            "done_count": 69,
+            "carbon_total": 401580,
+            "todo_count": 13
+        },
+        {
+            "id": 4,
+            "name": "NO COST home energy assessment",
+            "category": "Home Energy",
+            "done_count": 87,
+            "carbon_total": 1305,
+            "todo_count": 16
+        },
+        {
+            "id": 8,
+            "name": "Install rooftop solar",
+            "category": "Solar",
+            "done_count": 53,
+            "carbon_total": 291182,
+            "todo_count": 17
+        },
+        {
+            "id": 1,
+            "name": "Green your electricity",
+            "category": "Home Energy",
+            "done_count": 51,
+            "carbon_total": 189414,
+            "todo_count": 16
+        },
+        {
+            "id": 1927,
+            "name": "Help the grid - shave the peak!",
+            "category": "Home Energy",
+            "done_count": 11,
+            "carbon_total": 0,
+            "todo_count": 2
+        },
+        {
+            "id": 1839,
+            "name": "Electrify your landscaping equipment",
+            "category": "Land, Soil & Water",
+            "done_count": 17,
+            "carbon_total": 6273,
+            "todo_count": 3
+        },
+        {
+            "id": 32,
+            "name": "Reduce/Replace your Lawn",
+            "category": "Land, Soil & Water",
+            "done_count": 25,
+            "carbon_total": 6025,
+            "todo_count": 18
+        },
+        {
+            "id": 2089,
+            "name": "Sign up for community solar",
+            "category": "Solar",
+            "done_count": 13,
+            "carbon_total": 48282,
+            "todo_count": 13
+        },
+        {
+            "id": 3324,
+            "name": "Home Battery Storage",
+            "category": "Home Energy",
+            "done_count": 2,
+            "carbon_total": 296,
+            "todo_count": 8
+        },
+        {
+            "id": 3,
+            "name": "Green heating and AC",
+            "category": "Home Energy",
+            "done_count": 37,
+            "carbon_total": 263403,
+            "todo_count": 34
+        },
+        {
+            "id": 415,
+            "name": "Eat less meat and dairy",
+            "category": "Food",
+            "done_count": 51,
+            "carbon_total": 72267,
+            "todo_count": 5
+        },
+        {
+            "id": 1404,
+            "name": "Insulate and air seal your home",
+            "category": "Home Energy",
+            "done_count": 70,
+            "carbon_total": 229670,
+            "todo_count": 11
+        },
+        {
+            "id": 53,
+            "name": "What to do with food scraps?",
+            "category": "Waste & Recycling",
+            "done_count": 55,
+            "carbon_total": 10395,
+            "todo_count": 7
+        },
+        {
+            "id": 22,
+            "name": "Discounted Rain Barrels (ends 6/25)",
+            "category": "Land, Soil & Water",
+            "done_count": 12,
+            "carbon_total": 0,
+            "todo_count": 7
+        },
+        {
+            "id": 9,
+            "name": "Heat my water with Solar!",
+            "category": "Solar",
+            "done_count": 15,
+            "carbon_total": 10620,
+            "todo_count": 15
+        },
+        {
+            "id": 2922,
+            "name": "Make Magic: Compost",
+            "category": "Land, Soil & Water",
+            "done_count": 23,
+            "carbon_total": 4347,
+            "todo_count": 2
+        },
+        {
+            "id": 2921,
+            "name": "Switch to Induction Cooking",
+            "category": "Food",
+            "done_count": 10,
+            "carbon_total": 420,
+            "todo_count": 7
+        },
+        {
+            "id": 2539,
+            "name": "Join this site and be counted!",
+            "category": "Activism & Education",
+            "done_count": 45,
+            "carbon_total": 675,
+            "todo_count": 0
+        },
+        {
+            "id": 2164,
+            "name": "Buy food from local farms",
+            "category": "Food",
+            "done_count": 37,
+            "carbon_total": 0,
+            "todo_count": 6
+        },
+        {
+            "id": 2,
+            "name": "Monitor your electricity",
+            "category": "Home Energy",
+            "done_count": 28,
+            "carbon_total": 3108,
+            "todo_count": 18
+        },
+        {
+            "id": 2924,
+            "name": "Buy Less Stuff",
+            "category": "Waste & Recycling",
+            "done_count": 11,
+            "carbon_total": 5291,
+            "todo_count": 0
+        },
+        {
+            "id": 2931,
+            "name": "Join the Climate Mobilization!",
+            "category": "Activism & Education",
+            "done_count": 8,
+            "carbon_total": 120,
+            "todo_count": 2
+        },
+        {
+            "id": 5,
+            "name": "Change to LED Lighting",
+            "category": "Home Energy",
+            "done_count": 92,
+            "carbon_total": 57408,
+            "todo_count": 3
+        },
+        {
+            "id": 2047,
+            "name": "Get rid of junk mail",
+            "category": "Waste & Recycling",
+            "done_count": 17,
+            "carbon_total": 8177,
+            "todo_count": 18
+        },
+        {
+            "id": 1402,
+            "name": "Cleaning house?  Donate or pass on",
+            "category": "Waste & Recycling",
+            "done_count": 54,
+            "carbon_total": 25974,
+            "todo_count": 4
+        },
+        {
+            "id": 1366,
+            "name": "Grow your own food",
+            "category": "Food",
+            "done_count": 37,
+            "carbon_total": 0,
+            "todo_count": 7
+        },
+        {
+            "id": 2144,
+            "name": "Heat & Cool: Heat Pumps ",
+            "category": "Home Energy",
+            "done_count": 0,
+            "carbon_total": 0,
+            "todo_count": 1
+        },
+        {
+            "id": 2141,
+            "name": "Choose 100% Green Electricity",
+            "category": "Home Energy",
+            "done_count": 0,
+            "carbon_total": 0,
+            "todo_count": 1
+        },
+        {
+            "id": 2521,
+            "name": "Electrify Your Ride ",
+            "category": "Transportation",
+            "done_count": 1,
+            "carbon_total": 5820,
+            "todo_count": 0
+        },
+        {
+            "id": 2520,
+            "name": "No-cost Home Energy Assessment",
+            "category": "Home Energy",
+            "done_count": 1,
+            "carbon_total": 15,
+            "todo_count": 0
+        },
+        {
+            "id": 2519,
+            "name": "Insulate and Air Seal Your Home",
+            "category": "Home Energy",
+            "done_count": 1,
+            "carbon_total": 3281,
+            "todo_count": 0
+        },
+        {
+            "id": 2477,
+            "name": "Calculate your Carbon Footprint",
+            "category": "Activism & Education",
+            "done_count": 0,
+            "carbon_total": 0,
+            "todo_count": 1
+        },
+        {
+            "id": 2530,
+            "name": "Compost at Home or with a Service",
+            "category": "Waste & Recycling",
+            "done_count": 0,
+            "carbon_total": 0,
+            "todo_count": 1
+        },
+        {
+            "id": 2524,
+            "name": "Change Thermostat Settings",
+            "category": "Home Energy",
+            "done_count": 1,
+            "carbon_total": 111,
+            "todo_count": 0
+        },
+        {
+            "id": 35,
+            "name": "Energy-efficient appliances",
+            "category": "Home Energy",
+            "done_count": 55,
+            "carbon_total": 24310,
+            "todo_count": 8
+        },
+        {
+            "id": 3303,
+            "name": "Install a Heat Pump Water Heater",
+            "category": "Home Energy",
+            "done_count": 2,
+            "carbon_total": 1758,
+            "todo_count": 8
+        },
+        {
+            "id": 3274,
+            "name": "No idling at or near schools",
+            "category": "Transportation",
+            "done_count": 16,
+            "carbon_total": 26976,
+            "todo_count": 0
+        },
+        {
+            "id": 1416,
+            "name": "Drive less / Walk more!",
+            "category": "Transportation",
+            "done_count": 8,
+            "carbon_total": 13488,
+            "todo_count": 0
+        },
+        {
+            "id": 1367,
+            "name": "Invest like a climate activist",
+            "category": "Activism & Education",
+            "done_count": 18,
+            "carbon_total": 0,
+            "todo_count": 9
+        },
+        {
+            "id": 3172,
+            "name": "Expand your activism with an app",
+            "category": "Activism & Education",
+            "done_count": 1,
+            "carbon_total": 15,
+            "todo_count": 1
+        },
+        {
+            "id": 1365,
+            "name": "Renovating? Improve efficiency too!",
+            "category": "Home Energy",
+            "done_count": 13,
+            "carbon_total": 42653,
+            "todo_count": 5
+        },
+        {
+            "id": 3296,
+            "name": "Community Solar-Copy",
+            "category": "Solar",
+            "done_count": 1,
+            "carbon_total": 3714,
+            "todo_count": 0
+        },
+        {
+            "id": 3297,
+            "name": "Eat a More Plant-Based Diet-Copy",
+            "category": "Food",
+            "done_count": 1,
+            "carbon_total": 0,
+            "todo_count": 0
+        },
+        {
+            "id": 3003,
+            "name": "Take the Survey on Climate Change",
+            "category": "Activism & Education",
+            "done_count": 7,
+            "carbon_total": 105,
+            "todo_count": 2
+        },
+        {
+            "id": 2503,
+            "name": "Suggest a new action!",
+            "category": "Activism & Education",
+            "done_count": 2,
+            "carbon_total": 0,
+            "todo_count": 0
+        },
+        {
+            "id": 2972,
+            "name": "Discount compost bins!",
+            "category": "Land, Soil & Water",
+            "done_count": 6,
+            "carbon_total": 1134,
+            "todo_count": 0
+        },
+        {
+            "id": 3050,
+            "name": "Celebrate Earth Day!",
+            "category": "Activism & Education",
+            "done_count": 1,
+            "carbon_total": 15,
+            "todo_count": 3
+        },
+        {
+            "id": 2928,
+            "name": "Get involved in Town's Climate Action!",
+            "category": "Activism & Education",
+            "done_count": 2,
+            "carbon_total": 30,
+            "todo_count": 1
+        },
+        {
+            "id": 237,
+            "name": "Donate building materials",
+            "category": "Waste & Recycling",
+            "done_count": 9,
+            "carbon_total": 0,
+            "todo_count": 3
+        },
+        {
+            "id": 2951,
+            "name": "Get involved in Town's Climate Action!",
+            "category": "Activism & Education",
+            "done_count": 1,
+            "carbon_total": 15,
+            "todo_count": 0
+        },
+        {
+            "id": 2657,
+            "name": "Take a local class on climate change",
+            "category": "Activism & Education",
+            "done_count": 0,
+            "carbon_total": 0,
+            "todo_count": 2
+        },
+        {
+            "id": 87,
+            "name": "Ecological Landscaping & Tree Planting",
+            "category": "Land, Soil & Water",
+            "done_count": 4,
+            "carbon_total": 384,
+            "todo_count": 1
+        },
+        {
+            "id": 1377,
+            "name": "No-cost Home Energy Assessment",
+            "category": "Home Energy",
+            "done_count": 8,
+            "carbon_total": 120,
+            "todo_count": 1
+        },
+        {
+            "id": 96,
+            "name": "Energy-Efficient Appliances ",
+            "category": "Home Energy",
+            "done_count": 7,
+            "carbon_total": 3094,
+            "todo_count": 1
+        },
+        {
+            "id": 1394,
+            "name": "Compost at Home or With a Service",
+            "category": "Waste & Recycling",
+            "done_count": 10,
+            "carbon_total": 1890,
+            "todo_count": 0
+        },
+        {
+            "id": 88,
+            "name": "Change to LED Lighting",
+            "category": "Home Energy",
+            "done_count": 9,
+            "carbon_total": 5616,
+            "todo_count": 1
+        },
+        {
+            "id": 1370,
+            "name": "Green Heating and AC",
+            "category": "Home Energy",
+            "done_count": 3,
+            "carbon_total": 21357,
+            "todo_count": 2
+        },
+        {
+            "id": 2553,
+            "name": "Plant Native Grasses",
+            "category": "Land, Soil & Water",
+            "done_count": 1,
+            "carbon_total": 96,
+            "todo_count": 0
+        },
+        {
+            "id": 1391,
+            "name": "People Power Your Errands",
+            "category": "Transportation",
+            "done_count": 2,
+            "carbon_total": 3372,
+            "todo_count": 0
+        },
+        {
+            "id": 2699,
+            "name": "Bring a bag, save the Earth and 10\u00a2-Copy",
+            "category": "Waste & Recycling",
+            "done_count": 1,
+            "carbon_total": 481,
+            "todo_count": 0
+        },
+        {
+            "id": 2700,
+            "name": "May Line Drying Challenge-Copy",
+            "category": "Home Energy",
+            "done_count": 1,
+            "carbon_total": 223,
+            "todo_count": 0
+        },
+        {
+            "id": 2706,
+            "name": "Support the HERO Bill",
+            "category": "Activism & Education",
+            "done_count": 1,
+            "carbon_total": 15,
+            "todo_count": 0
+        },
+        {
+            "id": 2707,
+            "name": "Sign up for our Newsletter!\u00a0 ",
+            "category": "Activism & Education",
+            "done_count": 1,
+            "carbon_total": 15,
+            "todo_count": 0
+        },
+        {
+            "id": 1418,
+            "name": "No-cost Home Energy Assessment ",
+            "category": "Home Energy",
+            "done_count": 0,
+            "carbon_total": 0,
+            "todo_count": 1
+        },
+        {
+            "id": 1378,
+            "name": "Green Your Electricity",
+            "category": "Home Energy",
+            "done_count": 5,
+            "carbon_total": 18570,
+            "todo_count": 2
+        },
+        {
+            "id": 17,
+            "name": "Join Metrowest 350MA Node",
+            "category": "Activism & Education",
+            "done_count": 10,
+            "carbon_total": 0,
+            "todo_count": 5
+        },
+        {
+            "id": 1403,
+            "name": "Backyard compost or service",
+            "category": "Food",
+            "done_count": 39,
+            "carbon_total": 7371,
+            "todo_count": 5
+        },
+        {
+            "id": 2538,
+            "name": "Donate fresh food to food bank",
+            "category": "Food",
+            "done_count": 0,
+            "carbon_total": 0,
+            "todo_count": 2
+        },
+        {
+            "id": 737,
+            "name": "SUCCESS for Green Town Meeting Articles",
+            "category": "Activism & Education",
+            "done_count": 8,
+            "carbon_total": 29712,
+            "todo_count": 6
+        },
+        {
+            "id": 55,
+            "name": "Green Heating and AC copy",
+            "category": "Home Energy",
+            "done_count": 0,
+            "carbon_total": 0,
+            "todo_count": 1
+        },
+        {
+            "id": 57,
+            "name": "Green Your Electricity",
+            "category": "Home Energy",
+            "done_count": 1,
+            "carbon_total": 3714,
+            "todo_count": 0
+        },
+        {
+            "id": 2077,
+            "name": "An Action you want to show up 1st",
+            "category": "Home Energy",
+            "done_count": 0,
+            "carbon_total": 0,
+            "todo_count": 1
+        },
+        {
+            "id": 52,
+            "name": "And so on: you rank your actions",
+            "category": "Waste & Recycling",
+            "done_count": 1,
+            "carbon_total": 189,
+            "todo_count": 0
+        },
+        {
+            "id": 2059,
+            "name": "An action you want to show up next",
+            "category": "Solar",
+            "done_count": 1,
+            "carbon_total": 3714,
+            "todo_count": 0
+        },
+        {
+            "id": 56,
+            "name": "Lease, Buy an Electric Car",
+            "category": "Transportation",
+            "done_count": 1,
+            "carbon_total": 5820,
+            "todo_count": 0
+        },
+        {
+            "id": 2409,
+            "name": "Declare a Climate Emergency!",
+            "category": "Activism & Education",
+            "done_count": 2,
+            "carbon_total": 0,
+            "todo_count": 1
+        },
+        {
+            "id": 420,
+            "name": "Update Heating & Cooling",
+            "category": "Home Energy",
+            "done_count": 1,
+            "carbon_total": 7119,
+            "todo_count": 0
+        },
+        {
+            "id": 389,
+            "name": "Electrify Your Ride",
+            "category": "Transportation",
+            "done_count": 1,
+            "carbon_total": 5820,
+            "todo_count": 0
+        },
+        {
+            "id": 2379,
+            "name": "Annual roadside trash Clean Up!",
+            "category": "Waste & Recycling",
+            "done_count": 0,
+            "carbon_total": 0,
+            "todo_count": 2
+        },
+        {
+            "id": 10,
+            "name": "Shop Local: Farmers Market",
+            "category": "Food",
+            "done_count": 25,
+            "carbon_total": 0,
+            "todo_count": 3
+        },
+        {
+            "id": 2038,
+            "name": "Opt Up to APC Green for your Electricity",
+            "category": "Home Energy",
+            "done_count": 1,
+            "carbon_total": 3714,
+            "todo_count": 0
+        },
+        {
+            "id": 2087,
+            "name": "Community Solar, No Installation ",
+            "category": "Solar",
+            "done_count": 0,
+            "carbon_total": 0,
+            "todo_count": 1
+        },
+        {
+            "id": 1392,
+            "name": "Insulate and Air Seal Your Home",
+            "category": "Home Energy",
+            "done_count": 6,
+            "carbon_total": 19686,
+            "todo_count": 1
+        },
+        {
+            "id": 1409,
+            "name": "Pledge to Vote",
+            "category": "Activism & Education",
+            "done_count": 4,
+            "carbon_total": 0,
+            "todo_count": 2
+        },
+        {
+            "id": 1408,
+            "name": "Learn about JCAN-MA",
+            "category": "Activism & Education",
+            "done_count": 3,
+            "carbon_total": 0,
+            "todo_count": 1
+        },
+        {
+            "id": 82,
+            "name": "Buy or Lease Electric Car",
+            "category": "Transportation",
+            "done_count": 5,
+            "carbon_total": 29100,
+            "todo_count": 0
+        },
+        {
+            "id": 89,
+            "name": "Shop Local: Farmers Market",
+            "category": "Food",
+            "done_count": 6,
+            "carbon_total": 8502,
+            "todo_count": 1
+        },
+        {
+            "id": 1389,
+            "name": "Eat Less Meat and Dairy",
+            "category": "Food",
+            "done_count": 8,
+            "carbon_total": 11336,
+            "todo_count": 0
+        },
+        {
+            "id": 101,
+            "name": "Offset your air travel",
+            "category": "Transportation",
+            "done_count": 2,
+            "carbon_total": 3694,
+            "todo_count": 6
+        },
+        {
+            "id": 86,
+            "name": "Heat my water with Solar!",
+            "category": "Solar",
+            "done_count": 1,
+            "carbon_total": 708,
+            "todo_count": 1
+        },
+        {
+            "id": 1387,
+            "name": "Go Solar! ",
+            "category": "Solar",
+            "done_count": 3,
+            "carbon_total": 16482,
+            "todo_count": 1
+        },
+        {
+            "id": 1382,
+            "name": "Local Farmshare or Farmstand",
+            "category": "Food",
+            "done_count": 5,
+            "carbon_total": 7085,
+            "todo_count": 0
+        },
+        {
+            "id": 16,
+            "name": "Local food with Farm Share and Market",
+            "category": "Food",
+            "done_count": 15,
+            "carbon_total": 0,
+            "todo_count": 2
+        },
+        {
+            "id": 418,
+            "name": "Insulate \"To The Max\"",
+            "category": "Home Energy",
+            "done_count": 1,
+            "carbon_total": 3281,
+            "todo_count": 0
+        },
+        {
+            "id": 2007,
+            "name": "Compost at Home - All Ages",
+            "category": "Waste & Recycling",
+            "done_count": 1,
+            "carbon_total": 189,
+            "todo_count": 0
+        },
+        {
+            "id": 1380,
+            "name": "Renovating? Improve Efficiency too! ",
+            "category": "Home Energy",
+            "done_count": 1,
+            "carbon_total": 3281,
+            "todo_count": 0
+        },
+        {
+            "id": 751,
+            "name": "Get a Virtual Home Energy Assessment",
+            "category": "Home Energy",
+            "done_count": 1,
+            "carbon_total": 15,
+            "todo_count": 0
+        },
+        {
+            "id": 750,
+            "name": "Choose 100% Renewable Electricity",
+            "category": "Home Energy",
+            "done_count": 1,
+            "carbon_total": 3714,
+            "todo_count": 0
+        },
+        {
+            "id": 23,
+            "name": "Busy Parents Zero waste",
+            "category": "Waste & Recycling",
+            "done_count": 6,
+            "carbon_total": 2886,
+            "todo_count": 2
+        },
+        {
+            "id": 1390,
+            "name": "Planting Trees & Permaculture",
+            "category": "Land, Soil & Water",
+            "done_count": 1,
+            "carbon_total": 0,
+            "todo_count": 0
+        },
+        {
+            "id": 1388,
+            "name": "Food scraps pickup",
+            "category": "Waste & Recycling",
+            "done_count": 1,
+            "carbon_total": 189,
+            "todo_count": 0
+        },
+        {
+            "id": 24,
+            "name": "Pass on used goods",
+            "category": "Waste & Recycling",
+            "done_count": 14,
+            "carbon_total": 6734,
+            "todo_count": 1
+        },
+        {
+            "id": 12,
+            "name": "Recycle Textiles",
+            "category": "Waste & Recycling",
+            "done_count": 14,
+            "carbon_total": 6734,
+            "todo_count": 0
+        },
+        {
+            "id": 33,
+            "name": "Discount compost bins",
+            "category": "Land, Soil & Water",
+            "done_count": 3,
+            "carbon_total": 567,
+            "todo_count": 1
+        },
+        {
+            "id": 15,
+            "name": "What is the Town doing",
+            "category": "Activism & Education",
+            "done_count": 5,
+            "carbon_total": 0,
+            "todo_count": 1
+        },
+        {
+            "id": 14,
+            "name": "Market my Green Home",
+            "category": "Home Energy",
+            "done_count": 0,
+            "carbon_total": 0,
+            "todo_count": 1
+        },
+        {
+            "id": 13,
+            "name": "Donate children\u2019s items",
+            "category": "Waste & Recycling",
+            "done_count": 3,
+            "carbon_total": 1443,
+            "todo_count": 0
+        },
+        {
+            "id": 11,
+            "name": "Riverside Commute Shuttle",
+            "category": "Transportation",
+            "done_count": 1,
+            "carbon_total": 1686,
+            "todo_count": 1
+        },
+        {
+            "id": 18,
+            "name": "Community Garden Plot",
+            "category": "Food",
+            "done_count": 2,
+            "carbon_total": 0,
+            "todo_count": 0
+        },
+        {
+            "id": 34,
+            "name": "Calculate your Carbon Footprint!",
+            "category": "Activism & Education",
+            "done_count": 1,
+            "carbon_total": 15,
+            "todo_count": 1
+        }
+    ],
+    "error": null,
+    "success": true,
+    "cursor": {}
+}

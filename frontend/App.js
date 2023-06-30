@@ -18,6 +18,7 @@ import AddTestimonial from "./components/Pages/TestimonialsPage/AddTestimonial";
 import TeamsPage from "./components/Pages/TeamsPage/TeamsPage";
 import UserProfilePage from "./components/Pages/UserProfilePage/UserProfilePage";
 import EventsPage from "./components/Pages/EventsPage/EventsPage";
+import ImpactPage from "./components/Pages/CommunityPage/ImpactPage";
 import ActionDetails from "./components/Pages/ActionsPage/ActionDetails";
 import EventDetailsPage from "./components/Pages/EventsPage/EventDetailsPage";
 import IntroductionPage from "./components/Pages/IntroductionPage/IntroductionPage";
@@ -82,6 +83,7 @@ export default function App() {
           <Stack.Screen name="community" component={CommunityPage} />
           <Stack.Screen name="teamDetails" component={TeamDetailsPage} />
           <Stack.Screen name="teams" component={TeamsPage} />
+          <Stack.Screen name="impact" component={ImpactPage} options={{headerTitle: "IMPACT", headerTitleAlign: "center"}} />
           <Stack.Screen
             name="serviceProviders"
             component={ServiceProvidersPage}

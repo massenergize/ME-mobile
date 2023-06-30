@@ -1,10 +1,11 @@
-import { ScrollView } from "react-native";
+import { ScrollView, View, useWindowDimensions } from "react-native";
 import React from "react";
 import { Box, VStack, Image, Text } from "native-base";
-import ActionCard from "./../ActionsPage/ActionCard.js";
 import { RenderHTML } from "react-native-render-html";
-import { useWindowDimensions } from "react-native";
 import Moment from 'moment';
+
+import ActionCard from "./../ActionsPage/ActionCard.js";
+import ServiceProviderCard from "./../ServiceProvidersPage/ServiceProviderCard.js";
 
 export default function Testimonial({ route, navigation }) {
     const { data } = route.params;
@@ -42,7 +43,22 @@ export default function Testimonial({ route, navigation }) {
                 source={{html: data.body}}/>
             <Text bold fontSize="lg">Associated Action</Text>
             <ActionCard navigation={navigation} />
-            <Text bold fontSize="lg">Related Vendor</Text>
+            {
+                (data.vendor != null)
+                ?
+                <View>
+                    <Text bold fontSize="lg">Related Vendor</Text>
+                    <ServiceProviderCard
+                        direction="row"
+                        name={data.vendor.name}
+                        description="This could be a brief description of the service provider."
+                        image={data.vendor.logo.url}
+                        onPress={() => navigation.navigate("serviceProviderDetails")}
+                        my="2"
+                        />
+                </View>
+                : <></>
+            }
         </VStack>
     </ScrollView>
   );

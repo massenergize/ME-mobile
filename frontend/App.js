@@ -76,7 +76,7 @@ export default function App() {
             options={{ title: "" }}
           />
           <Stack.Screen name="actions" component={ActionsPage} />
-          <Stack.Screen name="actiondetails" component={ActionDetails} />
+          <Stack.Screen name="actiondetails" component={ActionDetails} options={{ headerTitle: "ACTION", headerTitleAlign: "center"}}/>
           <Stack.Screen name="testimonials" component={TestimonialsPage} />
           <Stack.Screen name="testimonial" component={Testimonial} options={{ headerTitle: "TESTIMONIAL", headerTitleAlign: "center"}}/>
           <Stack.Screen name="addTestimonial" component={AddTestimonial} options={{ headerTitle: "TESTIMONIAL", headerTitleAlign: "center"}}/>

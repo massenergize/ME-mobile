@@ -19,7 +19,7 @@ export default function ActionsPage({ navigation }) {
       <ScrollView>
         <Text style={styles.category}>Recommended</Text>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <HStack space={2} justifyContent="center" mx="15" marginBottom="15">
+          <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
             <ActionCard navigation={navigation} />
             <ActionCard navigation={navigation} />
             <ActionCard navigation={navigation} />
@@ -28,7 +28,7 @@ export default function ActionsPage({ navigation }) {
         </ScrollView>
         <Text style={styles.category}>Daily</Text>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <HStack space={2} justifyContent="center" mx="15" marginBottom="15">
+          <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
             <ActionCard navigation={navigation} />
             <ActionCard navigation={navigation} />
             <ActionCard navigation={navigation} />
@@ -36,7 +36,7 @@ export default function ActionsPage({ navigation }) {
         </ScrollView>
         <Text style={styles.category}>High Impact</Text>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <HStack space={2} justifyContent="center" mx="15" marginBottom="15">
+          <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
             <ActionCard navigation={navigation} />
             <ActionCard navigation={navigation} />
             <ActionCard navigation={navigation} />
@@ -44,7 +44,7 @@ export default function ActionsPage({ navigation }) {
         </ScrollView>
         <Text style={styles.category}>Low Cost</Text>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <HStack space={2} justifyContent="center" mx="15" marginBottom="15">
+          <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
             <ActionCard navigation={navigation} />
             <ActionCard navigation={navigation} />
             <ActionCard navigation={navigation} />

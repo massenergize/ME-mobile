@@ -11,8 +11,6 @@ import {
   Pressable,
   Image
 } from "native-base";
-import { Dimensions } from 'react-native';
-import { VictoryPie, VictoryContainer } from 'victory-native';
 import ActionCard from "./../ActionsPage/ActionCard";
 import { SmallChart } from "../../Shared/Charts.js";
 import EventCard from "./../EventsPage/EventCard";

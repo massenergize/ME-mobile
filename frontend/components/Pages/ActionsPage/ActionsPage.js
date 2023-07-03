@@ -17,22 +17,39 @@ export default function ActionsPage({ navigation }) {
     //<ScrollView style = {styles.scroll}>
     <Page>
       <ScrollView>
-        <Text style={styles.category}>One-Time Actions</Text>
-        <HStack space={2} justifyContent="center" mx="15" marginBottom="15">
-          <ActionCard navigation={navigation} />
-          <ActionCard navigation={navigation} />
-          {/*<Button onPress={() => navigation.navigate("welcome")}>Take Action</Button>*/}
-        </HStack>
-        <Text style={styles.category}>Recurring Actions</Text>
-        <HStack space={2} justifyContent="center" mx="15" marginBottom="15">
-          <ActionCard navigation={navigation} />
-          <ActionCard navigation={navigation} />
-        </HStack>
-        <Text style={styles.category}>Other Actions</Text>
-        <HStack space={2} justifyContent="center" mx="15" marginBottom="15">
-          <ActionCard navigation={navigation} />
-          <ActionCard navigation={navigation} />
-        </HStack>
+        <Text style={styles.category}>Recommended</Text>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          <HStack space={2} justifyContent="center" mx="15" marginBottom="15">
+            <ActionCard navigation={navigation} />
+            <ActionCard navigation={navigation} />
+            <ActionCard navigation={navigation} />
+            {/*<Button onPress={() => navigation.navigate("welcome")}>Take Action</Button>*/}
+          </HStack>
+        </ScrollView>
+        <Text style={styles.category}>Daily</Text>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          <HStack space={2} justifyContent="center" mx="15" marginBottom="15">
+            <ActionCard navigation={navigation} />
+            <ActionCard navigation={navigation} />
+            <ActionCard navigation={navigation} />
+          </HStack>
+        </ScrollView>
+        <Text style={styles.category}>High Impact</Text>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          <HStack space={2} justifyContent="center" mx="15" marginBottom="15">
+            <ActionCard navigation={navigation} />
+            <ActionCard navigation={navigation} />
+            <ActionCard navigation={navigation} />
+          </HStack>
+        </ScrollView>
+        <Text style={styles.category}>Low Cost</Text>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          <HStack space={2} justifyContent="center" mx="15" marginBottom="15">
+            <ActionCard navigation={navigation} />
+            <ActionCard navigation={navigation} />
+            <ActionCard navigation={navigation} />
+          </HStack>
+        </ScrollView>
       </ScrollView>
     </Page>
   );
@@ -44,7 +61,7 @@ const styles = StyleSheet.create({
   },
   category: {
     padding: 15,
-    fontSize: 23,
+    fontSize: 20,
     fontWeight: "bold",
   },
 });

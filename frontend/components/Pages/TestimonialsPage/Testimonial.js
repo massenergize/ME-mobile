@@ -1,6 +1,6 @@
 import { ScrollView, View, useWindowDimensions } from "react-native";
 import React from "react";
-import { Box, VStack, Image, Text } from "native-base";
+import { VStack, Image, Text } from "native-base";
 import { RenderHTML } from "react-native-render-html";
 import Moment from 'moment';
 

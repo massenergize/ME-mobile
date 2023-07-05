@@ -53,16 +53,18 @@ export default function ServiceProviderDetailsPage() {
           shadow="5"
         >
           <Heading size="xl" mb="5">
-            {spDetails?.name}
+            {spDetails.name}
           </Heading>
           <Box mb="5">
             <Text fontSize="lg" fontWeight="bold">
               Description
             </Text>
-            <HTMLParser
-              htmlString={spDetails?.description || ""}
-              baseStyle={{ fontSize: "16px" }}
-            />
+            {spDetails.description && (
+              <HTMLParser
+                htmlString={spDetails.description}
+                baseStyle={{ fontSize: "16px" }}
+              />
+            )}
           </Box>
           <Box>
             <Text fontSize="lg" fontWeight="bold">
@@ -71,16 +73,16 @@ export default function ServiceProviderDetailsPage() {
             <VStack space="2" mt="2">
               <HStack space="5">
                 <Icon as={FontAwesome} name="phone" size="sm" />
-                <Text>{spDetails?.phone_number}</Text>
+                <Text>{spDetails.phone_number}</Text>
               </HStack>
               <HStack space="5">
                 <Icon as={FontAwesome} name="envelope" size="sm" />
-                <Link isUnderlined={false}>{spDetails?.email}</Link>
+                <Link isUnderlined={false}>{spDetails.email}</Link>
               </HStack>
               <HStack space="5">
                 <Icon as={FontAwesome} name="globe" size="sm" />
                 <Link _text={{ color: "primary.400" }}>
-                  {spDetails?.website}
+                  {spDetails.website}
                 </Link>
               </HStack>
             </VStack>

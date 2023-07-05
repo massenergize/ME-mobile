@@ -1,11 +1,11 @@
 import { ScrollView, View, useWindowDimensions } from "react-native";
 import React from "react";
 import { VStack, Image, Text } from "native-base";
-import { RenderHTML } from "react-native-render-html";
 import Moment from 'moment';
 
 import ActionCard from "./../ActionsPage/ActionCard.js";
 import ServiceProviderCard from "./../ServiceProvidersPage/ServiceProviderCard.js";
+import HTMLParser from "../../Shared/HTMLParser";
 
 export default function Testimonial({ route, navigation }) {
     const { data } = route.params;
@@ -37,10 +37,10 @@ export default function Testimonial({ route, navigation }) {
             }
             <Text bold fontSize="2xl" mt={3}>{data.title}</Text>
             <Text fontSize="md" color="#BAB9C0">By {data.preferred_name} | {Moment(data.created_at).format('ll')}</Text>
-            {/* <Text fontSize="md" mb={4}>{data.body}</Text> */}
-            <RenderHTML 
-                contentWidth={width}
-                source={{html: data.body}}/>
+            <HTMLParser
+                  htmlString={data.body}
+                  baseStyle={textStyle}
+                />
             <Text bold fontSize="lg">Associated Action</Text>
             <ActionCard navigation={navigation} action={data.action} />
             {
@@ -63,3 +63,7 @@ export default function Testimonial({ route, navigation }) {
     </ScrollView>
   );
 }
+
+const textStyle = {
+    fontSize: "16px",
+};

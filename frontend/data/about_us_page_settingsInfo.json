@@ -1,0 +1,150 @@
+{
+    "data": {
+        "id": 3,
+        "community": {
+            "id": 3,
+            "name": "Energize Wayland",
+            "subdomain": "wayland",
+            "owner_name": "Kaat Vander Straeten",
+            "owner_email": "KAATvds@gmail.com",
+            "owner_phone_number": null,
+            "is_geographically_focused": true,
+            "location": {
+                "city": "Wayland",
+                "unit": null,
+                "state": "Massachusetts",
+                "address": null,
+                "country": "US",
+                "zipcode": "01778"
+            },
+            "is_approved": true,
+            "more_info": "{\"wants_socials\":\"true\",\"facebook_link\":\"https://www.facebook.com/EnergizeWayland\"}",
+            "is_published": true,
+            "logo": {
+                "id": 5,
+                "name": "Energize Wayland CommunityLogo",
+                "url": "https://massenergize-prod-files.s3.amazonaws.com/media/energizewayland_resized.jpg"
+            },
+            "favicon": null,
+            "feature_flags": [
+                {
+                    "id": 7,
+                    "name": "weekly_event_nudge",
+                    "scope": "BACKEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "weekly_event_nudge-feature-flag",
+                    "notes": "Send a weekly nudge to cadmins",
+                    "expires_on": null,
+                    "communities": [
+                        {
+                            "id": 3,
+                            "name": "Energize Wayland"
+                        },
+                        {
+                            "id": 7,
+                            "name": "Energize Framingham"
+                        },
+                        {
+                            "id": 6,
+                            "name": "Cooler Concord"
+                        }
+                    ]
+                },
+                {
+                    "id": 13,
+                    "name": "user-submitted-vendors",
+                    "scope": "USER_FRONTEND",
+                    "audience": "SPECIFIC",
+                    "user_audience": "EVERYONE",
+                    "key": "user-submitted-vendors-feature-flag",
+                    "notes": "Users can submit service providers",
+                    "expires_on": null,
+                    "communities": [
+                        {
+                            "id": 3,
+                            "name": "Energize Wayland"
+                        }
+                    ]
+                },
+                {
+                    "id": 10,
+                    "name": "user-submitted-testimonials",
+                    "scope": "USER_FRONTEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "user-submitted-testimonials-feature-flag",
+                    "notes": "Users can submit testimonials",
+                    "expires_on": null,
+                    "communities": []
+                },
+                {
+                    "id": 11,
+                    "name": "user-submitted-events",
+                    "scope": "USER_FRONTEND",
+                    "audience": "SPECIFIC",
+                    "user_audience": "EVERYONE",
+                    "key": "user-submitted-events-feature-flag",
+                    "notes": "Users can submit events",
+                    "expires_on": null,
+                    "communities": [
+                        {
+                            "id": 3,
+                            "name": "Energize Wayland"
+                        }
+                    ]
+                },
+                {
+                    "id": 12,
+                    "name": "user-submitted-actions",
+                    "scope": "USER_FRONTEND",
+                    "audience": "SPECIFIC",
+                    "user_audience": "EVERYONE",
+                    "key": "user-submitted-actions-feature-flag",
+                    "notes": "Users can submit actions",
+                    "expires_on": null,
+                    "communities": [
+                        {
+                            "id": 3,
+                            "name": "Energize Wayland"
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "name": "new-user-engagement-view",
+                    "scope": "ADMIN_FRONTEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "new-user-engagement-view-feature-flag",
+                    "notes": "Admin portal shows new user engagement view",
+                    "expires_on": null,
+                    "communities": []
+                },
+                {
+                    "id": 9,
+                    "name": "communication-prefs",
+                    "scope": "USER_FRONTEND",
+                    "audience": "EVERYONE",
+                    "user_audience": "EVERYONE",
+                    "key": "communication-prefs-feature-flag",
+                    "notes": "Whether Users see user communication preferences",
+                    "expires_on": null,
+                    "communities": []
+                }
+            ]
+        },
+        "title": "About Energize Wayland",
+        "sub_title": "",
+        "description": "<p style=\"text-align: center;\">&nbsp;</p>\r\n<p style=\"text-align: center;\"><span style=\"font-size: 18pt; color: #e67e23;\"><strong>Our goal for 2023 is that a 1200 Wayland households collectively take 5000 actions on climate change!</strong></span></p>\r\n<p style=\"text-align: center;\">&nbsp;</p>\r\n<p>Energize Wayland is an all-volunteer group dedicated to helping our neighbors and local businesses take steps in their homes, at work, and in their daily lives to address the climate emergency. Our ultimate goal is that <em>all </em>wayland households are capable, empowered and determined to take action.&nbsp;</p>\r\n<p>&nbsp;</p>\r\n<p>We are one big and joyful experiment involving a great variety of events, programs and collaborations:&nbsp;</p>\r\n<p>&nbsp;</p>\r\n<p><strong>Coaches</strong></p>\r\n<p>&nbsp;</p>\r\n<p>We support a cadre of coaches, who are often the first go-to for people and have proven to be essential in helping move forward on more complex actions.&nbsp;All of our coaches are local volunteers who collectively volunteer a ton of their time to help their neighbors! <span style=\"text-decoration: underline;\">THANK YOU, coaches!&nbsp;</span></p>\r\n<p>&nbsp;</p>\r\n<p>If you have expertise and would like to help, <a href=\"mailto:info@energizewayland.org\">be in touch</a>!</p>\r\n<p>&nbsp;</p>\r\n<ol>\r\n<li>Heat pump coaches: Steve Breit, Anne Harris, Aina Lagor, Tap Maniar, Eric Simms, Paul Dale, David Fitzpatrick, Michael Pineault - fill in <a href=\"https://www.massenergize.org/coaching-request/\" target=\"_blank\" rel=\"noopener\">this form</a></li>\r\n<li>Rooftop solar coach: Kaat Vander Straeten, Paul Dale, Bill Huss - <a href=\"https://www.massenergize.org/rooftop-community-solar/\" target=\"_blank\" rel=\"noopener\">form</a></li>\r\n<li>Native gardening coach: Jean Milburn - <a href=\"https://www.massenergize.org/nstive-ecolandscaping-coach/\" target=\"_blank\" rel=\"noopener\">form</a></li>\r\n<li>Electric Vehicle coach: Shelley Trucksis and Sabine von Mering - &nbsp;<a href=\"https://www.massenergize.org/ev-coach/\" target=\"_blank\" rel=\"noopener\">form</a></li>\r\n<li>Home Energy coach: Ellen Tohn, Anne Harris - <a href=\"https://www.massenergize.org/home-energy-assessment-coach/\">form</a></li>\r\n<li>Community Solar coach: John Harper&nbsp;- <a href=\"https://www.massenergize.org/rooftop-community-solar/\" target=\"_blank\" rel=\"noopener\">form</a></li>\r\n<li>Electric bike coach: Michael Delman - <a href=\"https://www.massenergize.org/electric-bike-coach/\" target=\"_blank\" rel=\"noopener\">form</a></li>\r\n</ol>\r\n<p><strong>Events</strong></p>\r\n<ol>\r\n<li>We organize well-loved yearly events such as Earth Day festivals and Spring Clean-Ups, often with the help of students.</li>\r\n<li>When the opportunity arises, we organize longer campaigns, like Solarize.&nbsp;</li>\r\n<li>Not a month goes by when we don't organize an event (in person or webinar) on a specific topic, like heat pumps, solar, electric vehicles...</li>\r\n<li>We also host a monthly Commmuty of Practice on climate grief.&nbsp;</li>\r\n<li>Check out our <a href=\"https://www.energizewayland.org/events\" target=\"_blank\" rel=\"noopener\">events</a>.</li>\r\n</ol>\r\n<p>&nbsp;</p>\r\n<p><strong>Newsletter and Facebook</strong></p>\r\n<ol>\r\n<li>Our newsletter goes out to about 800 Waylanders, twice, sometimes three times a month. If you want to be kept up to date on events and climate goings on in Town, and read stories of neighbors taking action, <a href=\"mailto:info@energizewayland.org\">email us</a> and we'll subscribe you. You can unsubscribe any time.</li>\r\n<li>If you're on Facebook, <a href=\"https://www.facebook.com/EnergizeWayland\" target=\"_blank\" rel=\"noopener\">follow our page</a>!&nbsp;</li>\r\n</ol>\r\n<p>&nbsp;</p>\r\n<p><strong>Town-wide Climate Action Mobilization and Survey</strong></p>\r\n<ol>\r\n<li>In 2021, Energize Wayland was instrumental in getting the Climate Emergency Declaration passed - check out the video our student volunteers made!</li>\r\n<li>We continue as the outreach partner in the ongoing town-wide <a href=\"https://www.energizewayland.org/actions/2931\" target=\"_blank\" rel=\"noopener\">Climate Action Mobilization</a>.&nbsp;</li>\r\n<li>We designed, host and promote a town-wide <a href=\"https://docs.google.com/forms/d/e/1FAIpQLSdYZyujAs8Gc80h1wm91eeSpGVkF7AehUW13Oot7qu9Gbx0XA/viewform\" target=\"_blank\" rel=\"noopener\">Survey</a> to learn how Waylanders feel and think about climate change, how prepared we are for action, what questions we have, and what obstacles are in our way.&nbsp;</li>\r\n</ol>\r\n<p>&nbsp;</p>\r\n<p><strong>Vendors and installers</strong></p>\r\n<ol>\r\n<li>Sometimes the biggest barrier is the time (and risk) involved in choosing vendors and installers. For some actions we partner with companies and non-profits, whom we hold to the highest standard of service and customer service.</li>\r\n<li>We do not receive money from these providers.</li>\r\n<li>If you are a service provider or installer who would like to learn more,&nbsp;<a href=\"mailto:info@energizewayland.org\">be in touch.</a></li>\r\n</ol>\r\n<p>&nbsp;</p>\r\n<p><strong>Collaborations and&nbsp; Partnerships</strong></p>\r\n<ol>\r\n<li>We are very well-networked with other local organizations, indviduals, and Town officials.&nbsp;</li>\r\n<li>We work closely with youth in town, for instance, mentoring High School students for their National Honors Society projects Clean-Ups and other projects.&nbsp;<a href=\"mailto:info@energizewayland.org\">Be in touch</a> if you would like to explore collaborating.</li>\r\n<li>Our long-standing collaboration with the <a href=\"https://www.wayland.ma.us/energy-and-climate-committee\" target=\"_blank\" rel=\"noopener\">Wayland Energy and&nbsp; Climate Committee</a> started in 2017 with Solarize Plus, and continues with the town-wide <a href=\"https://www.energizewayland.org/actions/2931\" target=\"_blank\" rel=\"noopener\">Climate Action Mobilization</a>.</li>\r\n</ol>\r\n<p>&nbsp;</p>\r\n<p><strong>Need our help?&nbsp;</strong></p>\r\n<ol>\r\n<li>We <em>gladly </em>help individuals and groups with events: we can do promotion and help with event design, annd we also host webinars and help with tech support.</li>\r\n<li>We can also advise on and help promote&nbsp; larger campaigns, like we did with the Town Meetinh&nbsp; Climate Emergency Declaration campaign (2021) and the push for a Full-time Sustainability Director (2021-22).&nbsp;</li>\r\n<li>If you want to make something happen,&nbsp;<a href=\"mailto:info@energizewayland.org\">be in touch</a>!</li>\r\n</ol>\r\n<p>&nbsp;</p>\r\n<p><strong>Want to help?</strong></p>\r\n<p>We are a merry band of volunteers, each involved according to our interests and within the bounds of the time we can devote. We always welcome more volunteers, so email <a href=\"mailto:info@energizewayland.org\" target=\"_self\">info@energizewayland.org</a> if you want to help.</p>\r\n<p>&nbsp;</p>\r\n<p style=\"text-align: center;\"><span style=\"font-size: 18pt; color: #e67e23;\"><strong>Our Mission and Vision Statement</strong></span></p>\r\n<p>&nbsp;</p>\r\n<p><span style=\"font-weight: 400;\"><strong>WHY</strong>? We face a climate emergency that demands action from every member of our community - people of all ages and income levels, businesses, houses of worship, schools, municipal government, nonprofits and grassroots organizations - to drastically reduce greenhouse gas emissions, improve local resilience, build real community, and adapt to a changing, unstable climate.&nbsp;</span></p>\r\n<p>&nbsp;</p>\r\n<p><span style=\"font-weight: 400;\"><strong>MISSION</strong>. Through climate action planning, outreach campaigns, community events, practical projects and neig</span><span style=\"font-weight: 400;\">hbor-to-neighbor engagement, Energize Wayland activates and nurtures our town&rsquo;s social networks, invites our collective skills and resources, and empowers everyone to take a diverse set of actions to reduce harm climate change causes.</span></p>\r\n<p>&nbsp;</p>\r\n<p><span style=\"font-weight: 400;\"><strong>VISION</strong>. We plan holistically, regeneratively, and ethically, integrating as best we can social, economic, and cultural dimensions within and beyond our borders. This creates the deep individual, social and cultural change on a local level that is a critical part of the wider systems change that we need, leading to a more just, resilient and fulfilling society.</span></p>\r\n<p>&nbsp;</p>",
+        "featured_video_link": "https://youtu.be/8ImhoIrj6qg",
+        "more_info": null,
+        "is_deleted": false,
+        "is_published": true,
+        "is_template": false,
+        "images": []
+    },
+    "error": null,
+    "success": true,
+    "cursor": {}
+}

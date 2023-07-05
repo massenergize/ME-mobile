@@ -13,6 +13,7 @@ import {
   Spacer
 } from "native-base";
 import Page from "../../Shared/Page";
+import HTMLParser from "../../Shared/HTMLParser";
 
 
 export default function ActionDetails({ route, navigation}) {
@@ -25,19 +26,28 @@ export default function ActionDetails({ route, navigation}) {
 
   const generateDescriptionTab = () => {
     return (
-      <Text>Description Tab</Text>
+      <HTMLParser
+        htmlString={action.about}
+        baseStyle={textStyle}
+      />
     )
   }
 
   const generateStepsTab = () => {
     return (
-      <Text>Steps Tab</Text>
+      <HTMLParser
+        htmlString={action.steps_to_take}
+        baseStyle={textStyle}
+      />
     )
   }
 
   const generateDeepDiveTab = () => {
     return (
-      <Text>Deep Dive Tab</Text>
+      <HTMLParser
+        htmlString={action.deep_dive}
+        baseStyle={textStyle}
+      />
     )
   }
 
@@ -123,12 +133,13 @@ export default function ActionDetails({ route, navigation}) {
                 <Spacer />
                 <Text fontSize="lg">$$$</Text>
               </HStack>
-              <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} pl={3}>
+              <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} px={3}>
                 <TabButton label="Description" name="description" />
                 <TabButton label="Steps" name="steps" />
                 <TabButton label="Deep Dive" name="deep_dive" />
                 <TabButton label="Testimonials" name="testimonials" />
                 <TabButton label="Service Providers" name="service_providers" />
+                <Container width={5}></Container>
               </ScrollView>
               <Box m={15}>
                 {renderTabContent()}
@@ -168,3 +179,7 @@ export default function ActionDetails({ route, navigation}) {
     </Page>
   );
 }
+
+const textStyle = {
+  fontSize: "16px",
+};

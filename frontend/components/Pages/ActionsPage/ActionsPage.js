@@ -9,6 +9,13 @@ import Page from "../../Shared/Page";
 import actions from "./../../../data/actionsList.json";
 
 export default function ActionsPage({ navigation }) {
+
+  // for (let i = 0; i < actions.data.length; i++) {
+  //   for (let j = 0; j < actions.data[i].tags.length; j++) {
+      
+  //   }
+  // }
+
   return (
     //the styling should apply to something else
     //<ScrollView style = {styles.scroll}>

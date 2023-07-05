@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import React from "react";
-import { Box, HStack, VStack, Text, Pressable, Container, Image } from "native-base";
+import { Box, Text, Pressable, Image } from "native-base";
 import Moment from 'moment';
 
 function TestimonialCard({ navigation, data, picture }) {

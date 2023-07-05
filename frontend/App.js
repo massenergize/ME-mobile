@@ -41,11 +41,6 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
-            name="chooseCommunity"
-            component={ChooseCommunityPage}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
             name="intro"
             component={IntroductionPage}
             options={{
@@ -91,6 +86,11 @@ export default function App() {
             options={{ headerTitle: "TESTIMONIAL", headerTitleAlign: "center" }}
           />
           <Stack.Screen name="community" component={CommunityPage} />
+          <Stack.Screen
+            name="chooseCommunity"
+            component={ChooseCommunityPage}
+            options={{ headerShown: false }}
+          />
           <Stack.Screen name="teamDetails" component={TeamDetailsPage} />
           <Stack.Screen name="teams" component={TeamsPage} />
           <Stack.Screen

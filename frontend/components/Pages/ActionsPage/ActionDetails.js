@@ -128,12 +128,6 @@ export default function ActionDetails() {
                 <TabButton label="Testimonials" name="testimonials" />
                 <TabButton label="Service Providers" name="service_providers" />
               </ScrollView>
-              {/* <Text style={{ margin: 15 }}>
-                {" "}
-                A Brief Description about the action, why it matters, what impact
-                it has, any statistics about usage, how many people have switched,
-                how easy it is, cost, etc.
-              </Text> */}
               <Box m={15}>
                 {renderTabContent()}
               </Box>
@@ -172,25 +166,3 @@ export default function ActionDetails() {
     </Page>
   );
 }
-
-const styles = StyleSheet.create({
-  actionname: {
-    padding: 15,
-    fontSize: 23,
-    fontWeight: "bold",
-  },
-  container: {
-    flex: 0.4,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  textStyle: {
-    padding: 15,
-    fontSize: 18,
-    fontWeight: "bold",
-    flex: 1,
-  },
-  menu: {
-    marginLeft: 15,
-  },
-});

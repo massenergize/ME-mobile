@@ -130,24 +130,6 @@ export default function ChooseCommunityPage({ navigation }) {
                       </Text>
                     </Box>
                   </Flex>
-                  {/* <HStack space="5" mb="2" alignItems="center">
-                    <Image
-                      source={{ uri: community.image }}
-                      alt={community.imageAlt}
-                      size="100px"
-                      resizeMode="contain"
-                    />
-                    <Box shadow="md" rounded="lg">
-                      <Box>
-                        <Text fontSize="lg" fontWeight="bold">
-                          {community.name}
-                        </Text>
-                        <Text fontSize="sm" color="muted.400">
-                          {community.location}
-                        </Text>
-                      </Box>
-                    </Box>
-                  </HStack> */}
                 </Pressable>
               ))}
             </ScrollView>

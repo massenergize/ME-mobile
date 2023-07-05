@@ -1,63 +1,89 @@
-import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
+import React, { useState, useEffect } from "react";
 import {
+  Button,
   Center,
   Image,
   Text,
   Box,
   VStack,
   Input,
-  Container,
   ScrollView,
   HStack,
   Icon,
-  Divider,
+  Modal,
+  Heading,
+  Flex,
 } from "native-base";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Pressable } from "react-native";
+import Page from "../../Shared/Page";
+import SearchBar from "../../Shared/SearchBar";
 
-const COMMUNITIES = [
+import DummyResponse from "../../../data/communitiesList.json";
+
+const filterOptions = [
   {
-    id: 1,
-    name: "Cooler Concord",
-    location: "Concord, MA",
-    image:
-      "https://massenergize-prod-files.s3.amazonaws.com/media/coolerconcord.jpg",
+    value: "all",
+    label: "All",
   },
   {
-    id: 2,
-    name: "Energize Framingham",
-    location: "Framingham, MA",
-    image:
-      "https://massenergize-prod-files.s3.amazonaws.com/media/Framingham2020_smaller.jpg",
+    value: "cities & towns",
+    label: "Cities & Towns",
   },
   {
-    id: 3,
-    name: "Energize Wayland",
-    location: "Wayland, MA",
-    image:
-      "https://www.massenergize.org/wp-content/uploads/2021/08/energize-wayland.jpg",
+    value: "other communities",
+    label: "Other Communities",
   },
   {
-    id: 4,
-    name: "Energize Boxborough",
-    location: "Boxborough, MA",
-    image: "https://massenergize-prod-files.s3.amazonaws.com/media/bsclogo.jpg",
+    value: "schools",
+    label: "Schools",
   },
 ];
 
 export default function ChooseCommunityPage({ navigation }) {
+  const [communities, setCommunities] = useState([]);
+  const [zipCode, setZipCode] = useState("");
+  const [showModal, setShowModal] = useState(true);
+
+  const handleZipCodeSubmit = () => {
+    // TODO: validate zip code
+    setShowModal(false);
+  };
+
+  useEffect(() => {
+    // TODO: fetch communities from backend
+    // TODO: add loading state
+    if (DummyResponse.success) {
+      const data = DummyResponse.data;
+      let nearbyCommunities = [];
+      // add all communities for now. TODO: implement zip code logic
+      data.forEach((community) => {
+        const location = community.is_geographically_focused
+          ? `${community.location.city}, ${community.location.state}`
+          : `${community.location.country}`;
+        // if zipCode exists then
+        //// only add community if community's location is within 10 miles of zipCode
+
+        // else add all communities
+        nearbyCommunities.push({
+          id: community.id,
+          name: community.name,
+          location: location,
+          image: community.logo.url,
+          imageAlt: community.logo.name,
+        });
+      });
+      setCommunities(nearbyCommunities);
+    }
+  }, []);
+
   return (
-    <SafeAreaView height="100%" width="100%">
-      <Center>
-        <Text fontSize="md" fontWeight="bold" py="5">
-          Choose a location to see nearby communities!
-        </Text>
-      </Center>
-      <Image
-        source={require("../../../assets/images/choose-community-background.png")}
-        alt="Background Image"
-      />
+    <Page>
+      <Box height="50%" backgroundColor={"amber.100"}>
+        <Center h="full">
+          <Heading>IMAGE</Heading>
+        </Center>
+      </Box>
       <Box
         position="absolute"
         backgroundColor="white"
@@ -66,84 +92,75 @@ export default function ChooseCommunityPage({ navigation }) {
         bottom="0"
         borderTopRadius="30"
       >
-        <Container alignSelf="center">
-          <VStack space="5" mt="10">
-            <HStack space="2" justifyContent="center">
-              <Text fontSize="10px" fontWeight="bold">
-                ALL
-              </Text>
-              <Divider orientation="vertical" />
-              <Text fontSize="10px">CITIES & TOWNS</Text>
-              <Divider orientation="vertical" />
-              <Text fontSize="10px">OTHER COMMUNITIES</Text>
-              <Divider orientation="vertical" />
-              <Text fontSize="10px">SCHOOLS</Text>
+        <Box mx="5">
+          <VStack space="5" pt="10">
+            <HStack space="2" alignItems="center">
+              <Text>Communities near: </Text>
+              <Pressable onPress={() => setShowModal(true)}>
+                <HStack space="1" alignItems="center">
+                  <Text fontSize="2xl" fontWeight="bold" color="primary.400">
+                    {zipCode ? zipCode : "0000"}
+                  </Text>
+                  <Icon as={FontAwesome} name="pencil" color="primary.400" />
+                </HStack>
+              </Pressable>
             </HStack>
-            <Input
-              placeholder="Search for a community..."
-              variant="rounded"
-              width="full"
-              borderRadius="full"
-              size="lg"
-              InputLeftElement={
-                <Icon
-                  ml="2"
-                  size="4"
-                  color="gray.400"
-                  as={FontAwesome}
-                  name="search"
-                />
-              }
-            />
-            <Text
-              color="primary.400"
-              fontWeight="bold"
-              fontSize="md"
-              textAlign="center"
-            >
-              <Icon
-                as={FontAwesome}
-                name="location-arrow"
-                size="4"
-                color="primary.400"
-              />
-              {"    "}Use my current location
-            </Text>
-            <Divider />
-            <ScrollView mb="10">
-              {COMMUNITIES.map((community) => (
+            <SearchBar filterOptions={filterOptions} />
+            {/* Container for communities */}
+            <ScrollView height="80">
+              {communities.map((community) => (
                 <Pressable
                   key={community.id}
                   onPress={() => navigation.navigate("drawer")}
                 >
-                  <HStack space="5" mb="2" alignItems="center">
+                  <Flex flexDirection="row" alignItems="center">
                     <Image
                       source={{ uri: community.image }}
-                      alt={community.name}
-                      size="128px"
+                      alt={community.imageAlt}
+                      size="100px"
                       resizeMode="contain"
                     />
-                    <Box shadow="md" rounded="lg">
-                      <Box>
-                        <Text
-                          fontSize="lg"
-                          fontWeight="bold"
-                          color="primary.400"
-                        >
-                          {community.name}
-                        </Text>
-                        <Text fontSize="sm" color="muted.400">
-                          {community.location}
-                        </Text>
-                      </Box>
+                    <Box width="70%" pl="5">
+                      <Text fontSize="lg" fontWeight="bold">
+                        {community.name}
+                      </Text>
+
+                      <Text fontSize="sm" color="muted.400">
+                        {community.location}
+                      </Text>
                     </Box>
-                  </HStack>
+                  </Flex>
                 </Pressable>
               ))}
             </ScrollView>
           </VStack>
-        </Container>
+        </Box>
       </Box>
-    </SafeAreaView>
+      {/* Modal for inputting zip code */}
+      <Modal isOpen={showModal} onClose={() => setShowModal(false)} size="lg">
+        <Modal.Content maxWidth="400px">
+          <Modal.Body>
+            <Center mb="5">
+              <Icon
+                as={FontAwesome}
+                name="globe"
+                size="90"
+                color="primary.600"
+              />
+              <Text fontSize="lg" fontWeight="bold" py="5">
+                Let's find your community!
+              </Text>
+              <Input
+                placeholder="Enter your zip code..."
+                variant="rounded"
+                value={zipCode}
+                onChangeText={(text) => setZipCode(text)}
+              />
+            </Center>
+            <Button onPress={handleZipCodeSubmit}>Submit</Button>
+          </Modal.Body>
+        </Modal.Content>
+      </Modal>
+    </Page>
   );
 }

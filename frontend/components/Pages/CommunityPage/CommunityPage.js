@@ -15,6 +15,7 @@ import ActionCard from "./../ActionsPage/ActionCard";
 import { SmallChart } from "../../Shared/Charts.js";
 import EventCard from "./../EventsPage/EventCard";
 import data from "./../../../data/communitiesInfo.json";
+import actions from "./../../../data/actionsList.json";
 
 const event = {
   id: 1,
@@ -96,6 +97,15 @@ function ShowMore({ navigation, page, text }) {
 }
 
 export default function CommunityPage({ navigation }) {
+  const getMetric = (action, metric) => {
+    for (let i = 0; i < action.tags.length; i++) {
+      if (action.tags[i].tag_collection_name === metric) {
+        return action.tags[i].name;
+      }
+    }
+    return "-"
+  }
+
   return (
     <ScrollView nestedScrollEnabled = {true}>
       <VStack alignItems="center" space={3} bg="white">
@@ -120,15 +130,22 @@ export default function CommunityPage({ navigation }) {
           <Spacer/>
           <ShowMore navigation={navigation} page="ACTIONS" text={"Show More"}/>
         </HStack>
-        {/* <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <HStack mx={4} mb={2}>
-            <ActionCard navigation={navigation}/>
-            <Container width="10px"/>
-            <ActionCard navigation={navigation}/>
-            <Container width="10px"/>
-            <ActionCard navigation={navigation}/>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
+          {
+            actions.data.map((action, index) => {
+              if (getMetric(action, "Cost") === "$" || getMetric(action, "Cost") === "0") {
+                return (
+                  <ActionCard navigation={navigation} action={action} key={index}></ActionCard>
+                )
+              }
+              else {
+                return null;
+              }
+            })
+          }
           </HStack>
-        </ScrollView> */}
+        </ScrollView>
         <HStack alignItems="center" pt={3}>
           <HeaderText text="Upcoming Event"/>
           <Spacer/>

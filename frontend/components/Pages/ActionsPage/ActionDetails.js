@@ -93,6 +93,15 @@ export default function ActionDetails({ route, navigation}) {
     }
   }
 
+  const getMetric = (metric) => {
+    for (let i = 0; i < action.tags.length; i++) {
+      if (action.tags[i].tag_collection_name === metric) {
+        return action.tags[i].name;
+      }
+    }
+    return "-"
+  }
+
   return (
     <Page>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -126,12 +135,12 @@ export default function ActionDetails({ route, navigation}) {
               <HStack alignItems="center" mx={4}>
                 <Text bold fontSize="lg">Impact</Text>
                 <Spacer />
-                <Text fontSize="lg">~1.42 tons CO2e</Text>
+                <Text fontSize="lg">{getMetric("Impact")}</Text>
               </HStack>
               <HStack alignItems="center" mx={4} mt={2} mb={4}>
                 <Text bold fontSize="lg">Cost</Text>
                 <Spacer />
-                <Text fontSize="lg">$$$</Text>
+                <Text fontSize="lg">{getMetric("Cost")}</Text>
               </HStack>
               <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} px={3}>
                 <TabButton label="Description" name="description" />

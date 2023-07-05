@@ -10,11 +10,14 @@ import actions from "./../../../data/actionsList.json";
 
 export default function ActionsPage({ navigation }) {
 
-  // for (let i = 0; i < actions.data.length; i++) {
-  //   for (let j = 0; j < actions.data[i].tags.length; j++) {
-      
-  //   }
-  // }
+  const getMetric = (action, metric) => {
+    for (let i = 0; i < action.tags.length; i++) {
+      if (action.tags[i].tag_collection_name === metric) {
+        return action.tags[i].name;
+      }
+    }
+    return "-"
+  }
 
   return (
     //the styling should apply to something else
@@ -44,23 +47,41 @@ export default function ActionsPage({ navigation }) {
             <ActionCard navigation={navigation} />
             <ActionCard navigation={navigation} />
           </HStack>
-        </ScrollView>
+        </ScrollView> */}
         <Text style={styles.category}>High Impact</Text>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
-            <ActionCard navigation={navigation} />
-            <ActionCard navigation={navigation} />
-            <ActionCard navigation={navigation} />
+            {
+              actions.data.map((action, index) => {
+                if (getMetric(action, "Impact") === "High") {
+                  return (
+                    <ActionCard navigation={navigation} action={action} key={index}></ActionCard>
+                  )
+                }
+                else {
+                  return null;
+                }
+              })
+            }
           </HStack>
         </ScrollView>
         <Text style={styles.category}>Low Cost</Text>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
-            <ActionCard navigation={navigation} />
-            <ActionCard navigation={navigation} />
-            <ActionCard navigation={navigation} />
+          {
+            actions.data.map((action, index) => {
+              if (getMetric(action, "Cost") === "$" || getMetric(action, "Cost") === "0") {
+                return (
+                  <ActionCard navigation={navigation} action={action} key={index}></ActionCard>
+                )
+              }
+              else {
+                return null;
+              }
+            })
+          }
           </HStack>
-        </ScrollView> */}
+        </ScrollView>
       </ScrollView>
     </Page>
   );

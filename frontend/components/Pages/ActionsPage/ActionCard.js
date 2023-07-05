@@ -4,6 +4,15 @@ import { Box, Heading, HStack, AspectRatio, Image, Stack } from "native-base";
 
 
 function ActionCard({ navigation, action }) {
+  const getMetric = (metric) => {
+    for (let i = 0; i < action.tags.length; i++) {
+      if (action.tags[i].tag_collection_name === metric) {
+        return action.tags[i].name;
+      }
+    }
+    return "-"
+  }
+  
   return (
     // <Box alignItems="center" width = "50%">
     // <Box alignItems="center" width={180} shadow={1} bg="white" rounded="lg" marginBottom={1}>
@@ -38,7 +47,8 @@ function ActionCard({ navigation, action }) {
                   fontSize="xs"
                   fontWeight="500"
                 >
-                  Impact | $$$ | Difficulty
+                  {/* {getMetric("Impact")} | {getMetric("Cost")} | Difficulty */}
+                  {getMetric("Impact")} Impact | {getMetric("Cost")}
                 </Text>
               </Stack>
               {/*

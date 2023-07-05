@@ -2,38 +2,37 @@ import { Text, Pressable } from "react-native";
 import React from "react";
 import { Box, Heading, HStack, AspectRatio, Image, Stack } from "native-base";
 
-const investigateAction = () => {
-  // const [actionCard, setActionCard] = useState();
-  // setActionCard(true);
-};
 
-function ActionCard({ navigation }) {
+function ActionCard({ navigation, action }) {
   return (
     // <Box alignItems="center" width = "50%">
     // <Box alignItems="center" width={180} shadow={1} bg="white" rounded="lg" marginBottom={1}>
     
       <Pressable
-        onPress={() => {console.log("Action clicked"), investigateAction(), navigation.navigate("actiondetails")}} 
+        onPress={() => {console.log("Action clicked"), navigation.navigate("actiondetails", {action: action})}} 
         // overflow="hidden"
         // bg="white" 
         // borderRadius="2xl"
         >
           <Box bg="white" borderRadius="xl" shadow={2} width={180}>
             <Box>
-              <AspectRatio w="100%" ratio={16 / 9}>
+              {/* <AspectRatio w="100%" ratio={16 / 9}> */}
                 <Image
                   source={{
-                    uri: "https://m.media-amazon.com/images/I/61JhlT09xiL._AC_SX679_.jpg",
+                    // uri: "https://m.media-amazon.com/images/I/61JhlT09xiL._AC_SX679_.jpg",
+                    uri: action.image.url,
                   }}
                   alt="image"
                   borderTopRadius="xl"
+                  resizeMode="cover"
+                  height={120}
                 />
-              </AspectRatio>
+              {/* </AspectRatio> */}
             </Box>
             <Stack p={3} space={3}>
               <Stack space={2}>
                 <Heading size="md" isTruncated={true} noOfLines={1}>
-                  Change LED
+                  {action.title}
                 </Heading>
                 <Text
                   fontSize="xs"

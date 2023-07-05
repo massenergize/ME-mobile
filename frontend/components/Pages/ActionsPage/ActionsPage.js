@@ -2,14 +2,11 @@ import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import {
   ScrollView,
-  Center,
-  Heading,
-  VStack,
-  HStack,
-  Button,
+  HStack
 } from "native-base";
 import ActionCard from "./ActionCard";
 import Page from "../../Shared/Page";
+import actions from "./../../../data/actionsList.json";
 
 export default function ActionsPage({ navigation }) {
   return (
@@ -20,13 +17,20 @@ export default function ActionsPage({ navigation }) {
         <Text style={styles.category}>Recommended</Text>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
-            <ActionCard navigation={navigation} />
-            <ActionCard navigation={navigation} />
-            <ActionCard navigation={navigation} />
+            {/* <ActionCard navigation={navigation} /> */}
+            {/* <ActionCard navigation={navigation} />
+            <ActionCard navigation={navigation} /> */}
             {/*<Button onPress={() => navigation.navigate("welcome")}>Take Action</Button>*/}
+            {
+              actions.data.map((action, index) => {
+                return (
+                  <ActionCard navigation={navigation} action={action} key={index}></ActionCard>
+                )
+              })
+            }
           </HStack>
         </ScrollView>
-        <Text style={styles.category}>Daily</Text>
+        {/* <Text style={styles.category}>Daily</Text>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
             <ActionCard navigation={navigation} />
@@ -49,7 +53,7 @@ export default function ActionsPage({ navigation }) {
             <ActionCard navigation={navigation} />
             <ActionCard navigation={navigation} />
           </HStack>
-        </ScrollView>
+        </ScrollView> */}
       </ScrollView>
     </Page>
   );

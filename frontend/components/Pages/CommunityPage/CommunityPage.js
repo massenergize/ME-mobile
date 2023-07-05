@@ -120,7 +120,7 @@ export default function CommunityPage({ navigation }) {
           <Spacer/>
           <ShowMore navigation={navigation} page="ACTIONS" text={"Show More"}/>
         </HStack>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+        {/* <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           <HStack mx={4} mb={2}>
             <ActionCard navigation={navigation}/>
             <Container width="10px"/>
@@ -128,7 +128,7 @@ export default function CommunityPage({ navigation }) {
             <Container width="10px"/>
             <ActionCard navigation={navigation}/>
           </HStack>
-        </ScrollView>
+        </ScrollView> */}
         <HStack alignItems="center" pt={3}>
           <HeaderText text="Upcoming Event"/>
           <Spacer/>

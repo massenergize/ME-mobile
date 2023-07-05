@@ -42,7 +42,7 @@ export default function Testimonial({ route, navigation }) {
                 contentWidth={width}
                 source={{html: data.body}}/>
             <Text bold fontSize="lg">Associated Action</Text>
-            <ActionCard navigation={navigation} />
+            <ActionCard navigation={navigation} action={data.action} />
             {
                 (data.vendor != null)
                 ?

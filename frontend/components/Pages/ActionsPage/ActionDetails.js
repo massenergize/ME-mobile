@@ -15,11 +15,13 @@ import {
 import Page from "../../Shared/Page";
 
 
-export default function ActionDetails() {
+export default function ActionDetails({ route, navigation}) {
 
   const { width } = useWindowDimensions();
 
   const [activeTab, setActiveTab] = useState("description")
+
+  const { action } = route.params;
 
   const generateDescriptionTab = () => {
     return (
@@ -98,19 +100,19 @@ export default function ActionDetails() {
           </View> */}
           <Image
             source={{
-                // uri: "https://massenergize-prod-files.s3.amazonaws.com/media/Acton_Boxborough__BioBlitz_2023_A-230529-160415.jpg",
-                uri: "https://m.media-amazon.com/images/I/61JhlT09xiL._AC_SX679_.jpg"
+                // uri: "https://m.media-amazon.com/images/I/61JhlT09xiL._AC_SX679_.jpg",
+               uri: action.image.url,
             }}
-            my={3}
+            m={3}
             h={250}
-            w={width}
+            // w={width}
             alt="image"
             // borderRadius="xl"
             resizeMode="contain"
         />
           <Box bg="white" rounded="xl" flex="0.6">
             <VStack>
-              <Text bold fontSize="2xl" m={4}>Change to LED</Text>
+              <Text bold fontSize="2xl" m={4}>{action.title}</Text>
               <HStack alignItems="center" mx={4}>
                 <Text bold fontSize="lg">Impact</Text>
                 <Spacer />
@@ -121,7 +123,7 @@ export default function ActionDetails() {
                 <Spacer />
                 <Text fontSize="lg">$$$</Text>
               </HStack>
-              <ScrollView horizontal={true} style={styles.menu} showsHorizontalScrollIndicator={false}>
+              <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} pl={3}>
                 <TabButton label="Description" name="description" />
                 <TabButton label="Steps" name="steps" />
                 <TabButton label="Deep Dive" name="deep_dive" />

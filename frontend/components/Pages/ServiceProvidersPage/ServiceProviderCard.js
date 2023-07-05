@@ -9,19 +9,6 @@ export default function ServiceProviderCard({
   onPress,
   ...props
 }) {
-  const parseDescription = (description) => {
-    // give a longer description if the direction is row
-    if (direction === "row") {
-      return description.length > 100
-        ? description.slice(0, 100) + "..."
-        : description;
-    }
-    // give a shorter description if the direction is column
-    return description.length > 40
-      ? description.slice(0, 40) + "..."
-      : description;
-  };
-
   return (
     <Pressable onPress={onPress}>
       <Flex
@@ -34,21 +21,25 @@ export default function ServiceProviderCard({
           source={{ uri: imageURI }}
           alt="service provider's image"
           resizeMode="contain"
-          size="40"
-          backgroundColor="gray.200"
+          size={direction === "row" ? "64px" : "128px"}
+          backgroundColor="muted.50"
           borderRadius="20"
         />
         <Box
-          width="40"
+          width={direction === "row" ? "80%" : "40"}
           pl={direction === "row" ? "3" : "0"}
           pt={direction === "column" ? "3" : "0"}
         >
           {/* name */}
-          <Text fontWeight="bold" fontSize="lg">
-            {name}
-          </Text>
-          {/* description */}
-          <Text fontWeight="thin">{parseDescription(description)}</Text>
+          {direction === "row" ? (
+            <Text fontWeight="bold" fontSize="lg">
+              {name}
+            </Text>
+          ) : (
+            <Text fontWeight="bold" fontSize="lg">
+              {name.slice(0, 20) + "..."}
+            </Text>
+          )}
         </Box>
       </Flex>
     </Pressable>

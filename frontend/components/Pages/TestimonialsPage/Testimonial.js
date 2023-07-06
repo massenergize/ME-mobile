@@ -1,6 +1,6 @@
 import { ScrollView, View, useWindowDimensions } from "react-native";
 import React from "react";
-import { Box, VStack, Image, Text } from "native-base";
+import { VStack, Image, Text } from "native-base";
 import Moment from 'moment';
 
 import ActionCard from "./../ActionsPage/ActionCard.js";
@@ -42,7 +42,7 @@ export default function Testimonial({ route, navigation }) {
                   baseStyle={textStyle}
                 />
             <Text bold fontSize="lg">Associated Action</Text>
-            <ActionCard navigation={navigation} />
+            <ActionCard navigation={navigation} action={data.action} />
             {
                 (data.vendor != null)
                 ?

@@ -11,12 +11,11 @@ import {
   Pressable,
   Image
 } from "native-base";
-import { Dimensions } from 'react-native';
-import { VictoryPie, VictoryContainer } from 'victory-native';
 import ActionCard from "./../ActionsPage/ActionCard";
 import { SmallChart } from "../../Shared/Charts.js";
 import EventCard from "./../EventsPage/EventCard";
 import data from "./../../../data/communitiesInfo.json";
+import actions from "./../../../data/actionsList.json";
 
 const event = {
   id: 1,
@@ -60,7 +59,7 @@ function GoalsCard({ navigation, goals }) {
   ]
 
   return (
-    <Pressable onPress={() => navigation.navigate("impact", {goalsList: goalsList})} width="100%">
+    <Pressable onPress={() => navigation.navigate("impact", {goalsList: goalsList})} mx={4}>
       {({ isHovered, isFocused, isPressed }) => {
       return <Box 
         // bg={isPressed ? "coolGray.200" : "white"}
@@ -69,14 +68,15 @@ function GoalsCard({ navigation, goals }) {
         width="100%" 
         alignItems="center" 
         rounded="xl" 
-        p="3"
+        p={3}
+        mx={4}
         >
         <HStack>
           { // show the three sample goals on the community page
             goalsList.map((goal, index) => <SmallChart goal={goal} color={colors[index]} key={index}/>)
           }
         </HStack>
-        <Text alignSelf="flex-end" mr={2} fontSize="sm" color="primary.400" mt={1}>Show More  ></Text>
+        <Text alignSelf="flex-end" mr={2} fontSize="sm" color="primary.400" mt={1}>Show More  {">"}</Text>
       </Box>
       }}
     </Pressable>
@@ -86,20 +86,29 @@ function GoalsCard({ navigation, goals }) {
 
 function HeaderText({ text }) {
   return (
-    <Text bold fontSize="xl">{text}</Text>
+    <Text bold fontSize="xl" ml={4}>{text}</Text>
   )
 }
 
 function ShowMore({ navigation, page, text }) {
   return (
-    <Text fontSize="sm" color="primary.400" onPress={() => navigation.navigate(page)}>{text}</Text>
+    <Text fontSize="sm" color="primary.400" mr={4} onPress={() => navigation.navigate(page)}>{text}</Text>
   )
 }
 
 export default function CommunityPage({ navigation }) {
+  const getMetric = (action, metric) => {
+    for (let i = 0; i < action.tags.length; i++) {
+      if (action.tags[i].tag_collection_name === metric) {
+        return action.tags[i].name;
+      }
+    }
+    return "-"
+  }
+
   return (
     <ScrollView nestedScrollEnabled = {true}>
-      <VStack alignItems="center" space={3} p={4} bg="white">
+      <VStack alignItems="center" space={3} bg="white">
         {/* <Text bold fontSize="2xl">Community Name</Text> */}
         <Container maxHeight={200} width="100%">
           <Image
@@ -122,12 +131,19 @@ export default function CommunityPage({ navigation }) {
           <ShowMore navigation={navigation} page="ACTIONS" text={"Show More"}/>
         </HStack>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <HStack>
-            <ActionCard navigation={navigation}/>
-            <Container width="10px"/>
-            <ActionCard navigation={navigation}/>
-            <Container width="10px"/>
-            <ActionCard navigation={navigation}/>
+          <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
+          {
+            actions.data.map((action, index) => {
+              if (getMetric(action, "Cost") === "$" || getMetric(action, "Cost") === "0") {
+                return (
+                  <ActionCard navigation={navigation} action={action} key={index}></ActionCard>
+                )
+              }
+              else {
+                return null;
+              }
+            })
+          }
           </HStack>
         </ScrollView>
         <HStack alignItems="center" pt={3}>
@@ -145,8 +161,9 @@ export default function CommunityPage({ navigation }) {
             isRSVPED={event.is_rsvped}
             isShared={event.is_shared}
             onPress={() => navigation.navigate("eventDetails")}
-            my="2"
-            shadow="5"
+            my={2}
+            mx={4}
+            shadow={5}
           />
       </VStack>
     </ScrollView>

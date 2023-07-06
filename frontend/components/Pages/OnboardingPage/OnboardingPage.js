@@ -71,7 +71,7 @@ export default function OnboardingPage({ navigation }) {
         right="5"
         zIndex={1}
         _text={{ fontWeight: "bold", color: "white", fontSize: "lg" }}
-        onPress={() => navigation.navigate("chooseCommunity")}
+        onPress={() => navigation.navigate("communitySearch")}
       >
         Skip
       </Button>

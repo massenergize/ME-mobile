@@ -21,7 +21,7 @@ export default function ServiceProviderCard({
           source={{ uri: imageURI }}
           alt="service provider's image"
           resizeMode="contain"
-          size={direction === "row" ? "64px" : "128px"}
+          size={direction === "row" ? "100px" : "128px"}
           backgroundColor="muted.50"
           borderRadius="20"
         />

@@ -17,7 +17,7 @@ import HTMLParser from "../../Shared/HTMLParser";
 import ServiceProviderCard from "../ServiceProvidersPage/ServiceProviderCard";
 
 
-export default function ActionDetails({ route, navigation}) {
+export default function ActionDetails({ route, navigation }) {
 
   const { width } = useWindowDimensions();
 
@@ -77,8 +77,11 @@ export default function ActionDetails({ route, navigation}) {
         return <ServiceProviderCard 
           direction="row" 
           description=""
-          image={vendor.logo.url}
+          imageURI={vendor.logo.url}
           name={vendor.name}
+          onPress={() =>
+            navigation.navigate("serviceProviderDetails")
+          }
           key={index}/>
       })
     )
@@ -125,7 +128,6 @@ export default function ActionDetails({ route, navigation}) {
   return (
     <Page>
       <ScrollView showsVerticalScrollIndicator={false}>
-
         <VStack style={{ flex: 1 }}>
           {/* <View style={styles.container}>
             <AspectRatio w="90%" ratio={9 / 9}>
@@ -149,7 +151,7 @@ export default function ActionDetails({ route, navigation}) {
             // borderRadius="xl"
             resizeMode="contain"
         />
-          <Box bg="white" rounded="xl" flex="0.6">
+          <Box bg="white" borderRadius="3xl" shadow={5} height="100%">
             <VStack>
               <Text bold fontSize="2xl" m={4}>{action.title}</Text>
               <HStack alignItems="center" mx={4}>
@@ -204,6 +206,7 @@ export default function ActionDetails({ route, navigation}) {
             </Container>
           </Box>
         </VStack>
+        
       </ScrollView>
     </Page>
   );

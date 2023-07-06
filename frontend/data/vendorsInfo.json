@@ -1,0 +1,281 @@
+{
+  "data": {
+    "id": 50,
+    "name": "Black Earth Compost ",
+    "phone_number": "978-290-4610",
+    "email": "jessica@blackearthcompost.com",
+    "description": "<p>Compost, Grow, Eat...Repeat. Our mission is to collect food waste, process it into nutrient rich compost, and return it to the community. There it will re-enter the growth cycle in your backyard garden or at a local farm, creating zero waste. Black Earth Compost was founded in January 2011, in Gloucester, MA. Originally a one man, one truck, Cape Ann company, it has steadily grown to become the leading full service compost company in New England. With over a dozen trucks, we are dedicated to collecting food scraps from residents, schools, supermarkets, colleges, and more, all across eastern MA. We are also the only vertically integrated company that composts the material too, returning it to customers and selling it in garden centers across Massachusetts and southern New Hampshire. Whatever your organic waste collection or garden soil needs, we are your one stop shop. Website: https://blackearthcompost.com/ Contact: https://blackearthcompost.com/forms/view/contact-form/ Email: jessica@blackearthcompost.com</p>",
+    "address": null,
+    "key_contact": {
+      "name": "Tom LeClair",
+      "email": "tom@blackearthcompost.com"
+    },
+    "service_area": "statewide",
+    "service_area_states": ["Massachusetts"],
+    "properties_serviced": ["residential", "commercial"],
+    "verification_checklist": null,
+    "is_verified": true,
+    "location": null,
+    "more_info": { "website": "https://blackearthcompost.com/" },
+    "user": null,
+    "is_deleted": false,
+    "is_published": true,
+    "is_approved": true,
+    "communities": [
+      {
+        "id": 27,
+        "name": "Energize Acton",
+        "subdomain": "ActonMA",
+        "owner_name": "Town of Acton and Acton Climate Coalition",
+        "owner_email": "EnergizeActonContact@ActonClimateCoalition.org",
+        "owner_phone_number": null,
+        "is_geographically_focused": true,
+        "location": {
+          "city": "Acton",
+          "unit": null,
+          "state": "Massachusetts",
+          "address": "472 Main St",
+          "country": "US",
+          "zipcode": "01720"
+        },
+        "is_approved": true,
+        "more_info": "{\"wants_socials\":\"true\",\"instagram_link\":\"https://www.instagram.com/actonclimatecoalition\",\"twitter_link\":\"https://www.twitter.com/ClimateActon\",\"facebook_link\":\"https://www.facebook.com/actonclimatecoalition\"}",
+        "is_published": true,
+        "logo": {
+          "id": 1361,
+          "name": "Energize Acton CommunityLogo",
+          "url": "https://massenergize-prod-files.s3.amazonaws.com/media/EnergizeActon.logo.draft.1_p.2.jpeg"
+        },
+        "favicon": null,
+        "feature_flags": [
+          {
+            "id": 7,
+            "name": "weekly_event_nudge",
+            "scope": "BACKEND",
+            "audience": "EVERYONE",
+            "user_audience": "EVERYONE",
+            "key": "weekly_event_nudge-feature-flag",
+            "notes": "Send a weekly nudge to cadmins",
+            "expires_on": null,
+            "communities": [
+              { "id": 3, "name": "Energize Wayland" },
+              { "id": 7, "name": "Energize Framingham" },
+              { "id": 6, "name": "Cooler Concord" }
+            ]
+          },
+          {
+            "id": 10,
+            "name": "user-submitted-testimonials",
+            "scope": "USER_FRONTEND",
+            "audience": "EVERYONE",
+            "user_audience": "EVERYONE",
+            "key": "user-submitted-testimonials-feature-flag",
+            "notes": "Users can submit testimonials",
+            "expires_on": null,
+            "communities": []
+          },
+          {
+            "id": 8,
+            "name": "new-user-engagement-view",
+            "scope": "ADMIN_FRONTEND",
+            "audience": "EVERYONE",
+            "user_audience": "EVERYONE",
+            "key": "new-user-engagement-view-feature-flag",
+            "notes": "Admin portal shows new user engagement view",
+            "expires_on": null,
+            "communities": []
+          },
+          {
+            "id": 9,
+            "name": "communication-prefs",
+            "scope": "USER_FRONTEND",
+            "audience": "EVERYONE",
+            "user_audience": "EVERYONE",
+            "key": "communication-prefs-feature-flag",
+            "notes": "Whether Users see user communication preferences",
+            "expires_on": null,
+            "communities": []
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "name": "Energize Framingham",
+        "subdomain": "Framingham",
+        "owner_name": "Aimee Powelka",
+        "owner_email": "EnergizeFramingham@gmail.com",
+        "owner_phone_number": null,
+        "is_geographically_focused": true,
+        "location": {
+          "city": "Framingham",
+          "unit": null,
+          "state": "Massachusetts",
+          "address": null,
+          "country": "US",
+          "zipcode": "01701"
+        },
+        "is_approved": true,
+        "more_info": "{\"wants_socials\":\"false\"}",
+        "is_published": true,
+        "logo": {
+          "id": 159,
+          "name": "Energize Framingham CommunityLogo",
+          "url": "https://massenergize-prod-files.s3.amazonaws.com/media/Framingham2020_smaller.jpg"
+        },
+        "favicon": null,
+        "feature_flags": [
+          {
+            "id": 7,
+            "name": "weekly_event_nudge",
+            "scope": "BACKEND",
+            "audience": "EVERYONE",
+            "user_audience": "EVERYONE",
+            "key": "weekly_event_nudge-feature-flag",
+            "notes": "Send a weekly nudge to cadmins",
+            "expires_on": null,
+            "communities": [
+              { "id": 3, "name": "Energize Wayland" },
+              { "id": 7, "name": "Energize Framingham" },
+              { "id": 6, "name": "Cooler Concord" }
+            ]
+          },
+          {
+            "id": 10,
+            "name": "user-submitted-testimonials",
+            "scope": "USER_FRONTEND",
+            "audience": "EVERYONE",
+            "user_audience": "EVERYONE",
+            "key": "user-submitted-testimonials-feature-flag",
+            "notes": "Users can submit testimonials",
+            "expires_on": null,
+            "communities": []
+          },
+          {
+            "id": 8,
+            "name": "new-user-engagement-view",
+            "scope": "ADMIN_FRONTEND",
+            "audience": "EVERYONE",
+            "user_audience": "EVERYONE",
+            "key": "new-user-engagement-view-feature-flag",
+            "notes": "Admin portal shows new user engagement view",
+            "expires_on": null,
+            "communities": []
+          },
+          {
+            "id": 9,
+            "name": "communication-prefs",
+            "scope": "USER_FRONTEND",
+            "audience": "EVERYONE",
+            "user_audience": "EVERYONE",
+            "key": "communication-prefs-feature-flag",
+            "notes": "Whether Users see user communication preferences",
+            "expires_on": null,
+            "communities": []
+          }
+        ]
+      },
+      {
+        "id": 46,
+        "name": "Melrose Climate Action",
+        "subdomain": "MelroseMA",
+        "owner_name": "Gary Lamothe",
+        "owner_email": "Glamothe@yahoo.com",
+        "owner_phone_number": null,
+        "is_geographically_focused": true,
+        "location": {
+          "city": "Melrose",
+          "unit": null,
+          "state": "Massachusetts",
+          "address": null,
+          "country": "US",
+          "zipcode": "02148, 02176, 02180"
+        },
+        "is_approved": true,
+        "more_info": "{\"wants_socials\":\"true\"}",
+        "is_published": true,
+        "logo": {
+          "id": 2210,
+          "name": "Melrose CommunityLogo",
+          "url": "https://massenergize-prod-files.s3.amazonaws.com/media/Melrose_Climate_Action_logo_-_cropped-mca_logo_final-4.jpeg"
+        },
+        "favicon": null,
+        "feature_flags": [
+          {
+            "id": 7,
+            "name": "weekly_event_nudge",
+            "scope": "BACKEND",
+            "audience": "EVERYONE",
+            "user_audience": "EVERYONE",
+            "key": "weekly_event_nudge-feature-flag",
+            "notes": "Send a weekly nudge to cadmins",
+            "expires_on": null,
+            "communities": [
+              { "id": 3, "name": "Energize Wayland" },
+              { "id": 7, "name": "Energize Framingham" },
+              { "id": 6, "name": "Cooler Concord" }
+            ]
+          },
+          {
+            "id": 10,
+            "name": "user-submitted-testimonials",
+            "scope": "USER_FRONTEND",
+            "audience": "EVERYONE",
+            "user_audience": "EVERYONE",
+            "key": "user-submitted-testimonials-feature-flag",
+            "notes": "Users can submit testimonials",
+            "expires_on": null,
+            "communities": []
+          },
+          {
+            "id": 8,
+            "name": "new-user-engagement-view",
+            "scope": "ADMIN_FRONTEND",
+            "audience": "EVERYONE",
+            "user_audience": "EVERYONE",
+            "key": "new-user-engagement-view-feature-flag",
+            "notes": "Admin portal shows new user engagement view",
+            "expires_on": null,
+            "communities": []
+          },
+          {
+            "id": 9,
+            "name": "communication-prefs",
+            "scope": "USER_FRONTEND",
+            "audience": "EVERYONE",
+            "user_audience": "EVERYONE",
+            "key": "communication-prefs-feature-flag",
+            "notes": "Whether Users see user communication preferences",
+            "expires_on": null,
+            "communities": []
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": 8,
+        "name": "Waste & Recycling",
+        "points": null,
+        "icon": "",
+        "tag_collection": 1,
+        "rank": 4,
+        "is_deleted": false,
+        "is_published": false,
+        "order": 4,
+        "tag_collection_name": "Category"
+      }
+    ],
+    "onboarding_contact": null,
+    "logo": {
+      "id": 2254,
+      "name": "Logo-black-earth-compost",
+      "url": "https://massenergize-prod-files.s3.amazonaws.com/media/blackearthlogo.PNG"
+    },
+    "banner": null,
+    "services": [],
+    "website": "https://blackearthcompost.com/"
+  },
+  "error": null,
+  "success": true,
+  "cursor": {}
+}

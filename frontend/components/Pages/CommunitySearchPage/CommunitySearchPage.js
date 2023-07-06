@@ -66,7 +66,7 @@ export default function CommunitySearchPage({ navigation }) {
         <Page>
             <Box height="50%" backgroundColor={"amber.100"}>
                 <Center h="full">
-        {/* TODO: Add an image here */}
+                    {/* TODO: Add an image here */}
                     <Heading>IMAGE</Heading>
                 </Center>
             </Box>
@@ -106,7 +106,9 @@ export default function CommunitySearchPage({ navigation }) {
                                 <Pressable
                                     key={community.id}
                                     onPress={() =>
-                                        navigation.navigate("drawer", {community_id: community.id})
+                                        navigation.navigate("drawer", {
+                                            community_id: community.id,
+                                        })
                                     }
                                 >
                                     <Flex

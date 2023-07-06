@@ -1,10 +1,10 @@
-import URLS from './urls';
+import URLS from "./urls";
 
 export async function apiCall(
     destinationUrl,
     dataToSend = {},
     // TODO: figure out what this is for.
-    relocationPage = null,
+    relocationPage = null
 ) {
     // TODO: add some meta data for context in backend
     dataToSend = {
@@ -49,13 +49,16 @@ export async function apiCall(
         return json;
     } catch (error) {
         const errorText = error.toString();
-        if (errorText.search("JSON")>-1) {
-            const errorMessage = "Invalid response to "+destinationUrl+" Data: "+JSON.stringify(dataToSend);
+        if (errorText.search("JSON") > -1) {
+            const errorMessage =
+                "Invalid response to " +
+                destinationUrl +
+                " Data: " +
+                JSON.stringify(dataToSend);
             // this will send message to Sentry Slack channel
             // Sentry.captureMessage(errorMessage);
             return { success: false, error: errorMessage };
-        }
-        else {
+        } else {
             // Sentry.captureException(error);
             return { success: false, error: error.toString() };
         }

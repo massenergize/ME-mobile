@@ -13,13 +13,12 @@ import {
     Modal,
     Heading,
     Flex,
+    Pressable,
 } from "native-base";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { Pressable } from "react-native";
 import Page from "../../Shared/Page";
 import SearchBar from "../../Shared/SearchBar";
 
-import DummyResponse from "../../../data/communitiesList.json";
 import { apiCall } from "../../../api/functions";
 
 const filterOptions = [
@@ -52,7 +51,6 @@ export default function CommunitySearchPage({ navigation }) {
     };
 
     useEffect(() => {
-        // TODO: fetch communities from backend
         // TODO: add loading state
         // TODO: is it possible to add extra parameters like limit, offset, etc.? (for pagination)
         apiCall("communities.list").then((json) => {
@@ -62,34 +60,13 @@ export default function CommunitySearchPage({ navigation }) {
                 console.log(json);
             }
         });
-        // if (DummyResponse.success) {
-        //   const data = DummyResponse.data;
-        //   let nearbyCommunities = [];
-        //   // add all communities for now. TODO: implement zip code logic
-        //   data.forEach((community) => {
-        //     const location = community.is_geographically_focused
-        //       ? `${community.location.city}, ${community.location.state}`
-        //       : `${community.location.country}`;
-        //     // if zipCode exists then
-        //     //// only add community if community's location is within 10 miles of zipCode
-
-        //     // else add all communities
-        //     nearbyCommunities.push({
-        //       id: community.id,
-        //       name: community.name,
-        //       location: location,
-        //       image: community.logo.url,
-        //       imageAlt: community.logo.name,
-        //     });
-        //   });
-        //   setCommunities(nearbyCommunities);
-        // }
     }, []);
 
     return (
         <Page>
             <Box height="50%" backgroundColor={"amber.100"}>
                 <Center h="full">
+        {/* TODO: Add an image here */}
                     <Heading>IMAGE</Heading>
                 </Center>
             </Box>
@@ -129,7 +106,7 @@ export default function CommunitySearchPage({ navigation }) {
                                 <Pressable
                                     key={community.id}
                                     onPress={() =>
-                                        navigation.navigate("drawer")
+                                        navigation.navigate("drawer", {community_id: community.id})
                                     }
                                 >
                                     <Flex

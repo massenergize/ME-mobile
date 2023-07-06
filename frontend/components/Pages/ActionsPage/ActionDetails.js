@@ -14,6 +14,7 @@ import {
 } from "native-base";
 import Page from "../../Shared/Page";
 import HTMLParser from "../../Shared/HTMLParser";
+import ServiceProviderCard from "../ServiceProvidersPage/ServiceProviderCard";
 
 
 export default function ActionDetails({ route, navigation}) {
@@ -43,12 +44,19 @@ export default function ActionDetails({ route, navigation}) {
   }
 
   const generateDeepDiveTab = () => {
-    return (
-      <HTMLParser
-        htmlString={action.deep_dive}
-        baseStyle={textStyle}
-      />
-    )
+    if (action.deep_dive === "") {
+      return (
+        <Text>No information available.</Text>
+      )
+    } 
+    else {
+      return (
+        <HTMLParser
+          htmlString={action.deep_dive}
+          baseStyle={textStyle}
+        />
+      )
+    }
   }
 
   const generateTestimonialsTab = () => {
@@ -59,8 +67,20 @@ export default function ActionDetails({ route, navigation}) {
 
 
   const generateServiceProvidersTab = () => {
+    if (action.vendors.length === 0) {
+      return (
+        <Text>No associated service providers.</Text>
+      )
+    }
     return (
-      <Text>Service Providers Tab</Text>
+      action.vendors.map((vendor, index) => {
+        return <ServiceProviderCard 
+          direction="row" 
+          description=""
+          image={vendor.logo.url}
+          name={vendor.name}
+          key={index}/>
+      })
     )
   }
 

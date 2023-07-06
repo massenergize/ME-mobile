@@ -40,7 +40,7 @@ function ActionCard({ navigation, action }) {
             </Box>
             <Stack p={3} space={3}>
               <Stack space={2}>
-                <Heading size="md" isTruncated={true} noOfLines={1}>
+                <Heading size="sm" isTruncated={true} noOfLines={1}>
                   {action.title}
                 </Heading>
                 <Text

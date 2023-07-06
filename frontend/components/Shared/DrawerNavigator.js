@@ -107,7 +107,7 @@ function CustomDrawerContent(props) {
                 }
             </DrawerContentScrollView>
             <Button mb={2} mt={0} m={4} bg="primary.400" onPress={() => props.navigation.navigate("welcome")}>LOGIN</Button>
-            <Button mb={2} mt={0} m={4} variant="outline" onPress={() => props.navigation.navigate("chooseCommunity")}>SWITCH COMMUNITIES</Button>
+            <Button mb={2} mt={0} m={4} variant="outline" onPress={() => props.navigation.navigate("communitySearch")}>SWITCH COMMUNITIES</Button>
         </SafeAreaView>
     )
 }

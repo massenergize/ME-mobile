@@ -21,11 +21,11 @@ import EventsPage from "./components/Pages/EventsPage/EventsPage";
 import ImpactPage from "./components/Pages/CommunityPage/ImpactPage";
 import ActionDetails from "./components/Pages/ActionsPage/ActionDetails";
 import EventDetailsPage from "./components/Pages/EventsPage/EventDetailsPage";
-import IntroductionPage from "./components/Pages/IntroductionPage/IntroductionPage";
+import OnboardingPage from "./components/Pages/OnboardingPage/OnboardingPage";
 import DrawerNavigator from "./components/Shared/DrawerNavigator";
 import ServiceProvidersPage from "./components/Pages/ServiceProvidersPage/ServiceProvidersPage";
 import ServiceProviderDetailsPage from "./components/Pages/ServiceProvidersPage/ServiceProviderDetailsPage";
-import ChooseCommunityPage from "./components/Pages/ChooseCommunityPage/ChooseCommunityPage";
+import CommunitySearchPage from "./components/Pages/CommunitySearchPage/CommunitySearchPage";
 import WithEmailOnlyPage from "./components/Pages/Auth/WithEmailOnlyPage";
 import CreateProfile from "./components/Pages/UserProfilePage/CreateProfile";
 import TeamDetailsPage from "./components/Pages/TeamsPage/TeamDetailsPage";
@@ -41,8 +41,8 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
-            name="intro"
-            component={IntroductionPage}
+            name="onboarding"
+            component={OnboardingPage}
             options={{
               headerShown: false,
             }}
@@ -87,8 +87,8 @@ export default function App() {
           />
           <Stack.Screen name="community" component={CommunityPage} />
           <Stack.Screen
-            name="chooseCommunity"
-            component={ChooseCommunityPage}
+            name="communitySearch"
+            component={CommunitySearchPage}
             options={{ headerShown: false }}
           />
           <Stack.Screen name="teamDetails" component={TeamDetailsPage} />

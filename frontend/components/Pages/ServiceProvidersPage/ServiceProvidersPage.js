@@ -61,6 +61,7 @@ export default function ServiceProvidersPage({ navigation }) {
         <VStack space="5" py="10">
           <Box>
             <Heading>Suggested</Heading>
+            {/* render cards horizontally */}
             <ScrollView horizontal={true} my="5" py="2">
               {sProviders &&
                 sProviders.map((sProvider, index) => {
@@ -81,6 +82,7 @@ export default function ServiceProvidersPage({ navigation }) {
           </Box>
           <Box>
             <Heading>All</Heading>
+            {/* render cards vertically */}
             {sProviders &&
               sProviders.map((sProvider, index) => {
                 return (

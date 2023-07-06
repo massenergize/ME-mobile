@@ -17,7 +17,7 @@ import Page from "../../Shared/Page";
 import DummyResponse from "../../../data/vendorsInfo.json";
 import HTMLParser from "../../Shared/HTMLParser";
 
-export default function ServiceProviderDetailsPage() {
+export default function ServiceProviderDetailsPage({ navigation }) {
   const [spDetails, setSpDetails] = useState({});
 
   useEffect(() => {
@@ -26,6 +26,7 @@ export default function ServiceProviderDetailsPage() {
     if (DummyResponse.success) {
       const data = DummyResponse.data;
       setSpDetails(data);
+      navigation.setOptions({ title: data?.name });
     }
   }, []);
   return (

@@ -40,10 +40,10 @@ const filterOptions = [
   },
 ];
 
-export default function ChooseCommunityPage({ navigation }) {
+export default function CommunitySearchPage({ navigation }) {
   const [communities, setCommunities] = useState([]);
   const [zipCode, setZipCode] = useState("");
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   const handleZipCodeSubmit = () => {
     // TODO: validate zip code

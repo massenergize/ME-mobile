@@ -40,7 +40,7 @@ const STEPS = [
   },
 ];
 
-export default function IntroductionPage({ navigation }) {
+export default function OnboardingPage({ navigation }) {
   const [currentStep, setCurrentStep] = useState(0);
   const [imgSrc, setImgSrc] = useState(STEPS[currentStep].image);
 
@@ -48,7 +48,7 @@ export default function IntroductionPage({ navigation }) {
     if (currentStep < STEPS.length - 1) {
       setCurrentStep(currentStep + 1);
     } else {
-      navigation.navigate("chooseCommunity");
+      navigation.navigate("communitySearch");
     }
   };
 

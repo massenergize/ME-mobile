@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { VStack, Box, Heading, ScrollView } from "native-base";
+
 import Page from "../../Shared/Page";
 import SearchBar from "../../Shared/SearchBar";
 import ServiceProviderCard from "./ServiceProviderCard";
+
+import DummyResponse from "../../../data/vendorsList.json";
 
 const filterOptions = [
   {
@@ -40,56 +43,61 @@ const filterOptions = [
 ];
 
 export default function ServiceProvidersPage({ navigation }) {
-  const generateSProvider = () => {
-    let sProvider = [];
-    for (let i = 0; i < 3; i++) {
-      sProvider.push(
-        <ServiceProviderCard
-          key={i}
-          direction="column"
-          name={`Provider ${i}`}
-          description="This could be a brief description of the service provider."
-          image={null}
-          onPress={() => navigation.navigate("serviceProviderDetails")}
-          mx="3"
-        />
-      );
-    }
-    return sProvider;
-  };
+  const [sProviders, setSProviders] = useState([]);
 
-  const generateVerticalSProvider = () => {
-    let sProvider = [];
-    for (let i = 0; i < 3; i++) {
-      sProvider.push(
-        <ServiceProviderCard
-          key={i}
-          direction="row"
-          name={`Provider ${i}`}
-          description="This could be a brief description of the service provider."
-          image={null}
-          onPress={() => navigation.navigate("serviceProviderDetails")}
-          my="3"
-        />
-      );
+  useEffect(() => {
+    // TODO: make an API call here
+    // TODO: add loading state (maybe a spinner)
+    if (DummyResponse.success) {
+      const data = DummyResponse.data;
+      setSProviders(data);
     }
-    return sProvider;
-  };
+  }, []);
 
   return (
     <Page>
       <ScrollView pt="10" px="5" showsVerticalScrollIndicator={false}>
         <SearchBar filterOptions={filterOptions} filterHeader="Category" />
-        <VStack space="10" pb="10">
+        <VStack space="5" py="10">
           <Box>
             <Heading>Suggested</Heading>
+            {/* render cards horizontally */}
             <ScrollView horizontal={true} my="5" py="2">
-              {generateSProvider()}
+              {sProviders &&
+                sProviders.map((sProvider, index) => {
+                  return (
+                    <ServiceProviderCard
+                      key={index}
+                      direction="column"
+                      name={sProvider.name}
+                      imageURI={sProvider.logo.url}
+                      onPress={() =>
+                        navigation.navigate("serviceProviderDetails")
+                      }
+                      my="3"
+                    />
+                  );
+                })}
             </ScrollView>
           </Box>
           <Box>
             <Heading>All</Heading>
-            {generateVerticalSProvider()}
+            {/* render cards vertically */}
+            {sProviders &&
+              sProviders.map((sProvider, index) => {
+                return (
+                  <ServiceProviderCard
+                    key={index}
+                    direction="row"
+                    name={sProvider.name}
+                    imageURI={sProvider.logo.url}
+                    onPress={() =>
+                      navigation.navigate("serviceProviderDetails")
+                    }
+                    my="3"
+                  />
+                );
+              })}
           </Box>
         </VStack>
       </ScrollView>

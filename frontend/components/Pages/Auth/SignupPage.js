@@ -10,7 +10,6 @@ import {
   Button,
   HStack,
   Text,
-  View,
 } from "native-base";
 import Page from "../../Shared/Page";
 

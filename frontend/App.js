@@ -1,12 +1,12 @@
 import React from "react";
 
+import { StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NativeBaseProvider } from "native-base";
 import "react-native-gesture-handler";
 
 import Theme from "./components/Shared/Theme";
-import WelcomePage from "./components/Pages/Auth/WelcomePage";
 import LoginPage from "./components/Pages/Auth/LoginPage";
 import SignupPage from "./components/Pages/Auth/SignupPage";
 import AboutPage from "./components/Pages/AboutPage/AboutPage";
@@ -30,7 +30,7 @@ import WithEmailOnlyPage from "./components/Pages/Auth/WithEmailOnlyPage";
 import CreateProfile from "./components/Pages/UserProfilePage/CreateProfile";
 import TeamDetailsPage from "./components/Pages/TeamsPage/TeamDetailsPage";
 import TabNavigator from "./components/Shared/TabNavigator";
-import { StatusBar } from "react-native";
+import AuthModal from "./components/Pages/Auth/AuthModal";
 
 const Stack = createNativeStackNavigator();
 
@@ -39,6 +39,7 @@ export default function App() {
     <NativeBaseProvider theme={Theme}>
       <StatusBar barStyle="dark-content" />
       <NavigationContainer>
+        <AuthModal />
         <Stack.Navigator>
           <Stack.Screen
             name="onboarding"
@@ -46,11 +47,6 @@ export default function App() {
             options={{
               headerShown: false,
             }}
-          />
-          <Stack.Screen
-            name="welcome"
-            component={WelcomePage}
-            options={{ headerShown: false }}
           />
           <Stack.Screen
             name="login"
@@ -73,7 +69,11 @@ export default function App() {
             options={{ title: "" }}
           />
           <Stack.Screen name="actions" component={ActionsPage} />
-          <Stack.Screen name="actiondetails" component={ActionDetails} options={{ headerTitle: "ACTION", headerTitleAlign: "center"}}/>
+          <Stack.Screen
+            name="actiondetails"
+            component={ActionDetails}
+            options={{ headerTitle: "ACTION", headerTitleAlign: "center" }}
+          />
           <Stack.Screen name="testimonials" component={TestimonialsPage} />
           <Stack.Screen
             name="testimonial"

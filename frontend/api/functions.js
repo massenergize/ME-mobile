@@ -30,12 +30,12 @@ export async function apiCall(
     // if (authToken)
     //     formData.append("__token", authToken || authTokenInLocalStorage || null);
 
-    const response = await fetch(`${URLS.ROOT}/${destinationUrl}`, {
-        credentials: "include",
-        method: "POST",
-        body: formData,
-    });
     try {
+        const response = await fetch(`${URLS.ROOT}/${destinationUrl}`, {
+            credentials: "include",
+            method: "POST",
+            // body: formData,
+        });
         const json = await response.json();
         // if (relocationPage && json && json.success) {
         //     window.location.href = relocationPage;

@@ -1,3 +1,9 @@
+/**
+ * formats a date range string based on the start and end date
+ * @param {Date} startDate
+ * @param {Date} endDate
+ * @returns {String} if same day: "mmmm dd, hh:mm AM/PM - hh:mm AM/PM", if same month: "mmmm dd-dd yyyy", if same year: "mmmm dd - mmmm dd, yyyy", if different year: "mmmm dd, yyyy - mmmm dd, yyyy"
+ */
 export function dateFormatString(startDate, endDate) {
   const dateOptions = {
     month: "long",

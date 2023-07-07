@@ -7,10 +7,12 @@ import React, {
 } from "react";
 import { Modal, VStack, Button } from "native-base";
 import AuthModalController from "./AuthModalController";
+import { useNavigation } from "@react-navigation/native";
 
 function AuthModal() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const modalRef = useRef();
+  const navigation = useNavigation();
 
   useLayoutEffect(() => {
     AuthModalController.setModalRef(modalRef);
@@ -42,7 +44,10 @@ function AuthModal() {
               shadow="5"
               size="lg"
               backgroundColor="primary.400"
-              //   onPress={() => navigation.navigate("withEmailOnly")}
+              onPress={() => {
+                navigation.navigate("withEmailOnly");
+                AuthModalController.hideModal();
+              }}
             >
               With email only
             </Button>
@@ -50,7 +55,10 @@ function AuthModal() {
               shadow="5"
               size="lg"
               backgroundColor="black"
-              //   onPress={() => navigation.navigate("login")}
+              onPress={() => {
+                navigation.navigate("login");
+                AuthModalController.hideModal();
+              }}
             >
               With email and password
             </Button>
@@ -63,7 +71,10 @@ function AuthModal() {
             <Button
               size="lg"
               variant="ghost"
-              //   onPress={() => navigation.navigate("chooseCommunity")}
+              onPress={() => {
+                // TODO: Implement guest login. Where should this go?
+                AuthModalController.hideModal();
+              }}
             >
               Proceed as guest
             </Button>

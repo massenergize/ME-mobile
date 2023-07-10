@@ -38,12 +38,14 @@ export default function SignupPage({ navigation }) {
     registerWithEmailAndPassword(
       values.email,
       values.password,
-      (user, error) => {
+      (userCreds, error) => {
         setIsSubmitting(false);
         if (error) {
           setErrorMsg(error);
         } else {
           console.log("User created successfully!");
+          // TODO: Send an email verification link to the user's email
+          // TODO: Redirect the user to the login page? Or just log them in?
         }
       }
     );

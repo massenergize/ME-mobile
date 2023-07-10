@@ -16,6 +16,7 @@ import { Formik } from "formik";
 
 import Page from "../../Shared/Page";
 import { signInWithEmailAndPassword } from "./Shared/firebase-helpers";
+import VerifyEmailPage from "./VerifyEmailPage";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -30,14 +31,19 @@ export default function LoginPage({ navigation }) {
 
   const handleSignIn = (values) => {
     setIsSubmitting(true);
-    signInWithEmailAndPassword(values.email, values.password, (user, error) => {
-      setIsSubmitting(false);
-      if (error) {
-        setErrorMsg(error);
-      } else {
-        console.log("User signed in successfully!");
+    signInWithEmailAndPassword(
+      values.email,
+      values.password,
+      (userCreds, error) => {
+        setIsSubmitting(false);
+        if (error) {
+          setErrorMsg(error);
+        } else {
+          console.log("User signed in successfully!");
+          console.log("is user email verified?", userCreds.user.emailVerified);
+        }
       }
-    });
+    );
   };
 
   return (

@@ -17,7 +17,7 @@ import {
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Page from "../../Shared/Page";
 import HTMLParser from "../../Shared/HTMLParser";
-import { dateFormatString } from "../../Shared/Utils";
+import { formatDateString } from "../../Shared/Utils";
 
 import DummyResponse from "../../../data/eventInfo.json";
 
@@ -40,7 +40,7 @@ export default function EventDetailsPage() {
     // TODO: add loading state (maybe a spinner)
     if (DummyResponse.success) {
       const data = DummyResponse.data;
-      const date = dateFormatString(
+      const date = formatDateString(
         new Date(data.start_date_and_time),
         new Date(data.end_date_and_time)
       );

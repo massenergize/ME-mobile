@@ -15,7 +15,7 @@ import * as Yup from "yup";
 import { Formik } from "formik";
 
 import Page from "../../Shared/Page";
-import { registerWithEmailAndPassword } from "./Shared/firebase-helpers";
+import useAuth from "../../Hooks/useAuth";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -32,6 +32,7 @@ const validationSchema = Yup.object().shape({
 export default function SignupPage({ navigation }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
+  const { registerWithEmailAndPassword } = useAuth();
 
   const handleSignUp = (values) => {
     setIsSubmitting(true);

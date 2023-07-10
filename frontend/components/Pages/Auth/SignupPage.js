@@ -31,6 +31,7 @@ const validationSchema = Yup.object().shape({
 
 export default function SignupPage({ navigation }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(null);
 
   const handleSignUp = (values) => {
     setIsSubmitting(true);
@@ -40,7 +41,7 @@ export default function SignupPage({ navigation }) {
       (user, error) => {
         setIsSubmitting(false);
         if (error) {
-          console.log(error);
+          setErrorMsg(error);
         } else {
           console.log("User created successfully!");
         }
@@ -55,6 +56,12 @@ export default function SignupPage({ navigation }) {
           <Heading mt="1" color="coolGray.600" fontWeight="medium">
             Sign up to join your community!
           </Heading>
+
+          {errorMsg && (
+            <Text mt="2" color="red.500">
+              {errorMsg}
+            </Text>
+          )}
 
           <Formik
             initialValues={{ email: "", password: "", confirmPassword: "" }}
@@ -129,7 +136,6 @@ export default function SignupPage({ navigation }) {
                 </FormControl>
                 <Button
                   mt="10"
-                  _text={{ color: "white" }}
                   isLoading={isSubmitting}
                   isLoadingText="Submitting"
                   onPress={handleSubmit}

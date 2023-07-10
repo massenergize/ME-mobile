@@ -8,7 +8,7 @@ import { translateFirebaseError } from "./utils";
  * @param {CallableFunction} callBackFn callback function to be called after the user is logged in or if there is an error.
  * callBackFn(userCredential, error)
  */
-export const signInwithEmailAndPassword = (
+export const signInWithEmailAndPassword = (
   email,
   password,
   callBackFn = null

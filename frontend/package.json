@@ -13,7 +13,6 @@
     "@react-navigation/drawer": "^6.6.2",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",
-    "email-validator": "^2.0.4",
     "expo": "^49.0.0",
     "expo-status-bar": "~1.6.0",
     "firebase": "^9.23.0",

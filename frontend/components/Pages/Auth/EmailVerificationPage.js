@@ -1,10 +1,20 @@
 import React from "react";
-import { Center, Container, Heading, Link, Text } from "native-base";
-import Page from "../../Shared/Page";
+import { Button, Center, Container, Heading, Link, Text } from "native-base";
 
-export default function VerifyEmailPage() {
+import Page from "../../Shared/Page";
+import useAuth from "../../Hooks/useAuth";
+
+export default function EmailVerificationPage() {
+  const { signOut, sendVerificationEmail } = useAuth();
+
   const resendEmail = () => {
-    // TODO: Resend email verification link
+    sendVerificationEmail((error) => {
+      if (error) {
+        console.log("Error sending verification email", error);
+      } else {
+        console.log("Verification email sent succeeded!");
+      }
+    });
   };
 
   return (
@@ -20,10 +30,22 @@ export default function VerifyEmailPage() {
             <Text fontWeight="bold">SPAM</Text> and{" "}
             <Text fontWeight="bold">Promotions</Text> folders.
           </Text>
-          <Link mt="2" _text={{ color: "primary.400" }}>
+          <Link
+            mt="2"
+            _text={{ color: "primary.400" }}
+            onPress={() => resendEmail()}
+          >
             Not there? Click to resend email.
           </Link>
         </Container>
+        <Button
+          mt="20"
+          width="80%"
+          backgroundColor="muted.400"
+          onPress={() => signOut()}
+        >
+          Sign Me Out
+        </Button>
       </Center>
     </Page>
   );

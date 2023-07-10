@@ -62,5 +62,41 @@ export default function useAuth() {
       });
   };
 
-  return { user, signInWithEmailAndPassword, registerWithEmailAndPassword };
+  const signOut = () => {
+    console.log("signing out...");
+    AUTH.signOut();
+  };
+
+  /**
+   * Wrapper function for firebase's send email verification.
+   * @param {CallableFunction} callBackFn callback function to be called after the email is sent or if there is an error.
+   */
+  const sendVerificationEmail = (authUser = null, callBackFn = null) => {
+    if (!authUser) {
+      authUser = user;
+    }
+
+    if (authUser) {
+      authUser
+        .sendEmailVerification()
+        .then(() => {
+          if (callBackFn) {
+            callBackFn(null);
+          }
+        })
+        .catch((error) => {
+          if (callBackFn) {
+            callBackFn(translateFirebaseError(error?.toString()));
+          }
+        });
+    }
+  };
+
+  return {
+    user,
+    signOut,
+    signInWithEmailAndPassword,
+    registerWithEmailAndPassword,
+    sendVerificationEmail,
+  };
 }

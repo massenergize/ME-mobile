@@ -3,9 +3,11 @@ import { Button, Center, Container, Heading, Link, Text } from "native-base";
 
 import Page from "../../Shared/Page";
 import useAuth from "../../Hooks/useAuth";
+import { useNavigation } from "@react-navigation/native";
 
 export default function EmailVerificationPage() {
   const { signOut, sendVerificationEmail } = useAuth();
+  const navigation = useNavigation();
 
   const resendEmail = () => {
     sendVerificationEmail((error) => {
@@ -40,6 +42,13 @@ export default function EmailVerificationPage() {
         </Container>
         <Button
           mt="20"
+          width="80%"
+          onPress={() => navigation.navigate("drawer")}
+        >
+          I've Verified My Email
+        </Button>
+        <Button
+          mt="3"
           width="80%"
           backgroundColor="muted.400"
           onPress={() => signOut()}

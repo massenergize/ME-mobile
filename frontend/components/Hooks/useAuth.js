@@ -62,6 +62,9 @@ export default function useAuth() {
       });
   };
 
+  /**
+   * Wrapper function for firebase sign out.
+   */
   const signOut = () => {
     console.log("signing out...");
     AUTH.signOut();
@@ -69,6 +72,7 @@ export default function useAuth() {
 
   /**
    * Wrapper function for firebase's send email verification.
+   * @param {firebase.User} authUser
    * @param {CallableFunction} callBackFn callback function to be called after the email is sent or if there is an error.
    */
   const sendVerificationEmail = (authUser = null, callBackFn = null) => {

@@ -253,7 +253,6 @@ export default function DrawerNavigator({ route, navigation }) {
       drawerContent={(props) => (
         <CustomDrawerContent {...props} community_id={community_id} />
       )}
-      S
     >
       <Drawer.Screen
         name="Community"

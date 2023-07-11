@@ -30,6 +30,7 @@ export default function LoginPage({ navigation }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
   const { user, authState, signInWithEmailAndPassword } = useAuth();
+  const [isEmailVerified, setIsEmailVerified] = useState(false);
 
   const handleSignIn = (values) => {
     setIsSubmitting(true);
@@ -49,6 +50,12 @@ export default function LoginPage({ navigation }) {
     );
   };
 
+  const refreshUser = async () => {
+    console.log("refreshing user...");
+    await user.reload();
+    setIsEmailVerified(user.emailVerified);
+  };
+
   // Hacky way to redirect to createProfile page if user is not registered in ME yet.
   useEffect(() => {
     if (authState === Constants.NEEDS_REGISTRATION) {
@@ -58,8 +65,15 @@ export default function LoginPage({ navigation }) {
     }
   }, [authState]);
 
-  if (user && !user.emailVerified) {
-    return <EmailVerificationPage />;
+  // display email verification page if user is not verified.
+  useEffect(() => {
+    if (user) {
+      setIsEmailVerified(user.emailVerified);
+    }
+  }, [user]);
+
+  if (user && !isEmailVerified) {
+    return <EmailVerificationPage onRefresh={() => refreshUser()} />;
   } else {
     return (
       <Page>

@@ -41,18 +41,25 @@ export default function Testimonial({ route, navigation }) {
                   htmlString={data.body}
                   baseStyle={textStyle}
                 />
-            <Text bold fontSize="lg">Associated Action</Text>
-            <ActionCard navigation={navigation} action={data.action} />
+            {
+                data.action != null  
+                ?
+                <View>
+                    <Text bold fontSize="lg" mb={3}>Associated Action</Text>
+                    <ActionCard navigation={navigation} action={data.action} />
+                </View>
+                : <></>
+            }
             {
                 (data.vendor != null)
                 ?
                 <View>
-                    <Text bold fontSize="lg">Related Vendor</Text>
+                    <Text bold fontSize="lg" my={3}>Related Vendor</Text>
                     <ServiceProviderCard
                         direction="row"
                         name={data.vendor.name}
                         description="This could be a brief description of the service provider."
-                        image={data.vendor.logo.url}
+                        image={(data.vendor.logo != null ) ? data.vendor.logo.url : null}
                         onPress={() => navigation.navigate("serviceProviderDetails")}
                         my="2"
                         />

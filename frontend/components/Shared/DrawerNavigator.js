@@ -14,11 +14,6 @@ import { Button, Image, Container, Center, HStack, VStack, Spacer, Pressable } f
 
 const Drawer = createDrawerNavigator();
 
-// custom drawer in order to have the "switch communities" button at the bottom
-const dataArray = [
-    {title: 'Resources', content: 'Test'}
-];
-
 const drawerItems = [
     {"name": "Community", "icon": "home-outline", "dropdown": false, "route": "Community", "dropdownItems": []},
     {"name": "About Us", "icon": "information-circle-outline", "dropdown": true, "route": "", "dropdownItems": [
@@ -93,7 +88,7 @@ function CustomDrawerContent(props) {
                             return (
                                 <DrawerItem 
                                     label={item.name} 
-                                    onPress={() => props.navigation.navigate(item.route)}
+                                    onPress={() => props.navigation.navigate(item.route, {community_id: props.community_id})}
                                     icon={({ focused, color, size }) => {
                                         return (
                                             <Ionicons name={item.icon} size={size} color={color} />

@@ -15,8 +15,8 @@ import { apiCall } from "../../../api/functions";
 import ActionCard from "./../ActionsPage/ActionCard";
 import { SmallChart } from "../../Shared/Charts.js";
 import EventCard from "./../EventsPage/EventCard";
-import data from "./../../../data/communitiesInfo.json";
-import actions from "./../../../data/actionsList.json";
+// import data from "./../../../data/communitiesInfo.json";
+// import actions from "./../../../data/actionsList.json";
 
 const event = {
   id: 1,
@@ -102,18 +102,37 @@ export default function CommunityPage({ route, navigation }) {
   const { community_id } = route.params;
 
   const [communityInfo, setCommunityInfo] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isCommunityLoading, setIsCommunityLoading] = useState(true);
+  const [actions, setActions] = useState(null);
+  const [isActionsLoading, setIsActionsLoading] = useState(true);
 
-  useEffect(() => {
+  const getCommuityInfo = () => {
     apiCall("communities.info", {community_id: community_id}).then((json) => {
       if (json.success) {
           setCommunityInfo(json.data);
-          console.log(json.data)
+          // console.log(json.data)
       } else {
           console.log(json);
       }
-      setIsLoading(false);
-  });
+      setIsCommunityLoading(false);
+    });
+  }
+
+  const getActionList = () => {
+    apiCall("actions.list", {community_id: community_id}).then((json) => {
+      if (json.success) {
+          setActions(json.data);
+          // console.log(json.data)
+      } else {
+          console.log(json);
+      }
+      setIsActionsLoading(false);
+    });
+  }
+
+  useEffect(() => {
+    getCommuityInfo();
+    getActionList();
   }, []);
 
   const getMetric = (action, metric) => {
@@ -128,7 +147,7 @@ export default function CommunityPage({ route, navigation }) {
   return (
     <ScrollView nestedScrollEnabled = {true}>
       {
-        isLoading 
+        isCommunityLoading 
           ? <Spinner size="lg" color="primary.500" /> 
           : 
           <VStack alignItems="center" space={3} bg="white">
@@ -156,7 +175,8 @@ export default function CommunityPage({ route, navigation }) {
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
               <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
               {
-                actions.data.map((action, index) => {
+                isActionsLoading ? <Spinner size="lg" color="primary.500" /> :
+                actions.map((action, index) => {
                   if (getMetric(action, "Cost") === "$" || getMetric(action, "Cost") === "0") {
                     return (
                       <ActionCard navigation={navigation} action={action} key={index}></ActionCard>

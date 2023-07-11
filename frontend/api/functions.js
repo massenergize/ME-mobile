@@ -26,9 +26,11 @@ export async function apiCall(
     // const authTokenInLocalStorage = localStorage.getItem(AUTH_TOKEN); // This is also only used in test. Its a fallback method to retrieve token
     const formData = new FormData();
 
-    console.log("Data to send", dataToSend)
     Object.keys(dataToSend).map((k) => formData.append(k, dataToSend[k]));
-    formData.append("", "")
+    console.log(dataToSend)
+    if (Object.keys(dataToSend).length === 0) {
+        formData.append("", "")
+    }
 
     // Object.keys(dataToSend).map((k) => formData.append(k, {...dataToSend[k], type: 'multipart/form-data'}));
     // if (authToken)
@@ -36,12 +38,7 @@ export async function apiCall(
     
     
     // })
-    // .catch(err => {
-        //     console.log("error catch search:", err.message);
-        //     fetching = false;
-        //     // Choose one, depends what you need.
-        //     return false; // If you want to ignore the error and do something in a chained .then()
-        // })
+
     console.log(formData)
         
     try {

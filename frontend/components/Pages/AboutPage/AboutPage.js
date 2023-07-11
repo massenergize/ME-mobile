@@ -1,29 +1,58 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Page from "../../Shared/Page";
-import { Text, Container, Image, VStack, ScrollView } from "native-base";
-import aboutData from "./../../../data/about_us_page_settingsInfo.json";
+import { Container, Image, VStack, ScrollView, Spinner } from "native-base";
 import HTMLParser from "../../Shared/HTMLParser";
 
-export default function AboutPage() {
+// import aboutData from "./../../../data/about_us_page_settingsInfo.json";
+import { apiCall } from "../../../api/functions";
+
+export default function AboutPage({ route, navigation }) {
+
+  const { community_id } = route.params;
+
+  const [about, setAbout] = useState(null);
+  const [isAboutLoading, setIsAboutLoading] = useState(true);
+
+  const getAbout = () => {
+    apiCall("about_us_page_settings.info", {community_id: community_id}).then((json) => {
+      if (json.success) {
+          setAbout(json.data);
+          // console.log(json.data)
+      } else {
+          console.log(json);
+      }
+      setIsAboutLoading(false);
+    });
+  }
+
+  useEffect(() => {
+    getAbout();
+  }, []);
+
   return (
     <Page>
-      <ScrollView showsVerticalScrollIndicator={false} px="5">
-        <VStack alignItems="center" m={4}>
-          <Container maxHeight={200} width="100%" alignItems="center">
-            <Image
-                source={{uri: aboutData.data.community.logo.url}}
-                alt="Community Logo"
-                resizeMode="contain"
-                height="full"
-                width="full"
-            />
-          </Container>
-          <HTMLParser
-                  htmlString={aboutData.data.description}
-                  baseStyle={textStyle}
-                />
-        </VStack>
-      </ScrollView>
+      {
+        isAboutLoading
+        ? <Spinner />
+        :
+        <ScrollView showsVerticalScrollIndicator={false} px="5">
+          <VStack alignItems="center" m={4}>
+            <Container maxHeight={200} width="100%" alignItems="center">
+              <Image
+                  source={{uri: about.community.logo.url}}
+                  alt="Community Logo"
+                  resizeMode="contain"
+                  height="full"
+                  width="full"
+              />
+            </Container>
+            <HTMLParser
+                    htmlString={about.description}
+                    baseStyle={textStyle}
+                  />
+          </VStack>
+        </ScrollView>
+      }
     </Page>
   );
 }

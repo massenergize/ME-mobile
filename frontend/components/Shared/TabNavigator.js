@@ -51,8 +51,8 @@ export default function TabNavigator({ route, navigation }) {
     }
     >
       <Tab.Screen name="COMMUNITY" component={CommunityPage} initialParams={{community_id: community_id}}/>
-      <Tab.Screen name="ACTIONS" component={ActionsPage} />
-      <Tab.Screen name="EVENTS" component={EventsPage} />
+      <Tab.Screen name="ACTIONS" component={ActionsPage} initialParams={{community_id: community_id}}/>
+      <Tab.Screen name="EVENTS" component={EventsPage} initialParams={{community_id: community_id}}/>
       <Tab.Screen name="PROFILE" component={UserProfilePage} />
   </Tab.Navigator>
   )

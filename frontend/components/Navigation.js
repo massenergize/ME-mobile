@@ -37,12 +37,6 @@ const MainNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptions}>
       <Stack.Screen
-        name="login"
-        component={LoginPage}
-        options={{ title: "Profile" }}
-      />
-      <Stack.Screen name="signup" component={SignupPage} />
-      <Stack.Screen
         name="onboarding"
         component={OnboardingPage}
         options={{
@@ -54,6 +48,12 @@ const MainNavigator = () => {
         component={CreateProfilePage}
         options={{ headerShown: false }}
       />
+      <Stack.Screen
+        name="login"
+        component={LoginPage}
+        options={{ title: "Profile" }}
+      />
+      <Stack.Screen name="signup" component={SignupPage} />
       <Stack.Screen name="withEmailOnly" component={WithEmailOnlyPage} />
       <Stack.Screen name="userProfile" component={UserProfilePage} />
       <Stack.Screen name="about" component={AboutPage} />

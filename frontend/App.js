@@ -8,15 +8,18 @@ import "react-native-gesture-handler";
 import Theme from "./components/Shared/Theme";
 import AuthModal from "./components/Pages/Auth/AuthModal";
 import MainNavigator from "./components/Navigation";
+import { CommunityProvider } from "./components/Contexts/CommunityContext";
 
 export default function App() {
   return (
     <NativeBaseProvider theme={Theme}>
       <StatusBar barStyle="dark-content" />
-      <NavigationContainer>
-        <AuthModal />
-        <MainNavigator />
-      </NavigationContainer>
+      <CommunityProvider>
+        <NavigationContainer>
+          <AuthModal />
+          <MainNavigator />
+        </NavigationContainer>
+      </CommunityProvider>
     </NativeBaseProvider>
   );
 }

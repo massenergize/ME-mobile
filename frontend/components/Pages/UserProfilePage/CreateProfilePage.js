@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   Center,
   Text,
@@ -16,6 +16,7 @@ import Page from "../../Shared/Page";
 import useAuth from "../../Hooks/useAuth";
 import useME from "../../Hooks/useME";
 import Constants from "../../Constants";
+import { CommunityContext } from "../../Contexts/CommunityContext";
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string().required("First name is required"),
@@ -27,12 +28,15 @@ const validationSchema = Yup.object().shape({
 });
 
 export default function CreateProfilePage({ route, navigation }) {
+  const { communityInfo } = useContext(CommunityContext);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { user, setUser, signOut, setAuthState } = useAuth();
   const { createUserProfile } = useME();
 
   const handleCreateProfile = async (values) => {
     setIsSubmitting(true);
+
     // TODO: find where to get city and state
     const location = ", , " + values.zipCode;
     const profile = {
@@ -42,10 +46,10 @@ export default function CreateProfilePage({ route, navigation }) {
       location: location,
       is_vendor: false,
       accepts_terms_and_conditions: true,
-      // TODO: find where to get subdomain
-      subdomain: "ActonMA",
+      subdomain: communityInfo.subdomain,
       color: "#000000",
     };
+
     createUserProfile(profile, (response, error) => {
       setIsSubmitting(false);
       if (error) {

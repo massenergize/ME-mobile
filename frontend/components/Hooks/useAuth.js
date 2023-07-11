@@ -84,6 +84,7 @@ export default function useAuth() {
    */
   const signOut = () => {
     console.log("signing out...");
+    setAuthState(Constants.USER_IS_NOT_AUTHENTICATED);
     AUTH.signOut();
   };
 

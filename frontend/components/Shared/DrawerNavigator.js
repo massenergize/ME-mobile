@@ -32,6 +32,7 @@ import {
   Pressable,
 } from "native-base";
 import AuthModalController from "../Pages/Auth/AuthModalController";
+import useAuth from "../Hooks/useAuth";
 
 const Drawer = createDrawerNavigator();
 
@@ -101,6 +102,7 @@ const drawerItems = [
 
 function CustomDrawerContent(props) {
   [expanded, setExpanded] = useState({ "About Us": false, Resources: false });
+  const { user, signOut } = useAuth();
 
   return (
     <SafeAreaView
@@ -208,15 +210,21 @@ function CustomDrawerContent(props) {
           }
         })}
       </DrawerContentScrollView>
-      <Button
-        mb={2}
-        mt={0}
-        m={4}
-        bg="primary.400"
-        onPress={() => props.navigation.navigate("welcome")}
-      >
-        LOGIN
-      </Button>
+      {user ? (
+        <Button mb={2} mt={0} m={4} bg="primary.400" onPress={() => signOut()}>
+          LOGOUT
+        </Button>
+      ) : (
+        <Button
+          mb={2}
+          mt={0}
+          m={4}
+          bg="primary.400"
+          onPress={() => props.navigation.navigate("login")}
+        >
+          LOGIN
+        </Button>
+      )}
       <Button
         mb={2}
         mt={0}

@@ -28,7 +28,7 @@ const validationSchema = Yup.object().shape({
 
 export default function CreateProfilePage({ navigation }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { user, setUser, setAuthState } = useAuth();
+  const { user, setUser, signOut, setAuthState } = useAuth();
   const { createUserProfile } = useME();
 
   const handleCreateProfile = async (values) => {
@@ -168,7 +168,15 @@ export default function CreateProfilePage({ navigation }) {
                 >
                   Finish Singing Up
                 </Button>
-                <Button size="lg" width="full" variant="ghost">
+                <Button
+                  size="lg"
+                  width="full"
+                  variant="ghost"
+                  onPress={() => {
+                    signOut();
+                    navigation.navigate("login");
+                  }}
+                >
                   Cancel
                 </Button>
               </VStack>

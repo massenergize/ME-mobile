@@ -63,6 +63,8 @@ export default function useAuth() {
             if (response.error === Constants.NEEDS_REGISTRATION) {
               setAuthState(Constants.NEEDS_REGISTRATION);
             }
+          } else {
+            setAuthState(Constants.USER_IS_AUTHENTICATED);
           }
         });
 

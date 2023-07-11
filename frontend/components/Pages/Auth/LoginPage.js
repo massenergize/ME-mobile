@@ -43,6 +43,7 @@ export default function LoginPage({ navigation }) {
         } else {
           console.log("User signed in successfully!");
           console.log("is user email verified?", userCreds.user.emailVerified);
+          console.log("authState: ", authState);
         }
       }
     );
@@ -52,6 +53,8 @@ export default function LoginPage({ navigation }) {
   useEffect(() => {
     if (authState === Constants.NEEDS_REGISTRATION) {
       navigation.navigate("createProfile", {});
+    } else if (authState === Constants.USER_IS_AUTHENTICATED) {
+      navigation.navigate("drawer", { community_id: 6 });
     }
   }, [authState]);
 

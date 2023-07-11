@@ -20,7 +20,7 @@ import ServiceProvidersPage from "./Pages/ServiceProvidersPage/ServiceProvidersP
 import ServiceProviderDetailsPage from "./Pages/ServiceProvidersPage/ServiceProviderDetailsPage";
 import CommunitySearchPage from "./Pages/CommunitySearchPage/CommunitySearchPage";
 import WithEmailOnlyPage from "./Pages/Auth/WithEmailOnlyPage";
-import CreateProfile from "./Pages/UserProfilePage/CreateProfile";
+import CreateProfilePage from "./Pages/UserProfilePage/CreateProfilePage";
 import TeamDetailsPage from "./Pages/TeamsPage/TeamDetailsPage";
 import TabNavigator from "./Shared/TabNavigator";
 
@@ -51,7 +51,7 @@ const MainNavigator = () => {
       />
       <Stack.Screen
         name="createProfile"
-        component={CreateProfile}
+        component={CreateProfilePage}
         options={{ headerShown: false }}
       />
       <Stack.Screen name="withEmailOnly" component={WithEmailOnlyPage} />

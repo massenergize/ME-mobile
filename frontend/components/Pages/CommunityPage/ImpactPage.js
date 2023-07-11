@@ -1,21 +1,21 @@
 import { ScrollView } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   VStack,
   HStack,
-  Box,
   Text,
   Spacer,
-  Container,
   Center,
-  View
+  View,
+  Spinner
 } from "native-base";
+import Page from "../../Shared/Page";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { Dimensions } from 'react-native';
-import { VictoryPie, VictoryContainer, VictoryBar, VictoryChart, VictoryTheme } from 'victory-native';
 import { BigPieChart, ActionsChart } from "../../Shared/Charts.js";
-import graphData from "./../../../data/graphActionsCompleted.json";
-import listData from "./../../../data/communitiesActionsCompleted.json";
+
+import { apiCall } from "../../../api/functions";
+// import graphData from "./../../../data/graphActionsCompleted.json";
+// import listData from "./../../../data/communitiesActionsCompleted.json";
 
 const colors = [
   "#DC4E34",
@@ -50,41 +50,83 @@ function ActionsList({ listData }) {
 
 export default function ImpactPage({ route, navigation }) {
   const { goalsList } = route.params;
+  const { community_id } = route.params;
   const [ actionDisplay, setActionDisplay ] = useState('chart');
 
+  const [graphData, setGraphData] = useState(null);
+  const [isGraphDataLoading, setIsGraphDataLoading] = useState(true);
+  const [listData, setListData] = useState(null);
+  const [isListDataLoading, setIsListDataLoading] = useState(true);
+
+  const getGraphData = () => {
+    apiCall("graphs.actions.completed", {community_id: community_id}).then((json) => {
+      if (json.success) {
+          setGraphData(json.data);
+          console.log(json.data)
+          // console.log("graph data")
+      } else {
+          console.log(json);
+      }
+      setIsGraphDataLoading(false);
+    });
+  }
+
+  const getActionsList = () => {
+    apiCall("communities.actions.completed", {community_id: community_id}).then((json) => {
+      if (json.success) {
+          setListData(json.data);
+          console.log(json.data)
+      } else {
+          console.log(json);
+      }
+      setIsListDataLoading(false);
+    });
+  }
+
+  useEffect(() => {
+    getGraphData();
+    getActionsList();
+  }, []);
+  
+
   return (
-    <ScrollView>
-      <VStack alignItems="center" space={3} bg="white">
-        <Text bold fontSize="xl" mt={2}>Goals</Text>
-        { // show the three sample goals on the impact page
-            goalsList.map((goal, index) => <BigPieChart goal={goal} color={colors[index]} key={index}/>)
-        }
-        <Text bold fontSize="xl" mb={2} mt={10}>Number of Actions Completed</Text>
-        <HStack width="100%">
-          <Spacer />
-          <Center>
-            <Ionicons 
-              name={"bar-chart-outline"} 
-              color={actionDisplay == "chart" ? '#64B058' : 'black'} 
-              padding={5} 
-              size={24} 
-              onPress={() => setActionDisplay('chart')}/>
-          </Center>
-          <Center pr={3}>
-            <Ionicons 
-              name={"list-outline"} 
-              color={actionDisplay == "list" ? '#64B058' : 'black'} 
-              padding={5} E
-              size={24} 
-              onPress={() => setActionDisplay('list')}/>
-          </Center>
-        </HStack>
-        {
-          (actionDisplay == "chart") ? 
-          <ActionsChart graphData={graphData.data.data} />:
-          <ActionsList listData={listData.data} />
-        }
-      </VStack>
-    </ScrollView>
+    <Page>
+      <ScrollView>
+        <VStack alignItems="center" space={3} bg="white">
+          <Text bold fontSize="xl" mt={2}>Goals</Text>
+          { // show the three sample goals on the impact page
+              goalsList.map((goal, index) => <BigPieChart goal={goal} color={colors[index]} key={index}/>)
+          }
+          <Text bold fontSize="xl" mb={2} mt={10}>Number of Actions Completed</Text>
+          <HStack width="100%">
+            <Spacer />
+            <Center>
+              <Ionicons 
+                name={"bar-chart-outline"} 
+                color={actionDisplay == "chart" ? '#64B058' : 'black'} 
+                padding={5} 
+                size={24} 
+                onPress={() => setActionDisplay('chart')}/>
+            </Center>
+            <Center pr={3}>
+              <Ionicons 
+                name={"list-outline"} 
+                color={actionDisplay == "list" ? '#64B058' : 'black'} 
+                padding={5} E
+                size={24} 
+                onPress={() => setActionDisplay('list')}/>
+            </Center>
+          </HStack>
+          {
+            (isGraphDataLoading || isListDataLoading) 
+            ? <Spinner />
+            : (actionDisplay == "chart") 
+              ? 
+            <ActionsChart graphData={graphData.data} />:
+            <ActionsList listData={listData} />
+          }
+        </VStack>
+      </ScrollView>
+    </Page>
   );
 }

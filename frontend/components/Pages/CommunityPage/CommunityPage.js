@@ -11,10 +11,11 @@ import {
   Pressable,
   Image
 } from "native-base";
-import { apiCall } from "../../../api/functions";
 import ActionCard from "./../ActionsPage/ActionCard";
 import { SmallChart } from "../../Shared/Charts.js";
 import EventCard from "./../EventsPage/EventCard";
+
+import { apiCall } from "../../../api/functions";
 // import data from "./../../../data/communitiesInfo.json";
 // import actions from "./../../../data/actionsList.json";
 
@@ -37,51 +38,67 @@ const colors = [
 ]
 
 // the card that shows up to three goals on the community page
-function GoalsCard({ navigation, goals }) {
-  const goalsList = [
-    { 
-      nameLong: "Individual Actions Completed",
-      nameShort: "Actions",
-      goal: goals.target_number_of_actions,
-      current: goals.initial_number_of_actions + goals.attained_number_of_actions
-    },
-    { 
-      nameLong: "Households Taking Action",
-      nameShort: "Households",
-      goal: goals.target_number_of_households,
-      current: goals.initial_number_of_households + goals.attained_number_of_households
-    },
-    { 
-      nameLong: "Carbon Reduction Impact",
-      nameShort: "Trees",
-      goal: goals.target_carbon_footprint_reduction,
-      current: goals.initial_carbon_footprint_reduction + goals.organic_attained_carbon_footprint_reduction
-    }
-  ]
+function GoalsCard({ navigation, goals, community_id }) {
 
-  return (
-    <Pressable onPress={() => navigation.navigate("impact", {goalsList: goalsList})} mx={4}>
-      {({ isHovered, isFocused, isPressed }) => {
-      return <Box 
-        // bg={isPressed ? "coolGray.200" : "white"}
-        shadow="1" 
-        bg="white" 
-        width="100%" 
-        alignItems="center" 
-        rounded="xl" 
-        p={3}
-        mx={4}
-        >
-        <HStack>
-          { // show the three sample goals on the community page
-            goalsList.map((goal, index) => <SmallChart goal={goal} color={colors[index]} key={index}/>)
-          }
-        </HStack>
-        <Text alignSelf="flex-end" mr={2} fontSize="sm" color="primary.400" mt={1}>Show More  {">"}</Text>
-      </Box>
-      }}
-    </Pressable>
-  );
+  const getGoalsList = () => {
+    let goalsList = []
+    if (goals.target_number_of_actions != 0) {
+      goalsList.push({
+        nameLong: "Individual Actions Completed",
+        nameShort: "Actions",
+        goal: goals.target_number_of_actions,
+        current: goals.initial_number_of_actions + goals.attained_number_of_actions + goals.organic_attained_number_of_actions
+      })
+    }
+    if (goals.target_number_of_households != 0) {
+      goalsList.push({
+        nameLong: "Households Taking Action",
+        nameShort: "Households",
+        goal: goals.target_number_of_households,
+        current: goals.attained_number_of_households + goals.organic_attained_number_of_households
+      })
+    }
+    if (goals.target_carbon_footprint_reduction != 0) {
+      goalsList.push({
+        nameLong: "Carbon Reduction Impact",
+        nameShort: "Trees",
+        goal: goals.target_carbon_footprint_reduction / 133,
+        current: (goals.initial_carbon_footprint_reduction / 133) + (goals.organic_attained_carbon_footprint_reduction / 133)
+      })
+    }
+    return goalsList
+  }
+
+  if (getGoalsList().length != 0) {
+    return (
+      <Pressable onPress={() => navigation.navigate("impact", {goalsList: getGoalsList(), community_id: community_id})} mx={4} width="100%">
+        {({ isHovered, isFocused, isPressed }) => {
+        return <Box 
+          // bg={isPressed ? "coolGray.200" : "white"}
+          shadow="1" 
+          bg="white" 
+          // width="100%" 
+          alignItems="center" 
+          rounded="xl" 
+          p={3}
+          mx={4}
+          >
+          <HStack justifyContent="space-evenly" width="100%">
+            { // show the three sample goals on the community page
+              getGoalsList().map((goal, index) => {
+                return <SmallChart goal={goal} color={colors[index]} key={index}/>
+              })
+            }
+          </HStack>
+          <Text alignSelf="flex-end" mr={2} fontSize="sm" color="primary.400" mt={2}>Show More  {">"}</Text>
+        </Box>
+        }}
+      </Pressable>
+    );
+  }
+  else {
+    return <></>
+  }
 }
 
 
@@ -110,7 +127,7 @@ export default function CommunityPage({ route, navigation }) {
     apiCall("communities.info", {community_id: community_id}).then((json) => {
       if (json.success) {
           setCommunityInfo(json.data);
-          // console.log(json.data)
+          console.log(json.data)
       } else {
           console.log(json);
       }
@@ -166,7 +183,7 @@ export default function CommunityPage({ route, navigation }) {
               <Spacer/>
               <ShowMore navigation={navigation} page="impact" text={"Know More"}/>
             </HStack> */}
-            <GoalsCard navigation={navigation} goals={communityInfo.goal} />
+            <GoalsCard navigation={navigation} goals={communityInfo.goal} community_id={community_id}/>
             <HStack alignItems="center" pb={2} pt={3}>
               <HeaderText text="Recommended Actions"/>
               <Spacer/>

@@ -79,7 +79,7 @@ export default function EventsPage({ route, navigation }) {
         const now = new Date();
         return eventDate > now;
       });
-    } else if (id === 1) {
+    } else if (id === 1) {  
       // past events
       return events.filter((event) => {
         const eventDate = new Date(event.start_date_and_time);

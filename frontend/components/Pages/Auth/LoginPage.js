@@ -40,6 +40,7 @@ export default function LoginPage({ route, navigation }) {
       values.email,
       values.password,
       (userCreds, error) => {
+        // useAuth is fetching ME's token behind the scenes.
         setIsSubmitting(false);
         if (error) {
           setErrorMsg(error);
@@ -53,7 +54,7 @@ export default function LoginPage({ route, navigation }) {
   };
 
   const refreshUser = async () => {
-    console.log("refreshing user...");
+    console.log("Refreshing user's credentials...");
     await user.reload();
     setIsEmailVerified(user.emailVerified);
   };

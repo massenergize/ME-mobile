@@ -78,7 +78,7 @@ function CustomDrawerContent(props) {
                                                 return (
                                                     <DrawerItem 
                                                         label={dropdownItem.name} 
-                                                        onPress={() => props.navigation.navigate(dropdownItem.route)}
+                                                        onPress={() => props.navigation.navigate(dropdownItem.route, {community_id: props.community_id})}
                                                         style={{flex: 1, marginLeft: 65}}
                                                         key={index2}
                                                     />
@@ -112,7 +112,10 @@ function CustomDrawerContent(props) {
     )
 }
 
-export default function CommunityNavigation() {
+export default function DrawerNavigator({ route, navigation }) {
+    console.log(route.params)
+    const { community_id } = route.params;
+
   return (
     <Drawer.Navigator 
         screenOptions={({ navigation, route, options }) => ({
@@ -122,12 +125,13 @@ export default function CommunityNavigation() {
             headerTitleAlign: "center",
         })}
 
-        drawerContent={props => <CustomDrawerContent {...props} />}S
+        drawerContent={props => <CustomDrawerContent {...props} community_id={community_id} />}S
     >
       <Drawer.Screen
         name="Community"
         component={TabNavigator}
         screenOptions={{ headerTitle: "COMMUNITY" }}
+        initialParams={{community_id: community_id}}
       />
       <Drawer.Screen name="About" component={AboutPage} />
       <Drawer.Screen 

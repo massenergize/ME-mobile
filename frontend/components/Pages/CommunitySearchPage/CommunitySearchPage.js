@@ -14,12 +14,14 @@ import {
     Heading,
     Flex,
     Pressable,
+    Spinner
 } from "native-base";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Page from "../../Shared/Page";
 import SearchBar from "../../Shared/SearchBar";
 
 import { apiCall } from "../../../api/functions";
+import { set } from "react-native-reanimated";
 
 const filterOptions = [
     {
@@ -45,6 +47,8 @@ export default function CommunitySearchPage({ navigation }) {
     const [zipCode, setZipCode] = useState("");
     const [showModal, setShowModal] = useState(false);
 
+    const [isLoading, setIsLoading] = useState(true);
+
     const handleZipCodeSubmit = () => {
         // TODO: validate zip code
         setShowModal(false);
@@ -59,6 +63,7 @@ export default function CommunitySearchPage({ navigation }) {
             } else {
                 console.log(json);
             }
+            setIsLoading(false);
         });
     }, []);
 
@@ -101,7 +106,11 @@ export default function CommunitySearchPage({ navigation }) {
                         </HStack>
                         <SearchBar filterOptions={filterOptions} />
                         {/* Container for communities */}
-                        <ScrollView height="80">
+                        {
+                            isLoading ? (
+                                <Spinner />
+                            ) : (
+                                <ScrollView height="80">
                             {communities.map((community) => (
                                 <Pressable
                                     key={community.id}
@@ -143,7 +152,9 @@ export default function CommunitySearchPage({ navigation }) {
                                     </Flex>
                                 </Pressable>
                             ))}
-                        </ScrollView>
+                            </ScrollView>
+                            )
+                        }
                     </VStack>
                 </Box>
             </Box>

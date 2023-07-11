@@ -180,7 +180,9 @@ function CustomDrawerContent(props) {
                       <DrawerItem
                         label={dropdownItem.name}
                         onPress={() =>
-                          props.navigation.navigate(dropdownItem.route)
+                          props.navigation.navigate(dropdownItem.route, {
+                            community_id: props.community_id,
+                          })
                         }
                         style={{ flex: 1, marginLeft: 65 }}
                         key={index2}
@@ -211,7 +213,7 @@ function CustomDrawerContent(props) {
         mt={0}
         m={4}
         bg="primary.400"
-        onPress={() => AuthModalController.showModal()}
+        onPress={() => props.navigation.navigate("welcome")}
       >
         LOGIN
       </Button>
@@ -228,7 +230,10 @@ function CustomDrawerContent(props) {
   );
 }
 
-export default function CommunityNavigation() {
+export default function DrawerNavigator({ route, navigation }) {
+  console.log(route.params);
+  const { community_id } = route.params;
+
   return (
     <Drawer.Navigator
       screenOptions={({ navigation, route, options }) => ({
@@ -237,13 +242,16 @@ export default function CommunityNavigation() {
         headerTitle: getFocusedRouteNameFromRoute(route), // make header title that of the current tab
         headerTitleAlign: "center",
       })}
-      drawerContent={(props) => <CustomDrawerContent {...props} />}
+      drawerContent={(props) => (
+        <CustomDrawerContent {...props} community_id={community_id} />
+      )}
       S
     >
       <Drawer.Screen
         name="Community"
         component={TabNavigator}
         screenOptions={{ headerTitle: "COMMUNITY" }}
+        initialParams={{ community_id: community_id }}
       />
       <Drawer.Screen name="About" component={AboutPage} />
       <Drawer.Screen

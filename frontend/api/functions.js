@@ -15,11 +15,11 @@ export async function apiCall(
   relocationPage = null
 ) {
   // TODO: add some meta data for context in backend
-  dataToSend = {
-    // __is_prod: IS_PROD || IS_CANARY,
-    // ..._getCurrentCommunityContext(),
-    ...dataToSend,
-  };
+  // dataToSend = {
+  //     // __is_prod: IS_PROD || IS_CANARY,
+  //     // ..._getCurrentCommunityContext(),
+  //     ...dataToSend,
+  // };
 
   // make leading '/' optional
   if (destinationUrl.charAt(0) === "/") {
@@ -34,16 +34,32 @@ export async function apiCall(
   // const authTokenInLocalStorage = localStorage.getItem(AUTH_TOKEN); // This is also only used in test. Its a fallback method to retrieve token
   const formData = new FormData();
 
+  console.log("Data to send", dataToSend);
   Object.keys(dataToSend).map((k) => formData.append(k, dataToSend[k]));
+  formData.append("", "");
+
+  // Object.keys(dataToSend).map((k) => formData.append(k, {...dataToSend[k], type: 'multipart/form-data'}));
   // if (authToken)
   //     formData.append("__token", authToken || authTokenInLocalStorage || null);
 
+  // })
+  // .catch(err => {
+  //     console.log("error catch search:", err.message);
+  //     fetching = false;
+  //     // Choose one, depends what you need.
+  //     return false; // If you want to ignore the error and do something in a chained .then()
+  // })
+  console.log(formData);
+
   try {
+    console.log("URL", `${URLS.ROOT}/${destinationUrl}`);
+    console.log("Form Data", formData, JSON.stringify(dataToSend));
     const response = await fetch(`${URLS.ROOT}/${destinationUrl}`, {
       credentials: "include",
       method: "POST",
-      // body: formData,
+      body: formData,
     });
+    // const response = await sendXmlHttpRequest(`${URLS.ROOT}/${destinationUrl}`, formData);
     const json = await response.json();
     // if (relocationPage && json && json.success) {
     //     window.location.href = relocationPage;

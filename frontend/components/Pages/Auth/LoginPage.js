@@ -26,7 +26,9 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().required("Password is required"),
 });
 
-export default function LoginPage({ navigation }) {
+export default function LoginPage({ route, navigation }) {
+  const { community_id } = route.params;
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
   const { user, authState, signInWithEmailAndPassword } = useAuth();
@@ -59,9 +61,9 @@ export default function LoginPage({ navigation }) {
   // Hacky way to redirect to createProfile page if user is not registered in ME yet.
   useEffect(() => {
     if (authState === Constants.NEEDS_REGISTRATION) {
-      navigation.navigate("createProfile", {});
+      navigation.navigate("createProfile", { community_id: community_id });
     } else if (authState === Constants.USER_IS_AUTHENTICATED) {
-      navigation.navigate("drawer", { community_id: 6 });
+      navigation.navigate("drawer", { community_id: community_id });
     }
   }, [authState]);
 
@@ -171,7 +173,11 @@ export default function LoginPage({ navigation }) {
                         bold: true,
                         fontSize: "sm",
                       }}
-                      onPress={() => navigation.navigate("signup")}
+                      onPress={() =>
+                        navigation.navigate("signup", {
+                          community_id: community_id,
+                        })
+                      }
                     >
                       Sign Up
                     </Link>

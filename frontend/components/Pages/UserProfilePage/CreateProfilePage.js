@@ -26,7 +26,7 @@ const validationSchema = Yup.object().shape({
     .matches(/^[0-9]{5}$/, "Must be exactly 5 digits"),
 });
 
-export default function CreateProfilePage({ navigation }) {
+export default function CreateProfilePage({ route, navigation }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { user, setUser, signOut, setAuthState } = useAuth();
   const { createUserProfile } = useME();
@@ -34,7 +34,7 @@ export default function CreateProfilePage({ navigation }) {
   const handleCreateProfile = async (values) => {
     setIsSubmitting(true);
     // TODO: find where to get city and state
-    const location = "Malden, MA, " + values.zipCode;
+    const location = ", , " + values.zipCode;
     const profile = {
       full_name: values.firstName + " " + values.lastName,
       preferred_name: values.username || values.firstName,
@@ -54,10 +54,7 @@ export default function CreateProfilePage({ navigation }) {
         console.log("Profile created successfully!", response.data.email);
         setUser({ ...user, profile: response.data });
         setAuthState(Constants.USER_IS_AUTHENTICATED);
-        // TODO: redirect to community page.
-        navigation.navigate("drawer", {
-          community_id: 6,
-        });
+        navigation.navigate("drawer", { ...route.params });
       }
     });
   };
@@ -174,7 +171,7 @@ export default function CreateProfilePage({ navigation }) {
                   variant="ghost"
                   onPress={() => {
                     signOut();
-                    navigation.navigate("login");
+                    navigation.navigate("login", { ...route.params });
                   }}
                 >
                   Cancel

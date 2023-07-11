@@ -29,7 +29,7 @@ const validationSchema = Yup.object().shape({
     .required("Confirm password is required"),
 });
 
-export default function SignupPage({ navigation }) {
+export default function SignupPage({ route, navigation }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
   const { registerWithEmailAndPassword, sendVerificationEmail } = useAuth();
@@ -52,7 +52,7 @@ export default function SignupPage({ navigation }) {
               console.log("Verification email sent succeeded!");
             }
           });
-          navigation.navigate("login");
+          navigation.navigate("login", { ...route.params });
         }
       }
     );
@@ -161,7 +161,9 @@ export default function SignupPage({ navigation }) {
                       bold: true,
                       fontSize: "sm",
                     }}
-                    onPress={() => navigation.navigate("login")}
+                    onPress={() =>
+                      navigation.navigate("login", { ...route.params })
+                    }
                   >
                     Sign In
                   </Link>

@@ -220,7 +220,11 @@ function CustomDrawerContent(props) {
           mt={0}
           m={4}
           bg="primary.400"
-          onPress={() => props.navigation.navigate("login")}
+          onPress={() =>
+            props.navigation.navigate("login", {
+              community_id: props.community_id,
+            })
+          }
         >
           LOGIN
         </Button>

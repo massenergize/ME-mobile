@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from "react";
 
+import useME from "./useME";
+import Constants from "../Constants";
 import { AUTH } from "../../config/firebaseConfig";
 import { translateFirebaseError } from "../Shared/Utils";
 
 export default function useAuth() {
   const [user, setUser] = useState(null);
+  const [authState, setAuthState] = useState(
+    Constants.USER_IS_NOT_AUTHENTICATED
+  );
+  const { fetchToken } = useME();
 
   useEffect(() => {
     const unsubscribe = AUTH.onAuthStateChanged((user) => {
@@ -27,10 +33,10 @@ export default function useAuth() {
    */
   const registerWithEmailAndPassword = (email, password, callBackFn = null) => {
     AUTH.createUserWithEmailAndPassword(email, password)
-      .then((userCredential) => {
+      .then((userCredentials) => {
         // Registered and signed in
         if (callBackFn) {
-          callBackFn(userCredential, null);
+          callBackFn(userCredentials, null);
         }
       })
       .catch((error) => {
@@ -49,10 +55,19 @@ export default function useAuth() {
    */
   const signInWithEmailAndPassword = (email, password, callBackFn = null) => {
     AUTH.signInWithEmailAndPassword(email, password)
-      .then((userCredential) => {
+      .then(async (userCredentials) => {
         // Signed in
+        const _fbToken = await userCredentials.user?.getIdTokenResult();
+        fetchToken(_fbToken.token, (response) => {
+          if (!response.success) {
+            if (response.error === Constants.NEEDS_REGISTRATION) {
+              setAuthState(Constants.NEEDS_REGISTRATION);
+            }
+          }
+        });
+
         if (callBackFn) {
-          callBackFn(userCredential, null);
+          callBackFn(userCredentials, null);
         }
       })
       .catch((error) => {
@@ -98,6 +113,9 @@ export default function useAuth() {
 
   return {
     user,
+    setUser,
+    authState,
+    setAuthState,
     signOut,
     signInWithEmailAndPassword,
     registerWithEmailAndPassword,

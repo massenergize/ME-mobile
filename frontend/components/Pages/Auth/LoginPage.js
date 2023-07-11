@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Center,
   Box,
@@ -17,6 +17,7 @@ import { Formik } from "formik";
 import Page from "../../Shared/Page";
 import EmailVerificationPage from "./EmailVerificationPage";
 import useAuth from "../../Hooks/useAuth";
+import Constants from "../../Constants";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -28,7 +29,7 @@ const validationSchema = Yup.object().shape({
 export default function LoginPage({ navigation }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
-  const { user, signInWithEmailAndPassword } = useAuth();
+  const { user, authState, signInWithEmailAndPassword } = useAuth();
 
   const handleSignIn = (values) => {
     setIsSubmitting(true);
@@ -46,6 +47,13 @@ export default function LoginPage({ navigation }) {
       }
     );
   };
+
+  // Hacky way to redirect to createProfile page if user is not registered in ME yet.
+  useEffect(() => {
+    if (authState === Constants.NEEDS_REGISTRATION) {
+      navigation.navigate("createProfile", {});
+    }
+  }, [authState]);
 
   if (user && !user.emailVerified) {
     return <EmailVerificationPage />;

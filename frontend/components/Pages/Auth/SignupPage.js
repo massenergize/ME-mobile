@@ -45,7 +45,6 @@ export default function SignupPage({ navigation }) {
           setErrorMsg(error);
         } else {
           console.log("User created successfully!");
-          // TODO: Send an email verification link to the user's email
           sendVerificationEmail(userCreds.user, (error) => {
             if (error) {
               console.log("Error sending verification email", error);
@@ -53,7 +52,6 @@ export default function SignupPage({ navigation }) {
               console.log("Verification email sent succeeded!");
             }
           });
-          // TODO: Redirect the user to the login page? Or just log them in?
           navigation.navigate("login");
         }
       }

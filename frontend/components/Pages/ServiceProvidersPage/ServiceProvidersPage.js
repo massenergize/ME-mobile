@@ -108,7 +108,7 @@ export default function ServiceProvidersPage({ route, navigation }) {
                 sProviders.map((sProvider, index) => {
                   return (
                     <ServiceProviderCard
-                    id={sProvider.id}
+                      id={sProvider.id}
                       key={index}
                       direction="row"
                       name={sProvider.name}

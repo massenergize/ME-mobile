@@ -1,6 +1,6 @@
-import { View, Text, SafeAreaView, ImageBackground, Animated } from "react-native";
-import { React, useState } from "react";
-import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from "@react-navigation/drawer";
+import { SafeAreaView } from "react-native";
+import { React, useState, useEffect } from "react";
+import { createDrawerNavigator, DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import AboutPage from "../Pages/AboutPage/AboutPage";
 import TestimonialsPage from "../Pages/TestimonialsPage/TestimonialsPage";
 import TeamsPage from "../Pages/TeamsPage/TeamsPage";
@@ -10,7 +10,8 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import TabNavigator from "./TabNavigator";
 import { getHeaderTitle } from "@react-navigation/elements";
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
-import { Button, Image, Container, Center, HStack, VStack, Spacer, Pressable } from "native-base";
+import { Button, Image, Center, HStack, VStack, Pressable } from "native-base";
+import { apiCall } from "../../api/functions";
 
 const Drawer = createDrawerNavigator();
 
@@ -30,12 +31,32 @@ const drawerItems = [
 function CustomDrawerContent(props) {
     [expanded, setExpanded] = useState({"About Us": false, "Resources": false});
 
+    const [communityInfo, setCommunityInfo] = useState(null);
+    const [isCommunityLoading, setIsCommunityLoading] = useState(true);
+
+    const getCommuityInfo = () => {
+        apiCall("communities.info", {community_id: props.community_id}).then((json) => {
+          if (json.success) {
+              setCommunityInfo(json.data);
+              // console.log(json.data)
+          } else {
+              console.log(json);
+          }
+          setIsCommunityLoading(false);
+        });
+    }
+
+    useEffect(() => {
+        getCommuityInfo();
+    }, [])
+
     return (
         <SafeAreaView style={{flex: 1}} forceInset={{top: "always", horizontal: "never"}}> 
             <DrawerContentScrollView {...props} >
                 <Center p={4} maxHeight={200}>
                     <Image
-                        source={require("../../assets/images/cooler-concord.png")}
+                        // source={require("../../assets/images/cooler-concord.png")}
+                        source={{uri: isCommunityLoading ? null : communityInfo.logo.url}}
                         alt="Community Logo"
                         resizeMode="contain"
                         height="full"
@@ -108,43 +129,42 @@ function CustomDrawerContent(props) {
 }
 
 export default function DrawerNavigator({ route, navigation }) {
-    console.log(route.params)
     const { community_id } = route.params;
 
-  return (
-    <Drawer.Navigator 
-        screenOptions={({ navigation, route, options }) => ({
-            drawerActiveTintColor: "#64B058",
-            headerTintColor: "#000000",
-            headerTitle: getFocusedRouteNameFromRoute(route), // make header title that of the current tab
-            headerTitleAlign: "center",
-        })}
+    return (
+        <Drawer.Navigator 
+            screenOptions={({ navigation, route, options }) => ({
+                drawerActiveTintColor: "#64B058",
+                headerTintColor: "#000000",
+                headerTitle: getFocusedRouteNameFromRoute(route), // make header title that of the current tab
+                headerTitleAlign: "center",
+            })}
 
-        drawerContent={props => <CustomDrawerContent {...props} community_id={community_id} />}S
-    >
-      <Drawer.Screen
-        name="Community"
-        component={TabNavigator}
-        screenOptions={{ headerTitle: "COMMUNITY" }}
-        initialParams={{community_id: community_id}}
-      />
-      <Drawer.Screen name="About" component={AboutPage} />
-      <Drawer.Screen 
-        name="Testimonials" 
-        component={TestimonialsPage} 
-        options={{
-          headerTitle: "TESTIMONIALS",
-          headerRight: () => (
-            <Ionicons name={"filter"} color="black" marginRight={15} size={20}/>
-          )
-        }}
-      />
-      <Drawer.Screen name="Teams" component={TeamsPage} />
-      <Drawer.Screen
-        name="Service Providers"
-        component={ServiceProvidersPage}
-      />
-      <Drawer.Screen name="Contact Us" component={ContactUsPage} />
-    </Drawer.Navigator>
-  );
+            drawerContent={props => <CustomDrawerContent {...props} community_id={community_id} />}
+        >
+        <Drawer.Screen
+            name="Community"
+            component={TabNavigator}
+            screenOptions={{ headerTitle: "COMMUNITY" }}
+            initialParams={{community_id: community_id}}
+        />
+        <Drawer.Screen name="About" component={AboutPage} />
+        <Drawer.Screen 
+            name="Testimonials" 
+            component={TestimonialsPage} 
+            options={{
+            headerTitle: "TESTIMONIALS",
+            headerRight: () => (
+                <Ionicons name={"filter"} color="black" marginRight={15} size={20}/>
+            )
+            }}
+        />
+        <Drawer.Screen name="Teams" component={TeamsPage} />
+        <Drawer.Screen
+            name="Service Providers"
+            component={ServiceProvidersPage}
+        />
+        <Drawer.Screen name="Contact Us" component={ContactUsPage} />
+        </Drawer.Navigator>
+    );
 }

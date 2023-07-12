@@ -220,11 +220,7 @@ function CustomDrawerContent(props) {
           mt={0}
           m={4}
           bg="primary.400"
-          onPress={() =>
-            props.navigation.navigate("login", {
-              community_id: props.community_id,
-            })
-          }
+          onPress={() => AuthModalController.showModal()}
         >
           LOGIN
         </Button>
@@ -243,7 +239,6 @@ function CustomDrawerContent(props) {
 }
 
 export default function DrawerNavigator({ route, navigation }) {
-  console.log(route.params);
   const { community_id } = route.params;
 
   return (

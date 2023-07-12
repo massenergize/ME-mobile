@@ -132,7 +132,6 @@ export default function CommunityPage({ route, navigation }) {
 
   useEffect(() => {
     fetchCommunityInfo(community_id, () => setIsLoading(false));
-    console.log(communityInfo);
     // apiCall("communities.info", { community_id: community_id }).then((json) => {
     //   if (json.success) {
     //     setCommunityInfo(json.data);

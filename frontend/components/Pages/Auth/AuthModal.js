@@ -1,5 +1,6 @@
 import React, {
   forwardRef,
+  useContext,
   useImperativeHandle,
   useLayoutEffect,
   useRef,
@@ -8,8 +9,10 @@ import React, {
 import { Modal, VStack, Button } from "native-base";
 import AuthModalController from "./AuthModalController";
 import { useNavigation } from "@react-navigation/native";
+import { CommunityContext } from "../../Contexts/CommunityContext";
 
 function AuthModal() {
+  const { communityInfo } = useContext(CommunityContext);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const modalRef = useRef();
   const navigation = useNavigation();
@@ -56,7 +59,9 @@ function AuthModal() {
               size="lg"
               backgroundColor="black"
               onPress={() => {
-                navigation.navigate("login");
+                navigation.navigate("login", {
+                  community_id: communityInfo.community_id,
+                });
                 AuthModalController.hideModal();
               }}
             >

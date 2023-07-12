@@ -40,7 +40,7 @@ export default function LoginPage({ route, navigation }) {
       values.email,
       values.password,
       (userCreds, error) => {
-        // useAuth is fetching ME's token behind the scenes.
+        // useAuth.signInWithEmailAndPassword is fetching ME's token behind the scenes.
         setIsSubmitting(false);
         if (error) {
           setErrorMsg(error);
@@ -62,7 +62,7 @@ export default function LoginPage({ route, navigation }) {
   // Hacky way to redirect to createProfile page if user is not registered in ME yet.
   useEffect(() => {
     if (authState === Constants.NEEDS_REGISTRATION) {
-      navigation.navigate("createProfile", { community_id: community_id });
+      navigation.navigate("createProfile");
     } else if (authState === Constants.USER_IS_AUTHENTICATED) {
       navigation.navigate("drawer", { community_id: community_id });
     }

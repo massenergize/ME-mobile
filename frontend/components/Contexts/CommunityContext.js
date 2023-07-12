@@ -9,7 +9,7 @@ export const CommunityProvider = ({ children }) => {
   const fetchCommunityInfo = (community_id, callBackFn = null) => {
     apiCall("communities.info", { community_id: community_id }).then((json) => {
       if (json.success) {
-        setCommunityInfo(json.data);
+        setCommunityInfo({ ...json.data, community_id: community_id });
         if (callBackFn) callBackFn(json.data, null);
       } else {
         console.log(json);

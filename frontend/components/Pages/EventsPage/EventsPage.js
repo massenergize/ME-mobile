@@ -5,7 +5,7 @@ import SearchBar from "../../Shared/SearchBar";
 import EventCard from "./EventCard";
 
 import DummyResponse from "../../../data/eventsList.json";
-import { dateFormatString } from "../../Shared/Utils";
+import { formatDateString } from "../../Shared/Utils";
 
 const filterOptions = [
   {
@@ -127,7 +127,7 @@ export default function EventsPage({ navigation }) {
             <EventCard
               key={event.id}
               title={event.name}
-              date={dateFormatString(
+              date={formatDateString(
                 new Date(event.start_date_and_time),
                 new Date(event.end_date_and_time)
               )}

@@ -21,6 +21,7 @@ import Page from "../../Shared/Page";
 import SearchBar from "../../Shared/SearchBar";
 
 import { apiCall } from "../../../api/functions";
+import CommunityCard from "./CommunityCard";
 
 const filterOptions = [
   {
@@ -104,36 +105,15 @@ export default function CommunitySearchPage({ navigation }) {
             ) : (
               <ScrollView height="80">
                 {communities.map((community) => (
-                  <Pressable
+                  <CommunityCard
+                    community={community}
                     key={community.id}
                     onPress={() =>
                       navigation.navigate("drawer", {
                         community_id: community.id,
                       })
                     }
-                  >
-                    <Flex flexDirection="row" alignItems="center">
-                      <Image
-                        source={{
-                          uri: community.logo?.url,
-                        }}
-                        alt="Community Logo"
-                        size="100px"
-                        resizeMode="contain"
-                      />
-                      <Box width="70%" pl="5">
-                        <Text fontSize="lg" fontWeight="bold">
-                          {community.name}
-                        </Text>
-
-                        <Text fontSize="sm" color="muted.400">
-                          {community.is_geographically_focused
-                            ? `${community.location.city}, ${community.location.state}`
-                            : `${community.location?.country}`}
-                        </Text>
-                      </Box>
-                    </Flex>
-                  </Pressable>
+                  />
                 ))}
               </ScrollView>
             )}

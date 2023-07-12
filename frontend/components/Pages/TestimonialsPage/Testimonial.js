@@ -56,11 +56,13 @@ export default function Testimonial({ route, navigation }) {
                 <View>
                     <Text bold fontSize="lg" my={3}>Related Vendor</Text>
                     <ServiceProviderCard
+                        id={data.vendor.id}
                         direction="row"
                         name={data.vendor.name}
                         description="This could be a brief description of the service provider."
-                        image={(data.vendor.logo != null ) ? data.vendor.logo.url : null}
-                        onPress={() => navigation.navigate("serviceProviderDetails")}
+                        imageURI={(data.vendor.logo) ? data.vendor.logo.url : null}
+                        // onPress={() => navigation.navigate("serviceProviderDetails")}
+                        navigation={navigation}
                         my="2"
                         />
                 </View>

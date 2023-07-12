@@ -86,13 +86,15 @@ export default function ServiceProvidersPage({ route, navigation }) {
                   sProviders.map((sProvider, index) => {
                     return (
                       <ServiceProviderCard
+                        id={sProvider.id}
                         key={index}
                         direction="column"
                         name={sProvider.name}
-                        imageURI={sProvider.logo.url}
-                        onPress={() =>
-                          navigation.navigate("serviceProviderDetails")
-                        }
+                        imageURI={sProvider.logo ? sProvider.logo.url : null}
+                        navigation={navigation}
+                        // onPress={() =>
+                        //   navigation.navigate("serviceProviderDetails", {vendor_id: sProvider.id})
+                        // }
                         my="3"
                       />
                     );
@@ -106,13 +108,15 @@ export default function ServiceProvidersPage({ route, navigation }) {
                 sProviders.map((sProvider, index) => {
                   return (
                     <ServiceProviderCard
+                    id={sProvider.id}
                       key={index}
                       direction="row"
                       name={sProvider.name}
-                      imageURI={sProvider.logo.url}
-                      onPress={() =>
-                        navigation.navigate("serviceProviderDetails")
-                      }
+                      imageURI={sProvider.logo ? sProvider.logo.url : null}
+                      // onPress={() =>
+                      //   navigation.navigate("serviceProviderDetails", {vendor_id: sProvider.id})
+                      // }
+                      navigation={navigation}
                       my="3"
                     />
                   );

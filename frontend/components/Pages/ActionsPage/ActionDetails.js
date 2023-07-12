@@ -75,13 +75,15 @@ export default function ActionDetails({ route, navigation }) {
     return (
       action.vendors.map((vendor, index) => {
         return <ServiceProviderCard 
+          id={vendor.id}
           direction="row" 
           description=""
           imageURI={vendor.logo.url}
           name={vendor.name}
-          onPress={() =>
-            navigation.navigate("serviceProviderDetails")
-          }
+          // onPress={() =>
+          //   navigation.navigate("serviceProviderDetails")
+          // }
+          navigation={navigation}
           key={index}/>
       })
     )

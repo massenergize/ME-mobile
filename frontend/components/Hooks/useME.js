@@ -19,7 +19,7 @@ export default function useME() {
   /**
    * Creates a user profile in the backend and calls the callback function with the response.
    * @param {Object} profile {full_name, preferred_name, email, location, is_vendor, accepts_terms_and_conditions, subdomain, color}
-   * @param {*} callBackFn callback function to be called after the user is created or if there is an error.
+   * @param {CallableFunction} callBackFn callback function to be called after the user is created or if there is an error.
    */
   const createUserProfile = (profile, callBackFn = null) => {
     apiCall("users.create", profile)

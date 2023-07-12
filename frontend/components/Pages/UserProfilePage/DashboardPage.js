@@ -10,6 +10,7 @@ import {
   Avatar,
   Center,
   Icon,
+  Pressable,
 } from "native-base";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
@@ -634,21 +635,28 @@ const ACTION = {
   ],
 };
 
-const ProfileName = () => {
+const ProfileName = ({ navigation }) => {
   return (
-    <Flex flexDirection="row">
+    <Flex
+      flexDirection="row"
+      alignItems="center"
+      justifyContent="space-between"
+    >
       <Image
         source={{
           uri: "https://media.npr.org/assets/img/2017/09/12/macaca_nigra_self-portrait-3e0070aa19a7fe36e802253048411a38f14a79f8-s1100-c50.jpg",
         }}
         alt="User avatar"
-        size="24"
+        size="20"
         rounded="full"
       />
-      <Box flexGrow="1" alignItems="center" alignSelf="center">
+      <Box alignItems="center">
         <Text fontSize="xl">Your Name</Text>
         <Text>Community Name</Text>
       </Box>
+      <Pressable onPress={() => navigation.navigate("settings")}>
+        <Icon as={FontAwesome} name="cog" size="lg" />
+      </Pressable>
     </Flex>
   );
 };
@@ -845,12 +853,12 @@ const CommunitiesList = () => {
   );
 };
 
-export default function DashboardPage() {
+export default function DashboardPage({ navigation }) {
   return (
     <Page>
       <ScrollView padding="5" contentContainerStyle={{ alignItems: "center" }}>
         <VStack space={10} mb="20">
-          <ProfileName />
+          <ProfileName navigation={navigation} />
           <SustainScore />
           <CarbonSaved />
           <ActionsList />

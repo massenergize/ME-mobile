@@ -23,6 +23,7 @@ import WithEmailOnlyPage from "./Pages/Auth/WithEmailOnlyPage";
 import CreateProfilePage from "./Pages/UserProfilePage/CreateProfilePage";
 import TeamDetailsPage from "./Pages/TeamsPage/TeamDetailsPage";
 import TabNavigator from "./Shared/TabNavigator";
+import SettingsPage from "./Pages/SettingsPage/SettingsPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -99,6 +100,7 @@ const MainNavigator = () => {
         component={ServiceProviderDetailsPage}
       />
       <Stack.Screen name="tab" component={TabNavigator} />
+      <Stack.Screen name="settings" component={SettingsPage} />
       <Stack.Screen
         name="drawer"
         component={DrawerNavigator}

@@ -9,11 +9,13 @@ import {
   Container,
   Spinner,
   Pressable,
-  Image
+  Image,
+  View
 } from "native-base";
 import ActionCard from "./../ActionsPage/ActionCard";
 import { SmallChart } from "../../Shared/Charts.js";
 import EventCard from "./../EventsPage/EventCard";
+import { dateFormatString } from "../../Shared/Utils";
 
 import { apiCall } from "../../../api/functions";
 // import data from "./../../../data/communitiesInfo.json";
@@ -122,12 +124,14 @@ export default function CommunityPage({ route, navigation }) {
   const [isCommunityLoading, setIsCommunityLoading] = useState(true);
   const [actions, setActions] = useState(null);
   const [isActionsLoading, setIsActionsLoading] = useState(true);
+  const [upcomingEvent, setUpcomingEvent] = useState(null);
+  const [isEventLoading, setIsEventLoading] = useState(true);
 
   const getCommuityInfo = () => {
     apiCall("communities.info", {community_id: community_id}).then((json) => {
       if (json.success) {
           setCommunityInfo(json.data);
-          console.log(json.data)
+          // console.log(json.data)
       } else {
           console.log(json);
       }
@@ -147,9 +151,31 @@ export default function CommunityPage({ route, navigation }) {
     });
   }
 
+  const getUpcomingEvent = () => {
+    apiCall("events.list", {community_id: community_id}).then((json) => {
+      if (json.success) {
+        const upcoming = json.data.filter((event) => {
+          const eventDate = new Date(event.start_date_and_time);
+          const now = new Date();
+          return eventDate > now;
+        });
+
+        if (upcoming.length > 0) {
+          console.log(upcoming[0])
+          setUpcomingEvent(upcoming[0]);
+        }
+          // console.log(json.data)
+      } else {
+          console.log(json);
+      }
+      setIsEventLoading(false);
+    });
+  }
+
   useEffect(() => {
     getCommuityInfo();
     getActionList();
+    getUpcomingEvent();
   }, []);
 
   const getMetric = (action, metric) => {
@@ -171,7 +197,7 @@ export default function CommunityPage({ route, navigation }) {
             {/* <Text bold fontSize="2xl">Community Name</Text> */}
             <Container maxHeight={200} width="100%" mt={3}>
               <Image
-                  source={{uri: communityInfo.logo.url}}
+                  source={{uri: (communityInfo.logo) ? communityInfo.logo.url : null}}
                   alt="Community Logo"
                   resizeMode="contain"
                   height="full"
@@ -194,6 +220,7 @@ export default function CommunityPage({ route, navigation }) {
               {
                 isActionsLoading ? <Spinner size="lg" color="primary.500" /> :
                 actions.map((action, index) => {
+                  // console.log(action)
                   if (getMetric(action, "Cost") === "$" || getMetric(action, "Cost") === "0") {
                     return (
                       <ActionCard navigation={navigation} action={action} key={index}></ActionCard>
@@ -206,25 +233,38 @@ export default function CommunityPage({ route, navigation }) {
               }
               </HStack>
             </ScrollView>
-            <HStack alignItems="center" pt={3}>
-              <HeaderText text="Upcoming Event"/>
-              <Spacer/>
-              <ShowMore navigation={navigation} page="EVENTS" text={"Show More"}/>
-            </HStack>
-            <EventCard
-                key={event.id}
-                title={event.title}
-                date={event.date}
-                location={event.location}
-                imageURI={event.image}
-                canRSVP={event.can_rsvp}
-                isRSVPED={event.is_rsvped}
-                isShared={event.is_shared}
-                onPress={() => navigation.navigate("eventDetails")}
-                my={2}
-                mx={4}
-                shadow={5}
-              />
+            {
+              upcomingEvent === null ? <></> :
+              <View>
+                <HStack alignItems="center" pt={3}>
+                  <HeaderText text="Upcoming Event"/>
+                  <Spacer/>
+                  <ShowMore navigation={navigation} page="EVENTS" text={"Show More"}/>
+                </HStack>
+                  {
+                  isEventLoading ? <Spinner size="lg" color="primary.500" /> : (
+                    <EventCard
+                        key={upcomingEvent.id}
+                        title={upcomingEvent.name}
+                        date={dateFormatString(
+                          new Date(upcomingEvent.start_date_and_time),
+                          new Date(upcomingEvent.end_date_and_time)
+                        )}
+                        location={upcomingEvent.location}
+                        imageURI={upcomingEvent.image.url}
+                        canRSVP={upcomingEvent.rsvp_enabled}
+                        isRSVPED={upcomingEvent.is_rsvped}
+                        isShared={upcomingEvent.is_shared}
+                        onPress={() => navigation.navigate("eventDetails", {event_id: upcomingEvent.id})}
+                        my={2}
+                        mx={4}
+                        shadow={5}
+                      />
+                  )
+                  }
+              </View>
+              
+            }
           </VStack>
       }
     </ScrollView>

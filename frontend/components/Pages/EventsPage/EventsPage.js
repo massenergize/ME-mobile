@@ -95,14 +95,14 @@ export default function EventsPage({ route, navigation }) {
   return (
     <Page>
       <ScrollView
-        p="5"
+        m={3}
         contentContainerStyle={{
           alignItems: "center",
         }}
       >
         <SearchBar
           pb="5"
-          w="full"
+          w="100%"
           filterOptions={filterOptions}
           filterHeader="Category"
         />
@@ -150,11 +150,12 @@ export default function EventsPage({ route, navigation }) {
                       new Date(event.end_date_and_time)
                     )}
                     location={event.location}
-                    imageURI={event.image.url}
+                    imageURI={(event.image != null) ? event.image.url : null}
                     canRSVP={event.rsvp_enabled}
-                    onPress={() => navigation.navigate("eventDetails")}
+                    onPress={() => navigation.navigate("eventDetails", {event_id: event.id})}
                     my="3"
-                    shadow="5"
+                    mx={2}
+                    shadow={3}
                   />
                 ))
               ) : (

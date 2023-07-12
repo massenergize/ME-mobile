@@ -29,12 +29,13 @@ function ActionCard({ navigation, action }) {
                 <Image
                   source={{
                     // uri: "https://m.media-amazon.com/images/I/61JhlT09xiL._AC_SX679_.jpg",
-                    uri: action.image.url,
+                    uri: (action.image != null) ? action.image.url : null,
                   }}
                   alt="image"
                   borderTopRadius="xl"
                   resizeMode="cover"
                   height={120}
+                  bg="gray.300"
                 />
               {/* </AspectRatio> */}
             </Box>

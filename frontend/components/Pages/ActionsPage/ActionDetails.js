@@ -142,7 +142,7 @@ export default function ActionDetails({ route, navigation }) {
           <Image
             source={{
                 // uri: "https://m.media-amazon.com/images/I/61JhlT09xiL._AC_SX679_.jpg",
-               uri: action.image.url,
+               uri: (action.image != null) ? action.image.url : "https://m.media-amazon.com/images/I/61JhlT09xiL._AC_SX679_.jpg",
             }}
             m={3}
             h={250}

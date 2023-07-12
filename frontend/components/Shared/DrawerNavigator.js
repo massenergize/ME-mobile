@@ -1,15 +1,8 @@
-import {
-  View,
-  Text,
-  SafeAreaView,
-  ImageBackground,
-  Animated,
-} from "react-native";
+import { SafeAreaView } from "react-native";
 import { React, useState } from "react";
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
-  DrawerItemList,
   DrawerItem,
 } from "@react-navigation/drawer";
 import AboutPage from "../Pages/AboutPage/AboutPage";
@@ -19,18 +12,19 @@ import ServiceProvidersPage from "../Pages/ServiceProvidersPage/ServiceProviders
 import ContactUsPage from "../Pages/ContactUsPage/ContactUsPage";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import TabNavigator from "./TabNavigator";
-import { getHeaderTitle } from "@react-navigation/elements";
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import {
+  Text,
   Button,
   Image,
-  Container,
   Center,
   HStack,
   VStack,
-  Spacer,
   Pressable,
+  Modal,
+  Icon,
 } from "native-base";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 import AuthModalController from "../Pages/Auth/AuthModalController";
 import useAuth from "../Hooks/useAuth";
 
@@ -102,6 +96,7 @@ const drawerItems = [
 
 function CustomDrawerContent(props) {
   [expanded, setExpanded] = useState({ "About Us": false, Resources: false });
+  const [isSignOutModalVisible, setIsSignOutModalVisible] = useState(false);
   const { user, signOut } = useAuth();
 
   return (
@@ -211,7 +206,13 @@ function CustomDrawerContent(props) {
         })}
       </DrawerContentScrollView>
       {user ? (
-        <Button mb={2} mt={0} m={4} bg="primary.400" onPress={() => signOut()}>
+        <Button
+          mb={2}
+          mt={0}
+          m={4}
+          bg="primary.400"
+          onPress={() => setIsSignOutModalVisible(true)}
+        >
           LOGOUT
         </Button>
       ) : (
@@ -234,6 +235,44 @@ function CustomDrawerContent(props) {
       >
         SWITCH COMMUNITIES
       </Button>
+      {/* Modal for confirming sign out */}
+      <Modal
+        isOpen={isSignOutModalVisible}
+        onClose={() => setIsSignOutModalVisible(false)}
+        size="lg"
+      >
+        <Modal.Content maxWidth="400px">
+          <Modal.Body>
+            <Center>
+              <Icon
+                as={FontAwesome}
+                name="sign-out"
+                size="90"
+                color="primary.600"
+              />
+              <Text fontSize="lg" fontWeight="bold" py="5">
+                Are you sure?
+              </Text>
+              <HStack space="5">
+                <Button
+                  onPress={() => {
+                    setIsSignOutModalVisible(false);
+                    signOut();
+                  }}
+                >
+                  Sign Me Out!
+                </Button>
+                <Button
+                  backgroundColor="muted.400"
+                  onPress={() => setIsSignOutModalVisible(false)}
+                >
+                  Go Back
+                </Button>
+              </HStack>
+            </Center>
+          </Modal.Body>
+        </Modal.Content>
+      </Modal>
     </SafeAreaView>
   );
 }

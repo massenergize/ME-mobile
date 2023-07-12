@@ -21,7 +21,6 @@ import Page from "../../Shared/Page";
 import SearchBar from "../../Shared/SearchBar";
 
 import { apiCall } from "../../../api/functions";
-import { set } from "react-native-reanimated";
 
 const filterOptions = [
   {

@@ -18,7 +18,7 @@ function ActionCard({ navigation, action }) {
     // <Box alignItems="center" width={180} shadow={1} bg="white" rounded="lg" marginBottom={1}>
     
       <Pressable
-        onPress={() => {console.log("Action clicked"), navigation.navigate("actiondetails", {action: action})}} 
+        onPress={() => {console.log("Action clicked"), navigation.navigate("actiondetails", {action_id: action.id})}} 
         // overflow="hidden"
         // bg="white" 
         // borderRadius="2xl"

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   ScrollView,
   Text,
@@ -9,8 +9,9 @@ import {
   Pressable,
 } from "native-base";
 import Page from "../../Shared/Page";
+import { apiCall } from "../../../api/functions";
 
-export default function TeamsPage({ navigation }) {
+export default function TeamsPage({ route, navigation }) {
   const generateTeams = () => {
     let teams = [];
     for (let i = 0; i < 5; i++) {
@@ -71,6 +72,28 @@ export default function TeamsPage({ navigation }) {
     }
     return teams;
   };
+
+  const { community_id } = route.params;
+
+  const [teams, setTeams] = useState(null);
+  const [isTeamsLoading, setIsTeamsLoading] = useState(true);
+
+  const getTeamsList = () => {
+    apiCall("teams.list", {community_id: community_id}).then((json) => {
+      if (json.success) {
+          setTeams(json.data);
+          // console.log(json.data)
+      } else {
+          console.log(json);
+      }
+      setIsTeamsLoading(false);
+    });
+  }
+
+  useEffect(() => {
+    getTeamsList();
+  }, []);
+
   return (
     <Page>
       <ScrollView showsVerticalScrollIndicator={false}>

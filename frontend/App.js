@@ -39,7 +39,7 @@ export default function App() {
     <NativeBaseProvider theme={Theme}>
       <StatusBar barStyle="dark-content" />
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={{headerTintColor: "black", headerBackTitleVisible: false}}>
           <Stack.Screen
             name="onboarding"
             component={OnboardingPage}
@@ -73,7 +73,7 @@ export default function App() {
             options={{ title: "" }}
           />
           <Stack.Screen name="actions" component={ActionsPage} />
-          <Stack.Screen name="actiondetails" component={ActionDetails} options={{ headerTitle: "ACTION", headerTitleAlign: "center"}}/>
+          <Stack.Screen name="actiondetails" component={ActionDetails} options={{ headerTitle: "ACTION", headerTitleAlign: "center", headerTintColor: "black"}}/>
           <Stack.Screen name="testimonials" component={TestimonialsPage} />
           <Stack.Screen
             name="testimonial"

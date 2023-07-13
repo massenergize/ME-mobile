@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Page from "../../Shared/Page";
-import { Container, Image, VStack, ScrollView, Spinner } from "native-base";
+import { Container, Image, VStack, ScrollView, Spinner, Text } from "native-base";
 import HTMLParser from "../../Shared/HTMLParser";
 
 // import aboutData from "./../../../data/about_us_page_settingsInfo.json";
@@ -46,6 +46,7 @@ export default function AboutPage({ route, navigation }) {
                   width="full"
               />
             </Container>
+            <Text bold fontSize="lg">{about.community.name}</Text>
             <HTMLParser
                     htmlString={about.description}
                     baseStyle={textStyle}

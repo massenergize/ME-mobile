@@ -36,7 +36,13 @@ const Filter = ({ label, values, initValue = null }) => {
 
   return (
     <Box>
-      <Button variant="outline" rounded="full" onPress={onOpen} size="xs">
+      <Button
+        variant="outline"
+        rounded="full"
+        onPress={onOpen}
+        size="xs"
+        my="1"
+      >
         <Text fontSize="xs">
           {chosenFilter
             ? chosenFilter.length > 4

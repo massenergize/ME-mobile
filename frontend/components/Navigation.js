@@ -9,7 +9,6 @@ import TestimonialsPage from "./Pages/TestimonialsPage/TestimonialsPage";
 import Testimonial from "./Pages/TestimonialsPage/Testimonial";
 import AddTestimonial from "./Pages/TestimonialsPage/AddTestimonial";
 import TeamsPage from "./Pages/TeamsPage/TeamsPage";
-import UserProfilePage from "./Pages/UserProfilePage/UserProfilePage";
 import EventsPage from "./Pages/EventsPage/EventsPage";
 import ImpactPage from "./Pages/CommunityPage/ImpactPage";
 import ActionDetails from "./Pages/ActionsPage/ActionDetails";
@@ -23,6 +22,8 @@ import WithEmailOnlyPage from "./Pages/Auth/WithEmailOnlyPage";
 import CreateProfilePage from "./Pages/UserProfilePage/CreateProfilePage";
 import TeamDetailsPage from "./Pages/TeamsPage/TeamDetailsPage";
 import TabNavigator from "./Shared/TabNavigator";
+import SettingsPage from "./Pages/SettingsPage/SettingsPage";
+import DashboardPage from "./Pages/UserProfilePage/DashboardPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -44,18 +45,12 @@ const MainNavigator = () => {
         }}
       />
       <Stack.Screen
-        name="createProfile"
-        component={CreateProfilePage}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
         name="login"
         component={LoginPage}
         options={{ title: "Profile" }}
       />
       <Stack.Screen name="signup" component={SignupPage} />
       <Stack.Screen name="withEmailOnly" component={WithEmailOnlyPage} />
-      <Stack.Screen name="userProfile" component={UserProfilePage} />
       <Stack.Screen name="about" component={AboutPage} />
       <Stack.Screen name="events" component={EventsPage} />
       <Stack.Screen
@@ -87,6 +82,13 @@ const MainNavigator = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen name="teamDetails" component={TeamDetailsPage} />
+      <Stack.Screen name="dashboard" component={DashboardPage} />
+      <Stack.Screen
+        name="createProfile"
+        component={CreateProfilePage}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen name="settings" component={SettingsPage} />
       <Stack.Screen name="teams" component={TeamsPage} />
       <Stack.Screen
         name="impact"

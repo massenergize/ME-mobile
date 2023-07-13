@@ -161,7 +161,7 @@ export default function CommunityPage({ route, navigation }) {
           {/* <Text bold fontSize="2xl">Community Name</Text> */}
           <Container maxHeight={200} width="100%" mt={3}>
             <Image
-              source={{ uri: communityInfo.logo.url }}
+              source={{ uri: communityInfo.logo?.url }}
               alt="Community Logo"
               resizeMode="contain"
               height="full"

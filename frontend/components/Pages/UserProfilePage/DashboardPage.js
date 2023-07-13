@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 import {
   Text,
   Image,
@@ -16,8 +17,8 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 import Page from "../../Shared/Page";
 import ActionCard from "../ActionsPage/ActionCard";
-import { useNavigation } from "@react-navigation/native";
 import CommunityCard from "../CommunitySearchPage/CommunityCard";
+import ActionsFilter from "../ActionsPage/ActionsFilter";
 
 const COMMUNITY = {
   id: 3,
@@ -713,20 +714,23 @@ const ActionsList = () => {
   const navigation = useNavigation();
 
   return (
-    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-      {actions &&
-        actions.map((action, index) => {
-          return (
-            <ActionCard
-              action={action}
-              key={index}
-              navigation={navigation}
-              mx="2"
-              my="3"
-            />
-          );
-        })}
-    </ScrollView>
+    <Box>
+      <ActionsFilter />
+      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+        {actions &&
+          actions.map((action, index) => {
+            return (
+              <ActionCard
+                action={action}
+                key={index}
+                navigation={navigation}
+                mx="2"
+                my="3"
+              />
+            );
+          })}
+      </ScrollView>
+    </Box>
   );
 };
 
@@ -856,7 +860,7 @@ const CommunitiesList = () => {
 export default function DashboardPage({ navigation }) {
   return (
     <Page>
-      <ScrollView padding="5" contentContainerStyle={{ alignItems: "center" }}>
+      <ScrollView padding="5">
         <VStack space={10} mb="20">
           <ProfileName navigation={navigation} />
           <SustainScore />

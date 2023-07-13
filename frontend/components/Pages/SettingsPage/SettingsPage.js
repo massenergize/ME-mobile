@@ -65,7 +65,7 @@ export default function SettingsPage() {
           <Icon as={FontAwesome} name="trash" size="md" color="primary.600" />
           <Text fontSize="md" px="5" flexGrow="1">
             Delete my account {"  "}
-            <Text color="red.400" fontWeight="bold">
+            <Text color="red.400" fontWeight="bold" fontSize="xs">
               This is Permanent!
             </Text>
           </Text>

@@ -36,8 +36,8 @@ const Filter = ({ label, values, initValue = null }) => {
 
   return (
     <Box>
-      <Button variant="outline" rounded="full" onPress={onOpen}>
-        <Text>
+      <Button variant="outline" rounded="full" onPress={onOpen} size="xs">
+        <Text fontSize="xs">
           {chosenFilter
             ? chosenFilter.length > 4
               ? chosenFilter.slice(0, 4) + "..."
@@ -66,7 +66,7 @@ const Filter = ({ label, values, initValue = null }) => {
 
 export default function ActionsFilter() {
   return (
-    <Flex flexDirection="row" justifyContent="space-evenly">
+    <Flex flexDirection="row" justifyContent="space-evenly" flexWrap="wrap">
       <Filter
         label={"Status"}
         values={["Todo", "Completed"]}

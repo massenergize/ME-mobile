@@ -17,12 +17,21 @@ function ActionCard({ navigation, action, ...props }) {
     // <Box alignItems="center" width={180} shadow={1} bg="white" rounded="lg" marginBottom={1}>
     
       <Pressable
-        onPress={() => {console.log("Action clicked"), navigation.navigate("actiondetails", {action_id: action.id})}} 
+        onPress={() => {
+          navigation.navigate("actiondetails", {action_id: action.id})}
+        } 
         // overflow="hidden"
         // bg="white" 
         // borderRadius="2xl"
+        {...props}
         >
-          <Box bg="white" borderRadius="xl" shadow={2} width={180}>
+          <Box 
+            bg="white" 
+            borderRadius="xl" 
+            shadow={2} 
+            width={180}
+            {...props}
+          >
             <Box>
               {/* <AspectRatio w="100%" ratio={16 / 9}> */}
                 <Image

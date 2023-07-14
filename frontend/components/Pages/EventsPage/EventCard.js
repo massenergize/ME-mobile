@@ -20,12 +20,16 @@ export default function EventCard({
   canRSVP,
   isRSVPED,
   isShared,
-  onPress,
+  // onPress,
+  id,
+  navigation,
   ...props
 }) {
   return (
     <Box rounded="lg" backgroundColor="white" {...props}>
-      <Pressable onPress={onPress}>
+      <Pressable onPress={() => 
+        navigation.navigate("eventDetails", {event_id: id})
+      }>
         <Box pt="2">
           <AspectRatio w="100%" ratio={16 / 9}>
             <Image

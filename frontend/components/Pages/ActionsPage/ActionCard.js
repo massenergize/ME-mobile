@@ -2,17 +2,16 @@ import { Text, Pressable } from "react-native";
 import React from "react";
 import { Box, Heading, HStack, AspectRatio, Image, Stack } from "native-base";
 
-
-function ActionCard({ navigation, action }) {
+function ActionCard({ navigation, action, ...props }) {
   const getMetric = (metric) => {
     for (let i = 0; i < action.tags.length; i++) {
       if (action.tags[i].tag_collection_name === metric) {
         return action.tags[i].name;
       }
     }
-    return "-"
-  }
-  
+    return "-";
+  };
+
   return (
     // <Box alignItems="center" width = "50%">
     // <Box alignItems="center" width={180} shadow={1} bg="white" rounded="lg" marginBottom={1}>
@@ -57,7 +56,7 @@ function ActionCard({ navigation, action }) {
                 Learn something cool about this task here!
               </Text>
             */}
-              {/* <HStack alignItems="center" space={4} justifyContent="space-between">
+          {/* <HStack alignItems="center" space={4} justifyContent="space-between">
                 <HStack alignItems="center">
                   <Text
                     color="coolGray.600"
@@ -70,9 +69,9 @@ function ActionCard({ navigation, action }) {
                   </Text>
                 </HStack>
               </HStack> */}
-            </Stack>
-          </Box>
-      </Pressable>
+        </Stack>
+      </Box>
+    </Pressable>
     // </Box>
   );
 }

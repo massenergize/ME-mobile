@@ -18,10 +18,10 @@ import {
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Page from "../../Shared/Page";
 import HTMLParser from "../../Shared/HTMLParser";
-import { dateFormatString } from "../../Shared/Utils";
+import { formatDateString } from "../../Shared/Utils";
 
 import { apiCall } from "../../../api/functions";
-import DummyResponse from "../../../data/eventInfo.json";
+// import DummyResponse from "../../../data/eventInfo.json";
 
 export default function EventDetailsPage({ route, navigation }) {
   const { event_id } = route.params;
@@ -45,7 +45,7 @@ export default function EventDetailsPage({ route, navigation }) {
     apiCall("events.info", {event_id: event_id}).then((json) => {
       if (json.success) {
         const data = json.data;
-        const date = dateFormatString(
+        const date = formatDateString(
           new Date(data.start_date_and_time),
           new Date(data.end_date_and_time)
         );

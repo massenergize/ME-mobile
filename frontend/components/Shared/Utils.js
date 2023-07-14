@@ -1,4 +1,10 @@
-export function dateFormatString(startDate, endDate) {
+/**
+ * formats a date range string based on the start and end date
+ * @param {Date} startDate
+ * @param {Date} endDate
+ * @returns {String} if same day: "mmmm dd, hh:mm AM/PM - hh:mm AM/PM", if same month: "mmmm dd-dd yyyy", if same year: "mmmm dd - mmmm dd, yyyy", if different year: "mmmm dd, yyyy - mmmm dd, yyyy"
+ */
+export function formatDateString(startDate, endDate) {
   const dateOptions = {
     month: "long",
     day: "numeric",
@@ -57,3 +63,21 @@ export function dateFormatString(startDate, endDate) {
 
   return dateRangeString;
 }
+
+/**
+ * Translate firebase error to a more user friendly error message.
+ * @param {FirebaseError} error
+ * @returns {String} error message
+ */
+export const translateFirebaseError = (error) => {
+  if (!error) return;
+  if (error.includes("auth/email-already-in-use"))
+    return "Hi there, a user already exists with this email.";
+  if (error.includes("auth/wrong-password"))
+    return "Hi, it looks like you typed a wrong password.";
+  if (error.includes("auth/invalid-email"))
+    return "Hi, please provide a valid email address, thank you :)";
+  if (error.includes("auth/user-not-found"))
+    return "Hi, it looks like you do not have an account with this email yet.. :(";
+  return error?.toString();
+};

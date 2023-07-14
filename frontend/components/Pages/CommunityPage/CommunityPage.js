@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { ScrollView } from "react-native";
 import {
   VStack,
@@ -15,11 +15,12 @@ import {
 import ActionCard from "./../ActionsPage/ActionCard";
 import { SmallChart } from "../../Shared/Charts.js";
 import EventCard from "./../EventsPage/EventCard";
-import { dateFormatString } from "../../Shared/Utils";
+import { formatDateString } from "../../Shared/Utils";
 
 import { apiCall } from "../../../api/functions";
 // import data from "./../../../data/communitiesInfo.json";
 // import actions from "./../../../data/actionsList.json";
+import { CommunityContext } from "../../Contexts/CommunityContext";
 
 const event = {
   id: 1,
@@ -31,13 +32,9 @@ const event = {
   can_rsvp: true,
   is_rsvped: false,
   is_shared: true,
-}
+};
 
-const colors = [
-  "#DC4E34",
-  "#64B058",
-  "#000000"
-]
+const colors = ["#DC4E34", "#64B058", "#000000"];
 
 // the card that shows up to three goals on the community page
 function GoalsCard({ navigation, goals, community_id }) {
@@ -103,41 +100,49 @@ function GoalsCard({ navigation, goals, community_id }) {
   }
 }
 
-
 function HeaderText({ text }) {
   return (
-    <Text bold fontSize="xl" ml={4}>{text}</Text>
-  )
+    <Text bold fontSize="xl" ml={4}>
+      {text}
+    </Text>
+  );
 }
 
 function ShowMore({ navigation, page, text }) {
   return (
-    <Text fontSize="sm" color="primary.400" mr={4} onPress={() => navigation.navigate(page)}>{text}</Text>
-  )
+    <Text
+      fontSize="sm"
+      color="primary.400"
+      mr={4}
+      onPress={() => navigation.navigate(page)}
+    >
+      {text}
+    </Text>
+  );
 }
 
 export default function CommunityPage({ route, navigation }) {
-
   const { community_id } = route.params;
+  const { communityInfo, fetchCommunityInfo } = useContext(CommunityContext);
 
-  const [communityInfo, setCommunityInfo] = useState(null);
+  // const [communityInfo, setCommunityInfo] = useState(null);
   const [isCommunityLoading, setIsCommunityLoading] = useState(true);
   const [actions, setActions] = useState(null);
   const [isActionsLoading, setIsActionsLoading] = useState(true);
   const [upcomingEvent, setUpcomingEvent] = useState(null);
   const [isEventLoading, setIsEventLoading] = useState(true);
 
-  const getCommuityInfo = () => {
-    apiCall("communities.info", {community_id: community_id}).then((json) => {
-      if (json.success) {
-          setCommunityInfo(json.data);
-          // console.log(json.data)
-      } else {
-          console.log(json);
-      }
-      setIsCommunityLoading(false);
-    });
-  }
+  // const getCommuityInfo = () => {
+  //   apiCall("communities.info", {community_id: community_id}).then((json) => {
+  //     if (json.success) {
+  //         setCommunityInfo(json.data);
+  //         // console.log(json.data)
+  //     } else {
+  //         console.log(json);
+  //     }
+  //     setIsCommunityLoading(false);
+  //   });
+  // }
 
   const getActionList = () => {
     apiCall("actions.list", {community_id: community_id}).then((json) => {
@@ -173,7 +178,8 @@ export default function CommunityPage({ route, navigation }) {
   }
 
   useEffect(() => {
-    getCommuityInfo();
+    // getCommuityInfo();
+    fetchCommunityInfo(community_id, () => setIsCommunityLoading(false));
     getActionList();
     getUpcomingEvent();
   }, []);
@@ -184,8 +190,8 @@ export default function CommunityPage({ route, navigation }) {
         return action.tags[i].name;
       }
     }
-    return "-"
-  }
+    return "-";
+  };
 
   return (
     <ScrollView nestedScrollEnabled = {true}>
@@ -246,7 +252,7 @@ export default function CommunityPage({ route, navigation }) {
                     <EventCard
                         key={upcomingEvent.id}
                         title={upcomingEvent.name}
-                        date={dateFormatString(
+                        date={formatDateString(
                           new Date(upcomingEvent.start_date_and_time),
                           new Date(upcomingEvent.end_date_and_time)
                         )}
@@ -255,7 +261,9 @@ export default function CommunityPage({ route, navigation }) {
                         canRSVP={upcomingEvent.rsvp_enabled}
                         isRSVPED={upcomingEvent.is_rsvped}
                         isShared={upcomingEvent.is_shared}
-                        onPress={() => navigation.navigate("eventDetails", {event_id: upcomingEvent.id})}
+                        // onPress={() => navigation.navigate("eventDetails", {event_id: upcomingEvent.id})}
+                        id={upcomingEvent.id}
+                        navigation={navigation}
                         my={2}
                         mx={4}
                         shadow={5}

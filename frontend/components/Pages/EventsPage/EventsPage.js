@@ -6,7 +6,7 @@ import EventCard from "./EventCard";
 
 import { apiCall } from "../../../api/functions";
 // import DummyResponse from "../../../data/eventsList.json";
-import { dateFormatString } from "../../Shared/Utils";
+import { formatDateString } from "../../Shared/Utils";
 
 const filterOptions = [
   {
@@ -145,14 +145,16 @@ export default function EventsPage({ route, navigation }) {
                   <EventCard
                     key={event.id}
                     title={event.name}
-                    date={dateFormatString(
+                    date={formatDateString(
                       new Date(event.start_date_and_time),
                       new Date(event.end_date_and_time)
                     )}
                     location={event.location}
                     imageURI={(event.image != null) ? event.image.url : null}
                     canRSVP={event.rsvp_enabled}
-                    onPress={() => navigation.navigate("eventDetails", {event_id: event.id})}
+                    id={event.id}
+                    navigation={navigation}
+                    // onPress={() => navigation.navigate("eventDetails", {event_id: event.id})}
                     my="3"
                     mx={2}
                     shadow={3}

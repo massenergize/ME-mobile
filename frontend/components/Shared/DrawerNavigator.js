@@ -126,7 +126,7 @@ function CustomDrawerContent(props) {
       <DrawerContentScrollView {...props}>
         <Center p={4} maxHeight={200}>
           <Image
-            source={require("../../assets/images/cooler-concord.png")}
+            source={{uri: communityInfo?.logo.url}}
             alt="Community Logo"
             resizeMode="contain"
             height="full"

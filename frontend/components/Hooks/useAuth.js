@@ -25,13 +25,38 @@ export default function useAuth() {
   }, []);
 
   /**
+   * Fetches the token from the backend and calls the callback function with the response.
+   * @param {firebase.User} userObj firebase user object
+   */
+  const _fetchMEToken = async (userObj) => {
+    const _fbToken = await userObj?.getIdTokenResult();
+    fetchToken(_fbToken.token, (response, error) => {
+      if (error) {
+        console.log("error fetching API to get token: ", error);
+        setAuthState(Constants.SERVER_ERROR);
+      } else {
+        if (!response.success) {
+          if (response.error === Constants.NEEDS_REGISTRATION) {
+            setAuthState(Constants.NEEDS_REGISTRATION);
+          } else {
+            console.log("error fetching token result: ", response.error);
+            setAuthState(Constants.SERVER_ERROR);
+          }
+        } else {
+          setAuthState(Constants.USER_IS_AUTHENTICATED);
+        }
+      }
+    });
+  };
+
+  /**
    * Wrapper function for firebase sign up with email and password.
    * @param {String} email
    * @param {String} password
    * @param {CallableFunction} callBackFn callback function to be called after the user is created or if there is an error.
    * callBackFn(userCredential, error)
    */
-  const registerWithEmailAndPassword = (email, password, callBackFn = null) => {
+  const registerWithEmailAndPassword = (email, password, callBackFn) => {
     AUTH.createUserWithEmailAndPassword(email, password)
       .then((userCredentials) => {
         // Registered and signed in
@@ -53,23 +78,11 @@ export default function useAuth() {
    * @param {CallableFunction} callBackFn callback function to be called after the user is logged in or if there is an error.
    * callBackFn(userCredential, error)
    */
-  const signInWithEmailAndPassword = (email, password, callBackFn = null) => {
+  const signInWithEmailAndPassword = (email, password, callBackFn) => {
     AUTH.signInWithEmailAndPassword(email, password)
-      .then(async (userCredentials) => {
+      .then((userCredentials) => {
         // Signed in
-        const _fbToken = await userCredentials.user?.getIdTokenResult();
-        fetchToken(_fbToken.token, (response) => {
-          if (!response.success) {
-            if (response.error === Constants.NEEDS_REGISTRATION) {
-              setAuthState(Constants.NEEDS_REGISTRATION);
-            } else {
-              console.log("error fetching token: ", response.error);
-            }
-            return callBackFn(null, "Server error. Please contact support.");
-          } else {
-            setAuthState(Constants.USER_IS_AUTHENTICATED);
-          }
-        });
+        _fetchMEToken(userCredentials.user);
 
         if (callBackFn) {
           callBackFn(userCredentials, null);

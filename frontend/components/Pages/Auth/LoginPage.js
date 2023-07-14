@@ -65,6 +65,8 @@ export default function LoginPage({ route, navigation }) {
       navigation.navigate("createProfile");
     } else if (authState === Constants.USER_IS_AUTHENTICATED) {
       navigation.navigate("drawer", { community_id: community_id });
+    } else if (authState === Constants.SERVER_ERROR) {
+      setErrorMsg("Something went wrong. Please try again later.");
     }
   }, [authState]);
 

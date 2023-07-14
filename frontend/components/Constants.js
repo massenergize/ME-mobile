@@ -5,4 +5,5 @@ export default {
   NEEDS_REGISTRATION: "authenticated_but_needs_registration",
   USER_IS_AUTHENTICATED: "user_is_authenticated",
   JUST_FROM_GOOGLE_AUTH: "just_from_google_auth",
+  SERVER_ERROR: "server_error",
 };

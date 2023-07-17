@@ -1,12 +1,8 @@
-import { View, Text } from "react-native";
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import CommunityPage from "../Pages/CommunityPage/CommunityPage";
 import ActionsPage from "../Pages/ActionsPage/ActionsPage";
 import EventsPage from "../Pages/EventsPage/EventsPage";
-import UserProfilePage from "../Pages/UserProfilePage/UserProfilePage";
-import AboidersPage from "../Pages/ServiceProvidersPage/ServiceProvidersPage";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import DashboardPage from "../Pages/UserProfilePage/DashboardPage";
 
@@ -16,11 +12,10 @@ const tabBarLabels = {
   COMMUNITY: "Community",
   ACTIONS: "Actions",
   EVENTS: "Events",
-  PROFILE: "Profile",
+  DASHBOARD: "Dashboard",
 };
 
-export default function TabNavigator({ route, navigation }) {
-  console.log(route.params);
+export default function TabNavigator({ route }) {
   const { community_id } = route.params;
 
   return (
@@ -35,7 +30,7 @@ export default function TabNavigator({ route, navigation }) {
             iconName = "flash";
           } else if (route.name === "EVENTS") {
             iconName = "calendar";
-          } else if (route.name === "PROFILE") {
+          } else if (route.name === "DASHBOARD") {
             iconName = "person-circle";
           }
 
@@ -54,7 +49,7 @@ export default function TabNavigator({ route, navigation }) {
       />
       <Tab.Screen name="ACTIONS" component={ActionsPage} />
       <Tab.Screen name="EVENTS" component={EventsPage} />
-      <Tab.Screen name="PROFILE" component={DashboardPage} />
+      <Tab.Screen name="DASHBOARD" component={DashboardPage} />
     </Tab.Navigator>
   );
 }

@@ -12,6 +12,7 @@ import {
   Center,
   Icon,
   Pressable,
+  Heading,
 } from "native-base";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
@@ -19,6 +20,7 @@ import Page from "../../Shared/Page";
 import ActionCard from "../ActionsPage/ActionCard";
 import CommunityCard from "../CommunitySearchPage/CommunityCard";
 import ActionsFilter from "../ActionsPage/ActionsFilter";
+import useAuth from "../../Hooks/useAuth";
 
 const COMMUNITY = {
   id: 3,
@@ -858,20 +860,28 @@ const CommunitiesList = () => {
 };
 
 export default function DashboardPage({ navigation }) {
+  const { user } = useAuth();
+
   return (
     <Page>
-      <ScrollView padding="5">
-        <VStack space={10} mb="20">
-          <ProfileName navigation={navigation} />
-          <SustainScore />
-          <CarbonSaved />
-          <ActionsList />
-          <BadgesList />
-          <TeamsList />
-          <HousesList />
-          <CommunitiesList />
-        </VStack>
-      </ScrollView>
+      {user ? (
+        <ScrollView padding="5">
+          <VStack space={10} mb="5">
+            <ProfileName navigation={navigation} />
+            <SustainScore />
+            <CarbonSaved />
+            <ActionsList />
+            <BadgesList />
+            <TeamsList />
+            <HousesList />
+            <CommunitiesList />
+          </VStack>
+        </ScrollView>
+      ) : (
+        <Center flex="1">
+          <Text>Please sign in or sign up to check out your profile!</Text>
+        </Center>
+      )}
     </Page>
   );
 }

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "frontend",
-    "slug": "frontend",
+    "name": "MassEnergize Mobile App",
+    "slug": "me-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "",
@@ -19,10 +19,17 @@
       "adaptiveIcon": {
         "foregroundImage": "",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.ntdkhiem.memobile"
     },
     "web": {
       "favicon": ""
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "b1d2fe9e-3308-4d2d-bc68-3e9640ae2699"
+      }
+    },
+    "scheme": "me-mobile"
   }
 }

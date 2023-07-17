@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 
+import * as Google from "expo-auth-session/providers/google";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { GoogleAuthProvider, signInWithCredential } from "firebase/auth";
+
 import useME from "./useME";
 import Constants from "../Constants";
 import { AUTH } from "../../config/firebaseConfig";
@@ -10,6 +14,12 @@ export default function useAuth() {
   const [authState, setAuthState] = useState(
     Constants.USER_IS_NOT_AUTHENTICATED
   );
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    expoClientId: process.env.EXPO_PUBLIC_REACT_APP_EXPO_CLIENT_ID,
+    iosClientId: process.env.EXPO_PUBLIC_REACT_APP_IOS_CLIENT_ID,
+    androidClientId: process.env.EXPO_PUBLIC_REACT_APP_ANDROID_CLIENT_ID,
+  });
+
   const { fetchToken } = useME();
 
   useEffect(() => {
@@ -82,10 +92,42 @@ export default function useAuth() {
     AUTH.signInWithEmailAndPassword(email, password)
       .then((userCredentials) => {
         // Signed in
-        _fetchMEToken(userCredentials.user);
+        setAuthState(Constants.CHECK_MASS_ENERGIZE);
 
         if (callBackFn) {
           callBackFn(userCredentials, null);
+        }
+      })
+      .catch((error) => {
+        if (callBackFn) {
+          callBackFn(null, translateFirebaseError(error?.toString()));
+        }
+      });
+  };
+
+  const authenticateWithGoogle = async (callBackFn) => {
+    promptAsync()
+      .then(() => {
+        if (response?.type === "success") {
+          const { authentication } = response;
+          const credential = GoogleAuthProvider.credential(
+            authentication.idToken,
+            authentication.accessToken
+          );
+          signInWithCredential(AUTH, credential)
+            .then((userCredential) => {
+              // Signed in
+              setAuthState(Constants.CHECK_MASS_ENERGIZE);
+
+              if (callBackFn) {
+                callBackFn(userCredential, null);
+              }
+            })
+            .catch((error) => {
+              if (callBackFn) {
+                callBackFn(null, translateFirebaseError(error?.toString()));
+              }
+            });
         }
       })
       .catch((error) => {
@@ -138,6 +180,8 @@ export default function useAuth() {
     signOut,
     signInWithEmailAndPassword,
     registerWithEmailAndPassword,
+    authenticateWithGoogle,
     sendVerificationEmail,
+    _fetchMEToken,
   };
 }

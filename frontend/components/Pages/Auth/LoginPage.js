@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import {
   Center,
   Box,
@@ -27,12 +27,13 @@ const validationSchema = Yup.object().shape({
 });
 
 export default function LoginPage({ route, navigation }) {
-  const { community_id } = route.params;
+  const { community_id, useGoogleAuth } = route.params;
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
-  const { user, authState, signInWithEmailAndPassword } = useAuth();
-  const [isEmailVerified, setIsEmailVerified] = useState(false);
+  const { user, authState, signInWithEmailAndPassword, _fetchMEToken } =
+    useAuth();
+  const [isEmailVerified, setIsEmailVerified] = useState(true);
 
   const handleSignIn = (values) => {
     setIsSubmitting(true);
@@ -73,6 +74,7 @@ export default function LoginPage({ route, navigation }) {
   // display email verification page if user is not verified.
   useEffect(() => {
     if (user) {
+      _fetchMEToken(user);
       setIsEmailVerified(user.emailVerified);
     }
   }, [user]);

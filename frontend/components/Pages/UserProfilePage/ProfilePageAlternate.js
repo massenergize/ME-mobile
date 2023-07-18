@@ -25,7 +25,7 @@ export default function ProfilePageAlternate({ navigation }) {
         }
     }
 
-    const switchList = props => {
+    const switchList = () => {
         console.log("testing")
         setdisplayToDo(current => !current);
         console.log(displayToDo)

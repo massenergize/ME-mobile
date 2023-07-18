@@ -31,7 +31,7 @@ export default function LoginPage({ route, navigation }) {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
-  const { user, authState, signInWithEmailAndPassword, _fetchMEToken } =
+  const { user, authState, signInWithEmailAndPassword, fetchMEToken } =
     useAuth();
   const [isEmailVerified, setIsEmailVerified] = useState(true);
 
@@ -74,7 +74,7 @@ export default function LoginPage({ route, navigation }) {
   // display email verification page if user is not verified.
   useEffect(() => {
     if (user) {
-      _fetchMEToken(user);
+      fetchMEToken(user);
       setIsEmailVerified(user.emailVerified);
     }
   }, [user]);

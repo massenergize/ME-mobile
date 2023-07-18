@@ -34,6 +34,11 @@ export default function useAuth() {
     return () => unsubscribe();
   }, []);
 
+  /**
+   * Fetches the user from the local storage.
+   * TODO: switch from AsyncStorage to SecureStore.
+   * reference: https://docs.expo.dev/guides/authentication/#storing-data
+   */
   const _fetchUserFromStorage = async () => {
     try {
       const user = await AsyncStorage.getItem("@FBUser");
@@ -49,7 +54,7 @@ export default function useAuth() {
    * Fetches the token from the backend and calls the callback function with the response.
    * @param {firebase.User} userObj firebase user object
    */
-  const _fetchMEToken = async (userObj) => {
+  const fetchMEToken = async (userObj) => {
     const _fbToken = await userObj?.getIdTokenResult();
     fetchToken(_fbToken.token, (response, error) => {
       if (error) {
@@ -116,8 +121,14 @@ export default function useAuth() {
       });
   };
 
+  /**
+   * Wrapper function for firebase sign in with Google.
+   * @param {CallableFunction} callBackFn
+   */
   const authenticateWithGoogle = async (callBackFn) => {
     try {
+      // presence of up-to-date Google Play Services is required to show the sign in modal.
+      // reference: https://github.com/react-native-google-signin/google-signin#hasplayservicesoptions
       await GoogleSignin.hasPlayServices();
       const { idToken } = await GoogleSignin.signIn();
 
@@ -137,48 +148,20 @@ export default function useAuth() {
           }
         });
     } catch (error) {
-      console.log("error signing in with google: ", error);
+      // TODO: figure out what to do with these errors.
       if (error.code === "auth/account-exists-with-different-credential") {
         //xx
       } else if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-        //xx
+        // user cancelled the login flow
       } else if (error.code === statusCodes.IN_PROGRESS) {
-        //HERE IS THE ISSUE
+        // operation (e.g. sign in) is in progress already
       } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        //xx
+        // play services not available or outdated
       } else {
-        //xx
+        // some other error happened
+        console.log("error signing in with google: ", error);
       }
     }
-    // promptAsync()
-    //   .then(() => {
-    //     console.log(response?.type, response?.params);
-    //     if (response?.type === "success") {
-    //       const { authentication } = response;
-    //       const credential = GoogleAuthProvider.credential(
-    //         authentication.idToken,
-    //         authentication.accessToken
-    //       );
-    //       signInWithCredential(AUTH, credential)
-    //         .then((userCredential) => {
-    //           // Signed in
-    //           setAuthState(Constants.CHECK_MASS_ENERGIZE);
-    //           if (callBackFn) {
-    //             callBackFn(userCredential, null);
-    //           }
-    //         })
-    //         .catch((error) => {
-    //           if (callBackFn) {
-    //             callBackFn(null, translateFirebaseError(error?.toString()));
-    //           }
-    //         });
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     if (callBackFn) {
-    //       callBackFn(null, translateFirebaseError(error?.toString()));
-    //     }
-    //   });
   };
 
   /**
@@ -188,7 +171,11 @@ export default function useAuth() {
     console.log("signing out...");
     setAuthState(Constants.USER_IS_NOT_AUTHENTICATED);
     AUTH.signOut();
-    AsyncStorage.removeItem("@FBUser");
+    // TODO: this line deletes the information that the app obtained from the Google APIs.
+    // maybe implement this feature when user wants to delete their account?
+    // GoogleSignin.revokeAccess();
+    GoogleSignin.signOut();
+    // AsyncStorage.removeItem("@FBUser");
   };
 
   /**
@@ -227,6 +214,6 @@ export default function useAuth() {
     registerWithEmailAndPassword,
     authenticateWithGoogle,
     sendVerificationEmail,
-    _fetchMEToken,
+    fetchMEToken,
   };
 }

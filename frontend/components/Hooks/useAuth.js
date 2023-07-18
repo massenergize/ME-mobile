@@ -21,11 +21,11 @@ export default function useAuth() {
   const { fetchToken } = useME();
 
   useEffect(() => {
-    // _fetchUserFromStorage();
+    _fetchUserFromStorage();
     const unsubscribe = AUTH.onAuthStateChanged(async (user) => {
       if (user) {
         setUser(user);
-        // await AsyncStorage.setItem("@FBUser", JSON.stringify(user));
+        await AsyncStorage.setItem("@FBUser", JSON.stringify(user));
       } else {
         setUser(null);
       }
@@ -175,7 +175,7 @@ export default function useAuth() {
     // maybe implement this feature when user wants to delete their account?
     // GoogleSignin.revokeAccess();
     GoogleSignin.signOut();
-    // AsyncStorage.removeItem("@FBUser");
+    AsyncStorage.removeItem("@FBUser");
   };
 
   /**

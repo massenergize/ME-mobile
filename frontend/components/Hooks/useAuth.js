@@ -42,9 +42,8 @@ export default function useAuth() {
   const _fetchUserFromStorage = async () => {
     try {
       const user = await AsyncStorage.getItem("@FBUser");
-      if (user) {
-        setUser(JSON.parse(user));
-      }
+      const userData = user ? JSON.parse(user) : null;
+      setUser(userData);
     } catch (error) {
       console.log("error fetching user from storage: ", error);
     }

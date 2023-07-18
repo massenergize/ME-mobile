@@ -51,10 +51,12 @@ export default function useAuth() {
 
   /**
    * Fetches the token from the backend and calls the callback function with the response.
-   * @param {firebase.User} userObj firebase user object
    */
-  const fetchMEToken = async (userObj) => {
-    const _fbToken = await userObj?.getIdTokenResult();
+  const fetchMEToken = async () => {
+    // TODO: encounter this warning: TypeError: user.getIdTokenResult is not a function (it is undefined)
+    // still works but the root cause is probably that the timing of the authentication token retrieval.
+    const _fbToken = await user?.getIdTokenResult();
+    console.log(_fbToken);
     fetchToken(_fbToken.token, (response, error) => {
       if (error) {
         console.log("error fetching API to get token: ", error);
@@ -131,7 +133,7 @@ export default function useAuth() {
       await GoogleSignin.hasPlayServices();
       const { idToken } = await GoogleSignin.signIn();
 
-      const googleCredential = await GoogleAuthProvider.credential(idToken);
+      const googleCredential = GoogleAuthProvider.credential(idToken);
 
       AUTH.signInWithCredential(googleCredential)
         .then((userCredential) => {

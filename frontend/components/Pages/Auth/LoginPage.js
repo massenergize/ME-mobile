@@ -74,7 +74,7 @@ export default function LoginPage({ route, navigation }) {
   // display email verification page if user is not verified.
   useEffect(() => {
     if (user) {
-      fetchMEToken(user);
+      fetchMEToken();
       setIsEmailVerified(user.emailVerified);
     }
   }, [user]);

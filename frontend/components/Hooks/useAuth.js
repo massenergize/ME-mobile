@@ -56,7 +56,6 @@ export default function useAuth() {
     // TODO: encounter this warning: TypeError: user.getIdTokenResult is not a function (it is undefined)
     // still works but the root cause is probably that the timing of the authentication token retrieval.
     const _fbToken = await user?.getIdTokenResult();
-    console.log(_fbToken);
     fetchToken(_fbToken.token, (response, error) => {
       if (error) {
         console.log("error fetching API to get token: ", error);

@@ -1,38 +1,41 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { KeyboardAvoidingView } from "react-native";
 import { Text, FormControl, Input, VStack, ScrollView, Divider, Button, Spinner, View } from "native-base";
 import Page from "../../Shared/Page";
 // import communityInfo from "../../../data/communitiesInfo.json";
 import { apiCall } from "../../../api/functions";
+import { CommunityContext } from "../../Contexts/CommunityContext";
 
 export default function ContactUsPage({ route, navigation }) {
   const { community_id } = route.params;
 
-  const [communityInfo, setCommunityInfo] = useState(null);
-  const [isCommunityLoading, setIsCommunityLoading] = useState(true);
+  const { communityInfo } = useContext(CommunityContext);
 
-  const getCommuityInfo = () => {
-    apiCall("communities.info", {community_id: community_id}).then((json) => {
-      if (json.success) {
-          setCommunityInfo(json.data);
-          // console.log(json.data)
-      } else {
-          console.log(json);
-      }
-      setIsCommunityLoading(false);
-    });
-  }
+  // const [communityInfo, setCommunityInfo] = useState(null);
+  // const [isCommunityLoading, setIsCommunityLoading] = useState(true);
 
-  useEffect(() => {
-    getCommuityInfo();
-  }, []);
+  // const getCommuityInfo = () => {
+  //   apiCall("communities.info", {community_id: community_id}).then((json) => {
+  //     if (json.success) {
+  //         setCommunityInfo(json.data);
+  //         // console.log(json.data)
+  //     } else {
+  //         console.log(json);
+  //     }
+  //     setIsCommunityLoading(false);
+  //   });
+  // }
+
+  // useEffect(() => {
+  //   getCommuityInfo();
+  // }, []);
 
   return (
     <Page>
       {
-        isCommunityLoading
-        ? <Spinner />
-        :
+        // isCommunityLoading
+        // ? <Spinner />
+        // :
         <ScrollView showsVerticalScrollIndicator={false} px={3}>
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'position' : null} keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}>
           <VStack>  

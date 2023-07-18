@@ -17,10 +17,10 @@ import { SmallChart } from "../../Shared/Charts.js";
 import EventCard from "./../EventsPage/EventCard";
 import { formatDateString } from "../../Shared/Utils";
 
-import { apiCall } from "../../../api/functions";
+// import { apiCall } from "../../../api/functions";
 // import data from "./../../../data/communitiesInfo.json";
 // import actions from "./../../../data/actionsList.json";
-import { CommunityContext } from "../../Contexts/CommunityContext";
+import { CommunityContext, useUpcomingEvent } from "../../Contexts/CommunityContext";
 
 const event = {
   id: 1,
@@ -123,14 +123,10 @@ function ShowMore({ navigation, page, text }) {
 
 export default function CommunityPage({ route, navigation }) {
   const { community_id } = route.params;
-  const { communityInfo, fetchCommunityInfo } = useContext(CommunityContext);
+  const { communityInfo, actions, events, fetchCommunityInfo } = useContext(CommunityContext);
 
-  // const [communityInfo, setCommunityInfo] = useState(null);
   const [isCommunityLoading, setIsCommunityLoading] = useState(true);
-  const [actions, setActions] = useState(null);
-  const [isActionsLoading, setIsActionsLoading] = useState(true);
-  const [upcomingEvent, setUpcomingEvent] = useState(null);
-  const [isEventLoading, setIsEventLoading] = useState(true);
+  const upcomingEvent = useUpcomingEvent();
 
   // const getCommuityInfo = () => {
   //   apiCall("communities.info", {community_id: community_id}).then((json) => {
@@ -144,44 +140,20 @@ export default function CommunityPage({ route, navigation }) {
   //   });
   // }
 
-  const getActionList = () => {
-    apiCall("actions.list", {community_id: community_id}).then((json) => {
-      if (json.success) {
-          setActions(json.data);
-          // console.log(json.data)
-      } else {
-          console.log(json);
-      }
-      setIsActionsLoading(false);
-    });
-  }
-
-  const getUpcomingEvent = () => {
-    apiCall("events.list", {community_id: community_id}).then((json) => {
-      if (json.success) {
-        const upcoming = json.data.filter((event) => {
-          const eventDate = new Date(event.start_date_and_time);
-          const now = new Date();
-          return eventDate > now;
-        });
-
-        if (upcoming.length > 0) {
-          console.log(upcoming[0])
-          setUpcomingEvent(upcoming[0]);
-        }
-          // console.log(json.data)
-      } else {
-          console.log(json);
-      }
-      setIsEventLoading(false);
-    });
-  }
+  // const getActionList = () => {
+  //   apiCall("actions.list", {community_id: community_id}).then((json) => {
+  //     if (json.success) {
+  //         setActions(json.data);
+  //         // console.log(json.data)
+  //     } else {
+  //         console.log(json);
+  //     }
+  //     setIsActionsLoading(false);
+  //   });
+  // }
 
   useEffect(() => {
-    // getCommuityInfo();
-    fetchCommunityInfo(community_id, () => setIsCommunityLoading(false));
-    getActionList();
-    getUpcomingEvent();
+    fetchCommunityInfo(community_id, () => setIsCommunityLoading(false))
   }, []);
 
   const getMetric = (action, metric) => {
@@ -224,7 +196,7 @@ export default function CommunityPage({ route, navigation }) {
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
               <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
               {
-                isActionsLoading ? <Spinner size="lg" color="primary.500" /> :
+                // isActionsLoading ? <Spinner size="lg" color="primary.500" /> :
                 actions.map((action, index) => {
                   // console.log(action)
                   if (getMetric(action, "Cost") === "$" || getMetric(action, "Cost") === "0") {
@@ -240,7 +212,12 @@ export default function CommunityPage({ route, navigation }) {
               </HStack>
             </ScrollView>
             {
-              upcomingEvent === null ? <></> :
+              // isEventLoading 
+              // ? <Spinner size="lg" color="primary.500" /> 
+              // :
+              upcomingEvent === null 
+              ? <></> 
+              :
               <View>
                 <HStack alignItems="center" pt={3}>
                   <HeaderText text="Upcoming Event"/>
@@ -248,7 +225,6 @@ export default function CommunityPage({ route, navigation }) {
                   <ShowMore navigation={navigation} page="EVENTS" text={"Show More"}/>
                 </HStack>
                   {
-                  isEventLoading ? <Spinner size="lg" color="primary.500" /> : (
                     <EventCard
                         key={upcomingEvent.id}
                         title={upcomingEvent.name}
@@ -268,10 +244,8 @@ export default function CommunityPage({ route, navigation }) {
                         mx={4}
                         shadow={5}
                       />
-                  )
                   }
               </View>
-              
             }
           </VStack>
       }

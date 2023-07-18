@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   ScrollView,
   HStack,
@@ -9,29 +9,32 @@ import ActionCard from "./ActionCard";
 import Page from "../../Shared/Page";
 // import actions from "./../../../data/actionsList.json";
 import { apiCall } from "../../../api/functions";
+import { CommunityContext } from "../../Contexts/CommunityContext";
 
 export default function ActionsPage({ route, navigation }) {
 
   const { community_id } = route.params;
 
-  const [actions, setActions] = useState(null);
-  const [isActionsLoading, setIsActionsLoading] = useState(true);
+  const { actions } = useContext(CommunityContext);
 
-  const getActionList = () => {
-    apiCall("actions.list", {community_id: community_id}).then((json) => {
-      if (json.success) {
-          setActions(json.data);
-          // console.log(json.data)
-      } else {
-          console.log(json);
-      }
-      setIsActionsLoading(false);
-    });
-  }
+  // const [actions, setActions] = useState(null);
+  // const [isActionsLoading, setIsActionsLoading] = useState(true);
 
-  useEffect(() => {
-    getActionList();
-  }, []);
+  // const getActionList = () => {
+  //   apiCall("actions.list", {community_id: community_id}).then((json) => {
+  //     if (json.success) {
+  //         setActions(json.data);
+  //         // console.log(json.data)
+  //     } else {
+  //         console.log(json);
+  //     }
+  //     setIsActionsLoading(false);
+  //   });
+  // }
+
+  // useEffect(() => {
+  //   getActionList();
+  // }, []);
 
   const getMetric = (action, metric) => {
     for (let i = 0; i < action.tags.length; i++) {
@@ -46,9 +49,10 @@ export default function ActionsPage({ route, navigation }) {
     //the styling should apply to something else
     //<ScrollView style = {styles.scroll}>
     <Page>
-      { isActionsLoading 
-        ? <Spinner />
-        :
+      { 
+      // isActionsLoading 
+      //   ? <Spinner />
+      //   :
         <ScrollView>
           <Text style={styles.category}>Recommended</Text>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>

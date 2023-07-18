@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Button, Center, Flex, ScrollView, Spinner, View } from "native-base";
 import Page from "../../Shared/Page";
 import SearchBar from "../../Shared/SearchBar";
 import EventCard from "./EventCard";
+import { CommunityContext } from "../../Contexts/CommunityContext";
 
 import { apiCall } from "../../../api/functions";
 // import DummyResponse from "../../../data/eventsList.json";
@@ -46,30 +47,32 @@ const filterOptions = [
 export default function EventsPage({ route, navigation }) {
   const { community_id } = route.params;
 
-  const [events, setEvents] = useState([]);
+  const { events } = useContext(CommunityContext);
+
+  // const [events, setEvents] = useState([]);
   const [eventFilterID, setEventFilterID] = useState(1); // 0 = upcoming, 1 = past, 2 = campaigns
-  const [isEventsLoading, setIsEventsLoading] = useState(true);
+  // const [isEventsLoading, setIsEventsLoading] = useState(true);
 
-  const getEventsList = () => {
-    apiCall("events.list", {community_id: community_id}).then((json) => {
-      if (json.success) {
-          const data = json.data;
-          const filteredEvents = data.filter((event) => event.community.id !== 3);
-          setEvents(filteredEvents);
-          // console.log(json.data)
-      } else {
-          console.log(json);
-      }
-      setIsEventsLoading(false);
-    });
-  }
+  // const getEventsList = () => {
+  //   apiCall("events.list", {community_id: community_id}).then((json) => {
+  //     if (json.success) {
+  //         const data = json.data;
+  //         const filteredEvents = data.filter((event) => event.community.id !== 3);
+  //         setEvents(filteredEvents);
+  //         // console.log(json.data)
+  //     } else {
+  //         console.log(json);
+  //     }
+  //     setIsEventsLoading(false);
+  //   });
+  // }
 
-  useEffect(() => {
-    // TODO: make an API call here
-    // TODO: add loading state (maybe a spinner)
-    // TODO: a reallllly long delay whenever data is loading (potential solution: cache it)
-    getEventsList();
-  }, []);
+  // useEffect(() => {
+  //   // TODO: make an API call here
+  //   // TODO: add loading state (maybe a spinner)
+  //   // TODO: a reallllly long delay whenever data is loading (potential solution: cache it)
+  //   getEventsList();
+  // }, []);
 
   const getEventsByFilter = (id) => {
     if (id === 0) {
@@ -108,9 +111,9 @@ export default function EventsPage({ route, navigation }) {
         />
         {/* events filter */}
         {
-          isEventsLoading 
-          ? <Spinner />
-          :
+          // isEventsLoading 
+          // ? <Spinner />
+          // :
           <View>
           <Flex flexDirection="row">
             <Button

@@ -1,5 +1,5 @@
 import { SafeAreaView } from "react-native";
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useContext } from "react";
 import { 
   createDrawerNavigator, 
   DrawerContentScrollView, 
@@ -23,11 +23,13 @@ import {
   Pressable,
   Modal,
   Icon,
+  Spinner
 } from "native-base";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import AuthModalController from "../Pages/Auth/AuthModalController";
 import useAuth from "../Hooks/useAuth";
-import { apiCall } from "../../api/functions";
+// import { apiCall } from "../../api/functions";
+import { CommunityContext } from "../Contexts/CommunityContext";
 
 const Drawer = createDrawerNavigator();
 
@@ -99,26 +101,9 @@ function CustomDrawerContent(props) {
   const [isSignOutModalVisible, setIsSignOutModalVisible] = useState(false);
   const { user, signOut } = useAuth();
 
-  const [communityInfo, setCommunityInfo] = useState(null);
-  const [isCommunityLoading, setIsCommunityLoading] = useState(true);
-
-  const getCommuityInfo = () => {
-    apiCall("communities.info", {community_id: props.community_id}).then((json) => {
-      if (json.success) {
-          setCommunityInfo(json.data);
-          // console.log(json.data)
-      } else {
-          console.log(json);
-      }
-      setIsCommunityLoading(false);
-    });
-  }
-
-  useEffect(() => {
-    getCommuityInfo();
-  }, []);
+  const { community_id, communityInfo } = props;
   
-    return (
+  return (
     <SafeAreaView
       style={{ flex: 1 }}
       forceInset={{ top: "always", horizontal: "never" }}
@@ -197,7 +182,7 @@ function CustomDrawerContent(props) {
                         label={dropdownItem.name}
                         onPress={() =>
                           props.navigation.navigate(dropdownItem.route, {
-                            community_id: props.community_id,
+                            community_id: community_id,
                           })
                         }
                         style={{ flex: 1, marginLeft: 65 }}
@@ -214,7 +199,7 @@ function CustomDrawerContent(props) {
                 label={item.name}
                 onPress={() => 
                   props.navigation.navigate(item.route, {
-                    community_id: props.community_id,
+                    community_id: community_id,
                   })
                 }
                 icon={({ focused, color, size }) => {
@@ -303,54 +288,68 @@ function CustomDrawerContent(props) {
 export default function DrawerNavigator({ route, navigation }) {
     const { community_id } = route.params;
 
-    return (
-        <Drawer.Navigator 
-            screenOptions={({ navigation, route, options }) => ({
-                drawerActiveTintColor: "#64B058",
-                headerTintColor: "#000000",
-                headerTitle: getFocusedRouteNameFromRoute(route), // make header title that of the current tab
-                headerTitleAlign: "center",
-            })}
+    const [isCommunityLoading, setIsCommunityLoading] = useState(true);
+    const { communityInfo, fetchCommunityInfo } = useContext(CommunityContext);
 
-            drawerContent={props => <CustomDrawerContent {...props} community_id={community_id} />}
-        >
-        <Drawer.Screen
-            name="Community"
-            component={TabNavigator}
-            screenOptions={{ headerTitle: "COMMUNITY" }}
-            initialParams={{community_id: community_id}}
-        />
-        <Drawer.Screen 
-          name="About" 
-          component={AboutPage} 
-        />
-        <Drawer.Screen 
-            name="Testimonials" 
-            component={TestimonialsPage} 
-            options={{
-            headerTitle: "TESTIMONIALS",
-            headerRight: () => (
-                <Ionicons 
-                  name={"filter"} 
-                  color="black" 
-                  marginRight={15} 
-                  size={20}
-                />
-            )
-            }}
-        />
-        <Drawer.Screen 
-          name="Teams" 
-          component={TeamsPage} 
-        />
-        <Drawer.Screen
-            name="Service Providers"
-            component={ServiceProvidersPage}
-        />
-        <Drawer.Screen 
-          name="Contact Us" 
-          component={ContactUsPage} 
-        />
-        </Drawer.Navigator>
-    );
+    useEffect(() => {
+      fetchCommunityInfo(community_id, () => setIsCommunityLoading(false))
+    }, []);
+
+    if (!isCommunityLoading) {
+      return (
+          <Drawer.Navigator 
+              screenOptions={({ navigation, route, options }) => ({
+                  drawerActiveTintColor: "#64B058",
+                  headerTintColor: "#000000",
+                  headerTitle: getFocusedRouteNameFromRoute(route), // make header title that of the current tab
+                  headerTitleAlign: "center",
+              })}
+
+              drawerContent={props => <CustomDrawerContent {...props} community_id={community_id} communityInfo={communityInfo} />}
+          >
+          <Drawer.Screen
+              name="Community"
+              component={TabNavigator}
+              screenOptions={{ headerTitle: "COMMUNITY" }}
+              initialParams={{community_id: community_id}}
+          />
+          <Drawer.Screen 
+            name="About" 
+            component={AboutPage} 
+          />
+          <Drawer.Screen 
+              name="Testimonials" 
+              component={TestimonialsPage} 
+              options={{
+              headerTitle: "TESTIMONIALS",
+              headerRight: () => (
+                  <Ionicons 
+                    name={"filter"} 
+                    color="black" 
+                    marginRight={15} 
+                    size={20}
+                  />
+              )
+              }}
+          />
+          <Drawer.Screen 
+            name="Teams" 
+            component={TeamsPage} 
+          />
+          <Drawer.Screen
+              name="Service Providers"
+              component={ServiceProvidersPage}
+          />
+          <Drawer.Screen 
+            name="Contact Us" 
+            component={ContactUsPage} 
+          />
+          </Drawer.Navigator>
+      );
+    }
+    else (
+      <Center>
+        <Spinner />
+      </Center>
+    )
 }

@@ -4,7 +4,7 @@ import { apiCall } from "../../api/functions";
 export const CommunityContext = createContext();
 
 export const CommunityProvider = ({ children }) => {
-  const [communityInfo, setCommunityInfo] = useState({});
+  const [communityInfo, setCommunityInfo] = useState(null);
   const [actions, setActions] = useState([]);
   const [events, setEvents] = useState([]);
   const [vendors, setVendors] = useState([]);

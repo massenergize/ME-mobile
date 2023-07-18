@@ -123,9 +123,9 @@ function ShowMore({ navigation, page, text }) {
 
 export default function CommunityPage({ route, navigation }) {
   const { community_id } = route.params;
-  const { communityInfo, actions, events, fetchCommunityInfo } = useContext(CommunityContext);
+  const { communityInfo, actions } = useContext(CommunityContext);
 
-  const [isCommunityLoading, setIsCommunityLoading] = useState(true);
+  // const [isCommunityLoading, setIsCommunityLoading] = useState(true);
   const upcomingEvent = useUpcomingEvent();
 
   // const getCommuityInfo = () => {
@@ -152,9 +152,9 @@ export default function CommunityPage({ route, navigation }) {
   //   });
   // }
 
-  useEffect(() => {
-    fetchCommunityInfo(community_id, () => setIsCommunityLoading(false))
-  }, []);
+  // useEffect(() => {
+  //   fetchCommunityInfo(community_id, () => setIsCommunityLoading(false))
+  // }, []);
 
   const getMetric = (action, metric) => {
     for (let i = 0; i < action.tags.length; i++) {
@@ -168,9 +168,9 @@ export default function CommunityPage({ route, navigation }) {
   return (
     <ScrollView nestedScrollEnabled = {true}>
       {
-        isCommunityLoading 
-          ? <Spinner size="lg" color="primary.500" /> 
-          : 
+        // isCommunityLoading 
+        //   ? <Spinner size="lg" color="primary.500" /> 
+        //   : 
           <VStack alignItems="center" space={3} bg="white">
             {/* <Text bold fontSize="2xl">Community Name</Text> */}
             <Container maxHeight={200} width="100%" mt={3}>

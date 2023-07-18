@@ -23,7 +23,8 @@ import {
   Pressable,
   Modal,
   Icon,
-  Spinner
+  Spinner,
+  View
 } from "native-base";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import AuthModalController from "../Pages/Auth/AuthModalController";
@@ -347,9 +348,10 @@ export default function DrawerNavigator({ route, navigation }) {
           </Drawer.Navigator>
       );
     }
-    else (
-      <Center>
-        <Text>Loading Community...</Text>
+    else {
+      return <Center alignContent="center" height="100%" justifyContent="center">
+        <Text bold mb={3} fontSize="lg">Loading Community...</Text>
+        <Spinner />
       </Center>
-    )
+    }
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Center,
   Box,
@@ -27,7 +27,7 @@ const validationSchema = Yup.object().shape({
 });
 
 export default function LoginPage({ route, navigation }) {
-  const { community_id, useGoogleAuth } = route.params;
+  const { community_id } = route.params;
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);

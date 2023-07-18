@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-import * as Google from "expo-auth-session/providers/google";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { GoogleAuthProvider, signInWithCredential } from "firebase/auth";
+import { GoogleAuthProvider } from "firebase/auth";
+import {
+  GoogleSignin,
+  statusCodes,
+} from "@react-native-google-signin/google-signin";
 
 import useME from "./useME";
 import Constants from "../Constants";
@@ -14,18 +17,15 @@ export default function useAuth() {
   const [authState, setAuthState] = useState(
     Constants.USER_IS_NOT_AUTHENTICATED
   );
-  const [request, response, promptAsync] = Google.useAuthRequest({
-    expoClientId: process.env.EXPO_PUBLIC_REACT_APP_EXPO_CLIENT_ID,
-    iosClientId: process.env.EXPO_PUBLIC_REACT_APP_IOS_CLIENT_ID,
-    androidClientId: process.env.EXPO_PUBLIC_REACT_APP_ANDROID_CLIENT_ID,
-  });
 
   const { fetchToken } = useME();
 
   useEffect(() => {
-    const unsubscribe = AUTH.onAuthStateChanged((user) => {
+    // _fetchUserFromStorage();
+    const unsubscribe = AUTH.onAuthStateChanged(async (user) => {
       if (user) {
         setUser(user);
+        // await AsyncStorage.setItem("@FBUser", JSON.stringify(user));
       } else {
         setUser(null);
       }
@@ -33,6 +33,17 @@ export default function useAuth() {
 
     return () => unsubscribe();
   }, []);
+
+  const _fetchUserFromStorage = async () => {
+    try {
+      const user = await AsyncStorage.getItem("@FBUser");
+      if (user) {
+        setUser(JSON.parse(user));
+      }
+    } catch (error) {
+      console.log("error fetching user from storage: ", error);
+    }
+  };
 
   /**
    * Fetches the token from the backend and calls the callback function with the response.
@@ -106,35 +117,68 @@ export default function useAuth() {
   };
 
   const authenticateWithGoogle = async (callBackFn) => {
-    promptAsync()
-      .then(() => {
-        if (response?.type === "success") {
-          const { authentication } = response;
-          const credential = GoogleAuthProvider.credential(
-            authentication.idToken,
-            authentication.accessToken
-          );
-          signInWithCredential(AUTH, credential)
-            .then((userCredential) => {
-              // Signed in
-              setAuthState(Constants.CHECK_MASS_ENERGIZE);
+    try {
+      await GoogleSignin.hasPlayServices();
+      const { idToken } = await GoogleSignin.signIn();
 
-              if (callBackFn) {
-                callBackFn(userCredential, null);
-              }
-            })
-            .catch((error) => {
-              if (callBackFn) {
-                callBackFn(null, translateFirebaseError(error?.toString()));
-              }
-            });
-        }
-      })
-      .catch((error) => {
-        if (callBackFn) {
-          callBackFn(null, translateFirebaseError(error?.toString()));
-        }
-      });
+      const googleCredential = await GoogleAuthProvider.credential(idToken);
+
+      AUTH.signInWithCredential(googleCredential)
+        .then((userCredential) => {
+          // Signed in
+          setAuthState(Constants.CHECK_MASS_ENERGIZE);
+          if (callBackFn) {
+            callBackFn(userCredential, null);
+          }
+        })
+        .catch((error) => {
+          if (callBackFn) {
+            callBackFn(null, translateFirebaseError(error?.toString()));
+          }
+        });
+    } catch (error) {
+      console.log("error signing in with google: ", error);
+      if (error.code === "auth/account-exists-with-different-credential") {
+        //xx
+      } else if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        //xx
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        //HERE IS THE ISSUE
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        //xx
+      } else {
+        //xx
+      }
+    }
+    // promptAsync()
+    //   .then(() => {
+    //     console.log(response?.type, response?.params);
+    //     if (response?.type === "success") {
+    //       const { authentication } = response;
+    //       const credential = GoogleAuthProvider.credential(
+    //         authentication.idToken,
+    //         authentication.accessToken
+    //       );
+    //       signInWithCredential(AUTH, credential)
+    //         .then((userCredential) => {
+    //           // Signed in
+    //           setAuthState(Constants.CHECK_MASS_ENERGIZE);
+    //           if (callBackFn) {
+    //             callBackFn(userCredential, null);
+    //           }
+    //         })
+    //         .catch((error) => {
+    //           if (callBackFn) {
+    //             callBackFn(null, translateFirebaseError(error?.toString()));
+    //           }
+    //         });
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     if (callBackFn) {
+    //       callBackFn(null, translateFirebaseError(error?.toString()));
+    //     }
+    //   });
   };
 
   /**
@@ -144,6 +188,7 @@ export default function useAuth() {
     console.log("signing out...");
     setAuthState(Constants.USER_IS_NOT_AUTHENTICATED);
     AUTH.signOut();
+    AsyncStorage.removeItem("@FBUser");
   };
 
   /**

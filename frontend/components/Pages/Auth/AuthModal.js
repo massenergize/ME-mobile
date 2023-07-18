@@ -75,13 +75,7 @@ function AuthModal() {
               size="lg"
               backgroundColor="red.400"
               onPress={() => {
-                authenticateWithGoogle((response, error) => {
-                  console.log("response: ", response, "error: ", error);
-                  navigation.navigate("login", {
-                    community_id: communityInfo.community_id,
-                    useGoogleAuth: true,
-                  });
-                });
+                authenticateWithGoogle();
 
                 AuthModalController.hideModal();
               }}

@@ -60,25 +60,26 @@ export default function LoginPage({ route, navigation }) {
     setIsEmailVerified(user.emailVerified);
   };
 
-  // Hacky way to redirect to createProfile page if user is not registered in ME yet.
-  useEffect(() => {
-    if (authState === Constants.NEEDS_REGISTRATION) {
-      navigation.navigate("createProfile");
-    } else if (authState === Constants.USER_IS_AUTHENTICATED) {
-      navigation.navigate("drawer", { community_id: community_id });
-    } else if (authState === Constants.SERVER_ERROR) {
-      setErrorMsg("Something went wrong. Please try again later.");
-    }
-  }, [authState]);
-
   useEffect(() => {
     if (user) {
       if (user?.getIdTokenResult) {
         fetchMEToken();
       }
+
       setIsEmailVerified(user.emailVerified);
+
+      if (isEmailVerified) {
+        // Hacky way to redirect to createProfile page if user is not registered in ME yet.
+        if (authState === Constants.NEEDS_REGISTRATION) {
+          navigation.navigate("createProfile");
+        } else if (authState === Constants.USER_IS_AUTHENTICATED) {
+          navigation.navigate("drawer", { community_id: community_id });
+        } else if (authState === Constants.SERVER_ERROR) {
+          setErrorMsg("Something went wrong. Please try again later.");
+        }
+      }
     }
-  }, [user]);
+  }, [user, authState]);
 
   if (user && !isEmailVerified) {
     return <EmailVerificationPage onRefresh={() => refreshUser()} />;

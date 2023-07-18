@@ -53,8 +53,6 @@ export default function useAuth() {
    * Fetches the token from the backend and calls the callback function with the response.
    */
   const fetchMEToken = async () => {
-    // TODO: encounter this warning: TypeError: user.getIdTokenResult is not a function (it is undefined)
-    // still works but the root cause is probably that the timing of the authentication token retrieval.
     const _fbToken = await user?.getIdTokenResult();
     fetchToken(_fbToken.token, (response, error) => {
       if (error) {

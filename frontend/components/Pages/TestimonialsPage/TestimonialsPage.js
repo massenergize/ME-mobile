@@ -1,41 +1,44 @@
 import { View, ScrollView, Text } from "react-native";
-import React, { useEffect, useState} from "react";
+import React, { useContext, useEffect, useState} from "react";
 import { Box, Container, Fab, Button, Pressable, Spinner } from "native-base";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Page from "../../Shared/Page";
 import { TestimonialCard } from "./TestimonialsCard.js";
 
-import testimonials from "./../../../data/testimonialsList.json";
-import { apiCall } from "../../../api/functions";
+// import testimonials from "./../../../data/testimonialsList.json";
+// import { apiCall } from "../../../api/functions";
+import { CommunityContext } from "../../Contexts/CommunityContext";
 
 export default function TestimonialsPage({ route, navigation }) {
   const { community_id } = route.params;
 
-  const [testimonials, setTestimonials] = useState(null);
-  const [isTestimonialsLoading, setIsTestimonialsLoading] = useState(true);
+  const { testimonials } = useContext(CommunityContext);
 
-  const getTestimonialList = () => {
-    apiCall("testimonials.list", {community_id: community_id}).then((json) => {
-      if (json.success) {
-          setTestimonials(json.data);
-          // console.log(json.data)
-      } else {
-          console.log(json);
-      }
-      setIsTestimonialsLoading(false);
-    });
-  }
+  // const [testimonials, setTestimonials] = useState(null);
+  // const [isTestimonialsLoading, setIsTestimonialsLoading] = useState(true);
 
-  useEffect(() => {
-    getTestimonialList();
-  }, []);
+  // const getTestimonialList = () => {
+  //   apiCall("testimonials.list", {community_id: community_id}).then((json) => {
+  //     if (json.success) {
+  //         setTestimonials(json.data);
+  //         // console.log(json.data)
+  //     } else {
+  //         console.log(json);
+  //     }
+  //     setIsTestimonialsLoading(false);
+  //   });
+  // }
+
+  // useEffect(() => {
+  //   getTestimonialList();
+  // }, []);
 
   return (
     <Page>
       {
-        isTestimonialsLoading
-        ? <Spinner />
-        :
+        // isTestimonialsLoading
+        // ? <Spinner />
+        // :
         <View>
           <ScrollView showsVerticalScrollIndicator={false}>
             {

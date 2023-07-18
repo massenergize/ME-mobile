@@ -1,5 +1,5 @@
 import { ScrollView } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   VStack,
   HStack,
@@ -13,9 +13,10 @@ import Page from "../../Shared/Page";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { BigPieChart, ActionsChart } from "../../Shared/Charts.js";
 
-import { apiCall } from "../../../api/functions";
+// import { apiCall } from "../../../api/functions";
 // import graphData from "./../../../data/graphActionsCompleted.json";
 // import listData from "./../../../data/communitiesActionsCompleted.json";
+import { CommunityContext } from "../../Contexts/CommunityContext";
 
 const colors = [
   "#DC4E34",
@@ -53,40 +54,44 @@ export default function ImpactPage({ route, navigation }) {
   const { community_id } = route.params;
   const [ actionDisplay, setActionDisplay ] = useState('chart');
 
-  const [graphData, setGraphData] = useState(null);
-  const [isGraphDataLoading, setIsGraphDataLoading] = useState(true);
-  const [listData, setListData] = useState(null);
-  const [isListDataLoading, setIsListDataLoading] = useState(true);
+  const { impactData, actionsCompleted } = useContext(CommunityContext);
 
-  const getGraphData = () => {
-    apiCall("graphs.actions.completed", {community_id: community_id}).then((json) => {
-      if (json.success) {
-          setGraphData(json.data);
-          console.log(json.data)
-          // console.log("graph data")
-      } else {
-          console.log(json);
-      }
-      setIsGraphDataLoading(false);
-    });
-  }
+  // console.log(impactData)
 
-  const getActionsList = () => {
-    apiCall("communities.actions.completed", {community_id: community_id}).then((json) => {
-      if (json.success) {
-          setListData(json.data);
-          console.log(json.data)
-      } else {
-          console.log(json);
-      }
-      setIsListDataLoading(false);
-    });
-  }
+  // const [graphData, setGraphData] = useState(null);
+  // const [isGraphDataLoading, setIsGraphDataLoading] = useState(true);
+  // const [listData, setListData] = useState(null);
+  // const [isListDataLoading, setIsListDataLoading] = useState(true);
 
-  useEffect(() => {
-    getGraphData();
-    getActionsList();
-  }, []);
+  // const getGraphData = () => {
+  //   apiCall("graphs.actions.completed", {community_id: community_id}).then((json) => {
+  //     if (json.success) {
+  //         setGraphData(json.data);
+  //         console.log(json.data)
+  //         // console.log("graph data")
+  //     } else {
+  //         console.log(json);
+  //     }
+  //     setIsGraphDataLoading(false);
+  //   });
+  // }
+
+  // const getActionsList = () => {
+  //   apiCall("communities.actions.completed", {community_id: community_id}).then((json) => {
+  //     if (json.success) {
+  //         setListData(json.data);
+  //         console.log(json.data)
+  //     } else {
+  //         console.log(json);
+  //     }
+  //     setIsListDataLoading(false);
+  //   });
+  // }
+
+  // useEffect(() => {
+  //   getGraphData();
+  //   getActionsList();
+  // }, []);
   
 
   return (
@@ -117,14 +122,20 @@ export default function ImpactPage({ route, navigation }) {
                 onPress={() => setActionDisplay('list')}/>
             </Center>
           </HStack>
-          {
-            (isGraphDataLoading || isListDataLoading) 
-            ? <Spinner />
-            : (actionDisplay == "chart") 
-              ? 
-            <ActionsChart graphData={graphData.data} />:
-            <ActionsList listData={listData} />
-          }
+          {/* { */}
+            {/* // (isGraphDataLoading || isListDataLoading) 
+            // ? <Spinner />
+            // : 
+            (actionDisplay == "chart") 
+            //   ?  */}
+            {
+              (actionDisplay == "chart")
+              ?
+              <ActionsChart graphData={impactData.data} />
+              :
+              <ActionsList listData={actionsCompleted} />
+            }
+          {/* //  */}
         </VStack>
       </ScrollView>
     </Page>

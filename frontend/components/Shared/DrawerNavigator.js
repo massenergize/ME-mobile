@@ -349,7 +349,7 @@ export default function DrawerNavigator({ route, navigation }) {
     }
     else (
       <Center>
-        <Spinner />
+        <Text>Loading Community...</Text>
       </Center>
     )
 }

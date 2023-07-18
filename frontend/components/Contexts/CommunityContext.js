@@ -8,18 +8,9 @@ export const CommunityProvider = ({ children }) => {
   const [actions, setActions] = useState([]);
   const [events, setEvents] = useState([]);
   const [vendors, setVendors] = useState([]);
-
-  const fetchInfo = (endpoint, args, setInfo, callBackFn=null) => {
-    apiCall(endpoint, args).then((json) => {
-      if (json.success) {
-        setInfo({ ...json.data, community_id: community_id });
-        if (callBackFn) callBackFn(json.data, null);
-      } else {
-        console.log(json);
-        if (callBackFn) callBackFn(null, json.error);
-      }
-    });
-  }
+  const [testimonials, setTestimonials] = useState([]);
+  const [impactData, setImpactData] = useState(null);
+  const [actionsCompleted, setActionsCompleted] = useState(null);
 
   const fetchCommunityInfo = async (community_id, callBackFn = null) => {
     await Promise.all([
@@ -54,15 +45,40 @@ export const CommunityProvider = ({ children }) => {
           console.log(json);
           if (callBackFn) callBackFn(null, json.error);
         }
-      })
+      }),
+      apiCall("testimonials.list", { community_id: community_id }).then((json) => {
+        if (json.success) {
+          setTestimonials(json.data);
+        } else {
+          console.log(json);
+          if (callBackFn) callBackFn(null, json.error);
+        }
+      }),
+      apiCall("graphs.actions.completed", { community_id: community_id }).then((json) => {
+        if (json.success) {
+          setImpactData(json.data);
+        } else {
+          console.log(json);
+          if (callBackFn) callBackFn(null, json.error);
+        }
+      }),
+      apiCall("communities.actions.completed", { community_id: community_id }).then((json) => {
+        if (json.success) {
+          setActionsCompleted(json.data);
+        } else {
+          console.log(json);
+          if (callBackFn) callBackFn(null, json.error);
+        }
+      }),
     ]).then(() => {
       // console.log(actions)
       if (callBackFn) callBackFn();
     });
+    console.log("Community Info Fetched");
   };
 
   return (
-    <CommunityContext.Provider value={{ communityInfo, actions, events, vendors, fetchCommunityInfo }}>
+    <CommunityContext.Provider value={{ communityInfo, actions, events, vendors, testimonials, impactData, actionsCompleted, fetchCommunityInfo }}>
       {children}
     </CommunityContext.Provider>
   );

@@ -15,7 +15,8 @@ import {
 import Page from "../../Shared/Page";
 import HTMLParser from "../../Shared/HTMLParser";
 import ServiceProviderCard from "../ServiceProvidersPage/ServiceProviderCard";
-import { apiCall } from "../../../api/functions";
+// import { apiCall } from "../../../api/functions";
+import { useDetails } from "../../Contexts/CommunityContext";
 
 
 export default function ActionDetails({ route, navigation }) {
@@ -24,24 +25,26 @@ export default function ActionDetails({ route, navigation }) {
 
   const [activeTab, setActiveTab] = useState("description")
 
-  const [action, setAction] = useState(null);
-  const [isActionLoading, setIsActionLoading] = useState(true);
+  const [action, isActionLoading] = useDetails("actions.info", {action_id: action_id});
 
-  const getAction = () => {
-    apiCall("actions.info", {action_id: action_id}).then((json) => {
-      if (json.success) {
-          setAction(json.data);
-          console.log(json.data)
-      } else {
-          console.log(json);
-      }
-      setIsActionLoading(false);
-    });
-  }
+  // const [action, setAction] = useState(null);
+  // const [isActionLoading, setIsActionLoading] = useState(true);
 
-  useEffect(() => {
-    getAction();
-  }, []);
+  // const getAction = () => {
+  //   apiCall("actions.info", {action_id: action_id}).then((json) => {
+  //     if (json.success) {
+  //         setAction(json.data);
+  //         console.log(json.data)
+  //     } else {
+  //         console.log(json);
+  //     }
+  //     setIsActionLoading(false);
+  //   });
+  // }
+
+  // useEffect(() => {
+  //   getAction();
+  // }, []);
 
   const generateDescriptionTab = () => {
     return (

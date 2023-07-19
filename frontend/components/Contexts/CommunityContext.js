@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { apiCall } from "../../api/functions";
 
 export const CommunityContext = createContext();
@@ -112,4 +112,24 @@ export const useUpcomingEvent = () => {
   else {
     return null
   }
+}
+
+export const useDetails = (route, args) => {
+  const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    console.log("Fetching Details");
+    apiCall(route, args).then((json) => {
+      if (json.success) {
+          setData(json.data);
+          // console.log(json.data)
+      } else {
+          console.log(json);
+      }
+      setIsLoading(false);
+    });
+  }, [])
+
+  return [data, isLoading]
 }

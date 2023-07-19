@@ -22,12 +22,13 @@ import { formatDateString } from "../../Shared/Utils";
 
 import { apiCall } from "../../../api/functions";
 // import DummyResponse from "../../../data/eventInfo.json";
+import { useDetails } from "../../Contexts/CommunityContext";
 
 export default function EventDetailsPage({ route, navigation }) {
   const { event_id } = route.params;
 
-  const [eventDetails, setEventDetails] = useState(null); // {name, description, date, location, imageURI, rsvp_enabled}
-  const [isEventLoading, setIsEventLoading] = useState(true);
+  // const [eventDetails, setEventDetails] = useState(null); // {name, description, date, location, imageURI, rsvp_enabled}
+  // const [isEventLoading, setIsEventLoading] = useState(true);
   const [rsvp, setRsvp] = useState(""); // "Interested", "Going", "Not Going"
   const { isOpen, onOpen, onClose } = useDisclose();
 
@@ -40,54 +41,55 @@ export default function EventDetailsPage({ route, navigation }) {
     onClose();
   };
 
+  const [event, isEventLoading] = useDetails("events.info", {event_id: event_id});
 
-  const getEvent = () => {
-    apiCall("events.info", {event_id: event_id}).then((json) => {
-      if (json.success) {
-        const data = json.data;
-        const date = formatDateString(
-          new Date(data.start_date_and_time),
-          new Date(data.end_date_and_time)
-        );
+  // const getEvent = () => {
+  //   apiCall("events.info", {event_id: event_id}).then((json) => {
+  //     if (json.success) {
+  //       const data = json.data;
+  //       const date = formatDateString(
+  //         new Date(data.start_date_and_time),
+  //         new Date(data.end_date_and_time)
+  //       );
   
-        setEventDetails({
-          name: data.name,
-          description: data.description,
-          date: date,
-          location: data.location,
-          imageURI: (data.image != null) ? data.image.url : null,
-          rsvp_enabled: data.rsvp_enabled,
-        });
-          // console.log(json.data)
-      } else {
-          console.log(json);
-      }
-      console.log(eventDetails)
-      setIsEventLoading(false);
-    });
-  }
+  //       setEventDetails({
+  //         name: data.name,
+  //         description: data.description,
+  //         date: date,
+  //         location: data.location,
+  //         imageURI: (data.image != null) ? data.image.url : null,
+  //         rsvp_enabled: data.rsvp_enabled,
+  //       });
+  //         // console.log(json.data)
+  //     } else {
+  //         console.log(json);
+  //     }
+  //     console.log(eventDetails)
+  //     setIsEventLoading(false);
+  //   });
+  // }
 
-  useEffect(() => {
-    // TODO: make an API call here
-    // TODO: add loading state (maybe a spinner)
-    // if (DummyResponse.success) {
-    //   const data = DummyResponse.data;
-    //   const date = dateFormatString(
-    //     new Date(data.start_date_and_time),
-    //     new Date(data.end_date_and_time)
-    //   );
+  // useEffect(() => {
+  //   // TODO: make an API call here
+  //   // TODO: add loading state (maybe a spinner)
+  //   // if (DummyResponse.success) {
+  //   //   const data = DummyResponse.data;
+  //   //   const date = dateFormatString(
+  //   //     new Date(data.start_date_and_time),
+  //   //     new Date(data.end_date_and_time)
+  //   //   );
 
-    //   setEventDetails({
-    //     name: data.name,
-    //     description: data.description,
-    //     date: date,
-    //     location: data.location,
-    //     imageURI: data.image.url,
-    //     rsvp_enabled: data.rsvp_enabled,
-    //   });
-    // }
-    getEvent();
-  }, []); // Only excute once,
+  //   //   setEventDetails({
+  //   //     name: data.name,
+  //   //     description: data.description,
+  //   //     date: date,
+  //   //     location: data.location,
+  //   //     imageURI: data.image.url,
+  //   //     rsvp_enabled: data.rsvp_enabled,
+  //   //   });
+  //   // }
+  //   getEvent();
+  // }, []); // Only excute once,
 
   return (
     <Page py="5">
@@ -100,7 +102,7 @@ export default function EventDetailsPage({ route, navigation }) {
             <AspectRatio ratio={16 / 9}>
               <Image
                 source={{
-                  uri: eventDetails.imageURI,
+                  uri: (event.image != null) ? event.image.url : null,
                 }}
                 alt="event's image"
                 resizeMode="contain"
@@ -111,19 +113,21 @@ export default function EventDetailsPage({ route, navigation }) {
               <Text fontSize="lg" fontWeight="bold" color="primary.400">
                 Date
               </Text>
-              <Text>{eventDetails.date}</Text>
+              <Text>{
+                formatDateString(new Date(event.start_date_and_time), new Date(event.end_date_and_time))
+              }</Text>
             </VStack>
             <VStack>
               <Text fontSize="lg" fontWeight="bold" color="primary.400">
                 Venue
               </Text>
-              <Text>{(eventDetails.location) ? (eventDetails.location.city + ", " + eventDetails.location.state) : "N/A"}</Text>
+              <Text>{(event.location) ? (event.location.city + ", " + event.location.state) : "N/A"}</Text>
             </VStack>
             {/* TODO: What field has this? */}
             {/* <Text fontSize="lg" fontWeight="bold" color="primary.400">
               Every Wednedsay through 2023-08-31
             </Text> */}
-            {eventDetails.rsvp_enabled && (
+            {event.rsvp_enabled && (
               <Button
                 backgroundColor={
                   rsvp === "Going" ? "secondary.400" : "primary.600"
@@ -168,11 +172,11 @@ export default function EventDetailsPage({ route, navigation }) {
           <Divider my="4" />
           <Box>
             <Heading textAlign="center">
-              {eventDetails.name || "Event Name"}
+              {event.name || "Event Name"}
             </Heading>
-            {eventDetails.description && (
+            {event.description && (
               <HTMLParser
-                htmlString={eventDetails.description}
+                htmlString={event.description}
                 baseStyle={textStyle}
               />
             )}

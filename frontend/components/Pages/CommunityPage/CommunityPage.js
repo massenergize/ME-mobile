@@ -166,7 +166,7 @@ export default function CommunityPage({ route, navigation }) {
   };
 
   return (
-    <ScrollView nestedScrollEnabled = {true}>
+    <ScrollView nestedScrollEnabled = {true} showsVerticalScrollIndicator={false}>
       {
         // isCommunityLoading 
         //   ? <Spinner size="lg" color="primary.500" /> 

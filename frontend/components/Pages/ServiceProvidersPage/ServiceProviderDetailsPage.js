@@ -18,36 +18,46 @@ import Page from "../../Shared/Page";
 import { apiCall } from "../../../api/functions";
 import DummyResponse from "../../../data/vendorsInfo.json";
 import HTMLParser from "../../Shared/HTMLParser";
+import { useDetails } from "../../Contexts/CommunityContext";
 
 export default function ServiceProviderDetailsPage({ route, navigation }) {
   const { vendor_id } = route.params;
-  const [spDetails, setSpDetails] = useState({});
-  const [isSpLoading, setIsSpLoading] = useState(true);
+  // const [spDetails, setSpDetails] = useState({});
+  // const [isSpLoading, setIsSpLoading] = useState(true);
 
-  const getSpDetails = () => {
-    navigation.setOptions({ title: "" });
-    apiCall("vendors.info", {vendor_id: vendor_id}).then((json) => {
-      if (json.success) {
-          setSpDetails(json.data);
-          // console.log(json.data)
-          navigation.setOptions({ title: json.data?.name })
-      } else {
-          console.log(json);
-      }
-      setIsSpLoading(false);
-    });
-  }
+  const [spDetails, isSpLoading] = useDetails("vendors.info", {vendor_id: vendor_id});
+
+  // const getSpDetails = () => {
+  //   navigation.setOptions({ title: "" });
+  //   apiCall("vendors.info", {vendor_id: vendor_id}).then((json) => {
+  //     if (json.success) {
+  //         setSpDetails(json.data);
+  //         // console.log(json.data)
+  //         navigation.setOptions({ title: json.data?.name })
+  //     } else {
+  //         console.log(json);
+  //     }
+  //     setIsSpLoading(false);
+  //   });
+  // }
 
   useEffect(() => {
-    // TODO: make an API call here
-    // TODO: add loading state (maybe a spinner)
-    // if (DummyResponse.success) {
-    //   const data = DummyResponse.data;
-    //   setSpDetails(data);
-    //   navigation.setOptions({ title: data?.name });
-    // }
-    getSpDetails();
-  }, []);
+    (spDetails)
+    ? navigation.setOptions({ title: spDetails?.name })
+    : navigation.setOptions({ title: "" });
+  }, [spDetails]);
+
+  // useEffect(() => {
+  //   // TODO: make an API call here
+  //   // TODO: add loading state (maybe a spinner)
+  //   // if (DummyResponse.success) {
+  //   //   const data = DummyResponse.data;
+  //   //   setSpDetails(data);
+  //   //   navigation.setOptions({ title: data?.name });
+  //   // }
+  //   getSpDetails();
+  // }, []);
+
   return (
     <Page>
       {isSpLoading

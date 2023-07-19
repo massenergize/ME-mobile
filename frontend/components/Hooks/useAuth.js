@@ -28,6 +28,7 @@ export default function useAuth() {
         await AsyncStorage.setItem("@FBUser", JSON.stringify(user));
       } else {
         setUser(null);
+        setAuthState(Constants.USER_IS_NOT_AUTHENTICATED);
       }
     });
 
@@ -43,7 +44,9 @@ export default function useAuth() {
     try {
       const user = await AsyncStorage.getItem("@FBUser");
       const userData = user ? JSON.parse(user) : null;
-      setUser(userData);
+      if (userData?.emailVerified) {
+        setUser(userData);
+      }
     } catch (error) {
       console.log("error fetching user from storage: ", error);
     }
@@ -165,15 +168,14 @@ export default function useAuth() {
   /**
    * Wrapper function for firebase sign out.
    */
-  const signOut = () => {
-    console.log("signing out...");
-    setAuthState(Constants.USER_IS_NOT_AUTHENTICATED);
-    AUTH.signOut();
+  const signOut = async () => {
+    console.log("signing out user: ", user?.email);
+    await AUTH.signOut().then(() => setUser(null));
     // TODO: this line deletes the information that the app obtained from the Google APIs.
     // maybe implement this feature when user wants to delete their account?
     // GoogleSignin.revokeAccess();
     GoogleSignin.signOut();
-    AsyncStorage.removeItem("@FBUser");
+    await AsyncStorage.removeItem("@FBUser");
   };
 
   /**

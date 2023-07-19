@@ -41,15 +41,13 @@ export default function LoginPage({ route, navigation }) {
       values.email,
       values.password,
       (userCreds, error) => {
-        // useAuth.signInWithEmailAndPassword is fetching ME's token behind the scenes.
         setIsSubmitting(false);
         if (error) {
           setErrorMsg(error);
         } else {
           console.log("User signed in successfully!");
-          console.log("is user email verified?", userCreds.user.emailVerified);
-          console.log("authState: ", authState);
         }
+        setIsEmailVerified(userCreds.user.emailVerified);
       }
     );
   };
@@ -66,7 +64,7 @@ export default function LoginPage({ route, navigation }) {
         fetchMEToken();
       }
 
-      setIsEmailVerified(user.emailVerified);
+      setIsEmailVerified(user?.emailVerified);
 
       if (isEmailVerified) {
         // Hacky way to redirect to createProfile page if user is not registered in ME yet.

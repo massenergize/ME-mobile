@@ -1,120 +1,148 @@
-import React from "react";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
-import {
-  Button,
-  Text,
-  Box,
-  Image,
-  Icon,
-  Heading,
-  Flex,
-  ScrollView,
-  Pressable,
-} from "native-base";
+import React, { useState, useEffect } from "react";
+import { Button, Center, Flex, ScrollView } from "native-base";
+import Page from "../../Shared/Page";
+import SearchBar from "../../Shared/SearchBar";
+import EventCard from "./EventCard";
 
-const EVENTS = [
+import DummyResponse from "../../../data/eventsList.json";
+import { formatDateString } from "../../Shared/Utils";
+
+const filterOptions = [
   {
-    id: 1,
-    title: "Nature of Acton and Boxborough 2023 - A BioBlitz",
-    date: "June 15th, 4:00 AM - 11:00 PM",
-    location: "Conservations Lands, Parks, and Yards, Acton, MA",
-    image:
-      "https://massenergize-prod-files.s3.amazonaws.com/media/Acton_Boxborough__BioBlitz_2023_A-230529-160415.jpg",
+    value: 0,
+    label: "All",
   },
   {
-    id: 2,
-    title: "Acton Clean Energy Coach Program",
-    date: "June 15th 2023, 9:00 am-11:00 pm",
-    location: "Online",
-    image:
-      "https://massenergize-prod-files.s3.amazonaws.com/media/Acton_Clean_Energy_Coach-230216-135015.jpg",
+    value: 5,
+    label: "Home Energy",
   },
   {
-    id: 3,
-    title: "Acton Water Wise Nature Walk",
-    date: "April 26th 2023, 3:00 pm-4:30 pm",
-    location: null,
-    image:
-      "https://massenergize-prod-files.s3.amazonaws.com/media/hello_april_Flyer_Landscape-230328-194333.jpg",
+    value: 33,
+    label: "Solar",
+  },
+  {
+    value: 7,
+    label: "Transportation",
+  },
+  {
+    value: 8,
+    label: "Waste & Recycling",
+  },
+  {
+    value: 3,
+    label: "Food",
+  },
+  {
+    value: 1,
+    label: "Activism & Education",
+  },
+  {
+    value: 9,
+    label: "Land, Soil & Water",
   },
 ];
 
 export default function EventsPage({ navigation }) {
+  const [events, setEvents] = useState([]);
+  const [eventFilterID, setEventFilterID] = useState(1); // 0 = upcoming, 1 = past, 2 = campaigns
+
+  useEffect(() => {
+    // TODO: make an API call here
+    // TODO: add loading state (maybe a spinner)
+    // TODO: a reallllly long delay whenever data is loading (potential solution: cache it)
+    if (DummyResponse.success) {
+      const data = DummyResponse.data;
+      // filter out events from Energize Wayland (id: 3)
+      const filteredEvents = data.filter((event) => event.community.id !== 3);
+      setEvents(filteredEvents);
+    }
+  }, []);
+
+  const getEventsByFilter = (id) => {
+    if (id === 0) {
+      // upcoming events
+      return events.filter((event) => {
+        const eventDate = new Date(event.start_date_and_time);
+        const now = new Date();
+        return eventDate > now;
+      });
+    } else if (id === 1) {
+      // past events
+      return events.filter((event) => {
+        const eventDate = new Date(event.start_date_and_time);
+        const now = new Date();
+        return eventDate < now;
+      });
+    }
+    // TODO: which field to filter by?
+    // campaigns
+    // return [];
+  };
+
   return (
-    <ScrollView>
-      {EVENTS.map((event) => (
-        <Box
-          key={event.id}
-          m="3"
-          height="200"
-          shadow="5"
-          backgroundColor="white"
-          borderRadius="2xl"
-        >
-          <Pressable onPress={() => navigation.navigate("eventDetails")}>
-            <Box borderRadius="2xl" overflow="hidden">
-              <Image
-                source={{ uri: event.image }}
-                alt="image"
-                h="full"
-                w="full"
-                resizeMode="cover"
-              />
-              <Box
-                w="full"
-                h="full"
-                position="absolute"
-                backgroundColor="primary.400"
-                opacity="60"
-              ></Box>
-            </Box>
-            <Button variant="ghost" position="absolute" top="5" right="2">
-              <Icon
-                as={FontAwesome}
-                name="angle-right"
-                size={6}
-                color="white"
-              />
-            </Button>
-            <Box p="5" position="absolute" bottom="0">
-              <Heading color="white">
-                {event.title.length > 35
-                  ? event.title.slice(0, 35) + "..."
-                  : event.title}
-              </Heading>
-              <Flex flexDirection="row" alignItems="center" mt="2">
-                <Icon
-                  as={FontAwesome}
-                  name="calendar-o"
-                  size={4}
-                  color="white"
-                  mr="2"
-                />
-                <Text color="white" fontWeight="bold">
-                  {event.date}
-                </Text>
-              </Flex>
-              <Flex flexDirection="row" alignItems="center" mt="2">
-                <Icon
-                  as={FontAwesome}
-                  name="location-arrow"
-                  size={4}
-                  color="white"
-                  mr="2"
-                  alignSelf="flex-end"
-                />
-                <Text color="white" fontWeight="bold">
-                  {event.location
-                    ? event.location.length > 30
-                      ? event.location.slice(0, 30) + "..."
-                      : event.location
-                    : "N/A"}
-                </Text>
-              </Flex>
-            </Box>
-          </Pressable>
-        </Box>
-      ))}
-    </ScrollView>
+    <Page>
+      <ScrollView
+        p="5"
+        contentContainerStyle={{
+          alignItems: "center",
+        }}
+      >
+        <SearchBar
+          pb="5"
+          w="full"
+          filterOptions={filterOptions}
+          filterHeader="Category"
+        />
+        {/* events filter */}
+        <Flex flexDirection="row">
+          <Button
+            variant={eventFilterID === 0 ? "solid" : "outline"}
+            _text={{ fontSize: "xs" }}
+            borderRadius="full"
+            onPress={() => setEventFilterID(0)}
+          >
+            Upcoming Events
+          </Button>
+          <Button
+            variant={eventFilterID === 1 ? "solid" : "outline"}
+            _text={{ fontSize: "xs" }}
+            borderRadius="full"
+            onPress={() => setEventFilterID(1)}
+          >
+            Past Events
+          </Button>
+          <Button
+            variant="outline"
+            _text={{ fontSize: "xs" }}
+            borderRadius="full"
+            onPress={() => handleFilter(2)}
+            isDisabled
+          >
+            Campaigns
+          </Button>
+        </Flex>
+        {/* events list */}
+        {getEventsByFilter(eventFilterID).length > 0 ? (
+          getEventsByFilter(eventFilterID).map((event) => (
+            <EventCard
+              key={event.id}
+              title={event.name}
+              date={formatDateString(
+                new Date(event.start_date_and_time),
+                new Date(event.end_date_and_time)
+              )}
+              location={event.location}
+              imageURI={event.image.url}
+              canRSVP={event.rsvp_enabled}
+              onPress={() => navigation.navigate("eventDetails")}
+              my="3"
+              shadow="5"
+            />
+          ))
+        ) : (
+          <Center py="5">There are no more events.</Center>
+        )}
+      </ScrollView>
+    </Page>
   );
 }

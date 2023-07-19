@@ -1,138 +1,217 @@
-import { View, Text, StyleSheet } from "react-native";
-import React from "react";
-import { Center, Box, AspectRatio, Image, VStack, ScrollView, Button } from "native-base";
+import { View, StyleSheet, useWindowDimensions } from "react-native";
+import React, { useState } from "react";
+import {
+  Text,
+  Box,
+  AspectRatio,
+  Image,
+  VStack,
+  ScrollView,
+  Button,
+  Container,
+  HStack,
+  Spacer
+} from "native-base";
+import Page from "../../Shared/Page";
+import HTMLParser from "../../Shared/HTMLParser";
+import ServiceProviderCard from "../ServiceProvidersPage/ServiceProviderCard";
 
-export default function ActionDetails() {
-    const buttonOne = React.useRef({});
-    React.useEffect(() => {
-        const styleObj = {
-            margin: 20,
-            backgroundColor: 'white',
-            flex: 1,
-        };
 
-        buttonOne.current.setNativeProps({
-            style: styleObj
-        });
-    }, [buttonOne]);
-    const buttonTwo = React.useRef({});
-    React.useEffect(() => {
-        const styleObj = {
-            margin: 20,
-            backgroundColor: 'green',
-            flex: 1,
-        };
+export default function ActionDetails({ route, navigation }) {
 
-        buttonTwo.current.setNativeProps({
-            style: styleObj
-        });
-    }, [buttonTwo]);
-    const buttonMenu = React.useRef({});
-    React.useEffect(() => {
-        const styleObj = {
+  const { width } = useWindowDimensions();
 
-            backgroundColor: 'white',
-            width: 110,
-            height: 40,
-        };
+  const [activeTab, setActiveTab] = useState("description")
 
-        buttonMenu.current.setNativeProps({
-            style: styleObj
-        });
-    }, [buttonMenu]);
+  const { action } = route.params;
+
+  const generateDescriptionTab = () => {
     return (
-        <VStack style={{flex: 1}}>
-            <View style={styles.container}> 
-                <AspectRatio w="90%" ratio={9 / 9}>
-                    <Image source={{
-                        uri: "https://m.media-amazon.com/images/I/61JhlT09xiL._AC_SX679_.jpg"
-                    }} alt="image"/>
-                </AspectRatio>
-            </View>
-            <Box bg="white" rounded = "xl" flex="0.6">
-                <VStack>
-                    <Text style={styles.actionname}>Change to LED</Text>
-                    <View style={{flexDirection:'row'}}>
-                        <Text style = {styles.textStyle}>Impact</Text>
-                        <Text style = {[styles.textStyle,{marginRight:25, textAlign:'right', fontWeight: 'normal'}]}>~1.42 tons CO2e</Text>
-                    </View>
-                    <View style={{flexDirection:'row'}}>
-                        <Text style = {styles.textStyle}>Cost</Text>
-                        <Text style = {[styles.textStyle,{marginRight:25, textAlign:'right', color:'#edb809'}]}>{'\u0024   \u0024   '}</Text>
-                    </View>
-                    <ScrollView horizontal={true} style={styles.menu}>
-                        <Button size = "md" variant="outline" marginRight="15" _text={{
-                            color: 'black',
-                            fontWeight: 'bold',
-                        }} ref={buttonMenu}>
-                            Description
-                        </Button>
-                        <Button size = "md" variant="outline" marginRight="15" _text={{
-                            color: 'black',
-                            fontWeight: 'bold',
-                        }} ref={buttonMenu}>
-                            Steps
-                        </Button>
-                        <Button size = "md" variant="outline"  marginRight="15" _text={{
-                            color: 'black',
-                            fontWeight: 'bold',
-                        }} ref={buttonMenu}>
-                            Testimonials
-                        </Button>
-                        <Button size = "md" variant="outline"  marginRight="15" _text={{
-                            color: 'black',
-                            fontWeight: 'bold',
-                        }} ref={buttonMenu}>
-                            Service Providers
-                        </Button>
-                        <Button size = "md" variant="outline"  marginRight="15" _text={{
-                            color: 'black',
-                            fontWeight: 'bold',
-                        }} ref={buttonMenu}>
-                            Deep Dive
-                        </Button>
-                        
-                    </ScrollView>
-                    <Text style = {{margin: 15}}> A Brief Description about the action, why it matters, what impact it has, any statistics about usage, how many people have switched, how easy it is, cost, etc.</Text>
-                </VStack>
-                <View style={{flexDirection: 'row', position: 'absolute', bottom: 35}}>
-                    <Button size = "md" variant="outline" _text={{
-                        color: 'black',
-                        fontWeight: 'bold',
-                    }} ref={buttonOne}>
-                        Add to To-Do
-                    </Button>
-                    <Button size = "md" variant = "solid" _text={{
-                        color: 'white',
-                        fontWeight: 'bold',
-                    }} ref={buttonTwo}>
-                        Done
-                    </Button>
-                </View>
-            </Box>
+      <HTMLParser
+        htmlString={action.about}
+        baseStyle={textStyle}
+      />
+    )
+  }
+
+  const generateStepsTab = () => {
+    return (
+      <HTMLParser
+        htmlString={action.steps_to_take}
+        baseStyle={textStyle}
+      />
+    )
+  }
+
+  const generateDeepDiveTab = () => {
+    if (action.deep_dive === "") {
+      return (
+        <Text>No information available.</Text>
+      )
+    } 
+    else {
+      return (
+        <HTMLParser
+          htmlString={action.deep_dive}
+          baseStyle={textStyle}
+        />
+      )
+    }
+  }
+
+  const generateTestimonialsTab = () => {
+    return (
+      <Text>Testimonials Tab</Text>
+    )
+  }
+
+
+  const generateServiceProvidersTab = () => {
+    if (action.vendors.length === 0) {
+      return (
+        <Text>No associated service providers.</Text>
+      )
+    }
+    return (
+      action.vendors.map((vendor, index) => {
+        return <ServiceProviderCard 
+          direction="row" 
+          description=""
+          imageURI={vendor.logo.url}
+          name={vendor.name}
+          onPress={() =>
+            navigation.navigate("serviceProviderDetails")
+          }
+          key={index}/>
+      })
+    )
+  }
+
+  function TabButton({ label, name }) {
+    return (
+      <Button 
+        variant={activeTab === name ? "solid" : "outline"}
+        onPress={() => setActiveTab(name)}
+        mr={2}
+        >
+        {label}
+      </Button>
+    )
+  }
+
+  const renderTabContent = () => {
+    switch(activeTab) {
+      case "description":
+        return generateDescriptionTab();
+      case "steps":
+        return generateStepsTab();
+      case "deep_dive":
+        return generateDeepDiveTab();
+      case "testimonials":
+        return generateTestimonialsTab();
+      case "service_providers":
+        return generateServiceProvidersTab();
+      default:
+        return generateDescriptionTab();
+    }
+  }
+
+  const getMetric = (metric) => {
+    for (let i = 0; i < action.tags.length; i++) {
+      if (action.tags[i].tag_collection_name === metric) {
+        return action.tags[i].name;
+      }
+    }
+    return "-"
+  }
+
+  return (
+    <Page>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <VStack style={{ flex: 1 }}>
+          {/* <View style={styles.container}>
+            <AspectRatio w="90%" ratio={9 / 9}>
+              <Image
+                source={{
+                  uri: "https://m.media-amazon.com/images/I/61JhlT09xiL._AC_SX679_.jpg",
+                }}
+                alt="image"
+              />
+            </AspectRatio>
+          </View> */}
+          <Image
+            source={{
+                // uri: "https://m.media-amazon.com/images/I/61JhlT09xiL._AC_SX679_.jpg",
+               uri: action.image.url,
+            }}
+            m={3}
+            h={250}
+            // w={width}
+            alt="image"
+            // borderRadius="xl"
+            resizeMode="contain"
+        />
+          <Box bg="white" borderRadius="3xl" shadow={5} height="100%">
+            <VStack>
+              <Text bold fontSize="2xl" m={4}>{action.title}</Text>
+              <HStack alignItems="center" mx={4}>
+                <Text bold fontSize="lg">Impact</Text>
+                <Spacer />
+                <Text fontSize="lg">{getMetric("Impact")}</Text>
+              </HStack>
+              <HStack alignItems="center" mx={4} mt={2} mb={4}>
+                <Text bold fontSize="lg">Cost</Text>
+                <Spacer />
+                <Text fontSize="lg">{getMetric("Cost")}</Text>
+              </HStack>
+              <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} px={3}>
+                <TabButton label="Description" name="description" />
+                <TabButton label="Steps" name="steps" />
+                <TabButton label="Deep Dive" name="deep_dive" />
+                <TabButton label="Testimonials" name="testimonials" />
+                <TabButton label="Service Providers" name="service_providers" />
+                <Container width={5}></Container>
+              </ScrollView>
+              <Box m={15}>
+                {renderTabContent()}
+              </Box>
+            </VStack>
+            <Container
+              // style={{ flexDirection: "row", position: "absolute", bottom: 35 }}
+              position="absolute"
+              bottom={15}
+            >
+              {/* <Button
+                size="md"
+                variant="outline"
+                _text={{
+                  color: "black",
+                  fontWeight: "bold",
+                }}
+                ref={buttonOne}
+              >
+                Add to To-Do
+              </Button>
+              <Button
+                size="md"
+                variant="solid"
+                _text={{
+                  color: "white",
+                  fontWeight: "bold",
+                }}
+                ref={buttonTwo}
+              >
+                Done
+              </Button> */}
+            </Container>
+          </Box>
         </VStack>
+        
+      </ScrollView>
+    </Page>
   );
 }
 
-
-const styles = StyleSheet.create({
-    actionname: {
-        padding: 15,
-        fontSize: 23,
-        fontWeight: "bold",    
-    },
-    container: {
-        flex: 0.4,
-        justifyContent: "center",
-        alignItems: "center"
-    },
-    textStyle: {
-        padding: 15,
-        fontSize: 18,
-        fontWeight: "bold",
-        flex: 1
-    },
-    menu: {
-        marginLeft: 15,
-    }
-  });
+const textStyle = {
+  fontSize: "16px",
+};

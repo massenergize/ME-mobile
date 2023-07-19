@@ -18,6 +18,7 @@ export const CommunityProvider = ({ children }) => {
       apiCall("communities.info", { community_id: community_id }).then((json) => {
         if (json.success) {
           setCommunityInfo({ ...json.data, community_id: community_id });
+          console.log("Coommunity Info Fetched")
         } else {
           console.log(json);
           if (callBackFn) callBackFn(null, json.error);
@@ -26,6 +27,7 @@ export const CommunityProvider = ({ children }) => {
       apiCall("actions.list", { community_id: community_id }).then((json) => {
         if (json.success) {
           setActions(json.data);
+          console.log("Actions Fetched")
         } else {
           console.log(json);
           if (callBackFn) callBackFn(null, json.error);
@@ -34,6 +36,7 @@ export const CommunityProvider = ({ children }) => {
       apiCall("events.list", { community_id: community_id }).then((json) => {
         if (json.success) {
           setEvents(json.data);
+          console.log("Events Fetched")
         } else {
           console.log(json);
           if (callBackFn) callBackFn(null, json.error);
@@ -42,6 +45,7 @@ export const CommunityProvider = ({ children }) => {
       apiCall("vendors.list", { community_id: community_id }).then((json) => {
         if (json.success) {
           setVendors(json.data);
+          console.log("Vendors Fetched")
         } else {
           console.log(json);
           if (callBackFn) callBackFn(null, json.error);
@@ -50,6 +54,7 @@ export const CommunityProvider = ({ children }) => {
       apiCall("testimonials.list", { community_id: community_id }).then((json) => {
         if (json.success) {
           setTestimonials(json.data);
+          console.log("Testimonials Fetched")
         } else {
           console.log(json);
           if (callBackFn) callBackFn(null, json.error);
@@ -58,6 +63,7 @@ export const CommunityProvider = ({ children }) => {
       apiCall("graphs.actions.completed", { community_id: community_id }).then((json) => {
         if (json.success) {
           setImpactData(json.data);
+          console.log("Graph Info Fetched")
         } else {
           console.log(json);
           if (callBackFn) callBackFn(null, json.error);
@@ -66,6 +72,7 @@ export const CommunityProvider = ({ children }) => {
       apiCall("communities.actions.completed", { community_id: community_id }).then((json) => {
         if (json.success) {
           setActionsCompleted(json.data);
+          console.log("Actions List Fetched")
         } else {
           console.log(json);
           if (callBackFn) callBackFn(null, json.error);
@@ -74,6 +81,7 @@ export const CommunityProvider = ({ children }) => {
       apiCall("about_us_page_settings.info", { community_id: community_id }).then((json) => {
         if (json.success) {
           setAbout(json.data);
+          console.log("About Fetched")
         } else {
           console.log(json);
           if (callBackFn) callBackFn(null, json.error);
@@ -83,7 +91,7 @@ export const CommunityProvider = ({ children }) => {
       // console.log(actions)
       if (callBackFn) callBackFn();
     });
-    console.log("Community Info Fetched");
+    console.log("Community Fetched");
   };
 
   return (

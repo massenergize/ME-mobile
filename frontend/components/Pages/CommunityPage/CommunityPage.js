@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import { ScrollView } from "react-native";
 import {
   VStack,
@@ -21,6 +21,7 @@ import { formatDateString } from "../../Shared/Utils";
 // import data from "./../../../data/communitiesInfo.json";
 // import actions from "./../../../data/actionsList.json";
 import { CommunityContext, useUpcomingEvent } from "../../Contexts/CommunityContext";
+import { RefreshControl } from "react-native-gesture-handler";
 
 const event = {
   id: 1,
@@ -123,10 +124,18 @@ function ShowMore({ navigation, page, text }) {
 
 export default function CommunityPage({ route, navigation }) {
   const { community_id } = route.params;
-  const { communityInfo, actions } = useContext(CommunityContext);
+  const { communityInfo, actions, fetchCommunityInfo } = useContext(CommunityContext);
 
   // const [isCommunityLoading, setIsCommunityLoading] = useState(true);
   const upcomingEvent = useUpcomingEvent();
+
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = useCallback (() => {
+    setRefreshing(true);
+    fetchCommunityInfo(community_id, () => setRefreshing(false))
+    // setTimeout(() => setRefreshing(false), 2000);
+  }, []);
 
   // const getCommuityInfo = () => {
   //   apiCall("communities.info", {community_id: community_id}).then((json) => {
@@ -166,7 +175,10 @@ export default function CommunityPage({ route, navigation }) {
   };
 
   return (
-    <ScrollView nestedScrollEnabled = {true} showsVerticalScrollIndicator={false}>
+    <ScrollView 
+      nestedScrollEnabled = {true} 
+      showsVerticalScrollIndicator={false}
+      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
       {
         // isCommunityLoading 
         //   ? <Spinner size="lg" color="primary.500" /> 

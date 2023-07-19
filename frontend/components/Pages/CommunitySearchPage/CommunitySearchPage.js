@@ -49,8 +49,20 @@ export default function CommunitySearchPage({ navigation }) {
 
   const [isLoading, setIsLoading] = useState(true);
 
-  const handleZipCodeSubmit = () => {
-    // TODO: validate zip code
+  const isValidZipCode = (zipCode) => {
+    // Define the regex pattern for a valid zip code
+    const zipCodePattern = /^\d{5}(?:[-\s]\d{4})?$/;
+
+    // Test the zip code against the pattern
+    return zipCodePattern.test(zipCode);
+  };
+
+  const handleZipCodeSubmit = async () => {
+    if (!isValidZipCode(zipCode)) {
+      alert("Please enter a valid zip code.");
+      return;
+    }
+
     setShowModal(false);
   };
 
@@ -104,17 +116,19 @@ export default function CommunitySearchPage({ navigation }) {
               <Spinner />
             ) : (
               <ScrollView height="80">
-                {communities.map((community) => (
-                  <CommunityCard
-                    community={community}
-                    key={community.id}
-                    onPress={() =>
-                      navigation.navigate("drawer", {
-                        community_id: community.id,
-                      })
-                    }
-                  />
-                ))}
+                {communities.map((community) => {
+                  return (
+                    <CommunityCard
+                      community={community}
+                      key={community.id}
+                      onPress={() =>
+                        navigation.navigate("drawer", {
+                          community_id: community.id,
+                        })
+                      }
+                    />
+                  );
+                })}
               </ScrollView>
             )}
           </VStack>

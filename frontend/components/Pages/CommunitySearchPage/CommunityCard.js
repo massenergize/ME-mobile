@@ -5,14 +5,23 @@ export default function CommunityCard({ community, ...props }) {
   return (
     <Pressable {...props}>
       <Flex flexDirection="row" alignItems="center">
-        <Image
-          source={{
-            uri: community.logo?.url,
-          }}
-          alt="Community Logo"
-          size="100px"
-          resizeMode="contain"
-        />
+        {community.logo?.url ? (
+          <Image
+            source={{
+              uri: community.logo?.url || "#",
+            }}
+            alt="Community Logo"
+            size="100px"
+            resizeMode="contain"
+          />
+        ) : (
+          <Image
+            source={require("../../../assets/images/logo.png")}
+            alt="Community Logo"
+            size="100px"
+            resizeMode="contain"
+          />
+        )}
         <Box width="70%" pl="5">
           <Text fontSize="lg" fontWeight="bold">
             {community.name}

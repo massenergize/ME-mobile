@@ -14,6 +14,7 @@ import {
   Pressable,
   Spinner,
   Slider,
+  View,
 } from "native-base";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
@@ -117,7 +118,7 @@ export default function CommunitySearchPage({ navigation }) {
                 step={5}
                 accessibilityLabel="max distance slider"
                 onChange={(value) => setMaxDistance(value)}
-                onChangeEnd={handleZipCodeSubmit}
+                onChangeEnd={() => handleZipCodeSubmit()}
                 isDisabled={zipCode === ""}
               >
                 <Slider.Track>
@@ -131,21 +132,32 @@ export default function CommunitySearchPage({ navigation }) {
             {isLoading ? (
               <Spinner />
             ) : (
-              <ScrollView height="80">
-                {communities.map((community) => {
-                  return (
-                    <CommunityCard
-                      community={community}
-                      key={community.id}
-                      onPress={() =>
-                        navigation.navigate("drawer", {
-                          community_id: community.id,
-                        })
-                      }
-                    />
-                  );
-                })}
-              </ScrollView>
+              <View>
+                {communities.length === 0 ? (
+                  <Text textAlign="center" color="muted.400">
+                    Please enter a zip code to find communities.
+                  </Text>
+                ) : (
+                  <ScrollView height="80">
+                    <Text textAlign="center" color="muted.400">
+                      Found {communities.length} communities.
+                    </Text>
+                    {communities.map((community) => {
+                      return (
+                        <CommunityCard
+                          community={community}
+                          key={community.id}
+                          onPress={() =>
+                            navigation.navigate("drawer", {
+                              community_id: community.id,
+                            })
+                          }
+                        />
+                      );
+                    })}
+                  </ScrollView>
+                )}
+              </View>
             )}
           </VStack>
         </Box>

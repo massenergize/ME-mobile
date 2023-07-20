@@ -45,7 +45,7 @@ const filterOptions = [
 export default function CommunitySearchPage({ navigation }) {
   const [communities, setCommunities] = useState([]);
   const [zipCode, setZipCode] = useState("");
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(true);
   const [maxDistance, setMaxDistance] = useState(25); // in miles
 
   const [isLoading, setIsLoading] = useState(false);

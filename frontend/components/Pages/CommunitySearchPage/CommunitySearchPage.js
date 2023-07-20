@@ -81,9 +81,8 @@ export default function CommunitySearchPage({ navigation }) {
 
   return (
     <Page>
-      <Box height="50%" backgroundColor={"primary.50"}>
+      <Box height="30%" backgroundColor={"primary.50"}>
         <Center h="full">
-          {/* TODO: Add an image here */}
           <Icon as={FontAwesome} name="users" size="90" color="white" />
           <Heading py="5" textAlign="center" color="white">
             BECOME PART OF A COMMUNITY
@@ -94,7 +93,7 @@ export default function CommunitySearchPage({ navigation }) {
         position="absolute"
         backgroundColor="white"
         width="100%"
-        height="60%"
+        height="75%"
         bottom="0"
         borderTopRadius="30"
       >
@@ -127,34 +126,44 @@ export default function CommunitySearchPage({ navigation }) {
                 <Slider.Thumb />
               </Slider>
             </VStack>
-            <SearchBar filterOptions={filterOptions} />
+            {/* <SearchBar filterOptions={filterOptions} /> */}
             {/* Container for communities */}
             {isLoading ? (
               <Spinner />
             ) : (
-              <View>
+              <View height="70%" backgroundColor={"amber.100"}>
                 {communities.length === 0 ? (
                   <Text textAlign="center" color="muted.400">
                     Please enter a zip code to find communities.
                   </Text>
                 ) : (
-                  <ScrollView height="80">
+                  <ScrollView>
                     <Text textAlign="center" color="muted.400">
                       Found {communities.length} communities.
                     </Text>
-                    {communities.map((community) => {
-                      return (
-                        <CommunityCard
-                          community={community}
-                          key={community.id}
-                          onPress={() =>
-                            navigation.navigate("drawer", {
-                              community_id: community.id,
-                            })
-                          }
-                        />
-                      );
-                    })}
+                    {communities
+                      // sort by geographically focused first, then by distance
+                      .sort((a, b) =>
+                        a.is_geographically_focused &&
+                        !b.is_geographically_focused
+                          ? -1
+                          : 1
+                      )
+                      .sort((a, b) => a.location.distance - b.location.distance)
+                      .map((community) => {
+                        return (
+                          <CommunityCard
+                            py="2"
+                            community={community}
+                            key={community.id}
+                            onPress={() =>
+                              navigation.navigate("drawer", {
+                                community_id: community.id,
+                              })
+                            }
+                          />
+                        );
+                      })}
                   </ScrollView>
                 )}
               </View>

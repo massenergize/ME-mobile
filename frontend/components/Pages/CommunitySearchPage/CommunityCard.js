@@ -32,6 +32,15 @@ export default function CommunityCard({ community, ...props }) {
               ? `${community.location.city}, ${community.location.state}`
               : `${community.location?.country}`}
           </Text>
+          {community.is_geographically_focused ? (
+            <Text fontSize="sm" color="muted.400">
+              {Math.round(community.location.distance)} miles away
+            </Text>
+          ) : (
+            <Text fontSize="sm" color="muted.400">
+              Non-geographically-focused
+            </Text>
+          )}
         </Box>
       </Flex>
     </Pressable>

@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Button,
   Center,
-  Image,
   Text,
   Box,
   VStack,
@@ -12,16 +11,16 @@ import {
   Icon,
   Modal,
   Heading,
-  Flex,
   Pressable,
   Spinner,
+  Slider,
 } from "native-base";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+
 import Page from "../../Shared/Page";
 import SearchBar from "../../Shared/SearchBar";
-
-import { apiCall } from "../../../api/functions";
 import CommunityCard from "./CommunityCard";
+import { apiCall } from "../../../api/functions";
 
 const filterOptions = [
   {
@@ -46,8 +45,9 @@ export default function CommunitySearchPage({ navigation }) {
   const [communities, setCommunities] = useState([]);
   const [zipCode, setZipCode] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [maxDistance, setMaxDistance] = useState(25); // in miles
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const isValidZipCode = (zipCode) => {
     // Define the regex pattern for a valid zip code
@@ -62,14 +62,11 @@ export default function CommunitySearchPage({ navigation }) {
       alert("Please enter a valid zip code.");
       return;
     }
-
-    setShowModal(false);
-  };
-
-  useEffect(() => {
-    // TODO: add loading state
-    // TODO: is it possible to add extra parameters like limit, offset, etc.? (for pagination)
-    const unsubscribe = apiCall("communities.list").then((json) => {
+    setIsLoading(true);
+    await apiCall("communities.list", {
+      zipcode: zipCode,
+      max_distance: maxDistance,
+    }).then((json) => {
       if (json.success) {
         setCommunities(json.data);
       } else {
@@ -78,8 +75,23 @@ export default function CommunitySearchPage({ navigation }) {
       setIsLoading(false);
     });
 
-    return () => unsubscribe;
-  }, []);
+    setShowModal(false);
+  };
+
+  // useEffect(() => {
+  //   // TODO: add loading state
+  //   // TODO: is it possible to add extra parameters like limit, offset, etc.? (for pagination)
+  //   const unsubscribe = apiCall("communities.list").then((json) => {
+  //     if (json.success) {
+  //       setCommunities(json.data);
+  //     } else {
+  //       console.log(json);
+  //     }
+  //     setIsLoading(false);
+  //   });
+
+  //   return () => unsubscribe;
+  // }, []);
 
   return (
     <Page>
@@ -110,6 +122,22 @@ export default function CommunitySearchPage({ navigation }) {
                 </HStack>
               </Pressable>
             </HStack>
+            <VStack>
+              <Text>Distance: {maxDistance} miles</Text>
+              <Slider
+                defaultValue={maxDistance}
+                step={5}
+                accessibilityLabel="max distance slider"
+                onChange={(value) => setMaxDistance(value)}
+                onChangeEnd={handleZipCodeSubmit}
+                isDisabled={zipCode === ""}
+              >
+                <Slider.Track>
+                  <Slider.FilledTrack />
+                </Slider.Track>
+                <Slider.Thumb />
+              </Slider>
+            </VStack>
             <SearchBar filterOptions={filterOptions} />
             {/* Container for communities */}
             {isLoading ? (
@@ -155,7 +183,13 @@ export default function CommunitySearchPage({ navigation }) {
                 onChangeText={(text) => setZipCode(text)}
               />
             </Center>
-            <Button onPress={handleZipCodeSubmit}>Submit</Button>
+            <Button
+              isLoading={isLoading}
+              isLoadingText="Searching..."
+              onPress={handleZipCodeSubmit}
+            >
+              Submit
+            </Button>
           </Modal.Body>
         </Modal.Content>
       </Modal>

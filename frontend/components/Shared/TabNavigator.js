@@ -54,7 +54,7 @@ export default function TabNavigator({ route, navigation }) {
       />
       <Tab.Screen name="ACTIONS" component={ActionsPage} />
       <Tab.Screen name="EVENTS" component={EventsPage} />
-      <Tab.Screen name="PROFILE" component={UserProfilePage} />
-  </Tab.Navigator>
+      <Tab.Screen name="PROFILE" component={DashboardPage} />
+    </Tab.Navigator>
   );
 }

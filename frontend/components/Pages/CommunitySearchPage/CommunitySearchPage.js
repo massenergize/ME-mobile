@@ -78,27 +78,15 @@ export default function CommunitySearchPage({ navigation }) {
     setShowModal(false);
   };
 
-  // useEffect(() => {
-  //   // TODO: add loading state
-  //   // TODO: is it possible to add extra parameters like limit, offset, etc.? (for pagination)
-  //   const unsubscribe = apiCall("communities.list").then((json) => {
-  //     if (json.success) {
-  //       setCommunities(json.data);
-  //     } else {
-  //       console.log(json);
-  //     }
-  //     setIsLoading(false);
-  //   });
-
-  //   return () => unsubscribe;
-  // }, []);
-
   return (
     <Page>
-      <Box height="50%" backgroundColor={"amber.100"}>
+      <Box height="50%" backgroundColor={"primary.50"}>
         <Center h="full">
           {/* TODO: Add an image here */}
-          <Heading>IMAGE</Heading>
+          <Icon as={FontAwesome} name="users" size="90" color="white" />
+          <Heading py="5" textAlign="center" color="white">
+            BECOME PART OF A COMMUNITY
+          </Heading>
         </Center>
       </Box>
       <Box

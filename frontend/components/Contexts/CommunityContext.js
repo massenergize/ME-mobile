@@ -12,6 +12,7 @@ export const CommunityProvider = ({ children }) => {
   const [impactData, setImpactData] = useState(null);
   const [actionsCompleted, setActionsCompleted] = useState(null);
   const [about, setAbout] = useState(null);
+  const [teams, setTeams] = useState(null);
 
   const fetchCommunityInfo = async (community_id, callBackFn = null) => {
     await Promise.all([
@@ -87,6 +88,15 @@ export const CommunityProvider = ({ children }) => {
           if (callBackFn) callBackFn(null, json.error);
         }
       }),
+      apiCall("teams.stats", { community_id: community_id }).then((json) => {
+        if (json.success) {
+          setTeams(json.data);
+          console.log("Teams Fetched")
+        } else {
+          console.log(json);
+          if (callBackFn) callBackFn(null, json.error);
+        }
+      }),
     ]).then(() => {
       // console.log(actions)
       if (callBackFn) callBackFn();
@@ -95,7 +105,7 @@ export const CommunityProvider = ({ children }) => {
   };
 
   return (
-    <CommunityContext.Provider value={{ communityInfo, actions, events, vendors, testimonials, impactData, actionsCompleted, about, fetchCommunityInfo }}>
+    <CommunityContext.Provider value={{ communityInfo, actions, events, vendors, testimonials, impactData, actionsCompleted, about, teams, fetchCommunityInfo }}>
       {children}
     </CommunityContext.Provider>
   );

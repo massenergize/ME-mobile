@@ -1,6 +1,12 @@
 import React from "react";
-import { Text, Pressable } from "react-native";
-import { Box, Heading, HStack, AspectRatio, Image, Stack } from "native-base";
+import {
+  Text,
+  VStack,
+  Image,
+  Flex,
+  Box,
+  Pressable,
+} from "native-base";
 
 
 export default function TeamCard({ 
@@ -8,17 +14,17 @@ export default function TeamCard({
   team 
 }) {
   return (
-    <Pressable key={i} onPress={() => navigation.navigate("teamDetails", {team_id: team.id})}>
+    <Pressable onPress={() => navigation.navigate("teamDetails", {team_id: team.team.id})}>
       <Flex
         direction="row"
         borderRadius={"2xl"}
         shadow="5"
         backgroundColor={"white"}
       >
-        {i % 2 == 0 ? (
+        { (team.team.logo) ? (
           <Image
             // source={require("../../../assets/images/team-1.jpeg")}
-            source={{uri: team.logo ? team.logo.url : null}}
+            source={{uri: team.team.logo ? team.team.logo.url : null}}
             alt="image"
             size="xl"
             height="full"
@@ -26,27 +32,31 @@ export default function TeamCard({
           />
         ) : null}
         <Box flexShrink={1} borderRightRadius="2xl" w="full">
-          <VStack space="3" p="4">
+          <VStack space={1} p="4">
             <Text fontSize="lg" fontWeight="bold">
-              {team.name}
+              {team.team.name}
             </Text>
-            <Text>{team.tagline}</Text>
+            {
+              (team.team.tagline !== "") 
+              ? <Text>{team.team.tagline}</Text>
+              : null
+            }
             <VStack>
               <Flex direction="row" justifyContent={"space-between"}>
                 <Text fontSize="sm" fontWeight="bold">
-                  --
+                  {team.members}
                 </Text>
                 <Text fontSize="sm">Members</Text>
               </Flex>
               <Flex direction="row" justifyContent={"space-between"}>
                 <Text fontSize="sm" fontWeight="bold">
-                  --
+                  {team.actions_completed}
                 </Text>
                 <Text fontSize="sm">Actions Completed</Text>
               </Flex>
               <Flex direction="row" justifyContent={"space-between"}>
                 <Text fontSize="sm" fontWeight="bold">
-                  --
+                  {(team.carbon_footprint_reduction / 133).toFixed(2)}
                 </Text>
                 <Text fontSize="sm">Number of Trees</Text>
               </Flex>

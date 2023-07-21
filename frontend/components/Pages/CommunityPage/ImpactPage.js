@@ -13,9 +13,6 @@ import Page from "../../Shared/Page";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { BigPieChart, ActionsChart } from "../../Shared/Charts.js";
 
-// import { apiCall } from "../../../api/functions";
-// import graphData from "./../../../data/graphActionsCompleted.json";
-// import listData from "./../../../data/communitiesActionsCompleted.json";
 import { CommunityContext } from "../../Contexts/CommunityContext";
 
 const colors = [
@@ -55,44 +52,6 @@ export default function ImpactPage({ route, navigation }) {
   const [ actionDisplay, setActionDisplay ] = useState('chart');
 
   const { impactData, actionsCompleted } = useContext(CommunityContext);
-
-  // console.log(impactData)
-
-  // const [graphData, setGraphData] = useState(null);
-  // const [isGraphDataLoading, setIsGraphDataLoading] = useState(true);
-  // const [listData, setListData] = useState(null);
-  // const [isListDataLoading, setIsListDataLoading] = useState(true);
-
-  // const getGraphData = () => {
-  //   apiCall("graphs.actions.completed", {community_id: community_id}).then((json) => {
-  //     if (json.success) {
-  //         setGraphData(json.data);
-  //         console.log(json.data)
-  //         // console.log("graph data")
-  //     } else {
-  //         console.log(json);
-  //     }
-  //     setIsGraphDataLoading(false);
-  //   });
-  // }
-
-  // const getActionsList = () => {
-  //   apiCall("communities.actions.completed", {community_id: community_id}).then((json) => {
-  //     if (json.success) {
-  //         setListData(json.data);
-  //         console.log(json.data)
-  //     } else {
-  //         console.log(json);
-  //     }
-  //     setIsListDataLoading(false);
-  //   });
-  // }
-
-  // useEffect(() => {
-  //   getGraphData();
-  //   getActionsList();
-  // }, []);
-  
 
   return (
     <Page>

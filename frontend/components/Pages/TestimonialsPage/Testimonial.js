@@ -7,36 +7,13 @@ import Moment from 'moment';
 import ActionCard from "./../ActionsPage/ActionCard.js";
 import ServiceProviderCard from "./../ServiceProvidersPage/ServiceProviderCard.js";
 import HTMLParser from "../../Shared/HTMLParser";
-
-// import { apiCall } from "../../../api/functions";
 import { useDetails } from "../../Contexts/CommunityContext";
 
 export default function Testimonial({ route, navigation }) {
-    const { data } = route.params;
     const { width } = useWindowDimensions();
 
     const { testimonial_id } = route.params;
-
     const [testimonial, isTestimonialLoading] = useDetails("testimonials.info", {testimonial_id: testimonial_id});
-
-    // const [testimonial, setTestimonial] = useState(null);
-    // const [isTestimonialLoading, setIsTestimonialLoading] = useState(true);
-
-    // const getTestimonial = () => {
-    //     apiCall("testimonials.info", {testimonial_id: testimonial_id}).then((json) => {
-    //     if (json.success) {
-    //         setTestimonial(json.data);
-    //         console.log(json.data)
-    //     } else {
-    //         console.log(json);
-    //     }
-    //     setIsTestimonialLoading(false);
-    //     });
-    // }
-
-    // useEffect(() => {
-    //     getTestimonial();
-    // }, []);
 
     return (
         <Page>  

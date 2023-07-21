@@ -4,9 +4,6 @@ import Page from "../../Shared/Page";
 import SearchBar from "../../Shared/SearchBar";
 import EventCard from "./EventCard";
 import { CommunityContext } from "../../Contexts/CommunityContext";
-
-import { apiCall } from "../../../api/functions";
-// import DummyResponse from "../../../data/eventsList.json";
 import { formatDateString } from "../../Shared/Utils";
 
 const filterOptions = [
@@ -46,33 +43,9 @@ const filterOptions = [
 
 export default function EventsPage({ route, navigation }) {
   const { community_id } = route.params;
-
   const { events } = useContext(CommunityContext);
 
-  // const [events, setEvents] = useState([]);
   const [eventFilterID, setEventFilterID] = useState(1); // 0 = upcoming, 1 = past, 2 = campaigns
-  // const [isEventsLoading, setIsEventsLoading] = useState(true);
-
-  // const getEventsList = () => {
-  //   apiCall("events.list", {community_id: community_id}).then((json) => {
-  //     if (json.success) {
-  //         const data = json.data;
-  //         const filteredEvents = data.filter((event) => event.community.id !== 3);
-  //         setEvents(filteredEvents);
-  //         // console.log(json.data)
-  //     } else {
-  //         console.log(json);
-  //     }
-  //     setIsEventsLoading(false);
-  //   });
-  // }
-
-  // useEffect(() => {
-  //   // TODO: make an API call here
-  //   // TODO: add loading state (maybe a spinner)
-  //   // TODO: a reallllly long delay whenever data is loading (potential solution: cache it)
-  //   getEventsList();
-  // }, []);
 
   const getEventsByFilter = (id) => {
     if (id === 0) {
@@ -110,65 +83,60 @@ export default function EventsPage({ route, navigation }) {
           filterHeader="Category"
         />
         {/* events filter */}
-        {
-          // isEventsLoading 
-          // ? <Spinner />
-          // :
-          <View>
-          <Flex flexDirection="row">
-            <Button
-              variant={eventFilterID === 0 ? "solid" : "outline"}
-              _text={{ fontSize: "xs" }}
-              borderRadius="full"
-              onPress={() => setEventFilterID(0)}
-            >
-              Upcoming Events
-            </Button>
-            <Button
-              variant={eventFilterID === 1 ? "solid" : "outline"}
-              _text={{ fontSize: "xs" }}
-              borderRadius="full"
-              onPress={() => setEventFilterID(1)}
-            >
-              Past Events
-            </Button>
-            <Button
-              variant="outline"
-              _text={{ fontSize: "xs" }}
-              borderRadius="full"
-              onPress={() => handleFilter(2)}
-              isDisabled
-            >
-              Campaigns
-            </Button>
-          </Flex>
-            {
-              getEventsByFilter(eventFilterID).length > 0 ? (
-                getEventsByFilter(eventFilterID).map((event) => (
-                  <EventCard
-                    key={event.id}
-                    title={event.name}
-                    date={formatDateString(
-                      new Date(event.start_date_and_time),
-                      new Date(event.end_date_and_time)
-                    )}
-                    location={event.location}
-                    imageURI={(event.image != null) ? event.image.url : null}
-                    canRSVP={event.rsvp_enabled}
-                    id={event.id}
-                    navigation={navigation}
-                    // onPress={() => navigation.navigate("eventDetails", {event_id: event.id})}
-                    my="3"
-                    mx={2}
-                    shadow={3}
-                  />
-                ))
-              ) : (
-                <Center py="5">There are no more events.</Center>
-              )
-            }
-          </View>
-        }
+        <View>
+        <Flex flexDirection="row">
+          <Button
+            variant={eventFilterID === 0 ? "solid" : "outline"}
+            _text={{ fontSize: "xs" }}
+            borderRadius="full"
+            onPress={() => setEventFilterID(0)}
+          >
+            Upcoming Events
+          </Button>
+          <Button
+            variant={eventFilterID === 1 ? "solid" : "outline"}
+            _text={{ fontSize: "xs" }}
+            borderRadius="full"
+            onPress={() => setEventFilterID(1)}
+          >
+            Past Events
+          </Button>
+          <Button
+            variant="outline"
+            _text={{ fontSize: "xs" }}
+            borderRadius="full"
+            onPress={() => handleFilter(2)}
+            isDisabled
+          >
+            Campaigns
+          </Button>
+        </Flex>
+          {
+            getEventsByFilter(eventFilterID).length > 0 ? (
+              getEventsByFilter(eventFilterID).map((event) => (
+                <EventCard
+                  key={event.id}
+                  title={event.name}
+                  date={formatDateString(
+                    new Date(event.start_date_and_time),
+                    new Date(event.end_date_and_time)
+                  )}
+                  location={event.location}
+                  imageURI={(event.image != null) ? event.image.url : null}
+                  canRSVP={event.rsvp_enabled}
+                  id={event.id}
+                  navigation={navigation}
+                  // onPress={() => navigation.navigate("eventDetails", {event_id: event.id})}
+                  my="3"
+                  mx={2}
+                  shadow={3}
+                />
+              ))
+            ) : (
+              <Center py="5">There are no more events.</Center>
+            )
+          }
+        </View>
       </ScrollView>
     </Page>
   );

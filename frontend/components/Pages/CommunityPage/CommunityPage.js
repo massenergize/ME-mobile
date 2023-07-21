@@ -16,10 +16,6 @@ import ActionCard from "./../ActionsPage/ActionCard";
 import { SmallChart } from "../../Shared/Charts.js";
 import EventCard from "./../EventsPage/EventCard";
 import { formatDateString } from "../../Shared/Utils";
-
-// import { apiCall } from "../../../api/functions";
-// import data from "./../../../data/communitiesInfo.json";
-// import actions from "./../../../data/actionsList.json";
 import { CommunityContext, useUpcomingEvent } from "../../Contexts/CommunityContext";
 import { RefreshControl } from "react-native-gesture-handler";
 
@@ -137,34 +133,6 @@ export default function CommunityPage({ route, navigation }) {
     // setTimeout(() => setRefreshing(false), 2000);
   }, []);
 
-  // const getCommuityInfo = () => {
-  //   apiCall("communities.info", {community_id: community_id}).then((json) => {
-  //     if (json.success) {
-  //         setCommunityInfo(json.data);
-  //         // console.log(json.data)
-  //     } else {
-  //         console.log(json);
-  //     }
-  //     setIsCommunityLoading(false);
-  //   });
-  // }
-
-  // const getActionList = () => {
-  //   apiCall("actions.list", {community_id: community_id}).then((json) => {
-  //     if (json.success) {
-  //         setActions(json.data);
-  //         // console.log(json.data)
-  //     } else {
-  //         console.log(json);
-  //     }
-  //     setIsActionsLoading(false);
-  //   });
-  // }
-
-  // useEffect(() => {
-  //   fetchCommunityInfo(community_id, () => setIsCommunityLoading(false))
-  // }, []);
-
   const getMetric = (action, metric) => {
     for (let i = 0; i < action.tags.length; i++) {
       if (action.tags[i].tag_collection_name === metric) {
@@ -179,88 +147,83 @@ export default function CommunityPage({ route, navigation }) {
       nestedScrollEnabled = {true} 
       showsVerticalScrollIndicator={false}
       refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
-      {
-        // isCommunityLoading 
-        //   ? <Spinner size="lg" color="primary.500" /> 
-        //   : 
-          <VStack alignItems="center" space={3} bg="white">
-            {/* <Text bold fontSize="2xl">Community Name</Text> */}
-            <Container maxHeight={200} width="100%" mt={3}>
-              <Image
-                  source={{uri: (communityInfo.logo) ? communityInfo.logo.url : null}}
-                  alt="Community Logo"
-                  resizeMode="contain"
-                  height="full"
-                  width="full"
-              />
-            </Container>
-            {/* <HStack>
-              <HeaderText text="Goals"/>
-              <Spacer/>
-              <ShowMore navigation={navigation} page="impact" text={"Know More"}/>
-            </HStack> */}
-            <GoalsCard navigation={navigation} goals={communityInfo.goal} community_id={community_id}/>
-            <HStack alignItems="center" pb={2} pt={3}>
-              <HeaderText text="Recommended Actions"/>
-              <Spacer/>
-              <ShowMore navigation={navigation} page="ACTIONS" text={"Show More"}/>
-            </HStack>
-            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-              <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
-              {
-                // isActionsLoading ? <Spinner size="lg" color="primary.500" /> :
-                actions.map((action, index) => {
-                  // console.log(action)
-                  if (getMetric(action, "Cost") === "$" || getMetric(action, "Cost") === "0") {
-                    return (
-                      <ActionCard navigation={navigation} action={action} key={index}></ActionCard>
-                    )
-                  }
-                  else {
-                    return null;
-                  }
-                })
-              }
-              </HStack>
-            </ScrollView>
+        <VStack alignItems="center" space={3} bg="white">
+          {/* <Text bold fontSize="2xl">Community Name</Text> */}
+          <Container maxHeight={200} width="100%" mt={3}>
+            <Image
+                source={{uri: (communityInfo.logo) ? communityInfo.logo.url : null}}
+                alt="Community Logo"
+                resizeMode="contain"
+                height="full"
+                width="full"
+            />
+          </Container>
+          {/* <HStack>
+            <HeaderText text="Goals"/>
+            <Spacer/>
+            <ShowMore navigation={navigation} page="impact" text={"Know More"}/>
+          </HStack> */}
+          <GoalsCard navigation={navigation} goals={communityInfo.goal} community_id={community_id}/>
+          <HStack alignItems="center" pb={2} pt={3}>
+            <HeaderText text="Recommended Actions"/>
+            <Spacer/>
+            <ShowMore navigation={navigation} page="ACTIONS" text={"Show More"}/>
+          </HStack>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
             {
-              // isEventLoading 
-              // ? <Spinner size="lg" color="primary.500" /> 
-              // :
-              upcomingEvent === null 
-              ? <></> 
-              :
-              <View>
-                <HStack alignItems="center" pt={3}>
-                  <HeaderText text="Upcoming Event"/>
-                  <Spacer/>
-                  <ShowMore navigation={navigation} page="EVENTS" text={"Show More"}/>
-                </HStack>
-                  {
-                    <EventCard
-                        key={upcomingEvent.id}
-                        title={upcomingEvent.name}
-                        date={formatDateString(
-                          new Date(upcomingEvent.start_date_and_time),
-                          new Date(upcomingEvent.end_date_and_time)
-                        )}
-                        location={upcomingEvent.location}
-                        imageURI={upcomingEvent.image.url}
-                        canRSVP={upcomingEvent.rsvp_enabled}
-                        isRSVPED={upcomingEvent.is_rsvped}
-                        isShared={upcomingEvent.is_shared}
-                        // onPress={() => navigation.navigate("eventDetails", {event_id: upcomingEvent.id})}
-                        id={upcomingEvent.id}
-                        navigation={navigation}
-                        my={2}
-                        mx={4}
-                        shadow={5}
-                      />
-                  }
-              </View>
+              // isActionsLoading ? <Spinner size="lg" color="primary.500" /> :
+              actions.map((action, index) => {
+                // console.log(action)
+                if (getMetric(action, "Cost") === "$" || getMetric(action, "Cost") === "0") {
+                  return (
+                    <ActionCard navigation={navigation} action={action} key={index}></ActionCard>
+                  )
+                }
+                else {
+                  return null;
+                }
+              })
             }
-          </VStack>
-      }
+            </HStack>
+          </ScrollView>
+          {
+            // isEventLoading 
+            // ? <Spinner size="lg" color="primary.500" /> 
+            // :
+            upcomingEvent === null 
+            ? <></> 
+            :
+            <View>
+              <HStack alignItems="center" pt={3}>
+                <HeaderText text="Upcoming Event"/>
+                <Spacer/>
+                <ShowMore navigation={navigation} page="EVENTS" text={"Show More"}/>
+              </HStack>
+                {
+                  <EventCard
+                      key={upcomingEvent.id}
+                      title={upcomingEvent.name}
+                      date={formatDateString(
+                        new Date(upcomingEvent.start_date_and_time),
+                        new Date(upcomingEvent.end_date_and_time)
+                      )}
+                      location={upcomingEvent.location}
+                      imageURI={upcomingEvent.image.url}
+                      canRSVP={upcomingEvent.rsvp_enabled}
+                      isRSVPED={upcomingEvent.is_rsvped}
+                      isShared={upcomingEvent.is_shared}
+                      // onPress={() => navigation.navigate("eventDetails", {event_id: upcomingEvent.id})}
+                      id={upcomingEvent.id}
+                      navigation={navigation}
+                      my={2}
+                      mx={4}
+                      shadow={5}
+                    />
+                }
+            </View>
+          }
+        </VStack>
     </ScrollView>
   );
 }

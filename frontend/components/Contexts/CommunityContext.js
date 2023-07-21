@@ -19,7 +19,7 @@ export const CommunityProvider = ({ children }) => {
       apiCall("communities.info", { community_id: community_id }).then((json) => {
         if (json.success) {
           setCommunityInfo({ ...json.data, community_id: community_id });
-          console.log("Coommunity Info Fetched")
+          console.log("Community Info Fetched")
         } else {
           console.log(json);
           if (callBackFn) callBackFn(null, json.error);

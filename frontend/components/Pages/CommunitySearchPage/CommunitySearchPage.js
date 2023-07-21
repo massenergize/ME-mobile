@@ -124,7 +124,7 @@ export default function CommunitySearchPage({ navigation }) {
             {isLoading ? (
               <Spinner />
             ) : (
-              <View height={"xs"} backgroundColor={"amber.100"}>
+              <View height={"xs"}>
                 {communities.length === 0 ? (
                   <Text textAlign="center" color="muted.400">
                     Please enter a zip code to find communities.

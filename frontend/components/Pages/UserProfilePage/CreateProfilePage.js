@@ -167,7 +167,7 @@ export default function CreateProfilePage({ route, navigation }) {
                   isLoadingText="Completing registration..."
                   onPress={handleSubmit}
                 >
-                  Finish Singing Up
+                  Finish Signing Up
                 </Button>
                 <Button
                   size="lg"

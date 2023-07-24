@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useEffect, useContext } from "@react-navigation/native";
 import {
   Text,
   Image,
@@ -14,11 +14,11 @@ import {
   Pressable,
 } from "native-base";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-
 import Page from "../../Shared/Page";
 import ActionCard from "../ActionsPage/ActionCard";
 import CommunityCard from "../CommunitySearchPage/CommunityCard";
 import ActionsFilter from "../ActionsPage/ActionsFilter";
+import { DashboardContext } from "../../Contexts/DashboardContext";
 
 const COMMUNITY = {
   id: 3,
@@ -702,7 +702,9 @@ const CarbonSaved = () => {
   );
 };
 
-const ActionsList = () => {
+const ActionsList = ({ route, navigate }) => {
+  // const { community_id } = route.params;
+  const { toDoList } = useContext(DashboardContext);
   const [actions, setActions] = useState([
     ACTION,
     ACTION,
@@ -718,6 +720,16 @@ const ActionsList = () => {
       <ActionsFilter />
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
         {actions &&
+          // toDoList.data.map((action, index) => {
+          //   if (getMetric(action, "Impact") === "High") {
+          //     return (
+          //       <ActionCard navigation={navigation} action={action} key={index} mx="2" my= "3"></ActionCard>
+          //     )
+          //   }
+          //   else {
+          //     return null;
+          //   }
+          // })
           actions.map((action, index) => {
             return (
               <ActionCard
@@ -728,7 +740,8 @@ const ActionsList = () => {
                 my="3"
               />
             );
-          })}
+          })
+        }
       </ScrollView>
     </Box>
   );
@@ -857,7 +870,7 @@ const CommunitiesList = () => {
   );
 };
 
-export default function DashboardPage({ navigation }) {
+export default function DashboardPage({ route, navigation }) {
   return (
     <Page>
       <ScrollView padding="5">
@@ -865,7 +878,7 @@ export default function DashboardPage({ navigation }) {
           <ProfileName navigation={navigation} />
           <SustainScore />
           <CarbonSaved />
-          <ActionsList />
+          <ActionsList route={route}/>
           <BadgesList />
           <TeamsList />
           <HousesList />

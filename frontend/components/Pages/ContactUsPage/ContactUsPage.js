@@ -9,7 +9,11 @@ import {
   Divider,
   Button,
   View,
+  Modal,
+  Center,
+  Icon,
 } from "native-base";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 import * as Yup from "yup";
 import { Formik } from "formik";
 
@@ -33,6 +37,7 @@ export default function ContactUsPage({ route }) {
   const { user } = useAuth();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSent, setIsSent] = useState(true);
 
   const handleSendMessage = (values, actions) => {
     setIsSubmitting(true);
@@ -47,9 +52,9 @@ export default function ContactUsPage({ route }) {
     apiCall("admins.messages.add", data).then((response) => {
       setIsSubmitting(false);
       if (response.success && response.data) {
-        alert("Message sent successfully!");
+        setIsSent(true);
       } else {
-        alert("Message sending failed!");
+        console.log("Error sending message", response);
       }
     });
 
@@ -222,6 +227,30 @@ export default function ContactUsPage({ route }) {
               )}
             </Formik>
           </VStack>
+          {/* Modal for congratulating after message is sent successfully */}
+          <Modal isOpen={isSent} onClose={() => setIsSent(false)}>
+            <Modal.Content maxWidth="400px">
+              <Modal.Body>
+                <Center mb="5">
+                  <Icon
+                    as={FontAwesome}
+                    name="paper-plane"
+                    size="90"
+                    color="primary.600"
+                  />
+                  <Text fontSize="lg" fontWeight="bold" py="5">
+                    Message Sent!
+                  </Text>
+                  <Text textAlign="center">
+                    The admin team will get in touch with you soon!
+                  </Text>
+                </Center>
+                <Button colorScheme={"gray"} onPress={() => setIsSent(false)}>
+                  Back
+                </Button>
+              </Modal.Body>
+            </Modal.Content>
+          </Modal>
         </KeyboardAvoidingView>
       </ScrollView>
     </Page>

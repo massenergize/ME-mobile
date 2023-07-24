@@ -211,7 +211,9 @@ export default function TeamDetailsPage({ route, navigation }) {
           ? <Spinner />
           : 
           <View>
-
+            {
+              console.log(team)
+            }
             <Center my="5">
               {
                 team.logo 

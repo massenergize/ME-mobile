@@ -17,7 +17,7 @@ export default function ContactUsPage({ route, navigation }) {
           <Text bold fontSize="lg" mt={5}>Community Administrator</Text>
           <Text fontSize="lg">{communityInfo.admins[0].full_name}</Text>
           {
-            communityInfo.admins[0].households[0].location.city ?
+            communityInfo.admins[0].households[0].location?.city ?
             <View>
               <Text bold fontSize="lg" mt={3}>Location</Text>
               <Text fontSize="lg">{communityInfo.admins[0].households[0].location.city}, Massachusetts, {communityInfo.admins[0].households[0].location.zipcode}</Text>

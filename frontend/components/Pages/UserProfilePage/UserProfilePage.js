@@ -20,7 +20,7 @@ export default function UserProfilePage({ navigation }) {
             <Pressable bg="white" rounded = "xl" flex="0.5" onPress={() => {console.log("expand"), navigation.navigate("profileAlternate")}}>
               <HStack padding={23} justifyContent="space-evenly">
                 <VStack>
-                  <Text style={styles.stats}> 12 </Text>
+                  <Text style={styles.stats}> 0 </Text>
                   <Text> CO2 Saved </Text>
                 </VStack>
                 <VStack>

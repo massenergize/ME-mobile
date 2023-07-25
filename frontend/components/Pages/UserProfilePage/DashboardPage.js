@@ -636,7 +636,7 @@ const ACTION = {
   ],
 };
 
-const ProfileName = ({ navigation }) => {
+const ProfileName = ({ navigation, userInfo }) => {
   return (
     <Flex
       flexDirection="row"
@@ -666,7 +666,7 @@ const SustainScore = () => {
   return (
     <Box>
       <Text fontSize="4xl" color="primary.400" textAlign="center">
-        83.2
+        0.0
       </Text>
       <Text fontSize="lg" fontWeight="light" textAlign="center">
         Sustainability Score
@@ -680,21 +680,21 @@ const CarbonSaved = () => {
     <Flex flexDirection="row" justifyContent="space-evenly" width="full">
       <Box alignItems="center">
         <Text fontSize="lg" fontWeight="medium">
-          12
+          0
         </Text>
         <Text>CO2 Saved</Text>
       </Box>
       <Divider orientation="vertical" />
       <Box alignItems="center">
         <Text fontSize="lg" fontWeight="medium">
-          987
+          0
         </Text>
         <Text>Trees</Text>
       </Box>
       <Divider orientation="vertical" />
       <Box alignItems="center">
         <Text fontSize="lg" fontWeight="medium">
-          45
+          0
         </Text>
         <Text>Points</Text>
       </Box>
@@ -702,9 +702,9 @@ const CarbonSaved = () => {
   );
 };
 
-const ActionsList = ({ route, navigate }) => {
-  // const { community_id } = route.params;
-  const { toDoList } = useContext(DashboardContext);
+const ActionsList = ({ route }) => {
+  const { community_id } = route.params;
+  // const { toDoList } = useContext(DashboardContext);
   const [actions, setActions] = useState([
     ACTION,
     ACTION,
@@ -875,10 +875,10 @@ export default function DashboardPage({ route, navigation }) {
     <Page>
       <ScrollView padding="5">
         <VStack space={10} mb="20">
-          <ProfileName navigation={navigation} />
+          <ProfileName navigation={navigation} /*userInfo={userInfo}*//>
           <SustainScore />
           <CarbonSaved />
-          <ActionsList route={route}/>
+          <ActionsList route={route} navigation={navigation}/>
           <BadgesList />
           <TeamsList />
           <HousesList />

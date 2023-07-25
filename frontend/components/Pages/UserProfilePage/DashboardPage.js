@@ -18,6 +18,7 @@ import Page from "../../Shared/Page";
 import ActionCard from "../ActionsPage/ActionCard";
 import CommunityCard from "../CommunitySearchPage/CommunityCard";
 import ActionsFilter from "../ActionsPage/ActionsFilter";
+import { CommunityContext } from "../../Contexts/CommunityContext";
 import { DashboardContext } from "../../Contexts/DashboardContext";
 
 const COMMUNITY = {
@@ -702,9 +703,8 @@ const CarbonSaved = () => {
   );
 };
 
-const ActionsList = ({ route }) => {
-  const { community_id } = route.params;
-  // const { toDoList } = useContext(DashboardContext);
+const ActionsList = ({ userInfo }) => {
+  
   const [actions, setActions] = useState([
     ACTION,
     ACTION,
@@ -871,6 +871,13 @@ const CommunitiesList = () => {
 };
 
 export default function DashboardPage({ route, navigation }) {
+  const { community_id } = route.params;
+  const { actions } = useContext(CommunityContext);
+
+  // const { communityInfo, fetchCommunityInfo } = useContext(CommunityContext);
+  // const [isLoading, setIsLoading] = useState(true);
+
+
   return (
     <Page>
       <ScrollView padding="5">
@@ -878,7 +885,7 @@ export default function DashboardPage({ route, navigation }) {
           <ProfileName navigation={navigation} /*userInfo={userInfo}*//>
           <SustainScore />
           <CarbonSaved />
-          <ActionsList route={route} navigation={navigation}/>
+          <ActionsList userInfo={actions}/>
           <BadgesList />
           <TeamsList />
           <HousesList />

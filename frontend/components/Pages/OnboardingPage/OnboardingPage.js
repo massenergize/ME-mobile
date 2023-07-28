@@ -12,6 +12,7 @@ import {
   HStack,
 } from "native-base";
 import HTMLParser from "../../Shared/HTMLParser";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const STEPS = [
   {
@@ -48,6 +49,8 @@ export default function OnboardingPage({ navigation }) {
     if (currentStep < STEPS.length - 1) {
       setCurrentStep(currentStep + 1);
     } else {
+      // Set this flag to true so that the user is not shown the onboarding screen again.
+      AsyncStorage.setItem("@IsOnboarded", "true");
       navigation.navigate("communitySearch");
     }
   };

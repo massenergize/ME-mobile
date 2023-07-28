@@ -109,7 +109,7 @@ export default function CommunitySearchPage({ navigation }) {
                     community={community}
                     key={community.id}
                     onPress={() =>
-                      navigation.navigate("drawer", {
+                      navigation.push("drawer", {
                         community_id: community.id,
                       })
                     }

@@ -14,6 +14,7 @@ export default {
     assetBundlePatterns: ["**/*"],
     ios: {
       supportsTablet: true,
+      bundleIdentifier: "com.ntdkhiem.memobile",
     },
     android: {
       googleServicesFile: process.env.GOOGLE_SERVICES_JSON,

@@ -23,8 +23,8 @@ import {
   Pressable,
   Modal,
   Icon,
-  Spinner,
-  View
+  Box,
+  Progress
 } from "native-base";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import AuthModalController from "../Pages/Auth/AuthModalController";
@@ -290,7 +290,7 @@ export default function DrawerNavigator({ route, navigation }) {
     const { community_id } = route.params;
 
     const [isCommunityLoading, setIsCommunityLoading] = useState(true);
-    const { communityInfo, fetchCommunityInfo } = useContext(CommunityContext);
+    const { communityInfo, fetchCommunityInfo, infoLoaded } = useContext(CommunityContext);
 
     useEffect(() => {
       fetchCommunityInfo(community_id, () => setIsCommunityLoading(false))
@@ -351,7 +351,9 @@ export default function DrawerNavigator({ route, navigation }) {
     else {
       return <Center alignContent="center" height="100%" justifyContent="center">
         <Text bold mb={3} fontSize="lg">Loading Community...</Text>
-        <Spinner />
+        <Box width="50%">
+          <Progress value={(infoLoaded/9)*100} />
+        </Box>
       </Center>
     }
 }

@@ -29,7 +29,8 @@ export default function ActionsPage({ route, navigation }) {
     //<ScrollView style = {styles.scroll}>
     <Page>
       <ScrollView>
-        <Text style={styles.category}>Recommended</Text>
+        {/* Temporarily All While Waiting for Recommendations */}
+        <Text style={styles.category}>All</Text>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
             {/* <ActionCard navigation={navigation} /> */}

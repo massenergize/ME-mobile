@@ -6,7 +6,8 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@react-navigation/bottom-tabs": "^6.5.8",
@@ -35,7 +36,8 @@
     "protobufjs": ">=7.2.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.9"
+    "@babel/core": "^7.22.9",
+    "patch-package": "^8.0.0"
   },
   "private": true
 }

@@ -212,7 +212,7 @@ export default function ActionDetails({ route, navigation }) {
             </VStack>
             <Container height={20}></Container>
           </ScrollView>
-          <HStack space={4} width="100%" justifyContent="center" position="absolute" bottom={8}>
+          <HStack space={4} justifyContent="center" position="absolute" bottom={8} width="100%">
             <Button
               size="md"
               variant="solid"

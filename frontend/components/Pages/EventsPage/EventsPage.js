@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Button, Center, Flex, ScrollView, Spinner, View } from "native-base";
+import { Button, Center, Flex, HStack, ScrollView, Spinner, View } from "native-base";
 import Page from "../../Shared/Page";
 import SearchBar from "../../Shared/SearchBar";
 import EventCard from "./EventCard";
@@ -48,7 +48,7 @@ export default function EventsPage({ route, navigation }) {
   const [isLoading, setIsLoading] = useState(true);
   const [newEvents, setNewEvents] = useState([]);
 
-  const [eventFilterID, setEventFilterID] = useState(1); // 0 = upcoming, 1 = past, 2 = campaigns
+  const [eventFilterID, setEventFilterID] = useState(0); // 0 = upcoming, 1 = past, 2 = campaigns
 
   useEffect(() => {
     setIsLoading(true);
@@ -93,7 +93,8 @@ export default function EventsPage({ route, navigation }) {
         />
         {/* events filter */}
         <View>
-          <Flex flexDirection="row">
+          {/* <Flex flexDirection="row"> */}
+          <HStack justifyContent="center" space={1}>
             <Button
               variant={eventFilterID === 0 ? "solid" : "outline"}
               _text={{ fontSize: "xs" }}
@@ -119,7 +120,8 @@ export default function EventsPage({ route, navigation }) {
             >
               Campaigns
             </Button>
-          </Flex>
+          </HStack>
+          {/* </Flex> */}
           {isLoading ? (
             <Center mt="5">
               <Spinner />

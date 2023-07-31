@@ -45,28 +45,37 @@ export default function EventsPage({ route, navigation }) {
   const { community_id } = route.params;
   const { events } = useContext(CommunityContext);
 
+  const [isLoading, setIsLoading] = useState(true);
+  const [newEvents, setNewEvents] = useState([]);
+
   const [eventFilterID, setEventFilterID] = useState(1); // 0 = upcoming, 1 = past, 2 = campaigns
 
-  const getEventsByFilter = (id) => {
-    if (id === 0) {
+  useEffect(() => {
+    setIsLoading(true);
+    if (eventFilterID === 0) {
       // upcoming events
-      return events.filter((event) => {
-        const eventDate = new Date(event.start_date_and_time);
-        const now = new Date();
-        return eventDate > now;
-      });
-    } else if (id === 1) {  
+      setNewEvents(
+        events.filter((event) => {
+          const eventDate = new Date(event.start_date_and_time);
+          const now = new Date();
+          return eventDate > now;
+        })
+      );
+    } else if (eventFilterID === 1) {
       // past events
-      return events.filter((event) => {
-        const eventDate = new Date(event.start_date_and_time);
-        const now = new Date();
-        return eventDate < now;
-      });
+      setNewEvents(
+        events.filter((event) => {
+          const eventDate = new Date(event.start_date_and_time);
+          const now = new Date();
+          return eventDate < now;
+        })
+      );
+    } else {
+      // TODO: campaigns
+      setNewEvents([]);
     }
-    // TODO: which field to filter by?
-    // campaigns
-    // return [];
-  };
+    setIsLoading(false);
+  }, [eventFilterID]);
 
   return (
     <Page>
@@ -84,58 +93,63 @@ export default function EventsPage({ route, navigation }) {
         />
         {/* events filter */}
         <View>
-        <Flex flexDirection="row">
-          <Button
-            variant={eventFilterID === 0 ? "solid" : "outline"}
-            _text={{ fontSize: "xs" }}
-            borderRadius="full"
-            onPress={() => setEventFilterID(0)}
-          >
-            Upcoming Events
-          </Button>
-          <Button
-            variant={eventFilterID === 1 ? "solid" : "outline"}
-            _text={{ fontSize: "xs" }}
-            borderRadius="full"
-            onPress={() => setEventFilterID(1)}
-          >
-            Past Events
-          </Button>
-          <Button
-            variant="outline"
-            _text={{ fontSize: "xs" }}
-            borderRadius="full"
-            onPress={() => handleFilter(2)}
-            isDisabled
-          >
-            Campaigns
-          </Button>
-        </Flex>
-          {
-            getEventsByFilter(eventFilterID).length > 0 ? (
-              getEventsByFilter(eventFilterID).map((event) => (
-                <EventCard
-                  key={event.id}
-                  title={event.name}
-                  date={formatDateString(
-                    new Date(event.start_date_and_time),
-                    new Date(event.end_date_and_time)
-                  )}
-                  location={event.location}
-                  imageURI={(event.image != null) ? event.image.url : null}
-                  canRSVP={event.rsvp_enabled}
-                  id={event.id}
-                  navigation={navigation}
-                  // onPress={() => navigation.navigate("eventDetails", {event_id: event.id})}
-                  my="3"
-                  mx={2}
-                  shadow={3}
-                />
-              ))
-            ) : (
-              <Center py="5">There are no more events.</Center>
-            )
-          }
+          <Flex flexDirection="row">
+            <Button
+              variant={eventFilterID === 0 ? "solid" : "outline"}
+              _text={{ fontSize: "xs" }}
+              borderRadius="full"
+              onPress={() => setEventFilterID(0)}
+            >
+              Upcoming Events
+            </Button>
+            <Button
+              variant={eventFilterID === 1 ? "solid" : "outline"}
+              _text={{ fontSize: "xs" }}
+              borderRadius="full"
+              onPress={() => setEventFilterID(1)}
+            >
+              Past Events
+            </Button>
+            <Button
+              variant="outline"
+              _text={{ fontSize: "xs" }}
+              borderRadius="full"
+              onPress={() => handleFilter(2)}
+              isDisabled
+            >
+              Campaigns
+            </Button>
+          </Flex>
+          {isLoading ? (
+            <Center mt="5">
+              <Spinner />
+            </Center>
+          ) : (
+            <View>
+              {newEvents.length > 0 ? (
+                newEvents.map((event) => (
+                  <EventCard
+                    key={event.id}
+                    title={event.name}
+                    date={formatDateString(
+                      new Date(event.start_date_and_time),
+                      new Date(event.end_date_and_time)
+                    )}
+                    location={event.location}
+                    imageURI={event.image != null ? event.image.url : null}
+                    canRSVP={event.rsvp_enabled}
+                    id={event.id}
+                    navigation={navigation}
+                    my="3"
+                    mx={2}
+                    shadow={3}
+                  />
+                ))
+              ) : (
+                <Center py="5">There are no more events.</Center>
+              )}
+            </View>
+          )}
         </View>
       </ScrollView>
     </Page>

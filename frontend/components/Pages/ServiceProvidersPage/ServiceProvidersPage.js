@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { VStack, Box, Heading, ScrollView } from "native-base";
+import React, { useState, useEffect, useContext } from "react";
+import { VStack, Box, Heading, ScrollView, Spinner } from "native-base";
 
 import Page from "../../Shared/Page";
 import SearchBar from "../../Shared/SearchBar";
 import ServiceProviderCard from "./ServiceProviderCard";
-
-import DummyResponse from "../../../data/vendorsList.json";
+import { CommunityContext } from "../../Contexts/CommunityContext";
 
 const filterOptions = [
   {
@@ -42,17 +41,10 @@ const filterOptions = [
   },
 ];
 
-export default function ServiceProvidersPage({ navigation }) {
-  const [sProviders, setSProviders] = useState([]);
+export default function ServiceProvidersPage({ route, navigation }) {
+  const { community_id } = route.params;
 
-  useEffect(() => {
-    // TODO: make an API call here
-    // TODO: add loading state (maybe a spinner)
-    if (DummyResponse.success) {
-      const data = DummyResponse.data;
-      setSProviders(data);
-    }
-  }, []);
+  const { vendors } = useContext(CommunityContext);
 
   return (
     <Page>
@@ -63,17 +55,19 @@ export default function ServiceProvidersPage({ navigation }) {
             <Heading>Suggested</Heading>
             {/* render cards horizontally */}
             <ScrollView horizontal={true} my="5" py="2">
-              {sProviders &&
-                sProviders.map((sProvider, index) => {
+              {vendors &&
+                vendors.map((sProvider, index) => {
                   return (
                     <ServiceProviderCard
+                      id={sProvider.id}
                       key={index}
                       direction="column"
                       name={sProvider.name}
-                      imageURI={sProvider.logo.url}
-                      onPress={() =>
-                        navigation.navigate("serviceProviderDetails")
-                      }
+                      imageURI={sProvider.logo ? sProvider.logo.url : null}
+                      navigation={navigation}
+                      // onPress={() =>
+                      //   navigation.navigate("serviceProviderDetails", {vendor_id: sProvider.id})
+                      // }
                       my="3"
                     />
                   );
@@ -83,17 +77,19 @@ export default function ServiceProvidersPage({ navigation }) {
           <Box>
             <Heading>All</Heading>
             {/* render cards vertically */}
-            {sProviders &&
-              sProviders.map((sProvider, index) => {
+            {vendors &&
+              vendors.map((sProvider, index) => {
                 return (
                   <ServiceProviderCard
+                    id={sProvider.id}
                     key={index}
                     direction="row"
                     name={sProvider.name}
-                    imageURI={sProvider.logo.url}
-                    onPress={() =>
-                      navigation.navigate("serviceProviderDetails")
-                    }
+                    imageURI={sProvider.logo ? sProvider.logo.url : null}
+                    // onPress={() =>
+                    //   navigation.navigate("serviceProviderDetails", {vendor_id: sProvider.id})
+                    // }
+                    navigation={navigation}
                     my="3"
                   />
                 );

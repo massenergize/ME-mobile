@@ -10,27 +10,29 @@ import {
   Link,
   Image,
   ScrollView,
+  Spinner
 } from "native-base";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Page from "../../Shared/Page";
-
-import DummyResponse from "../../../data/vendorsInfo.json";
 import HTMLParser from "../../Shared/HTMLParser";
+import { useDetails } from "../../Contexts/CommunityContext";
 
-export default function ServiceProviderDetailsPage({ navigation }) {
-  const [spDetails, setSpDetails] = useState({});
+export default function ServiceProviderDetailsPage({ route, navigation }) {
+  const { vendor_id } = route.params;
+
+  const [spDetails, isSpLoading] = useDetails("vendors.info", {vendor_id: vendor_id});
 
   useEffect(() => {
-    // TODO: make an API call here
-    // TODO: add loading state (maybe a spinner)
-    if (DummyResponse.success) {
-      const data = DummyResponse.data;
-      setSpDetails(data);
-      navigation.setOptions({ title: data?.name });
-    }
-  }, []);
+    (spDetails)
+    ? navigation.setOptions({ title: spDetails?.name })
+    : navigation.setOptions({ title: "" });
+  }, [spDetails]);
+
   return (
     <Page>
+      {isSpLoading
+      ? <Spinner />
+      :
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* image */}
         <Center py="20" px="5">
@@ -90,6 +92,7 @@ export default function ServiceProviderDetailsPage({ navigation }) {
           </Box>
         </Box>
       </ScrollView>
+    }
     </Page>
   );
 }

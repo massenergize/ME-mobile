@@ -12,9 +12,10 @@ import {
   Flex,
   Input,
   View,
+  Spinner
 } from "native-base";
-
 import Page from "../../Shared/Page";
+import { useDetails } from "../../Contexts/CommunityContext";
 
 const fill = "#DC4E34";
 const data = [
@@ -62,11 +63,14 @@ const data = [
   },
 ];
 
-export default function TeamDetailsPage() {
+export default function TeamDetailsPage({ route, navigation }) {
+  const { team_id } = route.params;
+  const [team, isTeamLoading] = useDetails("teams.info", {team_id: team_id});
+
   const [activeTab, setActiveTab] = useState("about");
   //   TODO: Cache these components to avoid re-rendering.
   const generateAboutTab = () => {
-    return <Text>Description of the team.</Text>;
+    return <Text>{team.description}</Text>;
   };
   const generateActionsTab = () => {
     return (
@@ -202,59 +206,76 @@ export default function TeamDetailsPage() {
   return (
     <Page>
       <ScrollView>
-        <Center my="5">
-          <Image
-            source={require("../../../assets/images/team-1.jpeg")}
-            alt="image"
-            size="xl"
-          />
-        </Center>
-        <VStack space="3">
-          <Heading alignSelf="center">Team Name</Heading>
-          <Center mx="5">
-            <ScrollView
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-            >
-              <HStack space="2">
-                <Button
-                  variant={activeTab === "about" ? "solid" : "outline"}
-                  onPress={() => setActiveTab("about")}
+        {
+          isTeamLoading
+          ? <Spinner />
+          : 
+          <View>
+            {
+              console.log(team)
+            }
+            <Center my="5">
+              {
+                team.logo 
+                ?
+                <Image
+                  source={{url: team.logo.url}}
+                  alt="image"
+                  height={150}
+                  width="95%"
+                  resizeMode="contain"
+                />
+                : null
+              }
+            </Center>
+            <VStack space="3">
+              <Heading alignSelf="center">{team.name}</Heading>
+              <Center mx="5">
+                <ScrollView
+                  horizontal={true}
+                  showsHorizontalScrollIndicator={false}
                 >
-                  About
-                </Button>
-                <Button
-                  variant={activeTab === "actions" ? "solid" : "outline"}
-                  onPress={() => setActiveTab("actions")}
-                >
-                  Actions
-                </Button>
-                <Button
-                  variant={activeTab === "members" ? "solid" : "outline"}
-                  onPress={() => setActiveTab("members")}
-                >
-                  Members (65)
-                </Button>
-                <Button
-                  variant={activeTab === "subTeams" ? "solid" : "outline"}
-                  onPress={() => setActiveTab("subTeams")}
-                >
-                  Sub-teams
-                </Button>
-                <Button
-                  variant={activeTab === "contact" ? "solid" : "outline"}
-                  onPress={() => setActiveTab("contact")}
-                >
-                  Contact
-                </Button>
-              </HStack>
-            </ScrollView>
-          </Center>
-          <Tab>
-            {renderTabContent()}
-            <Button my="5">JOIN</Button>
-          </Tab>
-        </VStack>
+                  <HStack space="2">
+                    <Button
+                      variant={activeTab === "about" ? "solid" : "outline"}
+                      onPress={() => setActiveTab("about")}
+                    >
+                      About
+                    </Button>
+                    <Button
+                      variant={activeTab === "actions" ? "solid" : "outline"}
+                      onPress={() => setActiveTab("actions")}
+                    >
+                      Actions
+                    </Button>
+                    <Button
+                      variant={activeTab === "members" ? "solid" : "outline"}
+                      onPress={() => setActiveTab("members")}
+                    >
+                      Members (65)
+                    </Button>
+                    <Button
+                      variant={activeTab === "subTeams" ? "solid" : "outline"}
+                      onPress={() => setActiveTab("subTeams")}
+                    >
+                      Sub-teams
+                    </Button>
+                    <Button
+                      variant={activeTab === "contact" ? "solid" : "outline"}
+                      onPress={() => setActiveTab("contact")}
+                    >
+                      Contact
+                    </Button>
+                  </HStack>
+                </ScrollView>
+              </Center>
+              <Tab>
+                {renderTabContent()}
+                <Button my="5">JOIN</Button>
+              </Tab>
+            </VStack>
+          </View>
+        }
       </ScrollView>
     </Page>
   );

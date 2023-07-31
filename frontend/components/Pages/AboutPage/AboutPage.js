@@ -1,25 +1,30 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Page from "../../Shared/Page";
-import { Text, Container, Image, VStack, ScrollView } from "native-base";
-import aboutData from "./../../../data/about_us_page_settingsInfo.json";
+import { Container, Image, VStack, ScrollView, Spinner, Text } from "native-base";
 import HTMLParser from "../../Shared/HTMLParser";
+import { CommunityContext } from "../../Contexts/CommunityContext";
 
-export default function AboutPage() {
+export default function AboutPage({ route, navigation }) {
+
+  const { community_id } = route.params;
+  const { about } = useContext(CommunityContext);
+
   return (
     <Page>
       <ScrollView showsVerticalScrollIndicator={false} px="5">
         <VStack alignItems="center" m={4}>
           <Container maxHeight={200} width="100%" alignItems="center">
             <Image
-                source={{uri: aboutData.data.community.logo.url}}
+                source={{uri: about.community.logo.url}}
                 alt="Community Logo"
                 resizeMode="contain"
                 height="full"
                 width="full"
             />
           </Container>
+          <Text bold fontSize="lg">{about.community.name}</Text>
           <HTMLParser
-                  htmlString={aboutData.data.description}
+                  htmlString={about.description}
                   baseStyle={textStyle}
                 />
         </VStack>

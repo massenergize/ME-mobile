@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Button, Center, Flex, ScrollView } from "native-base";
+import React, { useState, useEffect, useContext } from "react";
+import { Button, Center, Flex, ScrollView, Spinner, View } from "native-base";
 import Page from "../../Shared/Page";
 import SearchBar from "../../Shared/SearchBar";
 import EventCard from "./EventCard";
-
-import DummyResponse from "../../../data/eventsList.json";
+import { CommunityContext } from "../../Contexts/CommunityContext";
 import { formatDateString } from "../../Shared/Utils";
 
 const filterOptions = [
@@ -42,21 +41,11 @@ const filterOptions = [
   },
 ];
 
-export default function EventsPage({ navigation }) {
-  const [events, setEvents] = useState([]);
-  const [eventFilterID, setEventFilterID] = useState(1); // 0 = upcoming, 1 = past, 2 = campaigns
+export default function EventsPage({ route, navigation }) {
+  const { community_id } = route.params;
+  const { events } = useContext(CommunityContext);
 
-  useEffect(() => {
-    // TODO: make an API call here
-    // TODO: add loading state (maybe a spinner)
-    // TODO: a reallllly long delay whenever data is loading (potential solution: cache it)
-    if (DummyResponse.success) {
-      const data = DummyResponse.data;
-      // filter out events from Energize Wayland (id: 3)
-      const filteredEvents = data.filter((event) => event.community.id !== 3);
-      setEvents(filteredEvents);
-    }
-  }, []);
+  const [eventFilterID, setEventFilterID] = useState(1); // 0 = upcoming, 1 = past, 2 = campaigns
 
   const getEventsByFilter = (id) => {
     if (id === 0) {
@@ -66,7 +55,7 @@ export default function EventsPage({ navigation }) {
         const now = new Date();
         return eventDate > now;
       });
-    } else if (id === 1) {
+    } else if (id === 1) {  
       // past events
       return events.filter((event) => {
         const eventDate = new Date(event.start_date_and_time);
@@ -82,18 +71,19 @@ export default function EventsPage({ navigation }) {
   return (
     <Page>
       <ScrollView
-        p="5"
+        m={3}
         contentContainerStyle={{
           alignItems: "center",
         }}
       >
         <SearchBar
           pb="5"
-          w="full"
+          w="100%"
           filterOptions={filterOptions}
           filterHeader="Category"
         />
         {/* events filter */}
+        <View>
         <Flex flexDirection="row">
           <Button
             variant={eventFilterID === 0 ? "solid" : "outline"}
@@ -121,27 +111,32 @@ export default function EventsPage({ navigation }) {
             Campaigns
           </Button>
         </Flex>
-        {/* events list */}
-        {getEventsByFilter(eventFilterID).length > 0 ? (
-          getEventsByFilter(eventFilterID).map((event) => (
-            <EventCard
-              key={event.id}
-              title={event.name}
-              date={formatDateString(
-                new Date(event.start_date_and_time),
-                new Date(event.end_date_and_time)
-              )}
-              location={event.location}
-              imageURI={event.image.url}
-              canRSVP={event.rsvp_enabled}
-              onPress={() => navigation.navigate("eventDetails")}
-              my="3"
-              shadow="5"
-            />
-          ))
-        ) : (
-          <Center py="5">There are no more events.</Center>
-        )}
+          {
+            getEventsByFilter(eventFilterID).length > 0 ? (
+              getEventsByFilter(eventFilterID).map((event) => (
+                <EventCard
+                  key={event.id}
+                  title={event.name}
+                  date={formatDateString(
+                    new Date(event.start_date_and_time),
+                    new Date(event.end_date_and_time)
+                  )}
+                  location={event.location}
+                  imageURI={(event.image != null) ? event.image.url : null}
+                  canRSVP={event.rsvp_enabled}
+                  id={event.id}
+                  navigation={navigation}
+                  // onPress={() => navigation.navigate("eventDetails", {event_id: event.id})}
+                  my="3"
+                  mx={2}
+                  shadow={3}
+                />
+              ))
+            ) : (
+              <Center py="5">There are no more events.</Center>
+            )
+          }
+        </View>
       </ScrollView>
     </Page>
   );

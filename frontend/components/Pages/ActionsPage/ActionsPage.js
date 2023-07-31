@@ -1,14 +1,19 @@
 import { View, Text, StyleSheet } from "react-native";
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   ScrollView,
-  HStack
+  HStack,
+  Spinner
 } from "native-base";
 import ActionCard from "./ActionCard";
 import Page from "../../Shared/Page";
-import actions from "./../../../data/actionsList.json";
+import { CommunityContext } from "../../Contexts/CommunityContext";
 
-export default function ActionsPage({ navigation }) {
+export default function ActionsPage({ route, navigation }) {
+
+  const { community_id } = route.params;
+
+  const { actions } = useContext(CommunityContext);
 
   const getMetric = (action, metric) => {
     for (let i = 0; i < action.tags.length; i++) {
@@ -32,7 +37,7 @@ export default function ActionsPage({ navigation }) {
             <ActionCard navigation={navigation} /> */}
             {/*<Button onPress={() => navigation.navigate("welcome")}>Take Action</Button>*/}
             {
-              actions.data.map((action, index) => {
+              actions.map((action, index) => {
                 return (
                   <ActionCard navigation={navigation} action={action} key={index}></ActionCard>
                 )
@@ -40,19 +45,11 @@ export default function ActionsPage({ navigation }) {
             }
           </HStack>
         </ScrollView>
-        {/* <Text style={styles.category}>Daily</Text>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
-            <ActionCard navigation={navigation} />
-            <ActionCard navigation={navigation} />
-            <ActionCard navigation={navigation} />
-          </HStack>
-        </ScrollView> */}
         <Text style={styles.category}>High Impact</Text>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
             {
-              actions.data.map((action, index) => {
+              actions.map((action, index) => {
                 if (getMetric(action, "Impact") === "High") {
                   return (
                     <ActionCard navigation={navigation} action={action} key={index}></ActionCard>
@@ -69,7 +66,7 @@ export default function ActionsPage({ navigation }) {
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
           {
-            actions.data.map((action, index) => {
+            actions.map((action, index) => {
               if (getMetric(action, "Cost") === "$" || getMetric(action, "Cost") === "0") {
                 return (
                   <ActionCard navigation={navigation} action={action} key={index}></ActionCard>
@@ -82,7 +79,7 @@ export default function ActionsPage({ navigation }) {
           }
           </HStack>
         </ScrollView>
-      </ScrollView>
+      </ScrollView> 
     </Page>
   );
 }

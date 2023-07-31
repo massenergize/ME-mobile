@@ -2,15 +2,17 @@ import { Flex, Image, Pressable, Box, Text } from "native-base";
 import React from "react";
 
 export default function ServiceProviderCard({
+  id,
   direction, // "row" or "column"
   name,
   description,
   imageURI,
   onPress,
+  navigation,
   ...props
 }) {
   return (
-    <Pressable onPress={onPress}>
+    <Pressable onPress={() => navigation.navigate("serviceProviderDetails", {vendor_id: id})}>
       <Flex
         flexDirection={direction}
         alignItems={direction === "row" ? "center" : "baseline"}

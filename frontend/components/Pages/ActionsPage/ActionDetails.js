@@ -1,5 +1,5 @@
 import { View, StyleSheet, useWindowDimensions } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Text,
   Box,
@@ -15,7 +15,8 @@ import {
 import Page from "../../Shared/Page";
 import HTMLParser from "../../Shared/HTMLParser";
 import ServiceProviderCard from "../ServiceProvidersPage/ServiceProviderCard";
-import { useDetails } from "../../Contexts/CommunityContext";
+import { CommunityContext, useDetails } from "../../Contexts/CommunityContext";
+import { TestimonialCard } from "../TestimonialsPage/TestimonialsCard";
 
 
 export default function ActionDetails({ route, navigation }) {
@@ -25,6 +26,7 @@ export default function ActionDetails({ route, navigation }) {
   const [activeTab, setActiveTab] = useState("description")
 
   const [action, isActionLoading] = useDetails("actions.info", {action_id: action_id});
+  const { testimonials } = useContext(CommunityContext);
 
   const generateDescriptionTab = () => {
     return (
@@ -60,9 +62,34 @@ export default function ActionDetails({ route, navigation }) {
     }
   }
 
+  const [actionTestimonials, setActionTestimonials] = useState([])
+
+  const getTestimonials = () => {
+    const relatedTestimonials = [];
+    for (let i = 0; i < testimonials.length; i++) {
+      if (testimonials[i].action?.id === action_id) {
+        relatedTestimonials.push(testimonials[i]);
+      }
+    }
+    console.log(relatedTestimonials)
+    setActionTestimonials(relatedTestimonials);
+  }
+
+  useEffect(() => {
+    getTestimonials();
+  }, [])
+
   const generateTestimonialsTab = () => {
     return (
-      <Text>Testimonials Tab</Text>
+      actionTestimonials.length === 0 
+      ? <Text>No testimonials available.</Text> 
+      :
+      actionTestimonials.map((testimonial, index) => {
+        return (
+          <TestimonialCard navigation={navigation} data={testimonial} key={index} picture={testimonial.file != null}/>
+        )
+      })
+      
     )
   }
 

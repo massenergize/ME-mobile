@@ -9,13 +9,13 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "@react-navigation/bottom-tabs": "^6.5.7",
-    "@react-navigation/drawer": "^6.6.2",
-    "@react-navigation/native": "^6.1.6",
-    "@react-navigation/native-stack": "^6.9.12",
-    "expo": "^49.0.0",
+    "@react-navigation/bottom-tabs": "^6.5.8",
+    "@react-navigation/drawer": "^6.6.3",
+    "@react-navigation/native": "^6.1.7",
+    "@react-navigation/native-stack": "^6.9.13",
+    "expo": "^49.0.6",
     "expo-status-bar": "~1.6.0",
-    "firebase": "^9.23.0",
+    "firebase": "^10.1.0",
     "formik": "^2.4.2",
     "moment": "^2.29.4",
     "native-base": "^3.4.28",
@@ -30,8 +30,12 @@
     "victory-native": "^36.6.11",
     "yup": "^1.2.0"
   },
+  "overrides": {
+    "semver": ">=7.5.2",
+    "protobufjs": ">=7.2.4"
+  },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.22.9"
   },
   "private": true
 }

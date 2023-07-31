@@ -42,8 +42,6 @@ const MainNavigator = () => {
   const [initialRouteParams, setInitialRouteParams] = useState({});
 
   const _fetchOnboardingFlagsFromAsyncStorage = useCallback(async () => {
-    console.log("fetching onboarding flags from async storage");
-    console.log("initialRouteName: ", initialRouteName);
     try {
       const onboarded = await AsyncStorage.getItem("@IsOnboarded");
       if (onboarded) {

@@ -118,9 +118,9 @@ function ShowMore({ navigation, page, text }) {
   );
 }
 
-export default function CommunityPage({ route, navigation }) {
-  const { community_id } = route.params;
+export default function CommunityPage({ navigation }) {
   const { communityInfo, actions, fetchCommunityInfo } = useContext(CommunityContext);
+  const {community_id} = communityInfo
 
   // const [isCommunityLoading, setIsCommunityLoading] = useState(true);
   const upcomingEvent = useUpcomingEvent();

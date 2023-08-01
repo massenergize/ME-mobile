@@ -41,8 +41,7 @@ const filterOptions = [
   },
 ];
 
-export default function EventsPage({ route, navigation }) {
-  const { community_id } = route.params;
+export default function EventsPage({ navigation }) {
   const { events } = useContext(CommunityContext);
 
   const [isLoading, setIsLoading] = useState(true);

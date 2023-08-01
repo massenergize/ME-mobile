@@ -9,10 +9,7 @@ import ActionCard from "./ActionCard";
 import Page from "../../Shared/Page";
 import { CommunityContext } from "../../Contexts/CommunityContext";
 
-export default function ActionsPage({ route, navigation }) {
-
-  const { community_id } = route.params;
-
+export default function ActionsPage({ navigation }) {
   const { actions } = useContext(CommunityContext);
 
   const getMetric = (action, metric) => {

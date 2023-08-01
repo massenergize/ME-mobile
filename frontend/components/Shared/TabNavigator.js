@@ -1,10 +1,8 @@
-import { View, Text } from "react-native";
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import CommunityPage from "../Pages/CommunityPage/CommunityPage";
 import ActionsPage from "../Pages/ActionsPage/ActionsPage";
 import EventsPage from "../Pages/EventsPage/EventsPage";
-import UserProfilePage from "../Pages/UserProfilePage/UserProfilePage";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import DashboardPage from "../Pages/UserProfilePage/DashboardPage";
 

@@ -1,4 +1,4 @@
-import { View, StyleSheet, useWindowDimensions } from "react-native";
+import { View, useWindowDimensions } from "react-native";
 import React, { useState, useEffect, useContext } from "react";
 import {
   Text,
@@ -11,14 +11,17 @@ import {
   HStack,
   Spacer,
   Spinner,
-  Center
+  Center,
+  Modal,
+  Icon
 } from "native-base";
 import Page from "../../Shared/Page";
 import HTMLParser from "../../Shared/HTMLParser";
 import ServiceProviderCard from "../ServiceProvidersPage/ServiceProviderCard";
 import { CommunityContext, useDetails } from "../../Contexts/CommunityContext";
 import { TestimonialCard } from "../TestimonialsPage/TestimonialsCard";
-
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 export default function ActionDetails({ route, navigation }) {
   const { action_id } = route.params;
@@ -156,6 +159,8 @@ export default function ActionDetails({ route, navigation }) {
     return "-"
   }
 
+  const [ isDoneOpen, setIsDoneOpen ] = useState(false);
+
   return (
     <Page>
       {
@@ -189,10 +194,33 @@ export default function ActionDetails({ route, navigation }) {
                     <Spacer />
                     <Text fontSize="lg">{getMetric("Impact")}</Text>
                   </HStack>
-                  <HStack alignItems="center" mx={4} mt={2} mb={4}>
+                  <HStack alignItems="center" mx={4} mt={2} mb={1}>
                     <Text bold fontSize="lg">Cost</Text>
                     <Spacer />
                     <Text fontSize="lg">{getMetric("Cost")}</Text>
+                  </HStack>
+                  <HStack space={2} justifyContent="center" width="100%" mb={3}>
+                    <Button
+                      size="md"
+                      variant="solid"
+                      _text={{
+                        color: "white",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      Add to To-Do
+                    </Button>
+                    <Button
+                      size="md"
+                      variant="solid"
+                      _text={{
+                        color: "white",
+                        fontWeight: "bold",
+                      }}
+                      onPress={() => setIsDoneOpen(true)}
+                    >
+                      Done
+                    </Button>
                   </HStack>
                   <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} px={3}>
                     <TabButton label="Description" name="description" />
@@ -216,28 +244,34 @@ export default function ActionDetails({ route, navigation }) {
             </VStack>
             <Container height={20}></Container>
           </ScrollView>
-          <HStack space={4} justifyContent="center" position="absolute" bottom={8} width="100%">
-            <Button
-              size="md"
-              variant="solid"
-              _text={{
-                color: "white",
-                fontWeight: "bold",
-              }}
-            >
-              Add to To-Do
-            </Button>
-            <Button
-              size="md"
-              variant="solid"
-              _text={{
-                color: "white",
-                fontWeight: "bold",
-              }}
-            >
-              Done
-            </Button>
-          </HStack>
+
+          <Modal isOpen={isDoneOpen} onClose={() => {}}>
+            <Modal.Content maxWidth="400px">
+              <Modal.Body>
+                <Center mb="5">
+                  <Ionicons name={"ribbon-outline"} size={90} color="#64B058" />
+                  <Text fontSize="xl" fontWeight="bold" py={2}>
+                    Congratulations!
+                  </Text>
+                  <Text textAlign="center" fontSize="lg">
+                    You just completed <Text bold color="primary.600">{action.title}</Text>!
+                  </Text>
+                </Center>
+                <HStack width="100%" justifyContent={"center"}>
+                  <Button 
+                    color={"primary.600"} 
+                    onPress={() => {setIsDoneOpen(false), navigation.navigate("addTestimonial")}} 
+                    mr={3}
+                  >
+                    Leave a Testimonial
+                  </Button>
+                  <Button variant={"outline"} px={5} onPress={() => setIsDoneOpen(false)}>
+                    Exit
+                  </Button>
+                </HStack>
+              </Modal.Body>
+            </Modal.Content>
+          </Modal>
         </View>
       }
     </Page>

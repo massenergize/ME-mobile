@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useCallback } from "react";
+import React, { useState, useContext, useCallback } from "react";
 import { ScrollView } from "react-native";
 import {
   VStack,
@@ -7,7 +7,6 @@ import {
   Text,
   Spacer,
   Container,
-  Spinner,
   Pressable,
   Image,
   View
@@ -18,18 +17,6 @@ import EventCard from "./../EventsPage/EventCard";
 import { formatDateString, getActionMetric } from "../../Shared/Utils";
 import { CommunityContext, useUpcomingEvent } from "../../Contexts/CommunityContext";
 import { RefreshControl } from "react-native-gesture-handler";
-
-const event = {
-  id: 1,
-  title: "Nature of Acton and Boxborough 2023 - A BioBlitz",
-  date: "June 15th, 4:00 AM - 11:00 PM",
-  location: "Hybrid",
-  image:
-    "https://massenergize-prod-files.s3.amazonaws.com/media/Acton_Boxborough__BioBlitz_2023_A-230529-160415.jpg",
-  can_rsvp: true,
-  is_rsvped: false,
-  is_shared: true,
-};
 
 const colors = ["#DC4E34", "#64B058", "#000000"];
 

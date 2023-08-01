@@ -1,14 +1,12 @@
-import { View, ScrollView, Text } from "react-native";
-import React, { useContext, useEffect, useState} from "react";
-import { Box, Container, Fab, Button, Pressable, Spinner } from "native-base";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import React, { useContext } from "react";
+import { Container } from "native-base";
+import { View, ScrollView } from "react-native";
+
 import Page from "../../Shared/Page";
 import { TestimonialCard } from "./TestimonialsCard.js";
 import { CommunityContext } from "../../Contexts/CommunityContext";
 
-export default function TestimonialsPage({ route, navigation }) {
-  const { community_id } = route.params;
-
+export default function TestimonialsPage({ navigation }) {
   const { testimonials } = useContext(CommunityContext);
 
   return (

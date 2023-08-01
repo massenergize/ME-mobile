@@ -1,5 +1,5 @@
 import { ScrollView } from "react-native";
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import {
   VStack,
   HStack,
@@ -7,7 +7,6 @@ import {
   Spacer,
   Center,
   View,
-  Spinner
 } from "native-base";
 import Page from "../../Shared/Page";
 import Ionicons from "react-native-vector-icons/Ionicons";

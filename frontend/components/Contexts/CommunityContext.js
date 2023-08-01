@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+
 import { apiCall } from "../../api/functions";
 
 export const CommunityContext = createContext();
@@ -108,7 +109,6 @@ export const CommunityProvider = ({ children }) => {
         }
       }),
     ]).then(() => {
-      // console.log(actions)
       setInfoLoaded(0);
       if (callBackFn) callBackFn();
     });
@@ -116,17 +116,17 @@ export const CommunityProvider = ({ children }) => {
   };
 
   return (
-    <CommunityContext.Provider 
-      value={{ 
-        communityInfo, 
-        actions, 
-        events, 
-        vendors, 
-        testimonials, 
-        impactData, 
-        actionsCompleted, 
-        about, 
-        teams, 
+    <CommunityContext.Provider
+      value={{
+        communityInfo,
+        actions,
+        events,
+        vendors,
+        testimonials,
+        impactData,
+        actionsCompleted,
+        about,
+        teams,
         infoLoaded,
         fetchCommunityInfo }}>
       {children}
@@ -164,7 +164,6 @@ export const useDetails = (route, args) => {
     apiCall(route, args).then((json) => {
       if (json.success) {
           setData(json.data);
-          // console.log(json.data)
       } else {
           console.log(json);
       }

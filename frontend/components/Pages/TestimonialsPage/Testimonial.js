@@ -1,9 +1,9 @@
-import { ScrollView, View, useWindowDimensions } from "react-native";
-import React, { useState, useEffect } from "react";
-import { VStack, Image, Text, Spinner } from "native-base";
-import Page from "../../Shared/Page";
+import React from "react";
 import Moment from 'moment';
+import { VStack, Image, Text, Spinner } from "native-base";
+import { ScrollView, View, useWindowDimensions } from "react-native";
 
+import Page from "../../Shared/Page";
 import ActionCard from "./../ActionsPage/ActionCard.js";
 import ServiceProviderCard from "./../ServiceProvidersPage/ServiceProviderCard.js";
 import HTMLParser from "../../Shared/HTMLParser";

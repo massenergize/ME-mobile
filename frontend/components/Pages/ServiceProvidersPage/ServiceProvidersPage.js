@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import { VStack, Box, Heading, ScrollView, Spinner } from "native-base";
+import React, { useContext } from "react";
+import { VStack, Box, Heading, ScrollView } from "native-base";
 
 import Page from "../../Shared/Page";
 import SearchBar from "../../Shared/SearchBar";
@@ -41,9 +41,7 @@ const filterOptions = [
   },
 ];
 
-export default function ServiceProvidersPage({ route, navigation }) {
-  const { community_id } = route.params;
-
+export default function ServiceProvidersPage({ navigation }) {
   const { vendors } = useContext(CommunityContext);
 
   return (

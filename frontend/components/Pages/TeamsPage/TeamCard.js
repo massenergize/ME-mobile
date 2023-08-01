@@ -1,30 +1,22 @@
 import React from "react";
-import {
-  Text,
-  VStack,
-  Image,
-  Flex,
-  Box,
-  Pressable,
-} from "native-base";
+import { Text, VStack, Image, Flex, Box, Pressable } from "native-base";
 
-
-export default function TeamCard({ 
-  navigation, 
-  team 
-}) {
+export default function TeamCard({ navigation, team }) {
   return (
-    <Pressable onPress={() => navigation.navigate("teamDetails", {team_id: team.team.id})}>
+    <Pressable
+      onPress={() =>
+        navigation.navigate("teamDetails", { team_id: team.team.id })
+      }
+    >
       <Flex
         direction="row"
         borderRadius={"2xl"}
         shadow="5"
         backgroundColor={"white"}
       >
-        { (team.team.logo) ? (
+        {team.team.logo ? (
           <Image
-            // source={require("../../../assets/images/team-1.jpeg")}
-            source={{uri: team.team.logo ? team.team.logo.url : null}}
+            source={{ uri: team.team.logo ? team.team.logo.url : null }}
             alt="image"
             size="xl"
             height="full"
@@ -36,11 +28,7 @@ export default function TeamCard({
             <Text fontSize="lg" fontWeight="bold">
               {team.team.name}
             </Text>
-            {
-              (team.team.tagline !== "") 
-              ? <Text>{team.team.tagline}</Text>
-              : null
-            }
+            {team.team.tagline !== "" ? <Text>{team.team.tagline}</Text> : null}
             <VStack>
               <Flex direction="row" justifyContent={"space-between"}>
                 <Text fontSize="sm" fontWeight="bold">
@@ -71,5 +59,5 @@ export default function TeamCard({
         </Box>
       </Flex>
     </Pressable>
-  )
+  );
 }

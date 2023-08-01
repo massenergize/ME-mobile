@@ -12,7 +12,7 @@ import {
 } from "native-base";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
-export default function EventCard({
+export default EventCard = React.memo(({
   title,
   date,
   location,
@@ -24,7 +24,7 @@ export default function EventCard({
   id,
   navigation,
   ...props
-}) {
+}) => {
   return (
     <Box rounded="lg" backgroundColor="white" {...props}>
       <Pressable onPress={() => 
@@ -109,4 +109,4 @@ export default function EventCard({
       </Pressable>
     </Box>
   );
-}
+})

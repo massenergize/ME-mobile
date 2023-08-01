@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Button, Center, Flex, ScrollView, Spinner, View } from "native-base";
+import { Button, Center, FlatList, Flex, Spinner, View } from "native-base";
 import Page from "../../Shared/Page";
 import SearchBar from "../../Shared/SearchBar";
 import EventCard from "./EventCard";
@@ -77,80 +77,72 @@ export default function EventsPage({ navigation }) {
   }, [eventFilterID]);
 
   return (
-    <Page>
-      <ScrollView
-        m={3}
-        contentContainerStyle={{
-          alignItems: "center",
-        }}
-      >
-        <SearchBar
-          pb="5"
-          w="100%"
-          filterOptions={filterOptions}
-          filterHeader="Category"
-        />
-        {/* events filter */}
-        <View>
-          <Flex flexDirection="row">
-            <Button
-              variant={eventFilterID === 0 ? "solid" : "outline"}
-              _text={{ fontSize: "xs" }}
-              borderRadius="full"
-              onPress={() => setEventFilterID(0)}
-            >
-              Upcoming Events
-            </Button>
-            <Button
-              variant={eventFilterID === 1 ? "solid" : "outline"}
-              _text={{ fontSize: "xs" }}
-              borderRadius="full"
-              onPress={() => setEventFilterID(1)}
-            >
-              Past Events
-            </Button>
-            <Button
-              variant="outline"
-              _text={{ fontSize: "xs" }}
-              borderRadius="full"
-              onPress={() => handleFilter(2)}
-              isDisabled
-            >
-              Campaigns
-            </Button>
-          </Flex>
-          {isLoading ? (
-            <Center mt="5">
-              <Spinner />
-            </Center>
-          ) : (
+    <Page p={3}>
+      {isLoading ? (
+        <Center m="5">
+          <Spinner />
+        </Center>
+      ) : (
+        <FlatList
+          ListHeaderComponent={
             <View>
-              {newEvents.length > 0 ? (
-                newEvents.map((event) => (
-                  <EventCard
-                    key={event.id}
-                    title={event.name}
-                    date={formatDateString(
-                      new Date(event.start_date_and_time),
-                      new Date(event.end_date_and_time)
-                    )}
-                    location={event.location}
-                    imageURI={event.image != null ? event.image.url : null}
-                    canRSVP={event.rsvp_enabled}
-                    id={event.id}
-                    navigation={navigation}
-                    my="3"
-                    mx={2}
-                    shadow={3}
-                  />
-                ))
-              ) : (
-                <Center py="5">There are no more events.</Center>
-              )}
+              <SearchBar
+                pb="5"
+                w="100%"
+                filterOptions={filterOptions}
+                filterHeader="Category"
+              />
+              {/* events filter */}
+              <Flex flexDirection="row">
+                <Button
+                  variant={eventFilterID === 0 ? "solid" : "outline"}
+                  _text={{ fontSize: "xs" }}
+                  borderRadius="full"
+                  onPress={() => setEventFilterID(0)}
+                >
+                  Upcoming Events
+                </Button>
+                <Button
+                  variant={eventFilterID === 1 ? "solid" : "outline"}
+                  _text={{ fontSize: "xs" }}
+                  borderRadius="full"
+                  onPress={() => setEventFilterID(1)}
+                >
+                  Past Events
+                </Button>
+                <Button
+                  variant="outline"
+                  _text={{ fontSize: "xs" }}
+                  borderRadius="full"
+                  onPress={() => handleFilter(2)}
+                  isDisabled
+                >
+                  Campaigns
+                </Button>
+              </Flex>
             </View>
+          }
+          ListEmptyComponent={<Center>There are no events.</Center>}
+          data={newEvents}
+          renderItem={({ item }) => (
+            <EventCard
+              title={item.name}
+              date={formatDateString(
+                new Date(item.start_date_and_time),
+                new Date(item.end_date_and_time)
+              )}
+              location={item.location}
+              imageURI={item.image != null ? item.image.url : null}
+              canRSVP={item.rsvp_enabled}
+              id={item.id}
+              navigation={navigation}
+              my="3"
+              mx={2}
+              shadow={3}
+            />
           )}
-        </View>
-      </ScrollView>
+        />
+      )}
     </Page>
   );
 }

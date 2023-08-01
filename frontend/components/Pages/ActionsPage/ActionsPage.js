@@ -1,8 +1,9 @@
-import { View, Text, StyleSheet } from "react-native";
-import React, { useState, useEffect, useContext } from "react";
-import { ScrollView, HStack, Spinner } from "native-base";
-import ActionCard from "./ActionCard";
+import React, { useContext } from "react";
+import { Text, StyleSheet } from "react-native";
+import { ScrollView, HStack } from "native-base";
+
 import Page from "../../Shared/Page";
+import ActionCard from "./ActionCard";
 import { CommunityContext } from "../../Contexts/CommunityContext";
 import { getActionMetric } from "../../Shared/Utils";
 
@@ -10,17 +11,11 @@ export default function ActionsPage({ navigation }) {
   const { actions } = useContext(CommunityContext);
 
   return (
-    //the styling should apply to something else
-    //<ScrollView style = {styles.scroll}>
     <Page>
       <ScrollView>
         <Text style={styles.category}>Recommended</Text>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
-            {/* <ActionCard navigation={navigation} /> */}
-            {/* <ActionCard navigation={navigation} />
-            <ActionCard navigation={navigation} /> */}
-            {/*<Button onPress={() => navigation.navigate("welcome")}>Take Action</Button>*/}
             {actions.map((action, index) => {
               return (
                 <ActionCard

@@ -1,45 +1,45 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Button, Center, Flex, ScrollView, Spinner, View } from "native-base";
 import Page from "../../Shared/Page";
-import SearchBar from "../../Shared/SearchBar";
+// import SearchBar from "../../Shared/SearchBar";
 import EventCard from "./EventCard";
 import { CommunityContext } from "../../Contexts/CommunityContext";
 import { formatDateString } from "../../Shared/Utils";
 
-const filterOptions = [
-  {
-    value: 0,
-    label: "All",
-  },
-  {
-    value: 5,
-    label: "Home Energy",
-  },
-  {
-    value: 33,
-    label: "Solar",
-  },
-  {
-    value: 7,
-    label: "Transportation",
-  },
-  {
-    value: 8,
-    label: "Waste & Recycling",
-  },
-  {
-    value: 3,
-    label: "Food",
-  },
-  {
-    value: 1,
-    label: "Activism & Education",
-  },
-  {
-    value: 9,
-    label: "Land, Soil & Water",
-  },
-];
+// const filterOptions = [
+//   {
+//     value: 0,
+//     label: "All",
+//   },
+//   {
+//     value: 5,
+//     label: "Home Energy",
+//   },
+//   {
+//     value: 33,
+//     label: "Solar",
+//   },
+//   {
+//     value: 7,
+//     label: "Transportation",
+//   },
+//   {
+//     value: 8,
+//     label: "Waste & Recycling",
+//   },
+//   {
+//     value: 3,
+//     label: "Food",
+//   },
+//   {
+//     value: 1,
+//     label: "Activism & Education",
+//   },
+//   {
+//     value: 9,
+//     label: "Land, Soil & Water",
+//   },
+// ];
 
 export default function EventsPage({ route, navigation }) {
   const { community_id } = route.params;
@@ -85,12 +85,12 @@ export default function EventsPage({ route, navigation }) {
           alignItems: "center",
         }}
       >
-        <SearchBar
+        {/* <SearchBar
           pb="5"
           w="100%"
           filterOptions={filterOptions}
           filterHeader="Category"
-        />
+        /> */}
         {/* events filter */}
         <View>
           <Flex flexDirection="row">

@@ -2,7 +2,7 @@ import { Text, Pressable } from "react-native";
 import React from "react";
 import { Box, Heading, HStack, AspectRatio, Image, Stack } from "native-base";
 
-function ActionCard({ navigation, action, ...props }) {
+export default ActionCard = React.memo(({ navigation, action, ...props }) => {
   const getMetric = (metric) => {
     for (let i = 0; i < action.tags.length; i++) {
       if (action.tags[i].tag_collection_name === metric) {
@@ -83,6 +83,5 @@ function ActionCard({ navigation, action, ...props }) {
     </Pressable>
     // </Box>
   );
-}
+})
 
-export default ActionCard;

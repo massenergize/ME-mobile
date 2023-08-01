@@ -15,7 +15,7 @@ import {
 import ActionCard from "./../ActionsPage/ActionCard";
 import { SmallChart } from "../../Shared/Charts.js";
 import EventCard from "./../EventsPage/EventCard";
-import { formatDateString } from "../../Shared/Utils";
+import { formatDateString, getActionMetric } from "../../Shared/Utils";
 import { CommunityContext, useUpcomingEvent } from "../../Contexts/CommunityContext";
 import { RefreshControl } from "react-native-gesture-handler";
 
@@ -133,15 +133,6 @@ export default function CommunityPage({ navigation }) {
     // setTimeout(() => setRefreshing(false), 2000);
   }, []);
 
-  const getMetric = (action, metric) => {
-    for (let i = 0; i < action.tags.length; i++) {
-      if (action.tags[i].tag_collection_name === metric) {
-        return action.tags[i].name;
-      }
-    }
-    return "-";
-  };
-
   return (
     <ScrollView 
       nestedScrollEnabled = {true} 
@@ -173,16 +164,20 @@ export default function CommunityPage({ navigation }) {
             <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
             {
               // isActionsLoading ? <Spinner size="lg" color="primary.500" /> :
-              actions.map((action, index) => {
-                // console.log(action)
-                if (getMetric(action, "Cost") === "$" || getMetric(action, "Cost") === "0") {
-                  return (
-                    <ActionCard navigation={navigation} action={action} key={index}></ActionCard>
-                  )
-                }
-                else {
-                  return null;
-                }
+              actions
+              .filter((action) => getActionMetric(action, "Cost") === "$" || getActionMetric(action, "Cost") === "0")
+              .map((action, index) => {
+              return (
+                <ActionCard
+                  key={index}
+                  navigation={navigation}
+                  id={action.id}
+                  title={action.title}
+                  imgUrl={action.image?.url}
+                  impactMetric={getActionMetric(action, "Impact")}
+                  costMetric={getActionMetric(action, "Cost")}
+                />
+              );
               })
             }
             </HStack>

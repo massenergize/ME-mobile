@@ -7,7 +7,6 @@ import {
   Text,
   Spacer,
   Container,
-  Spinner,
   Pressable,
   Image,
   View
@@ -188,9 +187,6 @@ export default function CommunityPage({ route, navigation }) {
             </HStack>
           </ScrollView>
           {
-            // isEventLoading 
-            // ? <Spinner size="lg" color="primary.500" /> 
-            // :
             upcomingEvent === null 
             ? <></> 
             :

@@ -6,8 +6,7 @@ import {
   Text,
   Spacer,
   Center,
-  View,
-  Spinner
+  View
 } from "native-base";
 import Page from "../../Shared/Page";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -81,12 +80,6 @@ export default function ImpactPage({ route, navigation }) {
                 onPress={() => setActionDisplay('list')}/>
             </Center>
           </HStack>
-          {/* { */}
-            {/* // (isGraphDataLoading || isListDataLoading) 
-            // ? <Spinner />
-            // : 
-            (actionDisplay == "chart") 
-            //   ?  */}
             {
               (actionDisplay == "chart")
               ?
@@ -94,7 +87,6 @@ export default function ImpactPage({ route, navigation }) {
               :
               <ActionsList listData={actionsCompleted} />
             }
-          {/* //  */}
         </VStack>
       </ScrollView>
     </Page>

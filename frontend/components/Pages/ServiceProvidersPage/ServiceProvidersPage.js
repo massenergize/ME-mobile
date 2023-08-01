@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { VStack, Box, Heading, ScrollView, Spinner } from "native-base";
+import { VStack, Box, Heading, ScrollView } from "native-base";
 
 import Page from "../../Shared/Page";
 import SearchBar from "../../Shared/SearchBar";

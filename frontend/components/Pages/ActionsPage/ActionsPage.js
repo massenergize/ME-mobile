@@ -2,8 +2,7 @@ import { View, Text, StyleSheet } from "react-native";
 import React, { useState, useEffect, useContext } from "react";
 import {
   ScrollView,
-  HStack,
-  Spinner
+  HStack
 } from "native-base";
 import ActionCard from "./ActionCard";
 import Page from "../../Shared/Page";

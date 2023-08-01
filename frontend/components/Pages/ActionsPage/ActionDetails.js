@@ -10,7 +10,8 @@ import {
   Container,
   HStack,
   Spacer,
-  Spinner
+  Spinner,
+  Center
 } from "native-base";
 import Page from "../../Shared/Page";
 import HTMLParser from "../../Shared/HTMLParser";
@@ -159,7 +160,10 @@ export default function ActionDetails({ route, navigation }) {
     <Page>
       {
         isActionLoading 
-        ? <Spinner />
+        ? 
+        <Center width="100%" height="100%">
+          <Spinner size="lg"/>
+        </Center>
         :
         <View>
 

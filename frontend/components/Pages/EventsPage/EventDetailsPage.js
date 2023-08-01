@@ -13,7 +13,8 @@ import {
   Image,
   Actionsheet,
   useDisclose,
-  Spinner
+  Spinner,
+  Center
 } from "native-base";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Page from "../../Shared/Page";
@@ -41,7 +42,10 @@ export default function EventDetailsPage({ route, navigation }) {
   return (
     <Page py="5">
       {isEventLoading 
-        ? <Spinner />
+        ? 
+        <Center width="100%" height="100%">
+          <Spinner size="lg"/>
+        </Center>
         : 
         <ScrollView showsVerticalScrollIndicator={false} mx="5">
           <VStack space="2">

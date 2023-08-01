@@ -142,13 +142,13 @@ export default function EventsPage({ route, navigation }) {
                     canRSVP={event.rsvp_enabled}
                     id={event.id}
                     navigation={navigation}
-                    my="3"
+                    my={3}
                     mx={2}
                     shadow={3}
                   />
                 ))
               ) : (
-                <Center py="5">There are no more events.</Center>
+                <Center py="5">There are no upcoming events.</Center>
               )}
             </View>
           )}

@@ -37,7 +37,7 @@ export default function ContactUsPage({ route }) {
   const { user } = useAuth();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSent, setIsSent] = useState(true);
+  const [isSent, setIsSent] = useState(false);
 
   const handleSendMessage = (values, actions) => {
     setIsSubmitting(true);

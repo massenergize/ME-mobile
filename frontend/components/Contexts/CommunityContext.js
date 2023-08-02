@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import _ from 'lodash'
 
 import { apiCall } from "../../api/functions";
 
@@ -20,9 +21,12 @@ export const CommunityProvider = ({ children }) => {
     await Promise.all([
       apiCall("communities.info", { community_id: community_id }).then((json) => {
         if (json.success) {
-          setCommunityInfo({ ...json.data, community_id: community_id });
-          setInfoLoaded(infoLoaded => infoLoaded + 1);
-          console.log("Community Info Fetched")
+          const newCommunityInfo = { ...json.data, community_id: community_id };
+          if (!communityInfo || !_.isEqual(communityInfo, newCommunityInfo)) {
+            setCommunityInfo({ ...json.data, community_id: community_id });
+            setInfoLoaded(infoLoaded => infoLoaded + 1);
+            console.log("Community Info Fetched")
+          }
         } else {
           console.log(json);
           if (callBackFn) callBackFn(null, json.error);
@@ -30,9 +34,12 @@ export const CommunityProvider = ({ children }) => {
       }),
       apiCall("actions.list", { community_id: community_id }).then((json) => {
         if (json.success) {
-          setActions(json.data);
-          setInfoLoaded(infoLoaded => infoLoaded + 1);
-          console.log("Actions Fetched")
+          const newActions = json.data;
+          if (!actions || !_.isEqual(actions, newActions)) {
+            setActions(json.data);
+            setInfoLoaded(infoLoaded => infoLoaded + 1);
+            console.log("Actions Fetched")
+          }
         } else {
           console.log(json);
           if (callBackFn) callBackFn(null, json.error);
@@ -40,9 +47,12 @@ export const CommunityProvider = ({ children }) => {
       }),
       apiCall("events.list", { community_id: community_id }).then((json) => {
         if (json.success) {
-          setEvents(json.data);
-          setInfoLoaded(infoLoaded => infoLoaded + 1);
-          console.log("Events Fetched")
+          const newEvents = json.data;
+          if (!events || !_.isEqual(events, newEvents)) {
+            setEvents(json.data);
+            setInfoLoaded(infoLoaded => infoLoaded + 1);
+            console.log("Events Fetched")
+          }
         } else {
           console.log(json);
           if (callBackFn) callBackFn(null, json.error);
@@ -50,9 +60,12 @@ export const CommunityProvider = ({ children }) => {
       }),
       apiCall("vendors.list", { community_id: community_id }).then((json) => {
         if (json.success) {
-          setVendors(json.data);
-          setInfoLoaded(infoLoaded => infoLoaded + 1);
-          console.log("Vendors Fetched")
+          const newVendors = json.data;
+          if (!vendors || !_.isEqual(vendors, newVendors)) {
+            setVendors(json.data);
+            setInfoLoaded(infoLoaded => infoLoaded + 1);
+            console.log("Vendors Fetched")
+          }
         } else {
           console.log(json);
           if (callBackFn) callBackFn(null, json.error);
@@ -60,9 +73,12 @@ export const CommunityProvider = ({ children }) => {
       }),
       apiCall("testimonials.list", { community_id: community_id }).then((json) => {
         if (json.success) {
-          setTestimonials(json.data);
-          setInfoLoaded(infoLoaded => infoLoaded + 1);
-          console.log("Testimonials Fetched")
+          const newTestimonials = json.data;
+          if (!testimonials || !_.isEqual(testimonials, newTestimonials)) {
+            setTestimonials(json.data);
+            setInfoLoaded(infoLoaded => infoLoaded + 1);
+            console.log("Testimonials Fetched")
+          }
         } else {
           console.log(json);
           if (callBackFn) callBackFn(null, json.error);
@@ -70,9 +86,12 @@ export const CommunityProvider = ({ children }) => {
       }),
       apiCall("graphs.actions.completed", { community_id: community_id }).then((json) => {
         if (json.success) {
-          setImpactData(json.data);
-          setInfoLoaded(infoLoaded => infoLoaded + 1);
-          console.log("Graph Info Fetched")
+          const newImpactData = json.data;
+          if (!impactData || !_.isEqual(impactData, newImpactData)) {
+            setImpactData(json.data);
+            setInfoLoaded(infoLoaded => infoLoaded + 1);
+            console.log("Graph Info Fetched")
+          }
         } else {
           console.log(json);
           if (callBackFn) callBackFn(null, json.error);
@@ -80,9 +99,12 @@ export const CommunityProvider = ({ children }) => {
       }),
       apiCall("communities.actions.completed", { community_id: community_id }).then((json) => {
         if (json.success) {
-          setActionsCompleted(json.data);
-          setInfoLoaded(infoLoaded => infoLoaded + 1);
-          console.log("Actions List Fetched")
+          const newActionsCompleted = json.data;
+          if (!actionsCompleted || !_.isEqual(actionsCompleted, newActionsCompleted)) {
+            setActionsCompleted(json.data);
+            setInfoLoaded(infoLoaded => infoLoaded + 1);
+            console.log("Actions List Fetched")
+          }
         } else {
           console.log(json);
           if (callBackFn) callBackFn(null, json.error);
@@ -90,9 +112,12 @@ export const CommunityProvider = ({ children }) => {
       }),
       apiCall("about_us_page_settings.info", { community_id: community_id }).then((json) => {
         if (json.success) {
-          setAbout(json.data);
-          setInfoLoaded(infoLoaded => infoLoaded + 1);
-          console.log("About Fetched")
+          const newAbout = json.data;
+          if (!about || !_.isEqual(about, newAbout)) {
+            setAbout(json.data);
+            setInfoLoaded(infoLoaded => infoLoaded + 1);
+            console.log("About Fetched")
+          }
         } else {
           console.log(json);
           if (callBackFn) callBackFn(null, json.error);
@@ -100,9 +125,12 @@ export const CommunityProvider = ({ children }) => {
       }),
       apiCall("teams.stats", { community_id: community_id }).then((json) => {
         if (json.success) {
-          setTeams(json.data);
-          setInfoLoaded(infoLoaded => infoLoaded + 1);
-          console.log("Teams Fetched")
+          const newTeams = json.data;
+          if (!teams || !_.isEqual(teams, newTeams)) {
+            setTeams(json.data);
+            setInfoLoaded(infoLoaded => infoLoaded + 1);
+            console.log("Teams Fetched")
+          }
         } else {
           console.log(json);
           if (callBackFn) callBackFn(null, json.error);

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import {
   Button,
   ScrollView,
@@ -16,6 +15,7 @@ import {
   Spinner,
 } from "native-base";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+
 import Page from "../../Shared/Page";
 import HTMLParser from "../../Shared/HTMLParser";
 import { formatDateString } from "../../Shared/Utils";
@@ -48,15 +48,17 @@ export default function EventDetailsPage({ route }) {
         <ScrollView showsVerticalScrollIndicator={false} mx="5">
           <VStack space="2">
             {/* event image */}
-            <AspectRatio ratio={16 / 9}>
-              <Image
-                source={{
-                  uri: event.image != null ? event.image.url : null,
-                }}
-                alt="event's image"
-                resizeMode="contain"
-              />
-            </AspectRatio>
+            {event.image?.url && (
+              <AspectRatio ratio={16 / 9}>
+                <Image
+                  source={{
+                    uri: event.image?.url
+                  }}
+                  alt="event's image"
+                  resizeMode="contain"
+                />
+              </AspectRatio>
+            )}
             {/* event details */}
             <VStack>
               <Text fontSize="lg" fontWeight="bold" color="primary.400">

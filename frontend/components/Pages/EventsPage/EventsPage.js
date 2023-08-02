@@ -132,7 +132,7 @@ export default function EventsPage({ navigation }) {
                 new Date(item.end_date_and_time)
               )}
               location={item.location}
-              imageURI={item.image != null ? item.image.url : null}
+              imageUrl={item.image?.url}
               canRSVP={item.rsvp_enabled}
               id={item.id}
               navigation={navigation}

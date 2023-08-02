@@ -1,45 +1,45 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { VStack, Box, Heading, ScrollView } from "native-base";
 
 import Page from "../../Shared/Page";
-import SearchBar from "../../Shared/SearchBar";
+// import SearchBar from "../../Shared/SearchBar";
 import ServiceProviderCard from "./ServiceProviderCard";
 import { CommunityContext } from "../../Contexts/CommunityContext";
 
-const filterOptions = [
-  {
-    value: "all",
-    label: "All",
-  },
-  {
-    value: "home energy",
-    label: "Home Energy",
-  },
-  {
-    value: "solar",
-    label: "Solar",
-  },
-  {
-    value: "transportation",
-    label: "Transportation",
-  },
-  {
-    value: "waste recycling",
-    label: "Waste & Recycling",
-  },
-  {
-    value: "food",
-    label: "Food",
-  },
-  {
-    value: "activism education",
-    label: "Activism & Education",
-  },
-  {
-    value: "land soil water",
-    label: "Land, Soil & Water",
-  },
-];
+// const filterOptions = [
+//   {
+//     value: "all",
+//     label: "All",
+//   },
+//   {
+//     value: "home energy",
+//     label: "Home Energy",
+//   },
+//   {
+//     value: "solar",
+//     label: "Solar",
+//   },
+//   {
+//     value: "transportation",
+//     label: "Transportation",
+//   },
+//   {
+//     value: "waste recycling",
+//     label: "Waste & Recycling",
+//   },
+//   {
+//     value: "food",
+//     label: "Food",
+//   },
+//   {
+//     value: "activism education",
+//     label: "Activism & Education",
+//   },
+//   {
+//     value: "land soil water",
+//     label: "Land, Soil & Water",
+//   },
+// ];
 
 export default function ServiceProvidersPage({ route, navigation }) {
   const { community_id } = route.params;
@@ -49,8 +49,8 @@ export default function ServiceProvidersPage({ route, navigation }) {
   return (
     <Page>
       <ScrollView pt="10" px="5" showsVerticalScrollIndicator={false}>
-        <SearchBar filterOptions={filterOptions} filterHeader="Category" />
-        <VStack space="5" py="10">
+        {/* <SearchBar filterOptions={filterOptions} filterHeader="Category" /> */}
+        <VStack space="5">
           <Box>
             <Heading>Suggested</Heading>
             {/* render cards horizontally */}

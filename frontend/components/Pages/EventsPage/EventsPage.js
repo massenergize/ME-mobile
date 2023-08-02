@@ -76,6 +76,47 @@ export default function EventsPage({ navigation }) {
     setIsLoading(false);
   }, [eventFilterID]);
 
+  const renderHeader = () => {
+    return (
+      <View>
+        <SearchBar
+          pb="5"
+          w="100%"
+          filterOptions={filterOptions}
+          filterHeader="Category"
+        />
+        {/* events filter */}
+        <Flex flexDirection="row">
+          <Button
+            variant={eventFilterID === 0 ? "solid" : "outline"}
+            _text={{ fontSize: "xs" }}
+            borderRadius="full"
+            onPress={() => setEventFilterID(0)}
+          >
+            Upcoming Events
+          </Button>
+          <Button
+            variant={eventFilterID === 1 ? "solid" : "outline"}
+            _text={{ fontSize: "xs" }}
+            borderRadius="full"
+            onPress={() => setEventFilterID(1)}
+          >
+            Past Events
+          </Button>
+          <Button
+            variant="outline"
+            _text={{ fontSize: "xs" }}
+            borderRadius="full"
+            onPress={() => handleFilter(2)}
+            isDisabled
+          >
+            Campaigns
+          </Button>
+        </Flex>
+      </View>
+    );
+  };
+
   return (
     <Page p={3}>
       {isLoading ? (
@@ -84,44 +125,7 @@ export default function EventsPage({ navigation }) {
         </Center>
       ) : (
         <FlatList
-          ListHeaderComponent={
-            <View>
-              <SearchBar
-                pb="5"
-                w="100%"
-                filterOptions={filterOptions}
-                filterHeader="Category"
-              />
-              {/* events filter */}
-              <Flex flexDirection="row">
-                <Button
-                  variant={eventFilterID === 0 ? "solid" : "outline"}
-                  _text={{ fontSize: "xs" }}
-                  borderRadius="full"
-                  onPress={() => setEventFilterID(0)}
-                >
-                  Upcoming Events
-                </Button>
-                <Button
-                  variant={eventFilterID === 1 ? "solid" : "outline"}
-                  _text={{ fontSize: "xs" }}
-                  borderRadius="full"
-                  onPress={() => setEventFilterID(1)}
-                >
-                  Past Events
-                </Button>
-                <Button
-                  variant="outline"
-                  _text={{ fontSize: "xs" }}
-                  borderRadius="full"
-                  onPress={() => handleFilter(2)}
-                  isDisabled
-                >
-                  Campaigns
-                </Button>
-              </Flex>
-            </View>
-          }
+          ListHeaderComponent={renderHeader}
           ListEmptyComponent={<Center>There are no events.</Center>}
           data={newEvents}
           keyExtractor={(item) => item.id.toString()}

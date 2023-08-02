@@ -20,7 +20,7 @@ export default function ActionsPage({ navigation }) {
   return (
     <Page>
       {isLoading ? (
-        <Center m="5">
+        <Center flex="1">
           <Spinner />
         </Center>
       ) : (

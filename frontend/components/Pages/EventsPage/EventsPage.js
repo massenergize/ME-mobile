@@ -79,7 +79,7 @@ export default function EventsPage({ navigation }) {
   return (
     <Page p={3}>
       {isLoading ? (
-        <Center m="5">
+        <Center flex="1">
           <Spinner />
         </Center>
       ) : (

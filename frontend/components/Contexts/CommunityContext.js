@@ -15,6 +15,9 @@ export const CommunityProvider = ({ children }) => {
   const [actionsCompleted, setActionsCompleted] = useState(null);
   const [about, setAbout] = useState(null);
   const [teams, setTeams] = useState(null);
+  const [vendorsSettings, setVendorsSettings] = useState(null);
+  const [testimonialsSettings, setTestimonialsSettings] = useState(null);
+  const [teamsSettings, setTeamsSettings] = useState(null);
   const [infoLoaded, setInfoLoaded] = useState(0);
 
   const fetchCommunityInfo = async (community_id, callBackFn = null) => {
@@ -136,11 +139,50 @@ export const CommunityProvider = ({ children }) => {
           if (callBackFn) callBackFn(null, json.error);
         }
       }),
+      apiCall("vendors_page_settings.info", { community_id: community_id }).then((json) => {
+        if (json.success) {
+          const newVendorsSettings = json.data;
+          if (!vendorsSettings || !_.isEqual(vendorsSettings, newVendorsSettings)) {
+            setVendorsSettings(json.data);
+            setInfoLoaded(infoLoaded => infoLoaded + 1);
+            console.log("Vendors Settings Fetched")
+          }
+        } else {
+          console.log(json);
+          if (callBackFn) callBackFn(null, json.error);
+        }
+      }),
+      apiCall("testimonials_page_settings.info", { community_id: community_id }).then((json) => {
+        if (json.success) {
+          const newTestimonialsSettings = json.data;
+          if (!testimonialsSettings || !_.isEqual(testimonialsSettings, newTestimonialsSettings)) {
+            setTestimonialsSettings(json.data);
+            setInfoLoaded(infoLoaded => infoLoaded + 1);
+            console.log("Testimonials Settings Fetched")
+          }
+        } else {
+          console.log(json);
+          if (callBackFn) callBackFn(null, json.error);
+        }
+      }),
+      apiCall("teams_page_settings.info", { community_id: community_id }).then((json) => {
+        if (json.success) {
+          const newTeamsSettings = json.data;
+          if (!teamsSettings || !_.isEqual(teamsSettings, newTeamsSettings)) {
+            setTeamsSettings(json.data);
+            setInfoLoaded(infoLoaded => infoLoaded + 1);
+            console.log("Teams Settings Fetched")
+          }
+        } else {
+          console.log(json);
+          if (callBackFn) callBackFn(null, json.error);
+        }
+      }),
     ]).then(() => {
       setInfoLoaded(0);
       if (callBackFn) callBackFn();
     });
-    console.log("Community Fetched");
+    console.log("Fetch Finished");
   };
 
   return (
@@ -155,6 +197,9 @@ export const CommunityProvider = ({ children }) => {
         actionsCompleted,
         about,
         teams,
+        vendorsSettings,
+        testimonialsSettings,
+        teamsSettings,
         infoLoaded,
         fetchCommunityInfo }}>
       {children}

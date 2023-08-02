@@ -7,7 +7,7 @@ import Page from "../../Shared/Page";
 import TeamCard from "./TeamCard";
 import { CommunityContext } from "../../Contexts/CommunityContext";
 
-export default function TeamsPage({ route, navigation }) {
+export default function TeamsPage({ navigation }) {
 
   const { teams } = useContext(CommunityContext);
 

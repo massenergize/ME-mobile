@@ -1,4 +1,3 @@
-import { View, StyleSheet, useWindowDimensions } from "react-native";
 import React, { useState, useEffect, useContext } from "react";
 import {
   Text,
@@ -12,16 +11,17 @@ import {
   Spacer,
   Spinner
 } from "native-base";
+
 import Page from "../../Shared/Page";
 import HTMLParser from "../../Shared/HTMLParser";
 import ServiceProviderCard from "../ServiceProvidersPage/ServiceProviderCard";
 import { CommunityContext, useDetails } from "../../Contexts/CommunityContext";
 import { TestimonialCard } from "../TestimonialsPage/TestimonialsCard";
+import { getActionMetric } from "../../Shared/Utils";
 
 
 export default function ActionDetails({ route, navigation }) {
   const { action_id } = route.params;
-  const { width } = useWindowDimensions();
 
   const [activeTab, setActiveTab] = useState("description")
 
@@ -146,15 +146,6 @@ export default function ActionDetails({ route, navigation }) {
     }
   }
 
-  const getMetric = (metric) => {
-    for (let i = 0; i < action.tags.length; i++) {
-      if (action.tags[i].tag_collection_name === metric) {
-        return action.tags[i].name;
-      }
-    }
-    return "-"
-  }
-
   return (
     <Page>
       {
@@ -181,12 +172,12 @@ export default function ActionDetails({ route, navigation }) {
                 <HStack alignItems="center" mx={4}>
                   <Text bold fontSize="lg">Impact</Text>
                   <Spacer />
-                  <Text fontSize="lg">{getMetric("Impact")}</Text>
+                  <Text fontSize="lg">{getActionMetric(action, "Impact")}</Text>
                 </HStack>
                 <HStack alignItems="center" mx={4} mt={2} mb={4}>
                   <Text bold fontSize="lg">Cost</Text>
                   <Spacer />
-                  <Text fontSize="lg">{getMetric("Cost")}</Text>
+                  <Text fontSize="lg">{getActionMetric(action, "Cost")}</Text>
                 </HStack>
                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} px={3}>
                   <TabButton label="Description" name="description" />

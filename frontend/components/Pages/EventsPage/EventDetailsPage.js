@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-
+import React, { useState } from "react";
 import {
   Button,
   ScrollView,
@@ -13,15 +12,16 @@ import {
   Image,
   Actionsheet,
   useDisclose,
-  Spinner
+  Spinner,
 } from "native-base";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+
 import Page from "../../Shared/Page";
 import HTMLParser from "../../Shared/HTMLParser";
 import { formatDateString } from "../../Shared/Utils";
 import { useDetails } from "../../Contexts/CommunityContext";
 
-export default function EventDetailsPage({ route, navigation }) {
+export default function EventDetailsPage({ route }) {
   const { event_id } = route.params;
 
   const [rsvp, setRsvp] = useState(""); // "Interested", "Going", "Not Going"
@@ -36,39 +36,50 @@ export default function EventDetailsPage({ route, navigation }) {
     onClose();
   };
 
-  const [event, isEventLoading] = useDetails("events.info", {event_id: event_id});
+  const [event, isEventLoading] = useDetails("events.info", {
+    event_id: event_id,
+  });
 
   return (
     <Page py="5">
-      {isEventLoading 
-        ? <Spinner />
-        : 
+      {isEventLoading ? (
+        <Spinner />
+      ) : (
         <ScrollView showsVerticalScrollIndicator={false} mx="5">
           <VStack space="2">
             {/* event image */}
-            <AspectRatio ratio={16 / 9}>
-              <Image
-                source={{
-                  uri: (event.image != null) ? event.image.url : null,
-                }}
-                alt="event's image"
-                resizeMode="contain"
-              />
-            </AspectRatio>
+            {event.image?.url && (
+              <AspectRatio ratio={16 / 9}>
+                <Image
+                  source={{
+                    uri: event.image?.url
+                  }}
+                  alt="event's image"
+                  resizeMode="contain"
+                />
+              </AspectRatio>
+            )}
             {/* event details */}
             <VStack>
               <Text fontSize="lg" fontWeight="bold" color="primary.400">
                 Date
               </Text>
-              <Text>{
-                formatDateString(new Date(event.start_date_and_time), new Date(event.end_date_and_time))
-              }</Text>
+              <Text>
+                {formatDateString(
+                  new Date(event.start_date_and_time),
+                  new Date(event.end_date_and_time)
+                )}
+              </Text>
             </VStack>
             <VStack>
               <Text fontSize="lg" fontWeight="bold" color="primary.400">
                 Venue
               </Text>
-              <Text>{(event.location) ? (event.location.city + ", " + event.location.state) : "N/A"}</Text>
+              <Text>
+                {event.location
+                  ? event.location.city + ", " + event.location.state
+                  : "N/A"}
+              </Text>
             </VStack>
             {/* TODO: What field has this? */}
             {/* <Text fontSize="lg" fontWeight="bold" color="primary.400">
@@ -96,7 +107,9 @@ export default function EventDetailsPage({ route, navigation }) {
             <Actionsheet isOpen={isOpen} onClose={onClose} on>
               <Actionsheet.Content>
                 <Actionsheet.Item
-                  backgroundColor={rsvp === "Interested" ? "muted.200" : "white"}
+                  backgroundColor={
+                    rsvp === "Interested" ? "muted.200" : "white"
+                  }
                   onPress={() => handleAction("Interested")}
                 >
                   Interested
@@ -118,9 +131,7 @@ export default function EventDetailsPage({ route, navigation }) {
           </VStack>
           <Divider my="4" />
           <Box>
-            <Heading textAlign="center">
-              {event.name || "Event Name"}
-            </Heading>
+            <Heading textAlign="center">{event.name || "Event Name"}</Heading>
             {event.description && (
               <HTMLParser
                 htmlString={event.description}
@@ -129,7 +140,7 @@ export default function EventDetailsPage({ route, navigation }) {
             )}
           </Box>
         </ScrollView>
-      }
+      )}
     </Page>
   );
 }

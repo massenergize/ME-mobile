@@ -2,16 +2,11 @@ import React from "react";
 import {
     VStack,
     HStack,
-    Box,
     Text,
-    Spacer,
     Container,
-    Center,
-    Pressable,
-    Image
 } from "native-base";
 import { Dimensions } from 'react-native';
-import { VictoryPie, VictoryContainer, VictoryBar, VictoryChart, VictoryTheme, VictoryLabel, VictoryAxis, VictoryGroup, VictoryLegend } from 'victory-native';
+import { VictoryPie, VictoryContainer, VictoryBar, VictoryChart, VictoryTheme, VictoryAxis, VictoryGroup, VictoryLegend } from 'victory-native';
 
 
   // small pie charts that are part of the goal card

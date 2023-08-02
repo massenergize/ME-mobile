@@ -12,66 +12,21 @@ import {
   Flex,
   Input,
   View,
-  Spinner
+  Spinner,
 } from "native-base";
 import Page from "../../Shared/Page";
 import { useDetails } from "../../Contexts/CommunityContext";
 
-const fill = "#DC4E34";
-const data = [
-  {
-    id: 12,
-    name: "Activism & Education",
-    value: 127,
-    reported_value: 168,
-  },
-  {
-    id: 11,
-    name: "Food",
-    value: 245,
-    reported_value: 0,
-  },
-  {
-    id: 9,
-    name: "Home Energy",
-    value: 510,
-    reported_value: 413,
-  },
-  {
-    id: 26,
-    name: "Land, Soil & Water",
-    value: 92,
-    reported_value: 29,
-  },
-  {
-    id: 52,
-    name: "Solar",
-    value: 90,
-    reported_value: 360,
-  },
-  {
-    id: 24,
-    name: "Transportation",
-    value: 111,
-    reported_value: 599,
-  },
-  {
-    id: 25,
-    name: "Waste & Recycling",
-    value: 202,
-    reported_value: 200,
-  },
-];
-
-export default function TeamDetailsPage({ route, navigation }) {
+export default function TeamDetailsPage({ route }) {
   const { team_id } = route.params;
-  const [team, isTeamLoading] = useDetails("teams.info", {team_id: team_id});
+  const [team, isTeamLoading] = useDetails("teams.info", { team_id: team_id });
 
   const [activeTab, setActiveTab] = useState("about");
   //   TODO: Cache these components to avoid re-rendering.
   const generateAboutTab = () => {
     return <Text>{team.description}</Text>;
   };
+
   const generateActionsTab = () => {
     return (
       <VStack space="5">
@@ -86,6 +41,7 @@ export default function TeamDetailsPage({ route, navigation }) {
       </VStack>
     );
   };
+
   const generateMembersTab = () => {
     const generateMemers = () => {
       let members = [];
@@ -107,6 +63,7 @@ export default function TeamDetailsPage({ route, navigation }) {
     };
     return <VStack space="2">{generateMemers()}</VStack>;
   };
+
   const generateSubTeamsTab = () => {
     const generateSubTeams = () => {
       let subTeams = [];
@@ -167,6 +124,7 @@ export default function TeamDetailsPage({ route, navigation }) {
     };
     return <VStack space="5">{generateSubTeams()}</VStack>;
   };
+
   const generateContactTab = () => {
     return (
       <Box>
@@ -187,6 +145,7 @@ export default function TeamDetailsPage({ route, navigation }) {
       </Box>
     );
   };
+
   const renderTabContent = () => {
     switch (activeTab) {
       case "about":
@@ -203,30 +162,25 @@ export default function TeamDetailsPage({ route, navigation }) {
         return generateAboutTab();
     }
   };
+
   return (
     <Page>
       <ScrollView>
-        {
-          isTeamLoading
-          ? <Spinner />
-          : 
+        {isTeamLoading ? (
+          <Spinner />
+        ) : (
           <View>
-            {
-              console.log(team)
-            }
+            {console.log(team)}
             <Center my="5">
-              {
-                team.logo 
-                ?
+              {team.logo ? (
                 <Image
-                  source={{url: team.logo.url}}
+                  source={{ url: team.logo.url }}
                   alt="image"
                   height={150}
                   width="95%"
                   resizeMode="contain"
                 />
-                : null
-              }
+              ) : null}
             </Center>
             <VStack space="3">
               <Heading alignSelf="center">{team.name}</Heading>
@@ -275,7 +229,7 @@ export default function TeamDetailsPage({ route, navigation }) {
               </Tab>
             </VStack>
           </View>
-        }
+        )}
       </ScrollView>
     </Page>
   );

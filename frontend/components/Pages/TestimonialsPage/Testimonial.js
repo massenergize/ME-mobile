@@ -1,13 +1,14 @@
-import { ScrollView, View, useWindowDimensions } from "react-native";
 import React from "react";
-import { VStack, Image, Text, Spinner, Center } from "native-base";
-import Page from "../../Shared/Page";
 import Moment from 'moment';
+import { VStack, Image, Text, Spinner, Center } from "native-base";
+import { ScrollView, View, useWindowDimensions } from "react-native";
 
+import Page from "../../Shared/Page";
 import ActionCard from "./../ActionsPage/ActionCard.js";
 import ServiceProviderCard from "./../ServiceProvidersPage/ServiceProviderCard.js";
 import HTMLParser from "../../Shared/HTMLParser";
 import { useDetails } from "../../Contexts/CommunityContext";
+import { getActionMetric } from "../../Shared/Utils";
 
 export default function Testimonial({ route, navigation }) {
     const { width } = useWindowDimensions();
@@ -58,7 +59,14 @@ export default function Testimonial({ route, navigation }) {
                             ?
                             <View>
                                 <Text bold fontSize="lg" mb={3} mt={5}>Associated Action</Text>
-                                <ActionCard navigation={navigation} action={testimonial.action} />
+                                <ActionCard
+                                    navigation={navigation}
+                                    id={testimonial.action?.id}
+                                    title={testimonial.action?.title}
+                                    imgUrl={testimonial.action?.image?.url}
+                                    impactMetric={getActionMetric(testimonial.action, "Impact")}
+                                    costMetric={getActionMetric(testimonial.action, "Cost")}
+                                />
                             </View>
                             : <></>
                         }

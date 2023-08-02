@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useCallback } from "react";
+import React, { useState, useContext, useCallback } from "react";
 import { ScrollView } from "react-native";
 import {
   VStack,
@@ -14,21 +14,9 @@ import {
 import ActionCard from "./../ActionsPage/ActionCard";
 import { SmallChart } from "../../Shared/Charts.js";
 import EventCard from "./../EventsPage/EventCard";
-import { formatDateString } from "../../Shared/Utils";
+import { formatDateString, getActionMetric } from "../../Shared/Utils";
 import { CommunityContext, useUpcomingEvent } from "../../Contexts/CommunityContext";
 import { RefreshControl } from "react-native-gesture-handler";
-
-const event = {
-  id: 1,
-  title: "Nature of Acton and Boxborough 2023 - A BioBlitz",
-  date: "June 15th, 4:00 AM - 11:00 PM",
-  location: "Hybrid",
-  image:
-    "https://massenergize-prod-files.s3.amazonaws.com/media/Acton_Boxborough__BioBlitz_2023_A-230529-160415.jpg",
-  can_rsvp: true,
-  is_rsvped: false,
-  is_shared: true,
-};
 
 const colors = ["#DC4E34", "#64B058", "#000000"];
 
@@ -117,9 +105,9 @@ function ShowMore({ navigation, page, text }) {
   );
 }
 
-export default function CommunityPage({ route, navigation }) {
-  const { community_id } = route.params;
+export default function CommunityPage({ navigation }) {
   const { communityInfo, actions, fetchCommunityInfo } = useContext(CommunityContext);
+  const {community_id} = communityInfo
 
   // const [isCommunityLoading, setIsCommunityLoading] = useState(true);
   const upcomingEvent = useUpcomingEvent();
@@ -131,15 +119,6 @@ export default function CommunityPage({ route, navigation }) {
     fetchCommunityInfo(community_id, () => setRefreshing(false))
     // setTimeout(() => setRefreshing(false), 2000);
   }, []);
-
-  const getMetric = (action, metric) => {
-    for (let i = 0; i < action.tags.length; i++) {
-      if (action.tags[i].tag_collection_name === metric) {
-        return action.tags[i].name;
-      }
-    }
-    return "-";
-  };
 
   return (
     <ScrollView 
@@ -172,16 +151,20 @@ export default function CommunityPage({ route, navigation }) {
             <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
             {
               // isActionsLoading ? <Spinner size="lg" color="primary.500" /> :
-              actions.map((action, index) => {
-                // console.log(action)
-                if (getMetric(action, "Cost") === "$" || getMetric(action, "Cost") === "0") {
-                  return (
-                    <ActionCard navigation={navigation} action={action} key={index}></ActionCard>
-                  )
-                }
-                else {
-                  return null;
-                }
+              actions
+              .filter((action) => getActionMetric(action, "Cost") === "$" || getActionMetric(action, "Cost") === "0")
+              .map((action, index) => {
+              return (
+                <ActionCard
+                  key={index}
+                  navigation={navigation}
+                  id={action.id}
+                  title={action.title}
+                  imgUrl={action.image?.url}
+                  impactMetric={getActionMetric(action, "Impact")}
+                  costMetric={getActionMetric(action, "Cost")}
+                />
+              );
               })
             }
             </HStack>

@@ -1,6 +1,6 @@
-import { Divider, Flex, Icon, Link, Text, VStack } from "native-base";
 import React from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { Flex, Icon, Text, VStack } from "native-base";
 
 import Page from "../../Shared/Page";
 

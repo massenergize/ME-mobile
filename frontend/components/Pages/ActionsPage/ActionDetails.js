@@ -15,6 +15,7 @@ import {
   Modal,
   Icon
 } from "native-base";
+
 import Page from "../../Shared/Page";
 import HTMLParser from "../../Shared/HTMLParser";
 import ServiceProviderCard from "../ServiceProvidersPage/ServiceProviderCard";
@@ -22,15 +23,18 @@ import { CommunityContext, useDetails } from "../../Contexts/CommunityContext";
 import { TestimonialCard } from "../TestimonialsPage/TestimonialsCard";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { getActionMetric } from "../../Shared/Utils";
+
 
 export default function ActionDetails({ route, navigation }) {
   const { action_id } = route.params;
-  const { width } = useWindowDimensions();
 
   const [activeTab, setActiveTab] = useState("description")
 
   const [action, isActionLoading] = useDetails("actions.info", {action_id: action_id});
   const { testimonials } = useContext(CommunityContext);
+
+  const [isDoneOpen, setIsDoneOpen] = useState(false)
 
   const generateDescriptionTab = () => {
     return (
@@ -150,17 +154,6 @@ export default function ActionDetails({ route, navigation }) {
     }
   }
 
-  const getMetric = (metric) => {
-    for (let i = 0; i < action.tags.length; i++) {
-      if (action.tags[i].tag_collection_name === metric) {
-        return action.tags[i].name;
-      }
-    }
-    return "-"
-  }
-
-  const [ isDoneOpen, setIsDoneOpen ] = useState(false);
-
   return (
     <Page>
       {
@@ -192,12 +185,12 @@ export default function ActionDetails({ route, navigation }) {
                   <HStack alignItems="center" mx={4}>
                     <Text bold fontSize="lg">Impact</Text>
                     <Spacer />
-                    <Text fontSize="lg">{getMetric("Impact")}</Text>
+                    <Text fontSize="lg">{getActionMetric(action, "Impact")}</Text>
                   </HStack>
                   <HStack alignItems="center" mx={4} mt={2} mb={1}>
                     <Text bold fontSize="lg">Cost</Text>
                     <Spacer />
-                    <Text fontSize="lg">{getMetric("Cost")}</Text>
+                    <Text fontSize="lg">{getActionMetric(action, "Cost")}</Text>
                   </HStack>
                   <HStack space={2} justifyContent="center" width="100%" mb={3}>
                     <Button

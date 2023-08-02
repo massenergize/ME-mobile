@@ -12,11 +12,11 @@ import {
 } from "native-base";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
-export default function EventCard({
+export default EventCard = React.memo(({
   title,
   date,
   location,
-  imageURI,
+  imageUrl,
   canRSVP,
   isRSVPED,
   isShared,
@@ -24,20 +24,24 @@ export default function EventCard({
   id,
   navigation,
   ...props
-}) {
+}) => {
   return (
     <Box rounded="lg" backgroundColor="white" {...props}>
-      <Pressable onPress={() => 
+      <Pressable onPress={() =>
         navigation.navigate("eventDetails", {event_id: id})
       }>
         <Box pt="2">
-          <AspectRatio w="100%" ratio={16 / 9}>
-            <Image
-              source={{ uri: imageURI }}
-              alt="event's image"
-              resizeMode="contain"
-            />
-          </AspectRatio>
+          {imageUrl ? (
+            <AspectRatio w="100%" ratio={16 / 9}>
+              <Image
+                source={{ uri: imageUrl }}
+                alt="event's image"
+                resizeMode="contain"
+              />
+            </AspectRatio>
+          ) : (
+            <Box height={200} bg="gray.300"></Box>
+          )}
 
           {isShared && (
             <Center
@@ -109,4 +113,4 @@ export default function EventCard({
       </Pressable>
     </Box>
   );
-}
+})

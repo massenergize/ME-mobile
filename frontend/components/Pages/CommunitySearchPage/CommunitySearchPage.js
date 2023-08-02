@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import {
   Button,
   Center,
-  Image,
   Text,
   Box,
   VStack,
@@ -12,7 +11,6 @@ import {
   Icon,
   Modal,
   Heading,
-  Flex,
   Pressable,
   Spinner,
 } from "native-base";

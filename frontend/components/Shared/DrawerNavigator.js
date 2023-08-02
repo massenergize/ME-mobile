@@ -27,9 +27,9 @@ import {
   Progress
 } from "native-base";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+
 import AuthModalController from "../Pages/Auth/AuthModalController";
 import useAuth from "../Hooks/useAuth";
-// import { apiCall } from "../../api/functions";
 import { CommunityContext } from "../Contexts/CommunityContext";
 
 const Drawer = createDrawerNavigator();

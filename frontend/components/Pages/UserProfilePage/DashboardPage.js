@@ -19,6 +19,7 @@ import Page from "../../Shared/Page";
 import ActionCard from "../ActionsPage/ActionCard";
 import CommunityCard from "../CommunitySearchPage/CommunityCard";
 import ActionsFilter from "../ActionsPage/ActionsFilter";
+import { getActionMetric } from "../../Shared/Utils";
 
 const COMMUNITY = {
   id: 3,
@@ -720,13 +721,17 @@ const ActionsList = () => {
         {actions &&
           actions.map((action, index) => {
             return (
-              <ActionCard
-                action={action}
-                key={index}
-                navigation={navigation}
-                mx="2"
-                my="3"
-              />
+                <ActionCard
+                  key={index}
+                  navigation={navigation}
+                  id={action.id}
+                  title={action.title}
+                  imgUrl={action.image?.url}
+                  impactMetric={getActionMetric(action, "Impact")}
+                  costMetric={getActionMetric(action, "Cost")}
+                  mx="2"
+                  my="3"
+                />
             );
           })}
       </ScrollView>

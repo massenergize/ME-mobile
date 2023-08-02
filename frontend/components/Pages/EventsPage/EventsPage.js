@@ -124,6 +124,7 @@ export default function EventsPage({ navigation }) {
           }
           ListEmptyComponent={<Center>There are no events.</Center>}
           data={newEvents}
+          keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
             <EventCard
               title={item.name}

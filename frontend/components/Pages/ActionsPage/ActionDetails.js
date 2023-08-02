@@ -21,7 +21,6 @@ import HTMLParser from "../../Shared/HTMLParser";
 import ServiceProviderCard from "../ServiceProvidersPage/ServiceProviderCard";
 import { CommunityContext, useDetails } from "../../Contexts/CommunityContext";
 import { TestimonialCard } from "../TestimonialsPage/TestimonialsCard";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { getActionMetric } from "../../Shared/Utils";
 
@@ -32,7 +31,7 @@ export default function ActionDetails({ route, navigation }) {
   const [activeTab, setActiveTab] = useState("description")
 
   const [action, isActionLoading] = useDetails("actions.info", {action_id: action_id});
-  const { testimonials } = useContext(CommunityContext);
+  const { testimonials, testimonialsSettings, vendorsSettings } = useContext(CommunityContext);
 
   const [isDoneOpen, setIsDoneOpen] = useState(false)
 
@@ -73,14 +72,16 @@ export default function ActionDetails({ route, navigation }) {
   const [actionTestimonials, setActionTestimonials] = useState([])
 
   const getTestimonials = () => {
-    const relatedTestimonials = [];
-    for (let i = 0; i < testimonials.length; i++) {
-      if (testimonials[i].action?.id === action_id) {
-        relatedTestimonials.push(testimonials[i]);
+    if (testimonialsSettings.is_published) {
+      const relatedTestimonials = [];
+      for (let i = 0; i < testimonials.length; i++) {
+        if (testimonials[i].action?.id === action_id) {
+          relatedTestimonials.push(testimonials[i]);
+        }
       }
+      console.log(relatedTestimonials)
+      setActionTestimonials(relatedTestimonials);
     }
-    console.log(relatedTestimonials)
-    setActionTestimonials(relatedTestimonials);
   }
 
   useEffect(() => {
@@ -219,8 +220,12 @@ export default function ActionDetails({ route, navigation }) {
                     <TabButton label="Description" name="description" />
                     <TabButton label="Steps" name="steps" />
                     <TabButton label="Deep Dive" name="deep_dive" />
-                    <TabButton label="Testimonials" name="testimonials" />
-                    <TabButton label="Service Providers" name="service_providers" />
+                    {
+                      testimonialsSettings.is_published ? <TabButton label="Testimonials" name="testimonials" /> : null
+                    }
+                    {
+                      vendorsSettings.is_published ? <TabButton label="Service Providers" name="service_providers" /> : null
+                    }
                     <Container width={5}></Container>
                   </ScrollView>
                   <Box m={15}>

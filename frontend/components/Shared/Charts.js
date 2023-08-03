@@ -2,16 +2,11 @@ import React from "react";
 import {
     VStack,
     HStack,
-    Box,
     Text,
-    Spacer,
     Container,
-    Center,
-    Pressable,
-    Image
 } from "native-base";
 import { Dimensions } from 'react-native';
-import { VictoryPie, VictoryContainer, VictoryBar, VictoryChart, VictoryTheme, VictoryLabel, VictoryAxis, VictoryGroup, VictoryLegend } from 'victory-native';
+import { VictoryPie, VictoryContainer, VictoryBar, VictoryChart, VictoryTheme, VictoryAxis, VictoryGroup, VictoryLegend } from 'victory-native';
 
 
   // small pie charts that are part of the goal card
@@ -29,7 +24,11 @@ function SmallChart({ goal, color }) {
             padding={10}
             labels={() => null} 
             colorScale={[color, "#f2f2f2"]}/>
-        <Text fontSize="md">{(goal.current < 10000) ? goal.current : (goal.current / 1000).toFixed(1) + "k" } / {(goal.goal < 10000) ? goal.goal : (goal.goal / 1000) + "k"}</Text>
+        {
+            goal.nameShort === "Trees"
+            ? <Text fontSize="md">{(goal.current < 10000) ? goal.current.toFixed(1) : (goal.current / 1000).toFixed(1) + "k" } / {(goal.goal < 10000) ? goal.goal.toFixed(1) : (goal.goal / 1000).toFixed(1) + "k"}</Text>
+            : <Text fontSize="md">{(goal.current < 10000) ? goal.current : (goal.current / 1000).toFixed(1) + "k" } / {(goal.goal < 10000) ? goal.goal : (goal.goal / 1000) + "k"}</Text>
+        }
       </VStack>
     )
 }
@@ -50,7 +49,7 @@ function BigPieChart({ goal, color }) {
             <Container width={Dimensions.get('window').width - (Dimensions.get('window').width / 2.5)}>
                 <VStack>
                     <Text bold fontSize="lg">{goal.nameLong}</Text>
-                    <Text fontSize="md">{goal.current} / {goal.goal} {goal.nameShort}</Text>
+                    <Text fontSize="md">{(goal.nameShort === "Trees") ? goal.current.toFixed(1) : goal.current} / {(goal.nameShort === "Trees") ? goal.goal.toFixed(1) : goal.goal} {goal.nameShort}</Text>
                     <Text fontSize="sm">({(goal.current / goal.goal * 100).toFixed(1)}% of Goal)</Text>
                 </VStack>
             </Container>

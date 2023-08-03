@@ -1,4 +1,19 @@
 /**
+ * get the metric of an action
+ * @param {Object} action
+ * @param {String} metric
+ * @returns {String} the metric of the action
+ */
+export function getActionMetric(action, metric) {
+  for (let i = 0; i < action.tags.length; i++) {
+    if (action.tags[i].tag_collection_name === metric) {
+      return action.tags[i].name;
+    }
+  }
+  return "-";
+}
+
+/**
  * formats a date range string based on the start and end date
  * @param {Date} startDate
  * @param {Date} endDate

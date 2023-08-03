@@ -708,6 +708,8 @@ const CarbonSaved = () => {
 };
 
 const ActionsList = ({ navigation }) => {
+  const userInfo = useContext(DashboardContext);
+  // const { actions } = userInfo.completedList;
   const { actions } = useContext(CommunityContext);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -876,12 +878,14 @@ const CommunitiesList = ({ communityInfo }) => {
 };
 
 export default function DashboardPage({ route, navigation }) {
+  const { completedList, fetchDashboardInfo } = useContext(DashboardContext);
   const { communityInfo, actions, fetchCommunityInfo } = useContext(CommunityContext);
   const {community_id} = communityInfo
 
   const [refreshing, setRefreshing] = useState(false);
   const onRefresh = useCallback (() => {
     setRefreshing(true);
+    fetchDashboardInfo(community_id, () => setRefreshing(false));
     fetchCommunityInfo(community_id, () => setRefreshing(false))
     // setTimeout(() => setRefreshing(false), 2000);
   }, []);

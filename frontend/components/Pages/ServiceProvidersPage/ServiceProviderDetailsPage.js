@@ -31,7 +31,10 @@ export default function ServiceProviderDetailsPage({ route, navigation }) {
   return (
     <Page>
       {isSpLoading
-      ? <Spinner />
+      ?
+      <Center width="100%" height="100%">
+        <Spinner size="lg"/>
+      </Center>
       :
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* image */}

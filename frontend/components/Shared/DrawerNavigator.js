@@ -36,74 +36,128 @@ const Drawer = createDrawerNavigator();
 
 // custom drawer in order to have the "switch communities" button at the bottom
 
-const drawerItems = [
-  {
-    name: "Community",
-    icon: "home-outline",
-    dropdown: false,
-    route: "Community",
-    dropdownItems: [],
-  },
-  {
-    name: "About Us",
-    icon: "information-circle-outline",
-    dropdown: true,
-    route: "",
-    dropdownItems: [
-      {
-        name: "Our Mission",
-        icon: "",
-        dropdown: false,
-        route: "About",
-        dropdownItems: [],
-      },
-    ],
-  },
-  {
-    name: "Testimonials",
-    icon: "chatbox-outline",
-    dropdown: false,
-    route: "Testimonials",
-    dropdownItems: [],
-  },
-  {
-    name: "Teams",
-    icon: "people-outline",
-    dropdown: false,
-    route: "Teams",
-    dropdownItems: [],
-  },
-  {
-    name: "Resources",
-    icon: "document-text-outline",
-    dropdown: true,
-    route: "",
-    dropdownItems: [
-      {
-        name: "Service Providers",
-        icon: "",
-        dropdown: false,
-        route: "Service Providers",
-        dropdownItems: [],
-      },
-    ],
-  },
-  {
-    name: "Contact Us",
-    icon: "at-circle-outline",
-    dropdown: false,
-    route: "Contact Us",
-    dropdownItems: [],
-  },
-];
+// const drawerItems = [
+//   {
+//     name: "Community",
+//     icon: "home-outline",
+//     dropdown: false,
+//     route: "Community",
+//     dropdownItems: [],
+//   },
+//   {
+//     name: "About Us",
+//     icon: "information-circle-outline",
+//     dropdown: true,
+//     route: "",
+//     dropdownItems: [
+//       {
+//         name: "Our Mission",
+//         icon: "",
+//         dropdown: false,
+//         route: "About",
+//         dropdownItems: [],
+//       },
+//     ],
+//   },
+//   {
+//     name: "Testimonials",
+//     icon: "chatbox-outline",
+//     dropdown: false,
+//     route: "Testimonials",
+//     dropdownItems: [],
+//   },
+//   {
+//     name: "Teams",
+//     icon: "people-outline",
+//     dropdown: false,
+//     route: "Teams",
+//     dropdownItems: [],
+//   },
+//   {
+//     name: "Resources",
+//     icon: "document-text-outline",
+//     dropdown: true,
+//     route: "",
+//     dropdownItems: [
+//       {
+//         name: "Service Providers",
+//         icon: "",
+//         dropdown: false,
+//         route: "Service Providers",
+//         dropdownItems: [],
+//       },
+//     ],
+//   },
+//   {
+//     name: "Contact Us",
+//     icon: "at-circle-outline",
+//     dropdown: false,
+//     route: "Contact Us",
+//     dropdownItems: [],
+//   },
+// ];
 
 function CustomDrawerContent(props) {
   [expanded, setExpanded] = useState({ "About Us": false, Resources: false });
   const [isSignOutModalVisible, setIsSignOutModalVisible] = useState(false);
   const { user, signOut } = useAuth();
 
-  const { community_id, communityInfo } = props;
-  
+  const { community_id, communityInfo, testimonialsSettings, vendorsSettings, teamsSettings } = props;
+
+  const getDrawerItems = () => {
+    const drawerItems = [
+      {
+        name: "Community",
+        icon: "home-outline",
+        dropdown: false,
+        route: "Community",
+        dropdownItems: [],
+      },
+      {
+        name: "About Us",
+        icon: "information-circle-outline",
+        dropdown: false,
+        route: "About",
+        dropdownItems: []
+      }
+    ]
+    if (testimonialsSettings.is_published) {
+      drawerItems.push({
+        name: "Testimonials",
+        icon: "chatbox-outline",
+        dropdown: false,
+        route: "Testimonials",
+        dropdownItems: [],
+      })
+    }
+    if (teamsSettings.is_published) {
+      drawerItems.push({
+        name: "Teams",
+        icon: "people-outline",
+        dropdown: false,
+        route: "Teams",
+        dropdownItems: [],
+      })
+    }
+    if (vendorsSettings.is_published) {
+      drawerItems.push({
+        name: "Service Providers",
+        icon: "document-text-outline",
+        dropdown: false,
+        route: "Service Providers",
+        dropdownItems: [],
+      })
+    }
+    drawerItems.push({
+      name: "Contact Us",
+      icon: "at-circle-outline",
+      dropdown: false,
+      route: "Contact Us",
+      dropdownItems: [],
+    })
+    return drawerItems
+  }
+
   return (
     <SafeAreaView
       style={{ flex: 1 }}
@@ -120,7 +174,7 @@ function CustomDrawerContent(props) {
           />
         </Center>
         {/* <DrawerItemList {...props} /> */}
-        {drawerItems.map((item, index) => {
+        {getDrawerItems().map((item, index) => {
           if (item.dropdown) {
             return (
               <VStack key={index}>
@@ -290,7 +344,7 @@ export default function DrawerNavigator({ route, navigation }) {
     const { community_id } = route.params;
 
     const [isCommunityLoading, setIsCommunityLoading] = useState(true);
-    const { communityInfo, fetchCommunityInfo, infoLoaded } = useContext(CommunityContext);
+    const { communityInfo, fetchCommunityInfo, vendorsSettings, teamsSettings, testimonialsSettings, infoLoaded } = useContext(CommunityContext);
 
     useEffect(() => {
       fetchCommunityInfo(community_id, () => setIsCommunityLoading(false))
@@ -306,7 +360,15 @@ export default function DrawerNavigator({ route, navigation }) {
                   headerTitleAlign: "center",
               })}
 
-              drawerContent={props => <CustomDrawerContent {...props} community_id={community_id} communityInfo={communityInfo} />}
+              drawerContent={
+                props => 
+                  <CustomDrawerContent 
+                    {...props} 
+                    community_id={community_id} 
+                    communityInfo={communityInfo} 
+                    vendorsSettings={vendorsSettings}
+                    testimonialsSettings={testimonialsSettings}
+                    teamsSettings={teamsSettings}/>}
           >
           <Drawer.Screen
               name="Community"
@@ -352,7 +414,7 @@ export default function DrawerNavigator({ route, navigation }) {
       return <Center alignContent="center" height="100%" justifyContent="center">
         <Text bold mb={3} fontSize="lg">Loading Community...</Text>
         <Box width="50%">
-          <Progress value={(infoLoaded/9)*100} />
+          <Progress value={(infoLoaded/12)*100} />
         </Box>
       </Center>
     }

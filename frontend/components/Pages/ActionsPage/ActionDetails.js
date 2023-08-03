@@ -1,3 +1,4 @@
+import { View, useWindowDimensions } from "react-native";
 import React, { useState, useEffect, useContext } from "react";
 import {
   Text,
@@ -9,7 +10,10 @@ import {
   Container,
   HStack,
   Spacer,
-  Spinner
+  Spinner,
+  Center,
+  Modal,
+  Icon
 } from "native-base";
 
 import Page from "../../Shared/Page";
@@ -17,6 +21,7 @@ import HTMLParser from "../../Shared/HTMLParser";
 import ServiceProviderCard from "../ServiceProvidersPage/ServiceProviderCard";
 import { CommunityContext, useDetails } from "../../Contexts/CommunityContext";
 import { TestimonialCard } from "../TestimonialsPage/TestimonialsCard";
+import Ionicons from "react-native-vector-icons/Ionicons";
 import { getActionMetric } from "../../Shared/Utils";
 
 
@@ -26,7 +31,9 @@ export default function ActionDetails({ route, navigation }) {
   const [activeTab, setActiveTab] = useState("description")
 
   const [action, isActionLoading] = useDetails("actions.info", {action_id: action_id});
-  const { testimonials } = useContext(CommunityContext);
+  const { testimonials, testimonialsSettings, vendorsSettings } = useContext(CommunityContext);
+
+  const [isDoneOpen, setIsDoneOpen] = useState(false)
 
   const generateDescriptionTab = () => {
     return (
@@ -65,14 +72,16 @@ export default function ActionDetails({ route, navigation }) {
   const [actionTestimonials, setActionTestimonials] = useState([])
 
   const getTestimonials = () => {
-    const relatedTestimonials = [];
-    for (let i = 0; i < testimonials.length; i++) {
-      if (testimonials[i].action?.id === action_id) {
-        relatedTestimonials.push(testimonials[i]);
+    if (testimonialsSettings.is_published) {
+      const relatedTestimonials = [];
+      for (let i = 0; i < testimonials.length; i++) {
+        if (testimonials[i].action?.id === action_id) {
+          relatedTestimonials.push(testimonials[i]);
+        }
       }
+      console.log(relatedTestimonials)
+      setActionTestimonials(relatedTestimonials);
     }
-    console.log(relatedTestimonials)
-    setActionTestimonials(relatedTestimonials);
   }
 
   useEffect(() => {
@@ -150,78 +159,118 @@ export default function ActionDetails({ route, navigation }) {
     <Page>
       {
         isActionLoading 
-        ? <Spinner />
+        ? 
+        <Center width="100%" height="100%">
+          <Spinner size="lg"/>
+        </Center>
         :
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <VStack style={{ flex: 1 }}>
-            <Image
-              source={{
-                  // uri: "https://m.media-amazon.com/images/I/61JhlT09xiL._AC_SX679_.jpg",
-                uri: (action.image != null) ? action.image.url : null,
-              }}
-              m={3}
-              h={250}
-              // w={width}
-              alt="image"
-              // borderRadius="xl"
-              resizeMode="contain"
-          />
-            <Box bg="white" borderRadius="3xl" shadow={5} height="100%">
-              <VStack>
-                <Text bold fontSize="2xl" m={4}>{action.title}</Text>
-                <HStack alignItems="center" mx={4}>
-                  <Text bold fontSize="lg">Impact</Text>
-                  <Spacer />
-                  <Text fontSize="lg">{getActionMetric(action, "Impact")}</Text>
-                </HStack>
-                <HStack alignItems="center" mx={4} mt={2} mb={4}>
-                  <Text bold fontSize="lg">Cost</Text>
-                  <Spacer />
-                  <Text fontSize="lg">{getActionMetric(action, "Cost")}</Text>
-                </HStack>
-                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} px={3}>
-                  <TabButton label="Description" name="description" />
-                  <TabButton label="Steps" name="steps" />
-                  <TabButton label="Deep Dive" name="deep_dive" />
-                  <TabButton label="Testimonials" name="testimonials" />
-                  <TabButton label="Service Providers" name="service_providers" />
-                  <Container width={5}></Container>
-                </ScrollView>
-                <Box m={15}>
-                  {renderTabContent()}
-                </Box>
-              </VStack>
-              <Container
-                // style={{ flexDirection: "row", position: "absolute", bottom: 35 }}
-                position="absolute"
-                bottom={15}
-              >
-                {/* <Button
-                  size="md"
-                  variant="outline"
-                  _text={{
-                    color: "black",
-                    fontWeight: "bold",
-                  }}
-                  ref={buttonOne}
+        <View>
+
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <VStack style={{ flex: 1 }}>
+              <Image
+                source={{
+                    // uri: "https://m.media-amazon.com/images/I/61JhlT09xiL._AC_SX679_.jpg",
+                  uri: (action.image != null) ? action.image.url : null,
+                }}
+                m={3}
+                h={250}
+                // w={width}
+                alt="image"
+                // borderRadius="xl"
+                resizeMode="contain"
+            />
+              <Box bg="white" borderRadius="3xl" shadow={5} height="100%">
+                <VStack>
+                  <Text bold fontSize="2xl" m={4}>{action.title}</Text>
+                  <HStack alignItems="center" mx={4}>
+                    <Text bold fontSize="lg">Impact</Text>
+                    <Spacer />
+                    <Text fontSize="lg">{getActionMetric(action, "Impact")}</Text>
+                  </HStack>
+                  <HStack alignItems="center" mx={4} mt={2} mb={1}>
+                    <Text bold fontSize="lg">Cost</Text>
+                    <Spacer />
+                    <Text fontSize="lg">{getActionMetric(action, "Cost")}</Text>
+                  </HStack>
+                  <HStack space={2} justifyContent="center" width="100%" mb={3}>
+                    <Button
+                      size="md"
+                      variant="solid"
+                      _text={{
+                        color: "white",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      Add to To-Do
+                    </Button>
+                    <Button
+                      size="md"
+                      variant="solid"
+                      _text={{
+                        color: "white",
+                        fontWeight: "bold",
+                      }}
+                      onPress={() => setIsDoneOpen(true)}
+                    >
+                      Done
+                    </Button>
+                  </HStack>
+                  <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} px={3}>
+                    <TabButton label="Description" name="description" />
+                    <TabButton label="Steps" name="steps" />
+                    <TabButton label="Deep Dive" name="deep_dive" />
+                    {
+                      testimonialsSettings.is_published ? <TabButton label="Testimonials" name="testimonials" /> : null
+                    }
+                    {
+                      vendorsSettings.is_published ? <TabButton label="Service Providers" name="service_providers" /> : null
+                    }
+                    <Container width={5}></Container>
+                  </ScrollView>
+                  <Box m={15}>
+                    {renderTabContent()}
+                  </Box>
+                </VStack>
+                <Container
+                  // style={{ flexDirection: "row", position: "absolute", bottom: 35 }}
+                  // position="absolute"
+                  // bottom={15}
                 >
-                  Add to To-Do
-                </Button>
-                <Button
-                  size="md"
-                  variant="solid"
-                  _text={{
-                    color: "white",
-                    fontWeight: "bold",
-                  }}
-                  ref={buttonTwo}
-                >
-                  Done
-                </Button> */}
-              </Container>
-            </Box>
-          </VStack>
-        </ScrollView>
+                </Container>
+              </Box>
+            </VStack>
+            <Container height={20}></Container>
+          </ScrollView>
+
+          <Modal isOpen={isDoneOpen} onClose={() => {}}>
+            <Modal.Content maxWidth="400px">
+              <Modal.Body>
+                <Center mb="5">
+                  <Ionicons name={"ribbon-outline"} size={90} color="#64B058" />
+                  <Text fontSize="xl" fontWeight="bold" py={2}>
+                    Congratulations!
+                  </Text>
+                  <Text textAlign="center" fontSize="lg">
+                    You just completed <Text bold color="primary.600">{action.title}</Text>!
+                  </Text>
+                </Center>
+                <HStack width="100%" justifyContent={"center"}>
+                  <Button 
+                    color={"primary.600"} 
+                    onPress={() => {setIsDoneOpen(false), navigation.navigate("addTestimonial")}} 
+                    mr={3}
+                  >
+                    Leave a Testimonial
+                  </Button>
+                  <Button variant={"outline"} px={5} onPress={() => setIsDoneOpen(false)}>
+                    Exit
+                  </Button>
+                </HStack>
+              </Modal.Body>
+            </Modal.Content>
+          </Modal>
+        </View>
       }
     </Page>
   );

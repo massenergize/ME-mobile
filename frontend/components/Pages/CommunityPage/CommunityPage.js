@@ -170,9 +170,6 @@ export default function CommunityPage({ navigation }) {
             </HStack>
           </ScrollView>
           {
-            // isEventLoading 
-            // ? <Spinner size="lg" color="primary.500" /> 
-            // :
             upcomingEvent === null 
             ? <></> 
             :

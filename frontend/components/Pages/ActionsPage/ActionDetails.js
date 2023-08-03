@@ -34,6 +34,9 @@ export default function ActionDetails({ route, navigation }) {
   const { testimonials, testimonialsSettings, vendorsSettings } = useContext(CommunityContext);
 
   const [isDoneOpen, setIsDoneOpen] = useState(false)
+  const [isToDoOpen, setIsToDoOpen] = useState(false)
+  const [completedActions, setcompletedActions] = useState([])
+  const [toDoActions, settoDoActions] = useState([])
 
   const generateDescriptionTab = () => {
     return (
@@ -201,6 +204,7 @@ export default function ActionDetails({ route, navigation }) {
                         color: "white",
                         fontWeight: "bold",
                       }}
+                      onPress={() => {setIsToDoOpen(true), toDoActions.push({name: action}), console.log("Added " + action.title + " to To-do")}}
                     >
                       Add to To-Do
                     </Button>
@@ -211,7 +215,7 @@ export default function ActionDetails({ route, navigation }) {
                         color: "white",
                         fontWeight: "bold",
                       }}
-                      onPress={() => setIsDoneOpen(true)}
+                      onPress={() => {setIsDoneOpen(true), completedActions.push({name: action}), console.log("Added " + action.title + " Completed")}}
                     >
                       Done
                     </Button>
@@ -264,6 +268,26 @@ export default function ActionDetails({ route, navigation }) {
                     Leave a Testimonial
                   </Button>
                   <Button variant={"outline"} px={5} onPress={() => setIsDoneOpen(false)}>
+                    Exit
+                  </Button>
+                </HStack>
+              </Modal.Body>
+            </Modal.Content>
+          </Modal>
+          <Modal isOpen={isToDoOpen} onClose={() => {}}>
+            <Modal.Content maxWidth="400px">
+              <Modal.Body>
+                <Center mb="5">
+                  <Ionicons name={"ribbon-outline"} size={90} color="#64B058" />
+                  <Text fontSize="xl" fontWeight="bold" py={2}>
+                    Nice!
+                  </Text>
+                  <Text textAlign="center" fontSize="lg">
+                    You just added  <Text bold color="primary.600">{action.title}</Text> to your To-Do list!
+                  </Text>
+                </Center>
+                <HStack width="100%" justifyContent={"center"}>
+                  <Button variant={"outline"} px={5} onPress={() => setIsToDoOpen(false)}>
                     Exit
                   </Button>
                 </HStack>

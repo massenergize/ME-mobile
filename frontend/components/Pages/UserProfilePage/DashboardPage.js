@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useNavigation, useEffect, useContext } from "@react-navigation/native";
+import { StyleSheet } from "react-native";
+import { useNavigation, useEffect, createContext, useContext, useCallback } from "react";
 import {
   Text,
   Image,
@@ -11,6 +12,8 @@ import {
   Avatar,
   Center,
   Icon,
+  Spinner,
+  HStack,
   Pressable,
 } from "native-base";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
@@ -638,7 +641,7 @@ const ACTION = {
   ],
 };
 
-const ProfileName = ({ navigation, userInfo }) => {
+const ProfileName = ({ navigation, communityInfo }) => {
   return (
     <Flex
       flexDirection="row"
@@ -655,7 +658,7 @@ const ProfileName = ({ navigation, userInfo }) => {
       />
       <Box alignItems="center">
         <Text fontSize="xl">Your Name</Text>
-        <Text>Community Name</Text>
+        <Text>{communityInfo.name}</Text>
       </Box>
       <Pressable onPress={() => navigation.navigate("settings")}>
         <Icon as={FontAwesome} name="cog" size="lg" />
@@ -704,49 +707,46 @@ const CarbonSaved = () => {
   );
 };
 
-const ActionsList = ({ userInfo }) => {
-  
-  const [actions, setActions] = useState([
-    ACTION,
-    ACTION,
-    ACTION,
-    ACTION,
-    ACTION,
-    ACTION,
-  ]);
-  const navigation = useNavigation();
+const ActionsList = ({ navigation }) => {
+  const { actions } = useContext(CommunityContext);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (actions) {
+      setIsLoading(false);
+    }
+  }, []);  
+  // const actions = useContext(CommunityContext);
+  // const [actions, setActions] = useState([
+  //   ACTION,
+  //   ACTION,
+  //   ACTION,
+  //   ACTION,
+  //   ACTION,
+  //   ACTION,
+  // ]);
 
   return (
     <Box>
       <ActionsFilter />
-      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-        {actions &&
-          // toDoList.data.map((action, index) => {
-          //   if (getMetric(action, "Impact") === "High") {
-          //     return (
-          //       <ActionCard navigation={navigation} action={action} key={index} mx="2" my= "3"></ActionCard>
-          //     )
-          //   }
-          //   else {
-          //     return null;
-          //   }
-          // })
-          actions.map((action, index) => {
-            return (
-                <ActionCard
-                  key={index}
-                  navigation={navigation}
-                  id={action.id}
-                  title={action.title}
-                  imgUrl={action.image?.url}
-                  impactMetric={getActionMetric(action, "Impact")}
-                  costMetric={getActionMetric(action, "Cost")}
-                  mx="2"
-                  my="3"
-                />
-            );
-          })
-        }
+      <ScrollView>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
+              {actions.map((action, index) => {
+                return (
+                  <ActionCard
+                    key={index}
+                    navigation={navigation}
+                    id={action.id}
+                    title={action.title}
+                    imgUrl={action.image?.url}
+                    impactMetric={getActionMetric(action, "Impact")}
+                    costMetric={getActionMetric(action, "Cost")}
+                  />
+                );
+              })}
+            </HStack>
+          </ScrollView>
       </ScrollView>
     </Box>
   );
@@ -857,8 +857,8 @@ const HousesList = () => {
   );
 };
 
-const CommunitiesList = () => {
-  const [communities, setCommunities] = useState([COMMUNITY, COMMUNITY]);
+const CommunitiesList = ({ communityInfo }) => {
+  const [communities, setCommunities] = useState([communityInfo]);
 
   return (
     <Center>
@@ -876,27 +876,42 @@ const CommunitiesList = () => {
 };
 
 export default function DashboardPage({ route, navigation }) {
-  const { community_id } = route.params;
-  const { actions } = useContext(CommunityContext);
+  const { communityInfo, actions, fetchCommunityInfo } = useContext(CommunityContext);
+  const {community_id} = communityInfo
 
-  // const { communityInfo, fetchCommunityInfo } = useContext(CommunityContext);
-  // const [isLoading, setIsLoading] = useState(true);
-
-
+  const [refreshing, setRefreshing] = useState(false);
+  const onRefresh = useCallback (() => {
+    setRefreshing(true);
+    fetchCommunityInfo(community_id, () => setRefreshing(false))
+    // setTimeout(() => setRefreshing(false), 2000);
+  }, []);
   return (
+
+    
     <Page>
       <ScrollView padding="5">
         <VStack space={10} mb="20">
-          <ProfileName navigation={navigation} /*userInfo={userInfo}*//>
+          <ProfileName navigation={navigation} communityInfo = {communityInfo} /*userInfo={userInfo}*//>
           <SustainScore />
           <CarbonSaved />
-          <ActionsList userInfo={actions}/>
+          <ActionsList />
           <BadgesList />
           <TeamsList />
           <HousesList />
-          <CommunitiesList />
+          <CommunitiesList communityInfo = {communityInfo}/>
         </VStack>
       </ScrollView>
     </Page>
   );
 }
+
+const styles = StyleSheet.create({
+  scroll: {
+    height: "80",
+  },
+  category: {
+    padding: 15,
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+});

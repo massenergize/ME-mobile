@@ -191,7 +191,7 @@ export default function CommunityPage({ navigation }) {
                         new Date(upcomingEvent.end_date_and_time)
                       )}
                       location={upcomingEvent.location}
-                      imageURI={upcomingEvent.image.url}
+                      imageUrl={upcomingEvent.image?.url}
                       canRSVP={upcomingEvent.rsvp_enabled}
                       isRSVPED={upcomingEvent.is_rsvped}
                       isShared={upcomingEvent.is_shared}

@@ -36,7 +36,9 @@ export async function apiCall(
   const formData = new FormData();
 
   Object.keys(dataToSend).map((k) => formData.append(k, dataToSend[k]));
-  formData.append("", "");
+  if (Object.keys(dataToSend).length === 0) {
+    formData.append("", "")
+  }
 
   // Object.keys(dataToSend).map((k) => formData.append(k, {...dataToSend[k], type: 'multipart/form-data'}));
   // if (authToken)

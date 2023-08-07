@@ -1,6 +1,6 @@
-import { useWindowDimensions, StyleSheet } from "react-native";
 import React from "react";
 import HTMLRender from "react-native-render-html";
+import { useWindowDimensions, StyleSheet } from "react-native";
 
 export default HTMLParser = React.memo(({ htmlString, baseStyle }) => {
   const { width } = useWindowDimensions();

@@ -8,19 +8,14 @@ export default function CommunityCard({ community, ...props }) {
         {community.logo?.url ? (
           <Image
             source={{
-              uri: community.logo?.url || "#",
+              uri: community.logo?.url,
             }}
             alt="Community Logo"
             size="100px"
             resizeMode="contain"
           />
         ) : (
-          <Image
-            source={require("../../../assets/images/logo.png")}
-            alt="Community Logo"
-            size="100px"
-            resizeMode="contain"
-          />
+          <Box height={100} width={100} bg="gray.300"></Box>
         )}
         <Box width="70%" pl="5">
           <Text fontSize="lg" fontWeight="bold">

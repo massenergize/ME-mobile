@@ -9,17 +9,24 @@ import {
   VStack,
   Box,
   ScrollView,
-  Flex,
   Input,
   View,
   Spinner,
+  Spacer
 } from "native-base";
+import TeamCard from "./TeamCard";
 import Page from "../../Shared/Page";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import { TeamActionsChart, ActionsList } from "../../Shared/Charts";
 import { useDetails } from "../../Contexts/CommunityContext";
 
-export default function TeamDetailsPage({ route }) {
+export default function TeamDetailsPage({ route, navigation }) {
   const { team_id } = route.params;
+  const { subteams } = route.params;
+  const { team_stats } = route.params;
   const [team, isTeamLoading] = useDetails("teams.info", { team_id: team_id });
+  const [members, isMembersLoading] = useDetails("teams.members.preferredNames", { team_id: team_id });
+  const [actions, isActionsLoading] = useDetails("teams.actions.completed", { team_id: team_id });
 
   const [activeTab, setActiveTab] = useState("about");
   //   TODO: Cache these components to avoid re-rendering.
@@ -27,102 +34,107 @@ export default function TeamDetailsPage({ route }) {
     return <Text>{team.description}</Text>;
   };
 
+  const [ actionDisplay, setActionDisplay ] = useState('chart');
+
+  const getGraphData = () => {
+    let graphData = {
+      "Activism & Education": {
+        "name": "Activism & Education",
+        "value": 0
+      },
+      "Food": {
+        "name": "Food",
+        "value": 0,
+      },
+      "Home Energy":{
+        "name": "Home Energy",
+        "value": 0,
+      },
+      "Land, Soil & Water": {
+        "name": "Land, Soil & Water",
+        "value": 0,
+      },
+      "Solar": {
+        "name": "Solar",
+        "value": 0,
+      },
+      "Transportation": {
+        "name": "Transportation",
+        "value": 0,
+      },
+      "Waste & Recycling": {
+        "name": "Waste & Recycling",
+        "value": 0,
+      }
+    }
+    for (let i = 0; i < actions.length; i++) {
+      graphData[actions[i].category].value += actions[i].done_count
+    }
+    return Object.values(graphData)
+  }
+
   const generateActionsTab = () => {
     return (
       <VStack space="5">
         <Text alignSelf="center">
-          <Text fontWeight="bold">484 </Text>
+          <Text fontWeight="bold">{team_stats.actions_completed} </Text>
           Actions Completed
         </Text>
         <Text alignSelf="center">
-          <Text fontWeight="bold">5679.8 </Text>
+          <Text fontWeight="bold">{(team_stats.carbon_footprint_reduction / 133).toFixed(2)} </Text>
           Number of Trees
         </Text>
+        <HStack width="100%">
+            <Spacer />
+            <Center>
+              <Ionicons 
+                name={"bar-chart-outline"} 
+                color={actionDisplay == "chart" ? '#64B058' : 'black'} 
+                padding={5} 
+                size={24} 
+                onPress={() => setActionDisplay('chart')}/>
+            </Center>
+            <Center pr={3}>
+              <Ionicons 
+                name={"list-outline"} 
+                color={actionDisplay == "list" ? '#64B058' : 'black'} 
+                padding={5} E
+                size={24} 
+                onPress={() => setActionDisplay('list')}/>
+            </Center>
+          </HStack>
+          {
+            (actionDisplay == "chart")
+            ?
+            <TeamActionsChart graphData={getGraphData()} />
+            // null
+            :
+            <ActionsList listData={actions} />
+          }
       </VStack>
     );
   };
 
   const generateMembersTab = () => {
-    const generateMemers = () => {
-      let members = [];
-      for (let i = 0; i < 10; i++) {
-        members.push(
-          <HStack key={i} space="2" alignItems="center">
-            <Image
-              source={{}}
-              alt="Member Image"
-              size="xs"
-              backgroundColor="gray.300"
-              borderRadius="full"
-            />
-            <Text>Member {i + 1}</Text>
-          </HStack>
-        );
+    return <VStack space="2">
+      {
+        members.map((member, i) => {
+          return <Text fontSize="md" key={i}>{member.preferred_name}</Text>
+        })
       }
-      return members;
-    };
-    return <VStack space="2">{generateMemers()}</VStack>;
+    </VStack>;
   };
 
   const generateSubTeamsTab = () => {
-    const generateSubTeams = () => {
-      let subTeams = [];
-      for (let i = 0; i < 5; i++) {
-        subTeams.push(
-          <Flex
-            key={i}
-            direction="row"
-            borderRadius="2xl"
-            shadow="5"
-            backgroundColor="white"
-          >
-            <Image
-              source={require("../../../assets/images/team-1.jpeg")}
-              alt="image"
-              size="xl"
-              height="full"
-              borderLeftRadius="2xl"
-            />
-            <Box flexShrink={1} borderRightRadius="2xl" w="full">
-              <VStack space="3" p="4">
-                <Text fontSize="lg" fontWeight="bold">
-                  Sub Team 1
-                </Text>
-                <Text>Description of the team and what their purpose is.</Text>
-                <VStack>
-                  <Flex direction="row" justifyContent={"space-between"}>
-                    <Text fontSize="sm" fontWeight="bold">
-                      65
-                    </Text>
-                    <Text fontSize="sm">Members</Text>
-                  </Flex>
-                  <Flex direction="row" justifyContent={"space-between"}>
-                    <Text fontSize="sm" fontWeight="bold">
-                      124
-                    </Text>
-                    <Text fontSize="sm">Actions Completed</Text>
-                  </Flex>
-                  <Flex direction="row" justifyContent={"space-between"}>
-                    <Text fontSize="sm" fontWeight="bold">
-                      1615.2
-                    </Text>
-                    <Text fontSize="sm">Number of Trees</Text>
-                  </Flex>
-                  <Flex direction="row" justifyContent={"space-between"}>
-                    <Text fontSize="sm" fontWeight="bold">
-                      5
-                    </Text>
-                    <Text fontSize="sm">Sub-teams</Text>
-                  </Flex>
-                </VStack>
-              </VStack>
-            </Box>
-          </Flex>
+    return <VStack space="5">
+      {
+      subteams.map((subteam, i) => {
+        return (
+            <TeamCard navigation={navigation} team={subteam} isSubteam={true} key={i} />
         );
+      })
       }
-      return subTeams;
-    };
-    return <VStack space="5">{generateSubTeams()}</VStack>;
+    </VStack>;
   };
 
   const generateContactTab = () => {
@@ -166,11 +178,10 @@ export default function TeamDetailsPage({ route }) {
   return (
     <Page>
       <ScrollView>
-        {isTeamLoading ? (
+        {isTeamLoading || isMembersLoading ? (
           <Spinner />
         ) : (
           <View>
-            {console.log(team)}
             <Center my="5">
               {team.logo ? (
                 <Image
@@ -184,6 +195,7 @@ export default function TeamDetailsPage({ route }) {
             </Center>
             <VStack space="3">
               <Heading alignSelf="center">{team.name}</Heading>
+              <Button my={2} mx={4}>JOIN</Button>
               <Center mx="5">
                 <ScrollView
                   horizontal={true}
@@ -206,14 +218,17 @@ export default function TeamDetailsPage({ route }) {
                       variant={activeTab === "members" ? "solid" : "outline"}
                       onPress={() => setActiveTab("members")}
                     >
-                      Members (65)
+                        {"Members (" + members.length + ")"}
                     </Button>
-                    <Button
-                      variant={activeTab === "subTeams" ? "solid" : "outline"}
-                      onPress={() => setActiveTab("subTeams")}
-                    >
-                      Sub-teams
-                    </Button>
+                    {
+                      subteams.length === 0 ? null :
+                      <Button
+                        variant={activeTab === "subTeams" ? "solid" : "outline"}
+                        onPress={() => setActiveTab("subTeams")}
+                      >
+                        Sub-teams
+                      </Button>
+                    }
                     <Button
                       variant={activeTab === "contact" ? "solid" : "outline"}
                       onPress={() => setActiveTab("contact")}
@@ -225,7 +240,6 @@ export default function TeamDetailsPage({ route }) {
               </Center>
               <Tab>
                 {renderTabContent()}
-                <Button my="5">JOIN</Button>
               </Tab>
             </VStack>
           </View>

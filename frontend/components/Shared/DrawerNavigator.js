@@ -342,6 +342,7 @@ function CustomDrawerContent(props) {
 
 export default function DrawerNavigator({ route, navigation }) {
     const { community_id } = route.params;
+    console.log("community_id: ", community_id)
 
     const [isCommunityLoading, setIsCommunityLoading] = useState(true);
     const { communityInfo, fetchCommunityInfo, vendorsSettings, teamsSettings, testimonialsSettings, infoLoaded } = useContext(CommunityContext);

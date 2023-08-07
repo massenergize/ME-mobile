@@ -244,5 +244,5 @@ export const useDetails = (route, args) => {
     });
   }, [])
 
-  return [data, isLoading]
+  return [data, isLoading];
 }

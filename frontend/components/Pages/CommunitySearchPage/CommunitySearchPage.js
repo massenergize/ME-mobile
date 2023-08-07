@@ -142,7 +142,7 @@ export default function CommunitySearchPage({ navigation }) {
                           ? -1
                           : 1
                       )
-                      .sort((a, b) => a.location.distance - b.location.distance)
+                      .sort((a, b) => a.location?.distance - b.location?.distance)
                       .map((community) => {
                         return (
                           <CommunityCard

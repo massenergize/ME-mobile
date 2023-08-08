@@ -102,3 +102,11 @@ export const translateFirebaseError = (error) => {
 export const setAsyncStorageItem = async (key, value) => {
   await AsyncStorage.setItem(key, value);
 }
+
+export const getAsyncStorageItem = async (key) => {
+  return await AsyncStorage.getItem(key);
+}
+
+export const removeAsyncStorageItem = async (key) => {
+  await AsyncStorage.removeItem(key);
+}

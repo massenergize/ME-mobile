@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { GoogleAuthProvider } from "firebase/auth";
 import {
   GoogleSignin,
@@ -8,9 +7,9 @@ import {
 } from "@react-native-google-signin/google-signin";
 
 import useME from "./useME";
-import Constants from "../Constants";
+import Constants, { FB_USER } from "../Constants";
 import { AUTH } from "../../config/firebaseConfig";
-import { translateFirebaseError } from "../Shared/Utils";
+import { getAsyncStorageItem, removeAsyncStorageItem, setAsyncStorageItem, translateFirebaseError } from "../Shared/Utils";
 
 export default function useAuth() {
   const [user, setUser] = useState(null);
@@ -25,7 +24,7 @@ export default function useAuth() {
     const unsubscribe = AUTH.onAuthStateChanged(async (user) => {
       if (user) {
         setUser(user);
-        await AsyncStorage.setItem("@FBUser", JSON.stringify(user));
+        await setAsyncStorageItem(FB_USER, JSON.stringify(user))
       } else {
         setUser(null);
         setAuthState(Constants.USER_IS_NOT_AUTHENTICATED);
@@ -37,12 +36,11 @@ export default function useAuth() {
 
   /**
    * Fetches the user from the local storage.
-   * TODO: switch from AsyncStorage to SecureStore.
    * reference: https://docs.expo.dev/guides/authentication/#storing-data
    */
   const _fetchUserFromStorage = async () => {
     try {
-      const user = await AsyncStorage.getItem("@FBUser");
+      const user = await getAsyncStorageItem(FB_USER)
       const userData = user ? JSON.parse(user) : null;
       if (userData?.emailVerified) {
         setUser(userData);
@@ -175,7 +173,7 @@ export default function useAuth() {
     // maybe implement this feature when user wants to delete their account?
     // GoogleSignin.revokeAccess();
     GoogleSignin.signOut();
-    await AsyncStorage.removeItem("@FBUser");
+    await removeAsyncStorageItem(FB_USER)
   };
 
   /**

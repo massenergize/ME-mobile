@@ -1,9 +1,10 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 import _ from 'lodash'
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { apiCall } from "../../api/functions";
+import { setAsyncStorageItem } from "../Shared/Utils";
+import { LAST_VISITED_COMMUNITY_ID } from "../Constants";
 
 export const CommunityContext = createContext();
 
@@ -23,13 +24,13 @@ export const CommunityProvider = ({ children }) => {
     await Promise.all([
       apiCall("communities.info", { community_id: community_id }).then((json) => {
         if (json.success) {
-          AsyncStorage.setItem("@LastVisitedCommunityId", community_id.toString());
           const newCommunityInfo = { ...json.data, community_id: community_id };
           if (!communityInfo || !_.isEqual(communityInfo, newCommunityInfo)) {
             setCommunityInfo({ ...json.data, community_id: community_id });
             setInfoLoaded(infoLoaded => infoLoaded + 1);
             console.log("Community Info Fetched")
           }
+          setAsyncStorageItem(LAST_VISITED_COMMUNITY_ID, community_id.toString())
         } else {
           console.log(json);
           if (callBackFn) callBackFn(null, json.error);

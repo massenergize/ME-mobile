@@ -18,8 +18,8 @@
     "@react-navigation/native-stack": "^6.9.13",
     "expo": "^49.0.6",
     "expo-dev-client": "~2.4.6",
-    "expo-status-bar": "~1.6.0",
     "expo-splash-screen": "~0.20.4",
+    "expo-status-bar": "~1.6.0",
     "expo-system-ui": "~2.4.0",
     "firebase": "^10.1.0",
     "formik": "^2.4.2",
@@ -43,8 +43,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.22.9",
-    "sharp-cli": "^2.1.0",
-    "patch-package": "^8.0.0"
+    "patch-package": "^8.0.0",
+    "sharp-cli": "^4.1.1"
   },
   "private": true
 }

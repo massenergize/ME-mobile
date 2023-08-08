@@ -4,6 +4,7 @@ import {
     HStack,
     Text,
     Container,
+    View
 } from "native-base";
 import { Dimensions } from 'react-native';
 import { VictoryPie, VictoryContainer, VictoryBar, VictoryChart, VictoryTheme, VictoryAxis, VictoryGroup, VictoryLegend } from 'victory-native';
@@ -127,4 +128,77 @@ function ActionsChart({ graphData }) {
     )
 }
 
-export { SmallChart, BigPieChart, ActionsChart }
+function TeamActionsChart({ graphData }) {
+    const getData = () => {
+        for (let i = 0; i < graphData.length; i++) {
+            if (updatedNames[graphData[i].name] !== undefined)
+                graphData[i].name = updatedNames[graphData[i].name];
+        }
+        // console.log(graphData)
+        return graphData;
+    }
+
+    return (
+        <VStack alignItems="center">
+            <VictoryChart
+                theme={VictoryTheme.material}
+                domainPadding={10}
+                padding={{top: 40, right: 20, bottom: 30, left:110}}
+                >
+                <VictoryAxis dependentAxis />
+                <VictoryAxis style={{ 
+                    // tickLabels: { fill:"transparent"} 
+                }} />
+                {/* <VictoryGroup offset={10}> */}
+                <VictoryBar
+                    data={getData()}
+                    x="name"
+                    y="value"
+                    horizontal={true}
+                    style={{ data: { fill: "#DC4E34", fillOpacity: 0.9 }, labels: {fontSize: 15}}}
+                    // labels={({ datum }) => datum.name}
+                    // labelComponent={<VictoryLabel x={45} dy={-12}/>}
+                    barRatio={0.7}
+                />
+                {/* </VictoryGroup> */}
+                <VictoryLegend x={110} y={0}
+                    centerTitle
+                    orientation="horizontal"
+                    gutter={20}
+                    style={{ border: { stroke: "black" }, title: {fontSize: 20 } }}
+                    data={[
+                    { name: "Actions", symbol: { fill: "#DC4E34", type: "square", fillOpacity: 0.9 } },
+                    ]}
+                />
+            </VictoryChart>
+            <Container h={10}/>
+        </VStack>
+    )
+}
+
+function ActionsList({ listData }) {
+    return (
+      <View width="100%" ml={3} p={3}>
+        <HStack width="100%" alignItems="center" justifyContent="space-between" mb={2}>
+          <Text bold fontSize="sm" width="25%" textAlign="center">Actions</Text>
+          <Text bold fontSize="sm" width="30%" textAlign="center">Category</Text>
+          <Text bold fontSize="sm" width="25%" textAlign="center">Carbon Saving</Text>
+          <Text bold fontSize="sm" width="20%" textAlign="center"># Done</Text>
+        </HStack>
+        {
+          listData.map((action, index) => (
+  
+              <HStack width="100%" alignItems="center" justifyContent="space-between" mb={4} key={index}>
+                <Text bold fontSize="sm" width="25%" textAlign="left" color="#64B058">{action.name}</Text>
+                <Text fontSize="sm" width="30%" textAlign="center">{action.category}</Text>
+                <Text fontSize="sm" width="25%" textAlign="center">{action.carbon_total}</Text>
+                <Text fontSize="sm" width="20%" textAlign="center">{action.done_count}</Text>
+              </HStack>
+  
+          ))
+        }
+      </View>
+    )
+  }
+
+export { SmallChart, BigPieChart, ActionsChart, TeamActionsChart, ActionsList }

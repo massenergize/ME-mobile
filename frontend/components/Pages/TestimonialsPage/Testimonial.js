@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import Moment from 'moment';
-import { VStack, Image, Text, Spinner } from "native-base";
+import { VStack, Image, Text, Spinner, Center } from "native-base";
 import { ScrollView, View, useWindowDimensions } from "react-native";
 
 import Page from "../../Shared/Page";
 import ActionCard from "./../ActionsPage/ActionCard.js";
 import ServiceProviderCard from "./../ServiceProvidersPage/ServiceProviderCard.js";
 import HTMLParser from "../../Shared/HTMLParser";
-import { useDetails } from "../../Contexts/CommunityContext";
+import { useDetails, CommunityContext } from "../../Contexts/CommunityContext";
 import { getActionMetric } from "../../Shared/Utils";
 
 export default function Testimonial({ route, navigation }) {
@@ -15,14 +15,18 @@ export default function Testimonial({ route, navigation }) {
 
     const { testimonial_id } = route.params;
     const [testimonial, isTestimonialLoading] = useDetails("testimonials.info", {testimonial_id: testimonial_id});
+    const { vendorsSettings } = useContext(CommunityContext);
 
     return (
         <Page>  
-            <ScrollView>
-                {
-                    isTestimonialLoading
-                    ? <Spinner />
-                    :
+            {
+                isTestimonialLoading
+                ? 
+                <Center width="100%" height="100%">
+                    <Spinner size="lg"/>
+                </Center>
+                :
+                <ScrollView>
                     <VStack bg="white" px="3" pb="20">
                         {
                             (testimonial.file ) ? (
@@ -68,7 +72,7 @@ export default function Testimonial({ route, navigation }) {
                             : <></>
                         }
                         {
-                            (testimonial.vendor != null)
+                            (vendorsSettings.is_published && testimonial.vendor != null)
                             ?
                             <View>
                                 <Text bold fontSize="lg" mb={2} mt={7}>Related Vendor</Text>
@@ -86,8 +90,8 @@ export default function Testimonial({ route, navigation }) {
                             : <></>
                         }
                     </VStack>
-                }
-            </ScrollView>
+                </ScrollView>
+            }
         </Page>
     );
 }

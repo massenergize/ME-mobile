@@ -1,6 +1,6 @@
 import React from "react";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 import ActionsPage from "../Pages/ActionsPage/ActionsPage";
 import CommunityPage from "../Pages/CommunityPage/CommunityPage";

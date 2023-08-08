@@ -89,7 +89,7 @@ export default function CommunitySearchPage({ navigation }) {
           </Heading>
         </Center>
       </Box>
-      <Box backgroundColor="white" top="-25" borderTopRadius="30">
+      <Box backgroundColor="white" top="-5%" borderTopRadius="30">
         <Box mx="5">
           <VStack space="5" pt="10">
             <HStack space="2" alignItems="center">
@@ -124,7 +124,7 @@ export default function CommunitySearchPage({ navigation }) {
             {isLoading ? (
               <Spinner />
             ) : (
-              <View height={"xs"}>
+              <View height="75%">
                 {communities.length === 0 ? (
                   <Text textAlign="center" color="muted.400">
                     Please enter a zip code to find communities.

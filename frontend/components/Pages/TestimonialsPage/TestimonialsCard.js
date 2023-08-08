@@ -1,12 +1,11 @@
-import { View } from "react-native";
 import React from "react";
-import { Box, Text, Pressable, Image } from "native-base";
 import Moment from 'moment';
+import { Box, Text, Pressable, Image } from "native-base";
 
 function TestimonialCard({ navigation, data, picture }) {
     if (picture) {
         return (
-        <Pressable onPress={() => navigation.navigate("testimonial", {data: data})}  >
+        <Pressable onPress={() => navigation.navigate("testimonial", {data: data, testimonial_id: data.id})}  >
             <Box 
               mx={3} 
               mt={2} 
@@ -43,7 +42,7 @@ function TestimonialCard({ navigation, data, picture }) {
     }
     else {
         return (
-            <Pressable onPress={() => navigation.navigate("testimonial", {data: data})}>
+            <Pressable onPress={() => navigation.navigate("testimonial", {data: data, testimonial_id: data.id})}>
                 <Box mx={3} mt={2} bg="white" borderRadius="xl" shadow={1}>
                     <Box p={3}>
                         <Text bold fontSize="lg">{data.title}</Text>

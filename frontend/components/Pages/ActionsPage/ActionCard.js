@@ -1,78 +1,51 @@
-import { Text, Pressable } from "react-native";
 import React from "react";
-import { Box, Heading, HStack, AspectRatio, Image, Stack } from "native-base";
+import { Text, Pressable } from "react-native";
+import { Box, Heading, Image, Stack } from "native-base";
 
-function ActionCard({ navigation, action, ...props }) {
-  const getMetric = (metric) => {
-    for (let i = 0; i < action.tags.length; i++) {
-      if (action.tags[i].tag_collection_name === metric) {
-        return action.tags[i].name;
-      }
-    }
-    return "-";
-  };
-
-  return (
-    // <Box alignItems="center" width = "50%">
-    // <Box alignItems="center" width={180} shadow={1} bg="white" rounded="lg" marginBottom={1}>
-
-    <Pressable
-      onPress={() => {
-        console.log("Action clicked"),
-          navigation.navigate("actiondetails", { action: action });
-      }}
-      // overflow="hidden"
-      // bg="white"
-      // borderRadius="2xl"
-    >
-      <Box bg="white" borderRadius="xl" shadow={2} width={180} {...props}>
-        <Box>
-          {/* <AspectRatio w="100%" ratio={16 / 9}> */}
-          <Image
-            source={{
-              // uri: "https://m.media-amazon.com/images/I/61JhlT09xiL._AC_SX679_.jpg",
-              uri: action.image.url,
-            }}
-            alt="image"
-            borderTopRadius="xl"
-            resizeMode="cover"
-            height={120}
-          />
-          {/* </AspectRatio> */}
-        </Box>
-        <Stack p={3} space={3}>
-          <Stack space={2}>
-            <Heading size="sm" isTruncated={true} noOfLines={1}>
-              {action.title}
-            </Heading>
-            <Text fontSize="xs" fontWeight="500">
-              {/* {getMetric("Impact")} | {getMetric("Cost")} | Difficulty */}
-              {getMetric("Impact")} Impact | {getMetric("Cost")}
-            </Text>
-          </Stack>
-          {/*
-              <Text fontWeight="400">
-                Learn something cool about this task here!
+export default ActionCard = React.memo(
+  ({
+    navigation,
+    id,
+    title,
+    imgUrl,
+    impactMetric = "Low",
+    costMetric = "0",
+    ...props
+  }) => {
+    return (
+      <Pressable
+        onPress={() => {
+          navigation.navigate("actiondetails", { action_id: id });
+        }}
+        {...props}
+      >
+        <Box bg="white" borderRadius="xl" shadow={2} width={180} {...props}>
+          <Box>
+            {imgUrl ? (
+              <Image
+                source={{ uri: imgUrl }}
+                alt="image"
+                borderTopRadius="xl"
+                resizeMode="cover"
+                height={120}
+                bg="gray.300"
+              />
+            ) : (
+              <Box height={120} bg="gray.300"></Box>
+            )}
+          </Box>
+          <Stack p={3} space={3}>
+            <Stack space={2}>
+              <Heading size="sm" isTruncated={true} noOfLines={1}>
+                {title ? title : "Action Title"}
+              </Heading>
+              <Text fontSize="xs" fontWeight="500">
+                {`${impactMetric} Impact | ${costMetric}`}
               </Text>
-            */}
-          {/* <HStack alignItems="center" space={4} justifyContent="space-between">
-                <HStack alignItems="center">
-                  <Text
-                    color="coolGray.600"
-                    _dark={{
-                      color: "warmGray.200",
-                    }}
-                    fontWeight="400"
-                  >
-                    5 completed recently.
-                  </Text>
-                </HStack>
-              </HStack> */}
-        </Stack>
-      </Box>
-    </Pressable>
-    // </Box>
-  );
-}
-
-export default ActionCard;
+            </Stack>
+          </Stack>
+        </Box>
+      </Pressable>
+    );
+  }
+);

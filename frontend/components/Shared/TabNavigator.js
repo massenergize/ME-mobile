@@ -1,10 +1,11 @@
 import React from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import CommunityPage from "../Pages/CommunityPage/CommunityPage";
-import ActionsPage from "../Pages/ActionsPage/ActionsPage";
-import EventsPage from "../Pages/EventsPage/EventsPage";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
+import ActionsPage from "../Pages/ActionsPage/ActionsPage";
+import CommunityPage from "../Pages/CommunityPage/CommunityPage";
 import DashboardPage from "../Pages/UserProfilePage/DashboardPage";
+import EventsPage from "../Pages/EventsPage/EventsPage";
 
 const Tab = createBottomTabNavigator();
 
@@ -15,9 +16,7 @@ const tabBarLabels = {
   DASHBOARD: "Dashboard",
 };
 
-export default function TabNavigator({ route }) {
-  const { community_id } = route.params;
-
+export default function TabNavigator() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -42,14 +41,21 @@ export default function TabNavigator({ route }) {
         headerShown: false,
       })}
     >
-      <Tab.Screen
-        name="COMMUNITY"
-        component={CommunityPage}
-        initialParams={{ community_id: community_id }}
-      />
-      <Tab.Screen name="ACTIONS" component={ActionsPage} />
-      <Tab.Screen name="EVENTS" component={EventsPage} />
-      <Tab.Screen name="DASHBOARD" component={DashboardPage} />
-    </Tab.Navigator>
-  );
+      <Tab.Screen 
+        name="COMMUNITY" 
+        component={CommunityPage} 
+        />
+      <Tab.Screen 
+        name="ACTIONS" 
+        component={ActionsPage} 
+        />
+      <Tab.Screen 
+        name="EVENTS" 
+        component={EventsPage} 
+        />
+      <Tab.Screen 
+        name="PROFILE" 
+        component={DashboardPage} />
+  </Tab.Navigator>
+  )
 }

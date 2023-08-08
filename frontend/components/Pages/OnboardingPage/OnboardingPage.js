@@ -11,8 +11,10 @@ import {
   AspectRatio,
   HStack,
 } from "native-base";
+
 import HTMLParser from "../../Shared/HTMLParser";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { setAsyncStorageItem } from "../../Shared/Utils";
+import { IS_ONBOARDED } from "../../Constants";
 
 const STEPS = [
   {
@@ -49,8 +51,7 @@ export default function OnboardingPage({ navigation }) {
     if (currentStep < STEPS.length - 1) {
       setCurrentStep(currentStep + 1);
     } else {
-      // Set this flag to true so that the user is not shown the onboarding screen again.
-      AsyncStorage.setItem("@IsOnboarded", "true");
+      setAsyncStorageItem(IS_ONBOARDED, "true")
       navigation.navigate("communitySearch");
     }
   };

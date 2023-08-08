@@ -1,3 +1,7 @@
+export const LAST_VISITED_COMMUNITY_ID = "@LastVisitedCommunityId";
+export const IS_ONBOARDED = "@IsOnboarded";
+export const FB_USER = "@FBUser";
+
 export default {
   USER_IS_NOT_AUTHENTICATED: "user_is_not_authenticated",
   CHECKING_FIREBASE: "looking_for_firebase_authentication",

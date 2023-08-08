@@ -8,7 +8,7 @@ export default function EmailVerificationPage({ onRefresh }) {
   const { signOut, sendVerificationEmail } = useAuth();
 
   const resendEmail = () => {
-    sendVerificationEmail((error) => {
+    sendVerificationEmail(null, (error) => {
       if (error) {
         console.log("Error sending verification email", error);
       } else {

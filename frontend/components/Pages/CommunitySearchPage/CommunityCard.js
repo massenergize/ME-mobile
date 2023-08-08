@@ -25,7 +25,7 @@ export default function CommunityCard({ community, ...props }) {
           {community.is_geographically_focused ? (
             <View>
               <Text fontSize="sm" color="muted.400">
-                {community.location.city}, {community.location.state}
+                {community.location?.city || "null"}, {community.location?.state || community.location?.country || "null"}
               </Text>
               <Text fontSize="sm" color="muted.400">
                 {Math.round(community.location.distance)} miles away

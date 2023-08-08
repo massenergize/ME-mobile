@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, VStack, Image, Flex, Box, Pressable } from "native-base";
+import { Text, VStack, Image, Flex, Box, Pressable, Container } from "native-base";
 
 export default function TeamCard({ navigation, team, isSubteam }) {
   return (
@@ -15,14 +15,14 @@ export default function TeamCard({ navigation, team, isSubteam }) {
         backgroundColor={"white"}
       >
         {team.team.logo ? (
-          <Image
-            source={{ uri: team.team.logo ? team.team.logo.url : null }}
-            alt="image"
-            size="xl"
-            height="full"
-            borderLeftRadius="2xl"
-            resizeMode="contain"
-          />
+            <Image
+              source={{ uri: team.team.logo ? team.team.logo.url : null }}
+              alt="image"
+              size="xl"
+              height="full"
+              // borderLeftRadius="2xl"
+              resizeMode="contain"
+            />
         ) : null}
         <Box flexShrink={1} borderRightRadius="2xl" w="full">
           <VStack space={1} p="4">

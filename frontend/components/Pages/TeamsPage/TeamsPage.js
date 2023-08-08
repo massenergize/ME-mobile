@@ -75,7 +75,7 @@ export default function TeamsPage({ navigation }) {
                                 ? "chevron-up-outline"
                                 : "chevron-down-outline"
                             }
-                            color="#3182ce"
+                            color="#64B058"
                           />
                         </HStack>
                       </Pressable>

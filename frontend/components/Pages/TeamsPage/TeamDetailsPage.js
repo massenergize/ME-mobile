@@ -31,7 +31,11 @@ export default function TeamDetailsPage({ route, navigation }) {
   const [activeTab, setActiveTab] = useState("about");
   //   TODO: Cache these components to avoid re-rendering.
   const generateAboutTab = () => {
-    return <Text>{team.description}</Text>;
+    // return <Text>{team.description}</Text>;
+    return <HTMLParser
+            htmlString={team.description}
+            baseStyle={textStyle}
+            />
   };
 
   const [ actionDisplay, setActionDisplay ] = useState('chart');
@@ -182,19 +186,17 @@ export default function TeamDetailsPage({ route, navigation }) {
           <Spinner />
         ) : (
           <View>
-            <Center my="5">
-              {team.logo ? (
-                <Image
-                  source={{ url: team.logo.url }}
-                  alt="image"
-                  height={150}
-                  width="95%"
-                  resizeMode="contain"
-                />
-              ) : null}
-            </Center>
+            {team.logo ? (
+              <Image
+                source={{ uri: team.logo.url }}
+                alt="image"
+                height={200}
+                mt={5}
+                resizeMode="contain"
+              />
+            ) : null}
             <VStack space="3">
-              <Heading alignSelf="center">{team.name}</Heading>
+              <Heading alignSelf="center" mt={5}>{team.name}</Heading>
               <Button my={2} mx={4}>JOIN</Button>
               <Center mx="5">
                 <ScrollView
@@ -251,4 +253,8 @@ export default function TeamDetailsPage({ route, navigation }) {
 
 const Tab = ({ children }) => {
   return <Box p="5">{children}</Box>;
+};
+
+const textStyle = {
+  fontSize: "16px",
 };

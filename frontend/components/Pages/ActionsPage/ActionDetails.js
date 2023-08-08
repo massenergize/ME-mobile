@@ -256,13 +256,13 @@ export default function ActionDetails({ route, navigation }) {
                   </Text>
                 </Center>
                 <HStack width="100%" justifyContent={"center"}>
-                  <Button 
+                  {/* <Button 
                     color={"primary.600"} 
                     onPress={() => {setIsDoneOpen(false), navigation.navigate("addTestimonial")}} 
                     mr={3}
                   >
                     Leave a Testimonial
-                  </Button>
+                  </Button> */}
                   <Button variant={"outline"} px={5} onPress={() => setIsDoneOpen(false)}>
                     Exit
                   </Button>

@@ -25,7 +25,7 @@ export default function ActionsPage({ navigation }) {
         </Center>
       ) : (
         <ScrollView>
-          <Text style={styles.category}>Recommended</Text>
+          <Text style={styles.category}>All</Text>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
               {actions.map((action, index) => {

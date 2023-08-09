@@ -13,6 +13,7 @@ import {
   Actionsheet,
   useDisclose,
   Spinner,
+  Center
 } from "native-base";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
@@ -42,9 +43,12 @@ export default function EventDetailsPage({ route }) {
 
   return (
     <Page py="5">
-      {isEventLoading ? (
-        <Spinner />
-      ) : (
+      {isEventLoading 
+        ? 
+        <Center width="100%" height="100%">
+          <Spinner size="lg"/>
+        </Center>
+        : 
         <ScrollView showsVerticalScrollIndicator={false} mx="5">
           <VStack space="2">
             {/* event image */}
@@ -140,7 +144,7 @@ export default function EventDetailsPage({ route }) {
             )}
           </Box>
         </ScrollView>
-      )}
+      }
     </Page>
   );
 }

@@ -114,7 +114,7 @@ export default function CommunitySearchPage({ navigation }) {
                 Please enter a zip code to find communities.
               </Text>
             ) : (
-              <VStack space="5" p="5">
+              <VStack space="2">
                 <Text textAlign="center" color="muted.400">
                   Found {communities.length} communities
                 </Text>

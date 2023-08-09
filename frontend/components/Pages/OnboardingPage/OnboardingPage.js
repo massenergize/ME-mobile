@@ -90,9 +90,7 @@ export default function OnboardingPage({ navigation }) {
       <Box
         position="absolute"
         width="100%"
-        maxHeight="100%"
-        minHeight="70%"
-        height="65%"
+        height="55%"
         bottom="0"
         pt="10"
         borderTopRadius="30"

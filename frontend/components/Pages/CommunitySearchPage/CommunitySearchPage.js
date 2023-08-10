@@ -20,6 +20,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Page from "../../Shared/Page";
 import CommunityCard from "./CommunityCard";
 import { apiCall } from "../../../api/functions";
+import styles from "./styles";
 
 
 export default function CommunitySearchPage({ navigation }) {
@@ -63,7 +64,7 @@ export default function CommunitySearchPage({ navigation }) {
     <Page>
       <Box height="30%" backgroundColor={"primary.50"}>
         <Center h="full">
-          <Icon as={FontAwesome} name="users" size="90" color="white" />
+          <Icon as={FontAwesome} name="users" size={styles.backgroundIconSize} color="white" />
           <Heading py="5" textAlign="center" color="white">
             BECOME PART OF A COMMUNITY
           </Heading>
@@ -75,13 +76,13 @@ export default function CommunitySearchPage({ navigation }) {
         borderTopRadius="30"
         flex="1"
         px="5"
-        pt="10"
+        pt={styles.searchContainerPaddingTop}
       >
         <HStack space="2" alignItems="center">
           <Text>Communities near: </Text>
           <Pressable onPress={() => setShowModal(true)}>
             <HStack space="1" alignItems="center">
-              <Text fontSize="2xl" fontWeight="bold" color="primary.400">
+              <Text fontSize={styles.zipCodeInputSize} fontWeight="bold" color="primary.400">
                 {zipCode ? zipCode : "0000"}
               </Text>
               <Icon as={FontAwesome} name="pencil" color="primary.400" />

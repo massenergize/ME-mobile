@@ -28,4 +28,21 @@ export default Theme = extendTheme({
       900: "#934736",
     },
   },
+  // customize breakpoints
+  // reference:https://github.com/GeekyAnts/NativeBase/issues/5217#issuecomment-1194435310
+  breakpoints: {
+    'base': 0,
+    'sm': 376,
+    'md': 481,
+    'lg': 769,
+    'xl': 993,
+    '2xl': 1281,
+  },
+  components: {
+    Heading: {
+      defaultProps: {
+        fontSize: {base: 'md', sm: 'xl'},
+      },
+    },
+  },
 });

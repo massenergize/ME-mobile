@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { VStack, Box, Heading, ScrollView } from "native-base";
+import { VStack, Box, Heading, ScrollView, HStack } from "native-base";
 
 import Page from "../../Shared/Page";
 import ServiceProviderCard from "./ServiceProviderCard";
@@ -10,29 +10,29 @@ export default function ServiceProvidersPage({ navigation }) {
 
   return (
     <Page>
-      <ScrollView pt="10" px="5" showsVerticalScrollIndicator={false}>
-        <VStack space="5">
+      <ScrollView px="5" showsVerticalScrollIndicator={false}>
+        <VStack>
           <Box>
             <Heading>Suggested</Heading>
             {/* render cards horizontally */}
-            <ScrollView horizontal={true} my="5" py="2">
-              {vendors &&
-                vendors.map((sProvider, index) => {
-                  return (
-                    <ServiceProviderCard
-                      id={sProvider.id}
-                      key={index}
-                      direction="column"
-                      name={sProvider.name}
-                      imageURI={sProvider.logo ? sProvider.logo.url : null}
-                      navigation={navigation}
-                      // onPress={() =>
-                      //   navigation.navigate("serviceProviderDetails", {vendor_id: sProvider.id})
-                      // }
-                      my="3"
-                    />
-                  );
-                })}
+            <ScrollView horizontal={true} my="5">
+              {vendors && (
+                <HStack space="3">
+                  {vendors.map((sProvider, index) => {
+                    return (
+                      <ServiceProviderCard
+                        id={sProvider.id}
+                        key={index}
+                        direction="column"
+                        name={sProvider.name}
+                        imageURI={sProvider.logo ? sProvider.logo.url : null}
+                        navigation={navigation}
+                        my="3"
+                      />
+                    );
+                  })}
+                </HStack>
+              )}
             </ScrollView>
           </Box>
           <Box>
@@ -51,7 +51,6 @@ export default function ServiceProvidersPage({ navigation }) {
                     //   navigation.navigate("serviceProviderDetails", {vendor_id: sProvider.id})
                     // }
                     navigation={navigation}
-                    my="3"
                   />
                 );
               })}

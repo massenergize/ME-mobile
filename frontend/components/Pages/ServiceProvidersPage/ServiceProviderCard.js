@@ -29,7 +29,6 @@ export default function ServiceProviderCard({
           alt="service provider's image"
           resizeMode="contain"
           size={direction === "row" ? styles.rSPImageSize : styles.cSPImageSize}
-          borderRadius="20"
           alignSelf="center"
         />
         <Box

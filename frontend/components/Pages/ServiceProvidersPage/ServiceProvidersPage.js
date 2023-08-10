@@ -11,13 +11,13 @@ export default function ServiceProvidersPage({ navigation }) {
   return (
     <Page>
       <ScrollView px="5" showsVerticalScrollIndicator={false}>
-        <VStack>
+        <VStack mt="5">
           <Box>
             <Heading>Suggested</Heading>
             {/* render cards horizontally */}
             <ScrollView horizontal={true} my="5">
               {vendors && (
-                <HStack space="3">
+                <HStack>
                   {vendors.map((sProvider, index) => {
                     return (
                       <ServiceProviderCard
@@ -28,6 +28,7 @@ export default function ServiceProvidersPage({ navigation }) {
                         imageURI={sProvider.logo ? sProvider.logo.url : null}
                         navigation={navigation}
                         my="3"
+                        mx="2"
                       />
                     );
                   })}
@@ -39,7 +40,7 @@ export default function ServiceProvidersPage({ navigation }) {
             <Heading>All</Heading>
             {/* render cards vertically */}
             {vendors && (
-              <VStack space="3" my="5">
+              <VStack space="3" my="5" mx="2">
                 {vendors.map((sProvider, index) => {
                   return (
                     <ServiceProviderCard

@@ -30,7 +30,7 @@ const Stack = createNativeStackNavigator();
 const screenOptions = {
   // headerShown: false,
   headerTintColor: "black", 
-  headerBackTitleVisible: false
+  headerBackTitleVisible: false,
 };
 
 /**
@@ -81,7 +81,7 @@ const MainNavigator = () => {
       <Stack.Screen
         name="communitySearch"
         component={CommunitySearchPage}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, gestureEnabled: false }}
       />
       <Stack.Screen name="teamDetails" component={TeamDetailsPage} options={{ headerTitle: "TEAM", headerTitleAlign: "center" }}/>
       <Stack.Screen name="subteamDetails" component={TeamDetailsPage} options={{ headerTitle: "TEAM", headerTitleAlign: "center" }}/>
@@ -107,7 +107,7 @@ const MainNavigator = () => {
       <Stack.Screen
         name="drawer"
         component={DrawerNavigator}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, gestureEnabled: false }}
       />
     </Stack.Navigator>
   );

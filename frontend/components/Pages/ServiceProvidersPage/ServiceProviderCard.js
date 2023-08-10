@@ -19,8 +19,12 @@ export default function ServiceProviderCard({
       }
     >
       <Flex
+        backgroundColor="white"
         flexDirection={direction}
         alignItems={direction === "row" ? "center" : "baseline"}
+        borderRadius="xl"
+        p="2"
+        shadow="2"
         {...props}
       >
         {/* image */}

@@ -38,22 +38,22 @@ export default function ServiceProvidersPage({ navigation }) {
           <Box>
             <Heading>All</Heading>
             {/* render cards vertically */}
-            {vendors &&
-              vendors.map((sProvider, index) => {
-                return (
-                  <ServiceProviderCard
-                    id={sProvider.id}
-                    key={index}
-                    direction="row"
-                    name={sProvider.name}
-                    imageURI={sProvider.logo ? sProvider.logo.url : null}
-                    // onPress={() =>
-                    //   navigation.navigate("serviceProviderDetails", {vendor_id: sProvider.id})
-                    // }
-                    navigation={navigation}
-                  />
-                );
-              })}
+            {vendors && (
+              <VStack space="3" my="5">
+                {vendors.map((sProvider, index) => {
+                  return (
+                    <ServiceProviderCard
+                      id={sProvider.id}
+                      key={index}
+                      direction="row"
+                      name={sProvider.name}
+                      imageURI={sProvider.logo ? sProvider.logo.url : null}
+                      navigation={navigation}
+                    />
+                  );
+                })}
+              </VStack>
+            )}
           </Box>
         </VStack>
       </ScrollView>

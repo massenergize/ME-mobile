@@ -112,7 +112,7 @@ export default function OnboardingPage({ navigation }) {
             {STEPS[currentStep].title}
           </Heading>
           {/* Description */}
-          <Box flexGrow="1">
+          <Box flexGrow="1" justifyContent="center">
             <HTMLParser
               htmlString={STEPS[currentStep].description}
               baseStyle={textStyle}

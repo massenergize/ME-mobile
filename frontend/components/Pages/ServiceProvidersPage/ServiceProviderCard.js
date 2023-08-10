@@ -33,7 +33,6 @@ export default function ServiceProviderCard({
           alignSelf="center"
         />
         <Box
-          backgroundColor={"amber.100"}
           width={direction === "row" ? "60%" : "40"}
           pl={direction === "row" && "3"}
           pt={direction === "column" && "3"}

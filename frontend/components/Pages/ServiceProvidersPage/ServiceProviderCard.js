@@ -1,5 +1,6 @@
-import { Flex, Image, Pressable, Box, Text } from "native-base";
+import { Flex, Image, Pressable, Box, Text, Heading } from "native-base";
 import React from "react";
+import styles from "./styles";
 
 export default function ServiceProviderCard({
   id,
@@ -12,7 +13,11 @@ export default function ServiceProviderCard({
   ...props
 }) {
   return (
-    <Pressable onPress={() => navigation.navigate("serviceProviderDetails", {vendor_id: id})}>
+    <Pressable
+      onPress={() =>
+        navigation.navigate("serviceProviderDetails", { vendor_id: id })
+      }
+    >
       <Flex
         flexDirection={direction}
         alignItems={direction === "row" ? "center" : "baseline"}
@@ -23,24 +28,23 @@ export default function ServiceProviderCard({
           source={{ uri: imageURI }}
           alt="service provider's image"
           resizeMode="contain"
-          size={direction === "row" ? "100px" : "128px"}
-          backgroundColor="muted.50"
+          size={direction === "row" ? styles.rSPImageSize : styles.cSPImageSize}
           borderRadius="20"
+          alignSelf="center"
         />
         <Box
-          width={direction === "row" ? "80%" : "40"}
-          pl={direction === "row" ? "3" : "0"}
-          pt={direction === "column" ? "3" : "0"}
+          backgroundColor={"amber.100"}
+          width={direction === "row" ? "60%" : "40"}
+          pl={direction === "row" && "3"}
+          pt={direction === "column" && "3"}
         >
           {/* name */}
           {direction === "row" ? (
-            <Text fontWeight="bold" fontSize="lg">
+            <Text fontWeight="bold" fontSize={styles.SPNameSize}>
               {name}
             </Text>
           ) : (
-            <Text fontWeight="bold" fontSize="lg">
-              {name.slice(0, 20) + "..."}
-            </Text>
+            <Text fontWeight="bold">{name.slice(0, 20) + "..."}</Text>
           )}
         </Box>
       </Flex>

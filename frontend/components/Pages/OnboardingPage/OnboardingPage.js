@@ -107,9 +107,11 @@ export default function OnboardingPage({ navigation }) {
         }}
       >
         <Flex flexDirection="column" flex="1" width="100%" px="6">
+          {/* Title */}
           <Heading alignSelf="center" color="primary.600" textAlign="center">
             {STEPS[currentStep].title}
           </Heading>
+          {/* Description */}
           <Box flexGrow="1">
             <HTMLParser
               htmlString={STEPS[currentStep].description}
@@ -117,7 +119,8 @@ export default function OnboardingPage({ navigation }) {
             />
           </Box>
           <Box mb="5">
-            <HStack space="5" alignSelf="center" mb="5">
+            {/* Dots */}
+            <HStack space="5" alignSelf="center" mb="5" display={["none", "block"]}>
               {STEPS.map((_, index) => {
                 return (
                   <Circle
@@ -131,6 +134,7 @@ export default function OnboardingPage({ navigation }) {
                 );
               })}
             </HStack>
+            {/* Buttons Group */}
             <Flex flexDirection="row" justifyContent="space-between" width="100%">
               <Button
                 size="lg"

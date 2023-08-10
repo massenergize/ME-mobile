@@ -1,5 +1,6 @@
 import React from "react";
 import { Flex, Image, Pressable, Box, Text, View } from "native-base";
+import styles from "./styles";
 
 export default function CommunityCard({ community, ...props }) {
   return (
@@ -11,14 +12,14 @@ export default function CommunityCard({ community, ...props }) {
               uri: community.logo?.url,
             }}
             alt="Community Logo"
-            size="100px"
+            size={styles.communityImageSize}
             resizeMode="contain"
           />
         ) : (
-          <Box height={100} width={100} bg="gray.300"></Box>
+          <Box size={styles.communityImageSize} bg="gray.300"></Box>
         )}
         <Box width="70%" pl="5">
-          <Text fontSize="lg" fontWeight="bold">
+          <Text fontSize={styles.communityNameSize} fontWeight="bold">
             {community.name}
           </Text>
 

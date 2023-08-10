@@ -253,7 +253,9 @@ function CustomDrawerContent(props) {
               <DrawerItem
                 label={item.name}
                 onPress={() => 
-                  props.navigation.navigate(item.route, {
+                  (item.name === "Community") 
+                  ? props.navigation.navigate(item.route, {community_id: community_id, screen: "COMMUNITY"}) 
+                  : props.navigation.navigate(item.route, {
                     community_id: community_id,
                   })
                 }
@@ -342,7 +344,7 @@ function CustomDrawerContent(props) {
 
 export default function DrawerNavigator({ route, navigation }) {
     const { community_id } = route.params;
-    console.log("community_id: ", community_id)
+    // console.log("community_id: ", community_id)
 
     const [isCommunityLoading, setIsCommunityLoading] = useState(true);
     const { communityInfo, fetchCommunityInfo, vendorsSettings, teamsSettings, testimonialsSettings, infoLoaded } = useContext(CommunityContext);

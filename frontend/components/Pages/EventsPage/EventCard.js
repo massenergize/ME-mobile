@@ -63,8 +63,8 @@ export default EventCard = React.memo(({
           )}
         </Box>
 
-        <Flex px="4" pt="4" flexDirection="row" justifyContent="space-between">
-          <Text fontWeight="bold" fontSize="md" w="80%" mr="3">
+        <Flex px="4" pt="4" flexDirection="row" justifyContent="space-between" pb="2">
+          <Text fontWeight="bold" fontSize="md" w="90%" mr="3">
             {title}
           </Text>
           <Icon
@@ -83,6 +83,7 @@ export default EventCard = React.memo(({
           alignItems="center"
           borderBottomRadius="lg"
           overflow="hidden"
+          py="2"
         >
           <Box px="4">
             <Text fontSize="sm" color="primary.400">
@@ -103,7 +104,7 @@ export default EventCard = React.memo(({
               </Button>
             </Box>
           ) : (
-            <Box py="2" px="4">
+            <Box px="4">
               <Text fontSize="sm" color="primary.400">
                 {location ? `${location.city}, ${location.state}` : ""}
               </Text>

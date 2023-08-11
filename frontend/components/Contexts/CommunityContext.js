@@ -207,27 +207,6 @@ export const CommunityProvider = ({ children }) => {
   );
 };
 
-export const useUpcomingEvent = () => {
-  const context = useContext(CommunityContext);
-
-  if (context === undefined) {
-    throw new Error("useUpcomingEvent must be used within a CommunityProvider");
-  }
-
-  const upcoming = context.events.filter((event) => {
-    const eventDate = new Date(event.start_date_and_time);
-    const now = new Date();
-    return eventDate > now;
-  });
-
-  if (upcoming.length > 0) {
-    return upcoming[0]
-  }
-  else {
-    return null
-  }
-}
-
 export const useDetails = (route, args) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);

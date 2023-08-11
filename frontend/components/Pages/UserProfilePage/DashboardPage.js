@@ -878,17 +878,23 @@ const CommunitiesList = ({ communityInfo }) => {
 };
 
 export default function DashboardPage({ route, navigation }) {
-  const { completedList, fetchDashboardInfo } = useContext(DashboardContext);
   const { communityInfo, actions, fetchCommunityInfo } = useContext(CommunityContext);
   const {community_id} = communityInfo
+
+  // const { userInfo, todoList, fetchDashboardInfo } = useContext(DashboardContext);
 
   const [refreshing, setRefreshing] = useState(false);
   const onRefresh = useCallback (() => {
     setRefreshing(true);
-    fetchDashboardInfo(community_id, () => setRefreshing(false));
+    fetchDashboardInfo(email, () => setRefreshing(false));
     fetchCommunityInfo(community_id, () => setRefreshing(false))
     // setTimeout(() => setRefreshing(false), 2000);
   }, []);
+
+
+  const { completedList, fetchDashboardInfo } = useContext(DashboardContext);
+  fetchDashboardInfo();
+
   return (
 
     

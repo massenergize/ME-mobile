@@ -4,63 +4,81 @@ import { apiCall } from "../../api/functions";
 
 export const DashboardContext = createContext();
 
+// export const useDashboardContext = () => {
+//   return useContext(DashboardContext);
+// };
+
 export const DashboardProvider = ({ children }) => {
   const [todoList, setTodoList] = useState([]);
   const [completedList, setCompletedList] = useState([]);
-  const [dashboardInfo, setDashboardInfo] = useState([]);
+  const [dashboardInfo, setDashboardInfo] = useState(null);
   const [householdsList, setHouseholdsList] = useState([]);
   const [eventsList, setEventsList] = useState([]);
   const [userInfo, setUserInfo] = useState(0);
+  const [infoLoaded, setInfoLoaded] = useState(0);
 
-  const fetchDashboardInfo = async (community_id, callBackFn=null) => {
+  const fetchDashboardInfo = async (email, callBackFn=null) => {
     await Promise.all([
-      apiCall("users.info", { community_id: community_id}).then((json) => {
+      apiCall("users.info", { email: email}).then((json) => {
         if (json.success) {
-          setDashboardInfo(json.data);
-          console.log("User Info Fetched")
+          const newDashboardInfo = { ...json.data, email: email };
+          if(!dashboardInfo || !_.isEqual(dashboardInfo, newDashboardInfo)) {
+            setDashboardInfo({ ...json.data, email: email});
+            setInfoLoaded(infoLoaded => infoLoaded + 1);
+            console.log("User Info Fetched")
+          }
         } else {
+          console.log("User Info Failed");
           console.log(json);
           if (callBackFn) callBackFn(null, json.error);
         }
       }),
-      apiCall("users.actions.todo.list", { community_id: community_id}).then((json) => {
+      apiCall("users.actions.todo.list", { email: email}).then((json) => {
         if (json.success) {
           setTodoList(json.data);
+          setInfoLoaded(infoLoaded => infoLoaded + 1);
           console.log("Todo List Fetched")
         } else {
+          console.log("Action Todo List Failed");
           console.log(json);
           if (callBackFn) callBackFn(null, json.error);
         }
       }),
-      apiCall("users.actions.completed.list", { community_id: community_id}).then((json) => {
+      apiCall("users.actions.completed.list", { email: email}).then((json) => {
         if (json.success) {
           setCompletedList(json.data);
+          setInfoLoaded(infoLoaded => infoLoaded + 1);
           console.log("Completed List Fetched")
         } else {
+          console.log("Action Completed List Failed");
           console.log(json);
           if (callBackFn) callBackFn(null, json.error);
         }
       }),
-      apiCall("users.actions.hosueholds.list", { community_id: community_id}).then((json) => {
+      apiCall("users.households.list", { email: email}).then((json) => {
         if (json.success) {
           setHouseholdsList(json.data);
+          setInfoLoaded(infoLoaded => infoLoaded + 1);
           console.log("Households List Fetched")
         } else {
+          console.log("Household List Failed");
           console.log(json);
           if (callBackFn) callBackFn(null, json.error);
         }
       }),
-      apiCall("users.actions.events.list", { community_id: community_id}).then((json) => {
+      apiCall("users.events.list", { email: email}).then((json) => {
         if (json.success) {
           setEventsList(json.data);
+          setInfoLoaded(infoLoaded => infoLoaded + 1);
           console.log("Events List Fetched")
         } else {
+          console.log("Events List Failed");
           console.log(json);
           if (callBackFn) callBackFn(null, json.error);
         }
       }),
     ]).then(() => {
-      setUserInfo(0);
+      setInfoLoaded(0);
       if (callBackFn) callBackFn();
     });
     console.log("Fetch finished");
@@ -76,6 +94,7 @@ export const DashboardProvider = ({ children }) => {
         householdsList,
         eventsList,
         userInfo,
+        infoLoaded,
         fetchDashboardInfo }}>
       {children}
     </DashboardContext.Provider>

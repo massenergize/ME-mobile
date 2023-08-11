@@ -102,6 +102,7 @@ export default function EventsPage({ navigation }) {
               shadow={3}
             />
           )}
+          contentContainerStyle={{ alignItems: 'center'}}
         />
       )}
     </Page>

@@ -189,7 +189,7 @@ export default function CommunityPage({ navigation }) {
                 <ShowMore navigation={navigation} page="EVENTS" text={"Show More"}/>
               </HStack>
               <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                <HStack space={2} mx={15}>
+                <HStack space={3} mx={15}>
                   {featuredEvents.map((event) => (
                     <EventCard
                       key={event.id}
@@ -205,48 +205,14 @@ export default function CommunityPage({ navigation }) {
                       isShared={event.is_shared}
                       id={event.id}
                       navigation={navigation}
-                      my={2}
-                      shadow={5}
-                      width="400"
+                      my={3}
+                      shadow={3}
                     />
                   ))}
                 </HStack>
               </ScrollView>
             </View>
           )}
-          {/* {featuredEvents.length !== 0 &&
-            <View>
-              <HStack alignItems="center" pt={3}>
-                <HeaderText text="Featured Events"/>
-                <Spacer/>
-                <ShowMore navigation={navigation} page="EVENTS" text={"Show More"}/>
-              </HStack>
-              <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                <HStack space={2}>
-                  {featuredEvents.map((event) => {
-                    <EventCard
-                      key={event.id}
-                      title={event.name}
-                      date={formatDateString(
-                        new Date(event.start_date_and_time),
-                        new Date(event.end_date_and_time)
-                      )}
-                      location = {event.location}
-                      imageUrl={event.image?.url}
-                      canRSVP={event.rsvp_enabled}
-                      isRSVPED={event.is_rsvped}
-                      isShared={event.is_shared}
-                      id={event.id}
-                      navigation={navigation}
-                      my={2}
-                      mx={4}
-                      shadow={5}
-                    />
-                  })}
-                </HStack>
-              </ScrollView>
-            </View>
-          } */}
         </VStack>
     </ScrollView>
     </Page>

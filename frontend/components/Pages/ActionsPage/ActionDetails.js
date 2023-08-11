@@ -23,6 +23,7 @@ import { CommunityContext, useDetails } from "../../Contexts/CommunityContext";
 import { TestimonialCard } from "../TestimonialsPage/TestimonialsCard";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { getActionMetric } from "../../Shared/Utils";
+import { apiCall } from "../../../api/functions";
 
 
 export default function ActionDetails({ route, navigation }) {
@@ -37,6 +38,22 @@ export default function ActionDetails({ route, navigation }) {
   const [isToDoOpen, setIsToDoOpen] = useState(false)
   const [completedActions, setcompletedActions] = useState([])
   const [toDoActions, settoDoActions] = useState([])
+
+
+  const handleAddToDo = async (email, item) => {
+    try {
+      const response = await apiCall('users.actions.todo.add', { email, item });
+      if (response.success) {
+        // Update the todoList in context with the new item
+        setTodoList([...todoList, response.data]);
+      } else {
+        console.log('Failed to add item to todo list:', response.error);
+      }
+    } catch (error) {
+      console.log('API Error:', error);
+    }
+  };
+
 
   const generateDescriptionTab = () => {
     return (
@@ -204,7 +221,7 @@ export default function ActionDetails({ route, navigation }) {
                         color: "white",
                         fontWeight: "bold",
                       }}
-                      onPress={() => {setIsToDoOpen(true), toDoActions.push({name: action}), console.log("Added " + action.title + " to To-do")}}
+                      onPress={() => {handleAddToDo('tianyi.evans@gmail.com', action), setIsToDoOpen(true), toDoActions.push({name: action}), console.log("Added " + action.title + " to To-do")}}
                     >
                       Add to To-Do
                     </Button>

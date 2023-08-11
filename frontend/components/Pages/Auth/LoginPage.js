@@ -18,6 +18,7 @@ import Page from "../../Shared/Page";
 import EmailVerificationPage from "./EmailVerificationPage";
 import useAuth from "../../Hooks/useAuth";
 import Constants from "../../Constants";
+import { DashboardContext, useDashboardContext } from "../../Contexts/DashboardContext";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -35,6 +36,7 @@ export default function LoginPage({ route, navigation }) {
   const [isEmailVerified, setIsEmailVerified] = useState(false);
 
   const handleSignIn = (values) => {
+    const userEmail = values.email;
     setIsSubmitting(true);
     signInWithEmailAndPassword(
       values.email,
@@ -48,9 +50,12 @@ export default function LoginPage({ route, navigation }) {
           console.log("User signed in successfully!");
           console.log("is user email verified?", userCreds.user.emailVerified);
           console.log("authState: ", authState);
+          console.log("The user signed up with", values.email);
+          navigation.navigate("dashboard", { userEmail });
         }
       }
     );
+    
   };
 
   const refreshUser = async () => {

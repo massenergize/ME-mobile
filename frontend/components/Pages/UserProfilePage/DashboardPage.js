@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { StyleSheet } from "react-native";
+import { useRoute } from '@react-navigation/native'
 import { useNavigation, useEffect, createContext, useContext, useCallback } from "react";
 import {
+  Button,
+  View,
   Text,
   Image,
   Box,
@@ -24,6 +27,7 @@ import ActionsFilter from "../ActionsPage/ActionsFilter";
 import { getActionMetric } from "../../Shared/Utils";
 import { CommunityContext } from "../../Contexts/CommunityContext";
 import { DashboardContext } from "../../Contexts/DashboardContext";
+import { useDashboardContext } from "../../Contexts/DashboardContext";
 
 const COMMUNITY = {
   id: 3,
@@ -650,7 +654,7 @@ const ProfileName = ({ navigation, communityInfo }) => {
     >
       <Image
         source={{
-          uri: "https://media.npr.org/assets/img/2017/09/12/macaca_nigra_self-portrait-3e0070aa19a7fe36e802253048411a38f14a79f8-s1100-c50.jpg",
+          uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRir06bApyiBCEsxHMGNWtcxEZGCLYj5vdcxQ&usqp=CAU",
         }}
         alt="User avatar"
         size="20"
@@ -707,14 +711,14 @@ const CarbonSaved = () => {
   );
 };
 
-const ActionsList = ({ navigation }) => {
-  const userInfo = useContext(DashboardContext);
+const ActionsList = ({ navigation, list }) => {
+  const todoList = list;
   // const { actions } = userInfo.completedList;
   const { actions } = useContext(CommunityContext);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (actions) {
+    if (todoList) {
       setIsLoading(false);
     }
   }, []);  
@@ -734,7 +738,7 @@ const ActionsList = ({ navigation }) => {
       <ScrollView>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
-              {actions.map((action, index) => {
+              {todoList.map((action, index) => {
                 return (
                   <ActionCard
                     key={index}
@@ -877,10 +881,13 @@ const CommunitiesList = ({ communityInfo }) => {
   );
 };
 
-export default function DashboardPage({ route, navigation }) {
+export default function DashboardPage({ navigation }) {
   const { communityInfo, actions, fetchCommunityInfo } = useContext(CommunityContext);
   const {community_id} = communityInfo
+  // const { todoList, fetchDashboardInfo } = useContext(DashboardContext);
+  // fetchDashboardInfo();
 
+  // const { email } = email
   // const { userInfo, todoList, fetchDashboardInfo } = useContext(DashboardContext);
 
   const [refreshing, setRefreshing] = useState(false);
@@ -892,8 +899,23 @@ export default function DashboardPage({ route, navigation }) {
   }, []);
 
 
-  const { completedList, fetchDashboardInfo } = useContext(DashboardContext);
-  fetchDashboardInfo();
+  const route = useRoute();
+  const userEmail = route.params?.userEmail || 'No email provided';
+  console.log(userEmail);
+  const {
+    todoList,
+    dashboardInfo,
+    householdsList,
+    eventsList,
+    userInfo,
+    infoLoaded,
+    fetchDashboardInfo
+  } = useDashboardContext();
+
+  useEffect(() => {
+    fetchDashboardInfo(userEmail);
+  }, [userEmail]);
+
 
   return (
 
@@ -904,11 +926,20 @@ export default function DashboardPage({ route, navigation }) {
           <ProfileName navigation={navigation} communityInfo = {communityInfo} /*userInfo={userInfo}*//>
           <SustainScore />
           <CarbonSaved />
-          <ActionsList />
+          <ActionsList navigation={navigation} list = {todoList}/>
           <BadgesList />
           <TeamsList />
           <HousesList />
           <CommunitiesList communityInfo = {communityInfo}/>
+          <View>
+      <Text>User Info: {dashboardInfo ? dashboardInfo.name : 'Loading...'}</Text>
+      <Text>Todo List Length: {todoList.length}</Text>
+      <Text>Households List Length: {householdsList.length}</Text>
+      <Text>Events List Length: {eventsList.length}</Text>
+      <Text>User Info Value: {userInfo}</Text>
+      <Text>Info Loaded Value: {infoLoaded}</Text>
+      <Button title="Fetch Dashboard Info" onPress={() => fetchDashboardInfo(userEmail)} />
+    </View>
         </VStack>
       </ScrollView>
     </Page>

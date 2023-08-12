@@ -31,11 +31,11 @@ export default function ActionDetails({ route, navigation }) {
   const [action, isActionLoading] = useDetails("actions.info", {
     action_id: action_id,
   });
-  const { testimonials, testimonialsSettings, vendorsSettings } =
-    useContext(CommunityContext);
+  const { testimonials, testimonialsSettings, vendorsSettings } = useContext(CommunityContext);
 
   const [isDoneOpen, setIsDoneOpen] = useState(false);
 
+  // individual functions to render the context for each tab in the action details page
   const generateDescriptionTab = () => {
     return <HTMLParser htmlString={action.about} baseStyle={textStyle} />;
   };
@@ -54,8 +54,10 @@ export default function ActionDetails({ route, navigation }) {
     }
   };
 
+  // for the testimonials associated with this action
   const [actionTestimonials, setActionTestimonials] = useState([]);
 
+  // get testimonials related to this action
   const getTestimonials = () => {
     if (testimonialsSettings.is_published) {
       const relatedTestimonials = [];
@@ -69,6 +71,7 @@ export default function ActionDetails({ route, navigation }) {
     }
   };
 
+  // only retrieve associated testimonials once
   useEffect(() => {
     getTestimonials();
   }, []);
@@ -102,9 +105,6 @@ export default function ActionDetails({ route, navigation }) {
           description=""
           imageURI={vendor.logo.url}
           name={vendor.name}
-          // onPress={() =>
-          //   navigation.navigate("serviceProviderDetails")
-          // }
           navigation={navigation}
           key={index}
         />
@@ -124,6 +124,7 @@ export default function ActionDetails({ route, navigation }) {
     );
   }
 
+  // render the appropriate tab content based on the active tab
   const renderTabContent = () => {
     switch (activeTab) {
       case "description":
@@ -153,14 +154,11 @@ export default function ActionDetails({ route, navigation }) {
             <VStack style={{ flex: 1 }}>
               <Image
                 source={{
-                  // uri: "https://m.media-amazon.com/images/I/61JhlT09xiL._AC_SX679_.jpg",
                   uri: action.image != null ? action.image.url : null,
                 }}
                 m={3}
                 h={250}
-                // w={width}
                 alt="image"
-                // borderRadius="xl"
                 resizeMode="contain"
               />
               <Box bg="white" borderRadius="3xl" shadow={5} height="100%">
@@ -223,6 +221,7 @@ export default function ActionDetails({ route, navigation }) {
                     ) : null}
                     <Container width={5}></Container>
                   </ScrollView>
+                  {/* Display the tab content */}
                   <Box m={15}>{renderTabContent()}</Box>
                 </VStack>
                 <Container></Container>
@@ -230,7 +229,7 @@ export default function ActionDetails({ route, navigation }) {
             </VStack>
             <Container height={20}></Container>
           </ScrollView>
-
+          {/* Modal for when the user marks the action as done */}
           <Modal isOpen={isDoneOpen} onClose={() => {}}>
             <Modal.Content maxWidth="400px">
               <Modal.Body>
@@ -248,6 +247,7 @@ export default function ActionDetails({ route, navigation }) {
                   </Text>
                 </Center>
                 <HStack width="100%" justifyContent={"center"}>
+                  {/* Testimonial button temporarily disabled while waiting for user funcitonality */}
                   {/* <Button 
                     color={"primary.600"} 
                     onPress={() => {setIsDoneOpen(false), navigation.navigate("addTestimonial")}} 

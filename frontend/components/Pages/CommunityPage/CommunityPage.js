@@ -20,11 +20,13 @@ import { RefreshControl } from "react-native-gesture-handler";
 
 const colors = ["#DC4E34", "#64B058", "#000000"];
 
-// the card that shows up to three goals on the community page
+// card that shows up to three goals on the community page
 function GoalsCard({ navigation, goals, community_id }) {
 
+  // create the list of progress charts to display
   const getGoalsList = () => {
     let goalsList = []
+    // don't display a chart if the goal is 0
     if (goals.target_number_of_actions != 0) {
       goalsList.push({
         nameLong: "Individual Actions Completed",
@@ -52,22 +54,20 @@ function GoalsCard({ navigation, goals, community_id }) {
     return goalsList
   }
 
+  // render a pressable card with progress charts for the available goals
   if (getGoalsList().length != 0) {
     return (
       <Pressable onPress={() => navigation.navigate("impact", {goalsList: getGoalsList(), community_id: community_id})} mx={4} width="100%">
-        {({ isHovered, isFocused, isPressed }) => {
-        return <Box 
-          // bg={isPressed ? "coolGray.200" : "white"}
+        <Box
           shadow="1" 
-          bg="white" 
-          // width="100%" 
+          bg="white"
           alignItems="center" 
           rounded="xl" 
           p={3}
           mx={4}
           >
           <HStack justifyContent="space-evenly" width="100%">
-            { // show the three sample goals on the community page
+            {
               getGoalsList().map((goal, index) => {
                 return <SmallChart goal={goal} color={colors[index]} key={index}/>
               })
@@ -75,7 +75,6 @@ function GoalsCard({ navigation, goals, community_id }) {
           </HStack>
           <Text alignSelf="flex-end" mr={2} fontSize="sm" color="primary.400" mt={2}>Show More  {">"}</Text>
         </Box>
-        }}
       </Pressable>
     );
   }
@@ -92,6 +91,7 @@ function HeaderText({ text }) {
   );
 }
 
+// show more button displayed next to header
 function ShowMore({ navigation, page, text }) {
   return (
     <Text
@@ -150,7 +150,7 @@ export default function CommunityPage({ navigation }) {
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
             {
-              // isActionsLoading ? <Spinner size="lg" color="primary.500" /> :
+              // displaay all low cost actions for v1 (recommended in the future)
               actions
               .filter((action) => getActionMetric(action, "Cost") === "$" || getActionMetric(action, "Cost") === "0")
               .map((action, index) => {
@@ -192,7 +192,6 @@ export default function CommunityPage({ navigation }) {
                       canRSVP={upcomingEvent.rsvp_enabled}
                       isRSVPED={upcomingEvent.is_rsvped}
                       isShared={upcomingEvent.is_shared}
-                      // onPress={() => navigation.navigate("eventDetails", {event_id: upcomingEvent.id})}
                       id={upcomingEvent.id}
                       navigation={navigation}
                       my={2}

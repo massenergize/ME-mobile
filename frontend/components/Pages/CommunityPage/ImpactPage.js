@@ -32,12 +32,13 @@ export default function ImpactPage({ route, navigation }) {
       <ScrollView>
         <VStack alignItems="center" space={3} bg="white">
           <Text bold fontSize="xl" mt={2}>Goals</Text>
-          { // show the three sample goals on the impact page
+          { // show the available goals
               goalsList.map((goal, index) => <BigPieChart goal={goal} color={colors[index]} key={index}/>)
           }
           <Text bold fontSize="xl" mb={2} mt={10}>Number of Actions Completed</Text>
           <HStack width="100%">
             <Spacer />
+            {/* {Toggle between action chart and action list} */}
             <Center>
               <Ionicons 
                 name={"bar-chart-outline"} 

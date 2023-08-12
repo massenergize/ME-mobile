@@ -58,6 +58,7 @@ function BigPieChart({ goal, color }) {
     )
 }
 
+// category names to be displayed in the chart
 const updatedNames = {
     "Waste & Recycling": "Waste &\nRecycling",
     "Transportation": "Transportation",
@@ -68,14 +69,13 @@ const updatedNames = {
     "Activism & Education": "Activism &\nEducation"
 }
 
-// currently contains placeholder data provided by the package
+// bar chart that is displayed on the impact page
 function ActionsChart({ graphData }) {
     const getData = () => {
         for (let i = 0; i < graphData.length; i++) {
             if (updatedNames[graphData[i].name] !== undefined)
                 graphData[i].name = updatedNames[graphData[i].name];
         }
-        // console.log(graphData)
         return graphData;
     }
 
@@ -97,8 +97,6 @@ function ActionsChart({ graphData }) {
                         y="reported_value"
                         horizontal={true}
                         style={{ data: { fill: "#DC4E34", fillOpacity: 0.5 }, labels: {fontSize: 15}}}
-                        // labels={({ datum }) => datum.name}
-                        // labelComponent={<VictoryLabel x={50}/>}
                         barRatio={0.9}
                     />
                     <VictoryBar
@@ -107,8 +105,6 @@ function ActionsChart({ graphData }) {
                         y="value"
                         horizontal={true}
                         style={{ data: { fill: "#DC4E34", fillOpacity: 0.9 }, labels: {fontSize: 15}}}
-                        // labels={({ datum }) => datum.name}
-                        // labelComponent={<VictoryLabel x={45} dy={-12}/>}
                         barRatio={0.9}
                     />
                 </VictoryGroup>
@@ -128,13 +124,13 @@ function ActionsChart({ graphData }) {
     )
 }
 
+// bar chart that is displayed on the team page
 function TeamActionsChart({ graphData }) {
     const getData = () => {
         for (let i = 0; i < graphData.length; i++) {
             if (updatedNames[graphData[i].name] !== undefined)
                 graphData[i].name = updatedNames[graphData[i].name];
         }
-        // console.log(graphData)
         return graphData;
     }
 
@@ -149,18 +145,14 @@ function TeamActionsChart({ graphData }) {
                 <VictoryAxis style={{ 
                     // tickLabels: { fill:"transparent"} 
                 }} />
-                {/* <VictoryGroup offset={10}> */}
                 <VictoryBar
                     data={getData()}
                     x="name"
                     y="value"
                     horizontal={true}
                     style={{ data: { fill: "#DC4E34", fillOpacity: 0.9 }, labels: {fontSize: 15}}}
-                    // labels={({ datum }) => datum.name}
-                    // labelComponent={<VictoryLabel x={45} dy={-12}/>}
                     barRatio={0.7}
                 />
-                {/* </VictoryGroup> */}
                 <VictoryLegend x={110} y={0}
                     centerTitle
                     orientation="horizontal"
@@ -176,6 +168,7 @@ function TeamActionsChart({ graphData }) {
     )
 }
 
+// list of actions with their category, carbon saving, and number of times done displayed on the impact page
 function ActionsList({ listData }) {
     return (
       <View width="100%" ml={3} p={3}>

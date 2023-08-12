@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, VStack, Image, Flex, Box, Pressable, Container } from "native-base";
+import { Text, VStack, Image, Flex, Box, Pressable } from "native-base";
 
 export default function TeamCard({ navigation, team, isSubteam }) {
   return (
@@ -20,7 +20,6 @@ export default function TeamCard({ navigation, team, isSubteam }) {
               alt="image"
               size="xl"
               height="full"
-              // borderLeftRadius="2xl"
               resizeMode="contain"
             />
         ) : null}

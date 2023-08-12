@@ -24,6 +24,7 @@ export default function TeamDetailsPage({ route, navigation }) {
   const { team_id } = route.params;
   const { subteams } = route.params;
   const { team_stats } = route.params;
+  // must load team info, members, and actions separately
   const [team, isTeamLoading] = useDetails("teams.info", { team_id: team_id });
   const [members, isMembersLoading] = useDetails("teams.members.preferredNames", { team_id: team_id });
   const [actions, isActionsLoading] = useDetails("teams.actions.completed", { team_id: team_id });
@@ -40,6 +41,7 @@ export default function TeamDetailsPage({ route, navigation }) {
 
   const [ actionDisplay, setActionDisplay ] = useState('chart');
 
+  // determine the number of actions completed for each category
   const getGraphData = () => {
     let graphData = {
       "Activism & Education": {
@@ -162,6 +164,7 @@ export default function TeamDetailsPage({ route, navigation }) {
     );
   };
 
+  // render appropriate tab content based on active tab
   const renderTabContent = () => {
     switch (activeTab) {
       case "about":

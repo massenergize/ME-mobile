@@ -24,6 +24,7 @@ export default function ServiceProviderDetailsPage({ route, navigation }) {
     vendor_id: vendor_id,
   });
 
+  // set the header title when the details are loaded
   useEffect(() => {
     spDetails
       ? navigation.setOptions({ title: spDetails?.name })

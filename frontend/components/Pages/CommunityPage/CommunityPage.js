@@ -1,5 +1,4 @@
-import React, { useState, useContext, useCallback } from "react";
-import { ScrollView } from "react-native";
+import React, { useState, useContext, useCallback, useEffect } from "react";
 import {
   VStack,
   HStack,
@@ -9,14 +8,17 @@ import {
   Container,
   Pressable,
   Image,
-  View
+  View,
+  ScrollView
 } from "native-base";
-import ActionCard from "./../ActionsPage/ActionCard";
-import { SmallChart } from "../../Shared/Charts.js";
-import EventCard from "./../EventsPage/EventCard";
-import { formatDateString, getActionMetric } from "../../Shared/Utils";
-import { CommunityContext, useUpcomingEvent } from "../../Contexts/CommunityContext";
 import { RefreshControl } from "react-native-gesture-handler";
+
+import ActionCard from "./../ActionsPage/ActionCard";
+import EventCard from "./../EventsPage/EventCard";
+import Page from "../../Shared/Page";
+import { SmallChart } from "../../Shared/Charts.js";
+import { formatDateString, getActionMetric } from "../../Shared/Utils";
+import { CommunityContext } from "../../Contexts/CommunityContext";
 
 const colors = ["#DC4E34", "#64B058", "#000000"];
 
@@ -106,27 +108,35 @@ function ShowMore({ navigation, page, text }) {
 }
 
 export default function CommunityPage({ navigation }) {
-  const { communityInfo, actions, fetchCommunityInfo } = useContext(CommunityContext);
+  const { communityInfo, actions, events, fetchCommunityInfo } = useContext(CommunityContext);
   const {community_id} = communityInfo
 
-  // const [isCommunityLoading, setIsCommunityLoading] = useState(true);
-  const upcomingEvent = useUpcomingEvent();
+  const [featuredEvents, setFeaturedEvents] = useState([]);
 
   const [refreshing, setRefreshing] = useState(false);
+
+  const getFeaturedEvents = useCallback(() => {
+    const featured = events.filter((event) => event.is_on_home_page);
+    setFeaturedEvents(featured);
+  }, [featuredEvents])
 
   const onRefresh = useCallback (() => {
     setRefreshing(true);
     fetchCommunityInfo(community_id, () => setRefreshing(false))
-    // setTimeout(() => setRefreshing(false), 2000);
   }, []);
 
+  useEffect(() => {
+    getFeaturedEvents();
+  }, [])
+
   return (
+    <Page>
+
     <ScrollView 
       nestedScrollEnabled = {true} 
       showsVerticalScrollIndicator={false}
       refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
         <VStack alignItems="center" space={3} bg="white">
-          {/* <Text bold fontSize="2xl">Community Name</Text> */}
           <Container maxHeight={200} width="100%" mt={3}>
             <Image
                 source={{uri: (communityInfo.logo) ? communityInfo.logo.url : null}}
@@ -136,11 +146,6 @@ export default function CommunityPage({ navigation }) {
                 width="full"
             />
           </Container>
-          {/* <HStack>
-            <HeaderText text="Goals"/>
-            <Spacer/>
-            <ShowMore navigation={navigation} page="impact" text={"Know More"}/>
-          </HStack> */}
           <GoalsCard navigation={navigation} goals={communityInfo.goal} community_id={community_id}/>
           <HStack alignItems="center" pb={2} pt={3}>
             <HeaderText text="Recommended Actions"/>
@@ -169,39 +174,43 @@ export default function CommunityPage({ navigation }) {
             }
             </HStack>
           </ScrollView>
-          {
-            upcomingEvent === null 
-            ? <></> 
-            :
-            <View>
-              <HStack alignItems="center" pt={3}>
-                <HeaderText text="Upcoming Event"/>
+          {featuredEvents.length !== 0 && (
+            <View width="100%">
+              <HStack alignItems="center" pb={2} pt={3}>
+                <HeaderText text="Featured Events"/>
                 <Spacer/>
                 <ShowMore navigation={navigation} page="EVENTS" text={"Show More"}/>
               </HStack>
-                {
-                  <EventCard
-                      key={upcomingEvent.id}
-                      title={upcomingEvent.name}
+              <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                <HStack space={3} mx={15}>
+                  {featuredEvents.map((event) => (
+                    <EventCard
+                      key={event.id}
+                      title={event.name}
                       date={formatDateString(
-                        new Date(upcomingEvent.start_date_and_time),
-                        new Date(upcomingEvent.end_date_and_time)
+                        new Date(event.start_date_and_time),
+                        new Date(event.end_date_and_time)
                       )}
-                      location={upcomingEvent.location}
-                      imageUrl={upcomingEvent.image?.url}
-                      canRSVP={upcomingEvent.rsvp_enabled}
-                      isRSVPED={upcomingEvent.is_rsvped}
-                      isShared={upcomingEvent.is_shared}
-                      id={upcomingEvent.id}
+                      location = {event.location}
+                      imageUrl={event.image?.url}
+                      canRSVP={event.rsvp_enabled}
+                      isRSVPED={event.is_rsvped}
+                      isShared={event.is_shared}
+                      id={event.id}
                       navigation={navigation}
-                      my={2}
-                      mx={4}
-                      shadow={5}
+                      // set width to 250 to prevent styling error.
+                      // Bug: https://github.com/massenergize/ME-mobile/issues/38#issuecomment-1677405297
+                      width={250}
+                      my={3}
+                      shadow={3}
                     />
-                }
+                  ))}
+                </HStack>
+              </ScrollView>
             </View>
-          }
+          )}
         </VStack>
     </ScrollView>
+    </Page>
   );
 }

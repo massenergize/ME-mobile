@@ -20,20 +20,17 @@ export default function TeamsPage({ navigation }) {
   const [subteamsExpanded, setSubteamsExpanded] = useState({})
   const [teamsList, setTeamsList] = useState([])
 
+  // get a list of teams where subteams are nested under their parent team
   const getTeams = () => {
-    console.log("Getting teams")
     teamsDict = {}
     expanded = {}
     for (var i = 0; i < teams.length; i++) {
-      // console.log(teams[i])
-      // console.log(teams[i].team.parent)
       if (teams[i].team.parent === null) {
         teamsDict[teams[i].team.id] = teams[i]
         teamsDict[teams[i].team.id].subteams = []
       }
     }
     for (var i = 0; i < teams.length; i++) {
-      // console.log(teams[i])
       if (teams[i].team.parent) {
         teamsDict[teams[i].team.parent.id].subteams.push(teams[i])
         expanded[teams[i].team.id] = false
@@ -41,15 +38,16 @@ export default function TeamsPage({ navigation }) {
     }
     setTeamsList(Object.values(teamsDict))
     setSubteamsExpanded(expanded)
-    // return Object.values(teamsDict)
   }
 
+  // update the state of whether a team's subteams are expanded or not
   const changeExpanded = (team_id) => {
     let copy = {...subteamsExpanded}
     copy[team_id] = !copy[team_id]
     setSubteamsExpanded(copy)
   }
 
+  // get the list of teams on page load
   useEffect(() => {
     getTeams()
   }, [teams])
@@ -63,6 +61,7 @@ export default function TeamsPage({ navigation }) {
               return <View key={i}>
                 <TeamCard navigation={navigation} team={team} isSubteam={false} />
                 {
+                  // display the subteams associated with a parent if expanded
                   (team.subteams.length > 0) ? (
                     <View>
                       <Pressable onPress={() => changeExpanded(team.team.id)}>
@@ -84,7 +83,6 @@ export default function TeamsPage({ navigation }) {
                           <VStack ml={5} space={3} mt={3}>
                           {
                             team.subteams.map((subteam, j) => {
-                              // return <Text key={j}>{subteam.team.name}</Text>
                               return <TeamCard key={j} navigation={navigation} team={subteam} isSubteam={true}/>
                             })
                           }
@@ -96,7 +94,6 @@ export default function TeamsPage({ navigation }) {
                   : null
                 }
               </View>
-              // return <TeamCard key={i} navigation={navigation} team={team} />
             })
           }
         </VStack>

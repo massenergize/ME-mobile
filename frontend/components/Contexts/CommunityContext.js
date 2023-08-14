@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import _ from 'lodash'
 
 import { apiCall } from "../../api/functions";
@@ -6,6 +6,7 @@ import { apiCall } from "../../api/functions";
 export const CommunityContext = createContext();
 
 export const CommunityProvider = ({ children }) => {
+  // state hooks for all of the community data
   const [communityInfo, setCommunityInfo] = useState(null);
   const [actions, setActions] = useState([]);
   const [events, setEvents] = useState([]);
@@ -20,6 +21,7 @@ export const CommunityProvider = ({ children }) => {
   const [teamsSettings, setTeamsSettings] = useState(null);
   const [infoLoaded, setInfoLoaded] = useState(0);
 
+  // create a single promise that resolves when all the data is fetched
   const fetchCommunityInfo = async (community_id, callBackFn = null) => {
     await Promise.all([
       apiCall("communities.info", { community_id: community_id }).then((json) => {
@@ -207,6 +209,8 @@ export const CommunityProvider = ({ children }) => {
   );
 };
 
+// custom hook to get information from a single API call, takes a route and any arguments
+// often used for details pages (ie. actions, events, vendors, testimonials, teams)
 export const useDetails = (route, args) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);

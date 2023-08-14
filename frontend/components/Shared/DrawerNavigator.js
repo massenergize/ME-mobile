@@ -34,69 +34,6 @@ import { CommunityContext } from "../Contexts/CommunityContext";
 
 const Drawer = createDrawerNavigator();
 
-// custom drawer in order to have the "switch communities" button at the bottom
-
-// const drawerItems = [
-//   {
-//     name: "Community",
-//     icon: "home-outline",
-//     dropdown: false,
-//     route: "Community",
-//     dropdownItems: [],
-//   },
-//   {
-//     name: "About Us",
-//     icon: "information-circle-outline",
-//     dropdown: true,
-//     route: "",
-//     dropdownItems: [
-//       {
-//         name: "Our Mission",
-//         icon: "",
-//         dropdown: false,
-//         route: "About",
-//         dropdownItems: [],
-//       },
-//     ],
-//   },
-//   {
-//     name: "Testimonials",
-//     icon: "chatbox-outline",
-//     dropdown: false,
-//     route: "Testimonials",
-//     dropdownItems: [],
-//   },
-//   {
-//     name: "Teams",
-//     icon: "people-outline",
-//     dropdown: false,
-//     route: "Teams",
-//     dropdownItems: [],
-//   },
-//   {
-//     name: "Resources",
-//     icon: "document-text-outline",
-//     dropdown: true,
-//     route: "",
-//     dropdownItems: [
-//       {
-//         name: "Service Providers",
-//         icon: "",
-//         dropdown: false,
-//         route: "Service Providers",
-//         dropdownItems: [],
-//       },
-//     ],
-//   },
-//   {
-//     name: "Contact Us",
-//     icon: "at-circle-outline",
-//     dropdown: false,
-//     route: "Contact Us",
-//     dropdownItems: [],
-//   },
-// ];
-
 function CustomDrawerContent(props) {
   [expanded, setExpanded] = useState({ "About Us": false, Resources: false });
   const [isSignOutModalVisible, setIsSignOutModalVisible] = useState(false);
@@ -105,6 +42,16 @@ function CustomDrawerContent(props) {
   const { community_id, communityInfo, testimonialsSettings, vendorsSettings, teamsSettings } = props;
 
   const getDrawerItems = () => {
+    // drawerItem object
+     // name: name of the drawer item to be displayed in the sidebar
+     // icon: icon to be displayed next to the name
+     // dropdown: boolean to determine if the drawer item is a dropdown (if a dropdown, there is no route)
+     // route: route to navigate to when the drawer item is clicked
+     // dropdownItems: array of drawerItem objects to be displayed in the dropdown (dropDown items do not have icons)
+    // currently all dropdown items are empty because we only had one page in each of the dropdowns
+    // the dropdown items we would have are "About Us" and "Resources"
+
+    // Community and About Us are displayed by default
     const drawerItems = [
       {
         name: "Community",
@@ -121,6 +68,7 @@ function CustomDrawerContent(props) {
         dropdownItems: []
       }
     ]
+    // add pages if they are published
     if (testimonialsSettings.is_published) {
       drawerItems.push({
         name: "Testimonials",
@@ -173,13 +121,14 @@ function CustomDrawerContent(props) {
             width="full"
           />
         </Center>
-        {/* <DrawerItemList {...props} /> */}
         {getDrawerItems().map((item, index) => {
           if (item.dropdown) {
+            // dropdown items
             return (
               <VStack key={index}>
                 <Pressable
                   onPress={() => {
+                    // toggle the dropdown for the "About Us" or "Resources" drawer item
                     setExpanded({
                       "About Us":
                         item.name === "About Us"
@@ -249,6 +198,7 @@ function CustomDrawerContent(props) {
               </VStack>
             );
           } else {
+            // non-dropdown items
             return (
               <DrawerItem
                 label={item.name}
@@ -271,6 +221,7 @@ function CustomDrawerContent(props) {
         })}
       </DrawerContentScrollView>
       {user ? (
+        // sign out modal
         <Button
           mb={2}
           mt={0}
@@ -281,6 +232,7 @@ function CustomDrawerContent(props) {
           LOGOUT
         </Button>
       ) : (
+        // sign in modal
         <Button
           mb={2}
           mt={0}
@@ -291,6 +243,7 @@ function CustomDrawerContent(props) {
           LOGIN
         </Button>
       )}
+      {/* switch communities button */}
       <Button
         mb={2}
         mt={0}
@@ -344,11 +297,11 @@ function CustomDrawerContent(props) {
 
 export default function DrawerNavigator({ route, navigation }) {
     const { community_id } = route.params;
-    // console.log("community_id: ", community_id)
 
     const [isCommunityLoading, setIsCommunityLoading] = useState(true);
     const { communityInfo, fetchCommunityInfo, vendorsSettings, teamsSettings, testimonialsSettings, infoLoaded } = useContext(CommunityContext);
 
+    // fetch community info on the drawer load (first screen loaded associated with the community)
     useEffect(() => {
       fetchCommunityInfo(community_id, () => setIsCommunityLoading(false))
     }, []);
@@ -363,6 +316,7 @@ export default function DrawerNavigator({ route, navigation }) {
                   headerTitleAlign: "center",
               })}
 
+              // custom drawer content created above
               drawerContent={
                 props => 
                   <CustomDrawerContent 
@@ -373,6 +327,7 @@ export default function DrawerNavigator({ route, navigation }) {
                     testimonialsSettings={testimonialsSettings}
                     teamsSettings={teamsSettings}/>}
           >
+          {/* routes in the drawer */}
           <Drawer.Screen
               name="Community"
               component={TabNavigator}

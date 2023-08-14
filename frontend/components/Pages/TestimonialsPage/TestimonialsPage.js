@@ -23,6 +23,7 @@ export default function TestimonialsPage({ navigation }) {
             }
             <Container h={10}/>
           </ScrollView>
+          {/* Button to create a new testimonial - waiting on dashboard/user context */}
           {/* <Button bg="primary.400" size="lg" onPress={() => props.navigation.navigate("welcome")} position="absolute" bottom={2} right={2}>ADD TESTIMONIAL</Button> */}
           {/* <Pressable onPress={() => navigation.navigate("addTestimonial")} position="absolute" bottom={5} right={5}>
             <Box p={4} bg="primary.400" borderRadius="full" alignItems="center" justifyContent="center">

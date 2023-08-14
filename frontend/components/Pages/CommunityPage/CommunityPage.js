@@ -123,7 +123,6 @@ export default function CommunityPage({ navigation }) {
   const onRefresh = useCallback (() => {
     setRefreshing(true);
     fetchCommunityInfo(community_id, () => setRefreshing(false))
-    // setTimeout(() => setRefreshing(false), 2000);
   }, []);
 
   useEffect(() => {
@@ -138,7 +137,6 @@ export default function CommunityPage({ navigation }) {
       showsVerticalScrollIndicator={false}
       refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
         <VStack alignItems="center" space={3} bg="white">
-          {/* <Text bold fontSize="2xl">Community Name</Text> */}
           <Container maxHeight={200} width="100%" mt={3}>
             <Image
                 source={{uri: (communityInfo.logo) ? communityInfo.logo.url : null}}
@@ -148,11 +146,6 @@ export default function CommunityPage({ navigation }) {
                 width="full"
             />
           </Container>
-          {/* <HStack>
-            <HeaderText text="Goals"/>
-            <Spacer/>
-            <ShowMore navigation={navigation} page="impact" text={"Know More"}/>
-          </HStack> */}
           <GoalsCard navigation={navigation} goals={communityInfo.goal} community_id={community_id}/>
           <HStack alignItems="center" pb={2} pt={3}>
             <HeaderText text="Recommended Actions"/>
@@ -205,6 +198,9 @@ export default function CommunityPage({ navigation }) {
                       isShared={event.is_shared}
                       id={event.id}
                       navigation={navigation}
+                      // set width to 250 to prevent styling error.
+                      // Bug: https://github.com/massenergize/ME-mobile/issues/38#issuecomment-1677405297
+                      width={250}
                       my={3}
                       shadow={3}
                     />

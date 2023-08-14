@@ -11,7 +11,7 @@ import {
   Button,
 } from "native-base";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import styles from "./styles";
+import eventStyles from './styles';
 
 export default EventCard = React.memo(
   ({
@@ -22,7 +22,6 @@ export default EventCard = React.memo(
     canRSVP,
     isRSVPED,
     isShared,
-    // onPress,
     id,
     navigation,
     ...props
@@ -31,7 +30,6 @@ export default EventCard = React.memo(
       <Box
         rounded="lg"
         backgroundColor="white"
-        width={styles.eventCardWidth}
         {...props}
       >
         <Pressable
@@ -39,7 +37,7 @@ export default EventCard = React.memo(
         >
           <Box pt="2">
             {imageUrl ? (
-              <AspectRatio ratio={16 / 9}>
+              <AspectRatio width="100%" ratio={16 / 9}>
               <Image
                   source={{ uri: imageUrl }}
                   alt="event's image"
@@ -103,7 +101,7 @@ export default EventCard = React.memo(
             py={!canRSVP && "2"}
           >
             <Box px="4">
-              <Text fontSize={styles.eventCardMetaFontSize} color="primary.400">
+              <Text fontSize={eventStyles.cardMetaFontSize} color="primary.400">
                 {date}
               </Text>
             </Box>
@@ -124,7 +122,7 @@ export default EventCard = React.memo(
             ) : (
               <Box px="4">
                 <Text
-                  fontSize={styles.eventCardMetaFontSize}
+                  fontSize={eventStyles.cardMetaFontSize}
                   color="primary.400"
                 >
                   {location ? `${location.city}, ${location.state}` : ""}

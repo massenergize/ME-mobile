@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Button,
   Center,
-  Image,
   Text,
   Box,
   VStack,
@@ -12,52 +11,44 @@ import {
   Icon,
   Modal,
   Heading,
-  Flex,
   Pressable,
   Spinner,
+  Slider,
 } from "native-base";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+
 import Page from "../../Shared/Page";
-import SearchBar from "../../Shared/SearchBar";
-
-import { apiCall } from "../../../api/functions";
 import CommunityCard from "./CommunityCard";
+import { apiCall } from "../../../api/functions";
+import styles from "./styles";
 
-const filterOptions = [
-  {
-    value: "all",
-    label: "All",
-  },
-  {
-    value: "cities & towns",
-    label: "Cities & Towns",
-  },
-  {
-    value: "other communities",
-    label: "Other Communities",
-  },
-  {
-    value: "schools",
-    label: "Schools",
-  },
-];
 
 export default function CommunitySearchPage({ navigation }) {
   const [communities, setCommunities] = useState([]);
   const [zipCode, setZipCode] = useState("");
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(true);
+  const [maxDistance, setMaxDistance] = useState(25); // in miles
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleZipCodeSubmit = () => {
-    // TODO: validate zip code
-    setShowModal(false);
+  const isValidZipCode = (zipCode) => {
+    // Define the regex pattern for a valid zip code
+    const zipCodePattern = /^\d{5}(?:[-\s]\d{4})?$/;
+
+    // Test the zip code against the pattern
+    return zipCodePattern.test(zipCode);
   };
 
-  useEffect(() => {
-    // TODO: add loading state
-    // TODO: is it possible to add extra parameters like limit, offset, etc.? (for pagination)
-    const unsubscribe = apiCall("communities.list").then((json) => {
+  const handleZipCodeSubmit = async () => {
+    if (!isValidZipCode(zipCode)) {
+      alert("Please enter a valid zip code.");
+      return;
+    }
+    setIsLoading(true);
+    await apiCall("communities.list", {
+      zipcode: zipCode,
+      max_distance: maxDistance,
+    }).then((json) => {
       if (json.success) {
         setCommunities(json.data);
       } else {
@@ -66,59 +57,92 @@ export default function CommunitySearchPage({ navigation }) {
       setIsLoading(false);
     });
 
-    return () => unsubscribe;
-  }, []);
+    setShowModal(false);
+  };
 
   return (
     <Page>
-      <Box height="50%" backgroundColor={"amber.100"}>
+      <Box height="30%" backgroundColor={"primary.50"}>
         <Center h="full">
-          {/* TODO: Add an image here */}
-          <Heading>IMAGE</Heading>
+          <Icon as={FontAwesome} name="users" size={styles.backgroundIconSize} color="white" />
+          <Heading py="5" textAlign="center" color="white">
+            BECOME PART OF A COMMUNITY
+          </Heading>
         </Center>
       </Box>
       <Box
-        position="absolute"
         backgroundColor="white"
-        width="100%"
-        height="60%"
-        bottom="0"
+        top="-5%"
         borderTopRadius="30"
+        flex="1"
+        px="5"
+        pt={styles.searchContainerPaddingTop}
       >
-        <Box mx="5">
-          <VStack space="5" pt="10">
-            <HStack space="2" alignItems="center">
-              <Text>Communities near: </Text>
-              <Pressable onPress={() => setShowModal(true)}>
-                <HStack space="1" alignItems="center">
-                  <Text fontSize="2xl" fontWeight="bold" color="primary.400">
-                    {zipCode ? zipCode : "0000"}
-                  </Text>
-                  <Icon as={FontAwesome} name="pencil" color="primary.400" />
-                </HStack>
-              </Pressable>
+        <HStack space="2" alignItems="center">
+          <Text>Communities near: </Text>
+          <Pressable onPress={() => setShowModal(true)}>
+            <HStack space="1" alignItems="center">
+              <Text fontSize={styles.zipCodeInputSize} fontWeight="bold" color="primary.400">
+                {zipCode ? zipCode : "0000"}
+              </Text>
+              <Icon as={FontAwesome} name="pencil" color="primary.400" />
             </HStack>
-            <SearchBar filterOptions={filterOptions} />
-            {/* Container for communities */}
-            {isLoading ? (
-              <Spinner />
+          </Pressable>
+        </HStack>
+        <VStack>
+          <Text>Distance: {maxDistance} miles</Text>
+          <Slider
+            defaultValue={maxDistance}
+            step={5}
+            accessibilityLabel="max distance slider"
+            onChange={(value) => setMaxDistance(value)}
+            onChangeEnd={() => handleZipCodeSubmit()}
+            isDisabled={zipCode === ""}
+          >
+            <Slider.Track>
+              <Slider.FilledTrack />
+            </Slider.Track>
+            <Slider.Thumb />
+          </Slider>
+        </VStack>
+        {/* Container for communities */}
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <ScrollView showsVerticalScrollIndicator={false}>
+            {communities.length === 0 ? (
+              <Text textAlign="center" color="muted.400">
+                Please enter a zip code to find communities.
+              </Text>
             ) : (
-              <ScrollView height="80">
-                {communities.map((community) => (
-                  <CommunityCard
-                    community={community}
-                    key={community.id}
-                    onPress={() =>
-                      navigation.navigate("drawer", {
-                        community_id: community.id,
-                      })
-                    }
-                  />
-                ))}
-              </ScrollView>
+              <VStack space="2">
+                <Text textAlign="center" color="muted.400">
+                  Found {communities.length} communities
+                </Text>
+                {communities
+                  // sort by geographically focused first, then by distance
+                  .sort((a, b) =>
+                    a.is_geographically_focused && !b.is_geographically_focused
+                      ? -1
+                      : 1
+                  )
+                  .sort((a, b) => a.location?.distance - b.location?.distance)
+                  .map((community) => (
+                    <CommunityCard
+                      py="2"
+                      community={community}
+                      key={community.id}
+                      onPress={() =>
+                        navigation.navigate("drawer", {
+                          community_id: community.id,
+                        })
+                      }
+                    />
+                  ))}
+              </VStack>
             )}
-          </VStack>
-        </Box>
+          </ScrollView>
+        )}
       </Box>
       {/* Modal for inputting zip code */}
       <Modal isOpen={showModal} onClose={() => setShowModal(false)} size="lg">
@@ -141,7 +165,13 @@ export default function CommunitySearchPage({ navigation }) {
                 onChangeText={(text) => setZipCode(text)}
               />
             </Center>
-            <Button onPress={handleZipCodeSubmit}>Submit</Button>
+            <Button
+              isLoading={isLoading}
+              isLoadingText="Searching..."
+              onPress={handleZipCodeSubmit}
+            >
+              Submit
+            </Button>
           </Modal.Body>
         </Modal.Content>
       </Modal>

@@ -1,14 +1,11 @@
-import { View, Text } from "react-native";
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import CommunityPage from "../Pages/CommunityPage/CommunityPage";
-import ActionsPage from "../Pages/ActionsPage/ActionsPage";
-import EventsPage from "../Pages/EventsPage/EventsPage";
-import UserProfilePage from "../Pages/UserProfilePage/UserProfilePage";
-import AboidersPage from "../Pages/ServiceProvidersPage/ServiceProvidersPage";
 import Ionicons from "react-native-vector-icons/Ionicons";
+
+import ActionsPage from "../Pages/ActionsPage/ActionsPage";
+import CommunityPage from "../Pages/CommunityPage/CommunityPage";
 import DashboardPage from "../Pages/UserProfilePage/DashboardPage";
+import EventsPage from "../Pages/EventsPage/EventsPage";
 
 const Tab = createBottomTabNavigator();
 
@@ -19,10 +16,7 @@ const tabBarLabels = {
   PROFILE: "Profile",
 };
 
-export default function TabNavigator({ route, navigation }) {
-  console.log(route.params);
-  const { community_id } = route.params;
-
+export default function TabNavigator() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -47,14 +41,21 @@ export default function TabNavigator({ route, navigation }) {
         headerShown: false,
       })}
     >
-      <Tab.Screen
-        name="COMMUNITY"
-        component={CommunityPage}
-        initialParams={{ community_id: community_id }}
-      />
-      <Tab.Screen name="ACTIONS" component={ActionsPage} />
-      <Tab.Screen name="EVENTS" component={EventsPage} />
-      <Tab.Screen name="PROFILE" component={DashboardPage} />
-    </Tab.Navigator>
-  );
+      <Tab.Screen 
+        name="COMMUNITY" 
+        component={CommunityPage} 
+        />
+      <Tab.Screen 
+        name="ACTIONS" 
+        component={ActionsPage} 
+        />
+      <Tab.Screen 
+        name="EVENTS" 
+        component={EventsPage} 
+        />
+      <Tab.Screen 
+        name="PROFILE" 
+        component={DashboardPage} />
+  </Tab.Navigator>
+  )
 }

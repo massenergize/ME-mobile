@@ -35,8 +35,11 @@ export async function apiCall(
   // const authTokenInLocalStorage = localStorage.getItem(AUTH_TOKEN); // This is also only used in test. Its a fallback method to retrieve token
   const formData = new FormData();
 
+  // the request doesn't work if the form data is empty, so we need to add an empty key-value pair if dataToSend is empty
   Object.keys(dataToSend).map((k) => formData.append(k, dataToSend[k]));
-  formData.append("", "");
+  if (Object.keys(dataToSend).length === 0) {
+    formData.append("", "")
+  }
 
   // Object.keys(dataToSend).map((k) => formData.append(k, {...dataToSend[k], type: 'multipart/form-data'}));
   // if (authToken)

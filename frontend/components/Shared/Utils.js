@@ -1,4 +1,19 @@
 /**
+ * get the metric of an action
+ * @param {Object} action
+ * @param {String} metric
+ * @returns {String} the metric of the action
+ */
+export function getActionMetric(action, metric) {
+  for (let i = 0; i < action.tags.length; i++) {
+    if (action.tags[i].tag_collection_name === metric) {
+      return action.tags[i].name;
+    }
+  }
+  return "-";
+}
+
+/**
  * formats a date range string based on the start and end date
  * @param {Date} startDate
  * @param {Date} endDate
@@ -6,7 +21,7 @@
  */
 export function formatDateString(startDate, endDate) {
   const dateOptions = {
-    month: "long",
+    month: "short",
     day: "numeric",
     hour: "numeric",
     minute: "numeric",
@@ -18,7 +33,7 @@ export function formatDateString(startDate, endDate) {
   let dateRangeString;
 
   if (startDate.toDateString() === endDate.toDateString()) {
-    // Same day then display "mmmm dd, hh:mm AM/PM - hh:mm AM/PM"
+    // Same day then display "mm dd, hh:mm AM/PM - hh:mm AM/PM"
     dateRangeString = `${startDateString} - ${endDate.toLocaleTimeString(
       "en-US",
       { hour: "numeric", minute: "numeric", hour12: true }
@@ -26,9 +41,9 @@ export function formatDateString(startDate, endDate) {
   } else {
     // Same month
     if (startDate.getMonth() === endDate.getMonth()) {
-      // Display "mmmm dd-dd yyyy"
+      // Display "mm dd-dd yyyy"
       dateRangeString = `${startDate.toLocaleDateString("en-US", {
-        month: "long",
+        month: "short",
         day: "numeric",
       })}-${endDate.toLocaleDateString("en-US", {
         day: "numeric",
@@ -37,23 +52,23 @@ export function formatDateString(startDate, endDate) {
     } else {
       // Same year
       if (startDate.getFullYear() === endDate.getFullYear()) {
-        // Display "mmmm dd - mmmm dd, yyyy"
+        // Display "mm dd - mm dd, yyyy"
         dateRangeString = `${startDate.toLocaleDateString("en-US", {
-          month: "long",
+          month: "short",
           day: "numeric",
         })} - ${endDate.toLocaleDateString("en-US", {
-          month: "long",
+          month: "short",
           day: "numeric",
           year: "numeric",
         })}`;
       } else {
-        // Different year then display "mmmm dd, yyyy - mmmm dd, yyyy"
+        // Different year then display "mm dd, yyyy - mm dd, yyyy"
         dateRangeString = `${startDate.toLocaleDateString("en-US", {
-          month: "long",
+          month: "short",
           day: "numeric",
           year: "numeric",
         })} - ${endDate.toLocaleDateString("en-US", {
-          month: "long",
+          month: "short",
           day: "numeric",
           year: "numeric",
         })}`;

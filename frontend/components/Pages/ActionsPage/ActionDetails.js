@@ -1,106 +1,132 @@
-import { View, StyleSheet, useWindowDimensions } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
+  View,
   Text,
   Box,
-  AspectRatio,
   Image,
   VStack,
   ScrollView,
   Button,
   Container,
   HStack,
-  Spacer
+  Spacer,
+  Spinner,
+  Center,
+  Modal,
 } from "native-base";
+
 import Page from "../../Shared/Page";
 import HTMLParser from "../../Shared/HTMLParser";
 import ServiceProviderCard from "../ServiceProvidersPage/ServiceProviderCard";
-
+import { CommunityContext, useDetails } from "../../Contexts/CommunityContext";
+import { TestimonialCard } from "../TestimonialsPage/TestimonialsCard";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import { getActionMetric } from "../../Shared/Utils";
 
 export default function ActionDetails({ route, navigation }) {
+  const { action_id } = route.params;
 
-  const { width } = useWindowDimensions();
+  const [activeTab, setActiveTab] = useState("description");
 
-  const [activeTab, setActiveTab] = useState("description")
+  const [action, isActionLoading] = useDetails("actions.info", {
+    action_id: action_id,
+  });
+  const { testimonials, testimonialsSettings, vendorsSettings } = useContext(CommunityContext);
 
-  const { action } = route.params;
+  const [isDoneOpen, setIsDoneOpen] = useState(false);
 
+  // individual functions to render the context for each tab in the action details page
   const generateDescriptionTab = () => {
-    return (
-      <HTMLParser
-        htmlString={action.about}
-        baseStyle={textStyle}
-      />
-    )
-  }
+    return <HTMLParser htmlString={action.about} baseStyle={textStyle} />;
+  };
 
   const generateStepsTab = () => {
     return (
-      <HTMLParser
-        htmlString={action.steps_to_take}
-        baseStyle={textStyle}
-      />
-    )
-  }
+      <HTMLParser htmlString={action.steps_to_take} baseStyle={textStyle} />
+    );
+  };
 
   const generateDeepDiveTab = () => {
     if (action.deep_dive === "") {
-      return (
-        <Text>No information available.</Text>
-      )
-    } 
-    else {
-      return (
-        <HTMLParser
-          htmlString={action.deep_dive}
-          baseStyle={textStyle}
-        />
-      )
+      return <Text>No information available.</Text>;
+    } else {
+      return <HTMLParser htmlString={action.deep_dive} baseStyle={textStyle} />;
     }
-  }
+  };
+
+  // for the testimonials associated with this action
+  const [actionTestimonials, setActionTestimonials] = useState([]);
+
+  // get testimonials related to this action
+  const getTestimonials = () => {
+    if (testimonialsSettings.is_published) {
+      const relatedTestimonials = [];
+      for (let i = 0; i < testimonials.length; i++) {
+        if (testimonials[i].action?.id === action_id) {
+          relatedTestimonials.push(testimonials[i]);
+        }
+      }
+      console.log(relatedTestimonials);
+      setActionTestimonials(relatedTestimonials);
+    }
+  };
+
+  // only retrieve associated testimonials once
+  useEffect(() => {
+    getTestimonials();
+  }, []);
 
   const generateTestimonialsTab = () => {
-    return (
-      <Text>Testimonials Tab</Text>
-    )
-  }
-
+    return actionTestimonials.length === 0 ? (
+      <Text>No testimonials available.</Text>
+    ) : (
+      actionTestimonials.map((testimonial, index) => {
+        return (
+          <TestimonialCard
+            navigation={navigation}
+            data={testimonial}
+            key={index}
+            picture={testimonial.file != null}
+          />
+        );
+      })
+    );
+  };
 
   const generateServiceProvidersTab = () => {
     if (action.vendors.length === 0) {
-      return (
-        <Text>No associated service providers.</Text>
-      )
+      return <Text>No associated service providers.</Text>;
     }
-    return (
-      action.vendors.map((vendor, index) => {
-        return <ServiceProviderCard 
-          direction="row" 
+    return action.vendors.map((vendor, index) => {
+      return (
+        <ServiceProviderCard
+          id={vendor.id}
+          direction="row"
           description=""
           imageURI={vendor.logo.url}
           name={vendor.name}
-          onPress={() =>
-            navigation.navigate("serviceProviderDetails")
-          }
-          key={index}/>
-      })
-    )
-  }
+          navigation={navigation}
+          key={index}
+        />
+      );
+    });
+  };
 
   function TabButton({ label, name }) {
     return (
-      <Button 
+      <Button
         variant={activeTab === name ? "solid" : "outline"}
         onPress={() => setActiveTab(name)}
         mr={2}
-        >
+      >
         {label}
       </Button>
-    )
+    );
   }
 
+  // render the appropriate tab content based on the active tab
   const renderTabContent = () => {
-    switch(activeTab) {
+    switch (activeTab) {
       case "description":
         return generateDescriptionTab();
       case "steps":
@@ -114,100 +140,134 @@ export default function ActionDetails({ route, navigation }) {
       default:
         return generateDescriptionTab();
     }
-  }
-
-  const getMetric = (metric) => {
-    for (let i = 0; i < action.tags.length; i++) {
-      if (action.tags[i].tag_collection_name === metric) {
-        return action.tags[i].name;
-      }
-    }
-    return "-"
-  }
+  };
 
   return (
     <Page>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <VStack style={{ flex: 1 }}>
-          {/* <View style={styles.container}>
-            <AspectRatio w="90%" ratio={9 / 9}>
+      {isActionLoading ? (
+        <Center width="100%" height="100%">
+          <Spinner size="lg" />
+        </Center>
+      ) : (
+        <View>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <VStack style={{ flex: 1 }}>
               <Image
                 source={{
-                  uri: "https://m.media-amazon.com/images/I/61JhlT09xiL._AC_SX679_.jpg",
+                  uri: action.image != null ? action.image.url : null,
                 }}
+                m={3}
+                h={250}
                 alt="image"
+                resizeMode="contain"
               />
-            </AspectRatio>
-          </View> */}
-          <Image
-            source={{
-                // uri: "https://m.media-amazon.com/images/I/61JhlT09xiL._AC_SX679_.jpg",
-               uri: action.image.url,
-            }}
-            m={3}
-            h={250}
-            // w={width}
-            alt="image"
-            // borderRadius="xl"
-            resizeMode="contain"
-        />
-          <Box bg="white" borderRadius="3xl" shadow={5} height="100%">
-            <VStack>
-              <Text bold fontSize="2xl" m={4}>{action.title}</Text>
-              <HStack alignItems="center" mx={4}>
-                <Text bold fontSize="lg">Impact</Text>
-                <Spacer />
-                <Text fontSize="lg">{getMetric("Impact")}</Text>
-              </HStack>
-              <HStack alignItems="center" mx={4} mt={2} mb={4}>
-                <Text bold fontSize="lg">Cost</Text>
-                <Spacer />
-                <Text fontSize="lg">{getMetric("Cost")}</Text>
-              </HStack>
-              <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} px={3}>
-                <TabButton label="Description" name="description" />
-                <TabButton label="Steps" name="steps" />
-                <TabButton label="Deep Dive" name="deep_dive" />
-                <TabButton label="Testimonials" name="testimonials" />
-                <TabButton label="Service Providers" name="service_providers" />
-                <Container width={5}></Container>
-              </ScrollView>
-              <Box m={15}>
-                {renderTabContent()}
+              <Box bg="white" borderRadius="3xl" shadow={5} height="100%">
+                <VStack>
+                  <Text bold fontSize="2xl" m={4}>
+                    {action.title}
+                  </Text>
+                  <HStack alignItems="center" mx={4} mb={4}>
+                    <Text bold fontSize="lg">
+                      Impact -{" "}
+                    </Text>
+                    <Text fontSize="lg">
+                      {getActionMetric(action, "Impact")}
+                    </Text>
+                    <Spacer />
+                    <Text bold fontSize="lg">
+                      Cost -{" "}
+                    </Text>
+                    <Text fontSize="lg">{getActionMetric(action, "Cost")}</Text>
+                  </HStack>
+                  <HStack space={2} justifyContent="center" width="100%" mb={3}>
+                    <Button
+                      size="md"
+                      variant="solid"
+                      _text={{
+                        color: "white",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      Add to To-Do
+                    </Button>
+                    <Button
+                      size="md"
+                      variant="solid"
+                      _text={{
+                        color: "white",
+                        fontWeight: "bold",
+                      }}
+                      onPress={() => setIsDoneOpen(true)}
+                    >
+                      Done
+                    </Button>
+                  </HStack>
+                  <ScrollView
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                    px={3}
+                  >
+                    <TabButton label="Description" name="description" />
+                    <TabButton label="Steps" name="steps" />
+                    <TabButton label="Deep Dive" name="deep_dive" />
+                    {testimonialsSettings.is_published ? (
+                      <TabButton label="Testimonials" name="testimonials" />
+                    ) : null}
+                    {vendorsSettings.is_published ? (
+                      <TabButton
+                        label="Service Providers"
+                        name="service_providers"
+                      />
+                    ) : null}
+                    <Container width={5}></Container>
+                  </ScrollView>
+                  {/* Display the tab content */}
+                  <Box m={15}>{renderTabContent()}</Box>
+                </VStack>
+                <Container></Container>
               </Box>
             </VStack>
-            <Container
-              // style={{ flexDirection: "row", position: "absolute", bottom: 35 }}
-              position="absolute"
-              bottom={15}
-            >
-              {/* <Button
-                size="md"
-                variant="outline"
-                _text={{
-                  color: "black",
-                  fontWeight: "bold",
-                }}
-                ref={buttonOne}
-              >
-                Add to To-Do
-              </Button>
-              <Button
-                size="md"
-                variant="solid"
-                _text={{
-                  color: "white",
-                  fontWeight: "bold",
-                }}
-                ref={buttonTwo}
-              >
-                Done
-              </Button> */}
-            </Container>
-          </Box>
-        </VStack>
-        
-      </ScrollView>
+            <Container height={20}></Container>
+          </ScrollView>
+          {/* Modal for when the user marks the action as done */}
+          <Modal isOpen={isDoneOpen} onClose={() => {}}>
+            <Modal.Content maxWidth="400px">
+              <Modal.Body>
+                <Center mb="5">
+                  <Ionicons name={"ribbon-outline"} size={90} color="#64B058" />
+                  <Text fontSize="xl" fontWeight="bold" py={2}>
+                    Congratulations!
+                  </Text>
+                  <Text textAlign="center" fontSize="lg">
+                    You just completed{" "}
+                    <Text bold color="primary.600">
+                      {action.title}
+                    </Text>
+                    !
+                  </Text>
+                </Center>
+                <HStack width="100%" justifyContent={"center"}>
+                  {/* Testimonial button temporarily disabled while waiting for user funcitonality */}
+                  {/* <Button 
+                    color={"primary.600"} 
+                    onPress={() => {setIsDoneOpen(false), navigation.navigate("addTestimonial")}} 
+                    mr={3}
+                  >
+                    Leave a Testimonial
+                  </Button> */}
+                  <Button
+                    variant={"outline"}
+                    px={5}
+                    onPress={() => setIsDoneOpen(false)}
+                  >
+                    Close
+                  </Button>
+                </HStack>
+              </Modal.Body>
+            </Modal.Content>
+          </Modal>
+        </View>
+      )}
     </Page>
   );
 }

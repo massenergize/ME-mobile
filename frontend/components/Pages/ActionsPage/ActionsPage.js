@@ -1,88 +1,100 @@
-import { View, Text, StyleSheet } from "react-native";
-import React from "react";
-import {
-  ScrollView,
-  HStack
-} from "native-base";
-import ActionCard from "./ActionCard";
+import { useContext, useEffect, useState } from "react";
+import { StyleSheet } from "react-native";
+import { ScrollView, HStack, Text, Spinner, Center } from "native-base";
+
 import Page from "../../Shared/Page";
-import actions from "./../../../data/actionsList.json";
+import ActionCard from "./ActionCard";
+import { CommunityContext } from "../../Contexts/CommunityContext";
+import { getActionMetric } from "../../Shared/Utils";
 
 export default function ActionsPage({ navigation }) {
+  const { actions } = useContext(CommunityContext);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const getMetric = (action, metric) => {
-    for (let i = 0; i < action.tags.length; i++) {
-      if (action.tags[i].tag_collection_name === metric) {
-        return action.tags[i].name;
-      }
+  useEffect(() => {
+    if (actions) {
+      setIsLoading(false);
     }
-    return "-"
-  }
+  }, []);
 
   return (
-    //the styling should apply to something else
-    //<ScrollView style = {styles.scroll}>
     <Page>
-      <ScrollView>
-        <Text style={styles.category}>Recommended</Text>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
-            {/* <ActionCard navigation={navigation} /> */}
-            {/* <ActionCard navigation={navigation} />
-            <ActionCard navigation={navigation} /> */}
-            {/*<Button onPress={() => navigation.navigate("welcome")}>Take Action</Button>*/}
-            {
-              actions.data.map((action, index) => {
+      {isLoading ? (
+        <Center flex="1">
+          <Spinner />
+        </Center>
+      ) : (
+        <ScrollView>
+          {/* Currently "All" instead of "Recommended" for v1 (v2 will have filtering) */}
+          <Text style={styles.category}>All</Text>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
+              {/* Display all actions */}
+              {actions.map((action, index) => {
                 return (
-                  <ActionCard navigation={navigation} action={action} key={index}></ActionCard>
+                  <ActionCard
+                    key={index}
+                    navigation={navigation}
+                    id={action.id}
+                    title={action.title}
+                    imgUrl={action.image?.url}
+                    impactMetric={getActionMetric(action, "Impact")}
+                    costMetric={getActionMetric(action, "Cost")}
+                  />
+                );
+              })}
+            </HStack>
+          </ScrollView>
+          <Text style={styles.category}>High Impact</Text>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
+              {/* Display all actions with high impact */}
+              {actions
+                .filter(
+                  (action) => getActionMetric(action, "Impact") === "High"
                 )
-              })
-            }
-          </HStack>
-        </ScrollView>
-        {/* <Text style={styles.category}>Daily</Text>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
-            <ActionCard navigation={navigation} />
-            <ActionCard navigation={navigation} />
-            <ActionCard navigation={navigation} />
-          </HStack>
-        </ScrollView> */}
-        <Text style={styles.category}>High Impact</Text>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
-            {
-              actions.data.map((action, index) => {
-                if (getMetric(action, "Impact") === "High") {
+                .map((action, index) => {
                   return (
-                    <ActionCard navigation={navigation} action={action} key={index}></ActionCard>
-                  )
-                }
-                else {
-                  return null;
-                }
-              })
-            }
-          </HStack>
-        </ScrollView>
-        <Text style={styles.category}>Low Cost</Text>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
-          {
-            actions.data.map((action, index) => {
-              if (getMetric(action, "Cost") === "$" || getMetric(action, "Cost") === "0") {
-                return (
-                  <ActionCard navigation={navigation} action={action} key={index}></ActionCard>
+                    <ActionCard
+                      key={index}
+                      navigation={navigation}
+                      id={action.id}
+                      title={action.title}
+                      imgUrl={action.image?.url}
+                      impactMetric={getActionMetric(action, "Impact")}
+                      costMetric={getActionMetric(action, "Cost")}
+                    />
+                  );
+                })}
+            </HStack>
+          </ScrollView>
+          <Text style={styles.category}>Low Cost</Text>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
+              {/* Display all actions with low cost (0 or $) */}
+              {actions
+                .filter(
+                  (action) =>
+                    getActionMetric(action, "Cost") === "$" ||
+                    getActionMetric(action, "Cost") === "0"
                 )
-              }
-              else {
-                return null;
-              }
-            })
-          }
-          </HStack>
+                .map((action, index) => {
+                  return (
+                    <ActionCard
+                      key={index}
+                      navigation={navigation}
+                      id={action.id}
+                      title={action.title}
+                      imgUrl={action.image?.url}
+                      impactMetric={getActionMetric(action, "Impact")}
+                      costMetric={getActionMetric(action, "Cost")}
+                    />
+                  );
+                })}
+            </HStack>
+          </ScrollView>
         </ScrollView>
-      </ScrollView>
+      )}
     </Page>
   );
 }

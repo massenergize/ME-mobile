@@ -1,148 +1,110 @@
-import React, { useState, useEffect } from "react";
-import { Button, Center, Flex, ScrollView } from "native-base";
-import Page from "../../Shared/Page";
-import SearchBar from "../../Shared/SearchBar";
-import EventCard from "./EventCard";
+import React, { useState, useEffect, useContext } from "react";
+import { Button, Center, FlatList, HStack, Spinner } from "native-base";
 
-import DummyResponse from "../../../data/eventsList.json";
+import Page from "../../Shared/Page";
+import EventCard from "./EventCard";
+import { CommunityContext } from "../../Contexts/CommunityContext";
 import { formatDateString } from "../../Shared/Utils";
 
-const filterOptions = [
-  {
-    value: 0,
-    label: "All",
-  },
-  {
-    value: 5,
-    label: "Home Energy",
-  },
-  {
-    value: 33,
-    label: "Solar",
-  },
-  {
-    value: 7,
-    label: "Transportation",
-  },
-  {
-    value: 8,
-    label: "Waste & Recycling",
-  },
-  {
-    value: 3,
-    label: "Food",
-  },
-  {
-    value: 1,
-    label: "Activism & Education",
-  },
-  {
-    value: 9,
-    label: "Land, Soil & Water",
-  },
-];
-
 export default function EventsPage({ navigation }) {
-  const [events, setEvents] = useState([]);
-  const [eventFilterID, setEventFilterID] = useState(1); // 0 = upcoming, 1 = past, 2 = campaigns
+  const { events } = useContext(CommunityContext);
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [newEvents, setNewEvents] = useState([]);
+
+  const [eventFilterID, setEventFilterID] = useState(0); // 0 = upcoming, 1 = past, 2 = campaigns
 
   useEffect(() => {
-    // TODO: make an API call here
-    // TODO: add loading state (maybe a spinner)
-    // TODO: a reallllly long delay whenever data is loading (potential solution: cache it)
-    if (DummyResponse.success) {
-      const data = DummyResponse.data;
-      // filter out events from Energize Wayland (id: 3)
-      const filteredEvents = data.filter((event) => event.community.id !== 3);
-      setEvents(filteredEvents);
-    }
-  }, []);
-
-  const getEventsByFilter = (id) => {
-    if (id === 0) {
+    setIsLoading(true);
+    if (eventFilterID === 0) {
       // upcoming events
-      return events.filter((event) => {
-        const eventDate = new Date(event.start_date_and_time);
-        const now = new Date();
-        return eventDate > now;
-      });
-    } else if (id === 1) {
+      setNewEvents(
+        events.filter((event) => {
+          const eventDate = new Date(event.start_date_and_time);
+          const now = new Date();
+          return eventDate > now;
+        })
+      );
+    } else if (eventFilterID === 1) {
       // past events
-      return events.filter((event) => {
-        const eventDate = new Date(event.start_date_and_time);
-        const now = new Date();
-        return eventDate < now;
-      });
+      setNewEvents(
+        events.filter((event) => {
+          const eventDate = new Date(event.start_date_and_time);
+          const now = new Date();
+          return eventDate < now;
+        })
+      );
+    } else {
+      // TODO: campaigns
+      setNewEvents([]);
     }
-    // TODO: which field to filter by?
-    // campaigns
-    // return [];
+    setIsLoading(false);
+  }, [eventFilterID]);
+
+  const renderHeader = () => {
+    return (
+      <HStack width="100%" justifyContent="center" space={1} mb={1}>
+        <Button
+          variant={eventFilterID === 0 ? "solid" : "outline"}
+          _text={{ fontSize: "xs" }}
+          borderRadius="full"
+          onPress={() => setEventFilterID(0)}
+        >
+          Upcoming Events
+        </Button>
+        <Button
+          variant={eventFilterID === 1 ? "solid" : "outline"}
+          _text={{ fontSize: "xs" }}
+          borderRadius="full"
+          onPress={() => setEventFilterID(1)}
+        >
+          Past Events
+        </Button>
+        <Button
+          variant="outline"
+          _text={{ fontSize: "xs" }}
+          borderRadius="full"
+          onPress={() => handleFilter(2)}
+          isDisabled
+        >
+          Campaigns
+        </Button>
+      </HStack>
+    );
   };
 
   return (
-    <Page>
-      <ScrollView
-        p="5"
-        contentContainerStyle={{
-          alignItems: "center",
-        }}
-      >
-        <SearchBar
-          pb="5"
-          w="full"
-          filterOptions={filterOptions}
-          filterHeader="Category"
-        />
-        {/* events filter */}
-        <Flex flexDirection="row">
-          <Button
-            variant={eventFilterID === 0 ? "solid" : "outline"}
-            _text={{ fontSize: "xs" }}
-            borderRadius="full"
-            onPress={() => setEventFilterID(0)}
-          >
-            Upcoming Events
-          </Button>
-          <Button
-            variant={eventFilterID === 1 ? "solid" : "outline"}
-            _text={{ fontSize: "xs" }}
-            borderRadius="full"
-            onPress={() => setEventFilterID(1)}
-          >
-            Past Events
-          </Button>
-          <Button
-            variant="outline"
-            _text={{ fontSize: "xs" }}
-            borderRadius="full"
-            onPress={() => handleFilter(2)}
-            isDisabled
-          >
-            Campaigns
-          </Button>
-        </Flex>
-        {/* events list */}
-        {getEventsByFilter(eventFilterID).length > 0 ? (
-          getEventsByFilter(eventFilterID).map((event) => (
+    <Page p={3}>
+      {isLoading ? (
+        <Center flex="1">
+          <Spinner />
+        </Center>
+      ) : (
+        <FlatList
+          ListHeaderComponent={renderHeader}
+          ListEmptyComponent={<Center>There are no events.</Center>}
+          data={newEvents}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
             <EventCard
-              key={event.id}
-              title={event.name}
+              title={item.name}
               date={formatDateString(
-                new Date(event.start_date_and_time),
-                new Date(event.end_date_and_time)
+                new Date(item.start_date_and_time),
+                new Date(item.end_date_and_time)
               )}
-              location={event.location}
-              imageURI={event.image.url}
-              canRSVP={event.rsvp_enabled}
-              onPress={() => navigation.navigate("eventDetails")}
+              location={item.location}
+              imageUrl={item.image?.url}
+              canRSVP={item.rsvp_enabled}
+              id={item.id}
+              navigation={navigation}
               my="3"
-              shadow="5"
+              mx={2}
+              shadow={3}
             />
-          ))
-        ) : (
-          <Center py="5">There are no more events.</Center>
-        )}
-      </ScrollView>
+          )}
+          contentContainerStyle={{ alignItems: 'center'}}
+        />
+      )}
     </Page>
   );
 }

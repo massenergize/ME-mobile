@@ -1,81 +1,101 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   ScrollView,
-  Text,
   VStack,
-  Image,
-  Flex,
-  Box,
+  HStack,
+  View,
   Pressable,
+  Text,
+  Spacer
 } from "native-base";
+import Ionicons from "react-native-vector-icons/Ionicons";
 import Page from "../../Shared/Page";
+import TeamCard from "./TeamCard";
+import { CommunityContext } from "../../Contexts/CommunityContext";
+
 
 export default function TeamsPage({ navigation }) {
-  const generateTeams = () => {
-    let teams = [];
-    for (let i = 0; i < 5; i++) {
-      teams.push(
-        <Pressable key={i} onPress={() => navigation.navigate("teamDetails")}>
-          <Flex
-            direction="row"
-            borderRadius={"2xl"}
-            shadow="5"
-            backgroundColor={"white"}
-          >
-            {i % 2 == 0 ? (
-              <Image
-                source={require("../../../assets/images/team-1.jpeg")}
-                alt="image"
-                size="xl"
-                height="full"
-                borderLeftRadius="2xl"
-              />
-            ) : null}
-            <Box flexShrink={1} borderRightRadius="2xl" w="full">
-              <VStack space="3" p="4">
-                <Text fontSize="lg" fontWeight="bold">
-                  Team {i + 1}
-                </Text>
-                <Text>Description of the team and what their purpose is.</Text>
-                <VStack>
-                  <Flex direction="row" justifyContent={"space-between"}>
-                    <Text fontSize="sm" fontWeight="bold">
-                      65
-                    </Text>
-                    <Text fontSize="sm">Members</Text>
-                  </Flex>
-                  <Flex direction="row" justifyContent={"space-between"}>
-                    <Text fontSize="sm" fontWeight="bold">
-                      124
-                    </Text>
-                    <Text fontSize="sm">Actions Completed</Text>
-                  </Flex>
-                  <Flex direction="row" justifyContent={"space-between"}>
-                    <Text fontSize="sm" fontWeight="bold">
-                      1615.2
-                    </Text>
-                    <Text fontSize="sm">Number of Trees</Text>
-                  </Flex>
-                  <Flex direction="row" justifyContent={"space-between"}>
-                    <Text fontSize="sm" fontWeight="bold">
-                      5
-                    </Text>
-                    <Text fontSize="sm">Sub-teams</Text>
-                  </Flex>
-                </VStack>
-              </VStack>
-            </Box>
-          </Flex>
-        </Pressable>
-      );
+
+  const { teams } = useContext(CommunityContext);
+  const [subteamsExpanded, setSubteamsExpanded] = useState({})
+  const [teamsList, setTeamsList] = useState([])
+
+  // get a list of teams where subteams are nested under their parent team
+  const getTeams = () => {
+    teamsDict = {}
+    expanded = {}
+    for (var i = 0; i < teams.length; i++) {
+      if (teams[i].team.parent === null) {
+        teamsDict[teams[i].team.id] = teams[i]
+        teamsDict[teams[i].team.id].subteams = []
+      }
     }
-    return teams;
-  };
+    for (var i = 0; i < teams.length; i++) {
+      if (teams[i].team.parent) {
+        teamsDict[teams[i].team.parent.id].subteams.push(teams[i])
+        expanded[teams[i].team.id] = false
+      }
+    }
+    setTeamsList(Object.values(teamsDict))
+    setSubteamsExpanded(expanded)
+  }
+
+  // update the state of whether a team's subteams are expanded or not
+  const changeExpanded = (team_id) => {
+    let copy = {...subteamsExpanded}
+    copy[team_id] = !copy[team_id]
+    setSubteamsExpanded(copy)
+  }
+
+  // get the list of teams on page load
+  useEffect(() => {
+    getTeams()
+  }, [teams])
+
   return (
     <Page>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <VStack space="5" p="5">
-          {generateTeams()}
+        <VStack space={5} p={5}>
+          {
+            teamsList.map((team, i) => {
+              return <View key={i}>
+                <TeamCard navigation={navigation} team={team} isSubteam={false} />
+                {
+                  // display the subteams associated with a parent if expanded
+                  (team.subteams.length > 0) ? (
+                    <View>
+                      <Pressable onPress={() => changeExpanded(team.team.id)}>
+                        <HStack mt={2} alignItems="center">
+                          <Spacer />
+                          <Text color="primary.600" mr={1}>Expand Subteams</Text>
+                          <Ionicons
+                            name={
+                              subteamsExpanded[team.team.id]
+                                ? "chevron-up-outline"
+                                : "chevron-down-outline"
+                            }
+                            color="#64B058"
+                          />
+                        </HStack>
+                      </Pressable>
+                      {
+                        subteamsExpanded[team.team.id] ? (
+                          <VStack ml={5} space={3} mt={3}>
+                          {
+                            team.subteams.map((subteam, j) => {
+                              return <TeamCard key={j} navigation={navigation} team={subteam} isSubteam={true}/>
+                            })
+                          }
+                          </VStack>
+                        ) : null
+                      }
+                    </View>
+                  )
+                  : null
+                }
+              </View>
+            })
+          }
         </VStack>
       </ScrollView>
     </Page>

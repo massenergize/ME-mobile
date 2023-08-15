@@ -9,160 +9,140 @@ import {
   VStack,
   Box,
   ScrollView,
-  Flex,
   Input,
   View,
+  Spinner,
+  Spacer
 } from "native-base";
-
+import TeamCard from "./TeamCard";
 import Page from "../../Shared/Page";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import { TeamActionsChart, ActionsList } from "../../Shared/Charts";
+import { useDetails } from "../../Contexts/CommunityContext";
 
-const fill = "#DC4E34";
-const data = [
-  {
-    id: 12,
-    name: "Activism & Education",
-    value: 127,
-    reported_value: 168,
-  },
-  {
-    id: 11,
-    name: "Food",
-    value: 245,
-    reported_value: 0,
-  },
-  {
-    id: 9,
-    name: "Home Energy",
-    value: 510,
-    reported_value: 413,
-  },
-  {
-    id: 26,
-    name: "Land, Soil & Water",
-    value: 92,
-    reported_value: 29,
-  },
-  {
-    id: 52,
-    name: "Solar",
-    value: 90,
-    reported_value: 360,
-  },
-  {
-    id: 24,
-    name: "Transportation",
-    value: 111,
-    reported_value: 599,
-  },
-  {
-    id: 25,
-    name: "Waste & Recycling",
-    value: 202,
-    reported_value: 200,
-  },
-];
+export default function TeamDetailsPage({ route, navigation }) {
+  const { team_id } = route.params;
+  const { subteams } = route.params;
+  const { team_stats } = route.params;
+  // must load team info, members, and actions separately
+  const [team, isTeamLoading] = useDetails("teams.info", { team_id: team_id });
+  const [members, isMembersLoading] = useDetails("teams.members.preferredNames", { team_id: team_id });
+  const [actions, isActionsLoading] = useDetails("teams.actions.completed", { team_id: team_id });
 
-export default function TeamDetailsPage() {
   const [activeTab, setActiveTab] = useState("about");
   //   TODO: Cache these components to avoid re-rendering.
   const generateAboutTab = () => {
-    return <Text>Description of the team.</Text>;
+    // return <Text>{team.description}</Text>;
+    return <HTMLParser
+            htmlString={team.description}
+            baseStyle={textStyle}
+            />
   };
+
+  const [ actionDisplay, setActionDisplay ] = useState('chart');
+
+  // determine the number of actions completed for each category
+  const getGraphData = () => {
+    let graphData = {
+      "Activism & Education": {
+        "name": "Activism & Education",
+        "value": 0
+      },
+      "Food": {
+        "name": "Food",
+        "value": 0,
+      },
+      "Home Energy":{
+        "name": "Home Energy",
+        "value": 0,
+      },
+      "Land, Soil & Water": {
+        "name": "Land, Soil & Water",
+        "value": 0,
+      },
+      "Solar": {
+        "name": "Solar",
+        "value": 0,
+      },
+      "Transportation": {
+        "name": "Transportation",
+        "value": 0,
+      },
+      "Waste & Recycling": {
+        "name": "Waste & Recycling",
+        "value": 0,
+      }
+    }
+    for (let i = 0; i < actions.length; i++) {
+      graphData[actions[i].category].value += actions[i].done_count
+    }
+    return Object.values(graphData)
+  }
+
   const generateActionsTab = () => {
     return (
       <VStack space="5">
         <Text alignSelf="center">
-          <Text fontWeight="bold">484 </Text>
+          <Text fontWeight="bold">{team_stats.actions_completed} </Text>
           Actions Completed
         </Text>
         <Text alignSelf="center">
-          <Text fontWeight="bold">5679.8 </Text>
+          <Text fontWeight="bold">{(team_stats.carbon_footprint_reduction / 133).toFixed(2)} </Text>
           Number of Trees
         </Text>
+        <HStack width="100%">
+            <Spacer />
+            <Center>
+              <Ionicons 
+                name={"bar-chart-outline"} 
+                color={actionDisplay == "chart" ? '#64B058' : 'black'} 
+                padding={5} 
+                size={24} 
+                onPress={() => setActionDisplay('chart')}/>
+            </Center>
+            <Center pr={3}>
+              <Ionicons 
+                name={"list-outline"} 
+                color={actionDisplay == "list" ? '#64B058' : 'black'} 
+                padding={5} E
+                size={24} 
+                onPress={() => setActionDisplay('list')}/>
+            </Center>
+          </HStack>
+          {
+            (actionDisplay == "chart")
+            ?
+            <TeamActionsChart graphData={getGraphData()} />
+            // null
+            :
+            <ActionsList listData={actions} />
+          }
       </VStack>
     );
   };
+
   const generateMembersTab = () => {
-    const generateMemers = () => {
-      let members = [];
-      for (let i = 0; i < 10; i++) {
-        members.push(
-          <HStack key={i} space="2" alignItems="center">
-            <Image
-              source={{}}
-              alt="Member Image"
-              size="xs"
-              backgroundColor="gray.300"
-              borderRadius="full"
-            />
-            <Text>Member {i + 1}</Text>
-          </HStack>
-        );
+    return <VStack space="2">
+      {
+        members.map((member, i) => {
+          return <Text fontSize="md" key={i}>{member.preferred_name}</Text>
+        })
       }
-      return members;
-    };
-    return <VStack space="2">{generateMemers()}</VStack>;
+    </VStack>;
   };
+
   const generateSubTeamsTab = () => {
-    const generateSubTeams = () => {
-      let subTeams = [];
-      for (let i = 0; i < 5; i++) {
-        subTeams.push(
-          <Flex
-            key={i}
-            direction="row"
-            borderRadius="2xl"
-            shadow="5"
-            backgroundColor="white"
-          >
-            <Image
-              source={require("../../../assets/images/team-1.jpeg")}
-              alt="image"
-              size="xl"
-              height="full"
-              borderLeftRadius="2xl"
-            />
-            <Box flexShrink={1} borderRightRadius="2xl" w="full">
-              <VStack space="3" p="4">
-                <Text fontSize="lg" fontWeight="bold">
-                  Sub Team 1
-                </Text>
-                <Text>Description of the team and what their purpose is.</Text>
-                <VStack>
-                  <Flex direction="row" justifyContent={"space-between"}>
-                    <Text fontSize="sm" fontWeight="bold">
-                      65
-                    </Text>
-                    <Text fontSize="sm">Members</Text>
-                  </Flex>
-                  <Flex direction="row" justifyContent={"space-between"}>
-                    <Text fontSize="sm" fontWeight="bold">
-                      124
-                    </Text>
-                    <Text fontSize="sm">Actions Completed</Text>
-                  </Flex>
-                  <Flex direction="row" justifyContent={"space-between"}>
-                    <Text fontSize="sm" fontWeight="bold">
-                      1615.2
-                    </Text>
-                    <Text fontSize="sm">Number of Trees</Text>
-                  </Flex>
-                  <Flex direction="row" justifyContent={"space-between"}>
-                    <Text fontSize="sm" fontWeight="bold">
-                      5
-                    </Text>
-                    <Text fontSize="sm">Sub-teams</Text>
-                  </Flex>
-                </VStack>
-              </VStack>
-            </Box>
-          </Flex>
+    return <VStack space="5">
+      {
+      subteams.map((subteam, i) => {
+        return (
+            <TeamCard navigation={navigation} team={subteam} isSubteam={true} key={i} />
         );
+      })
       }
-      return subTeams;
-    };
-    return <VStack space="5">{generateSubTeams()}</VStack>;
+    </VStack>;
   };
+
   const generateContactTab = () => {
     return (
       <Box>
@@ -183,6 +163,8 @@ export default function TeamDetailsPage() {
       </Box>
     );
   };
+
+  // render appropriate tab content based on active tab
   const renderTabContent = () => {
     switch (activeTab) {
       case "about":
@@ -199,62 +181,74 @@ export default function TeamDetailsPage() {
         return generateAboutTab();
     }
   };
+
   return (
     <Page>
       <ScrollView>
-        <Center my="5">
-          <Image
-            source={require("../../../assets/images/team-1.jpeg")}
-            alt="image"
-            size="xl"
-          />
-        </Center>
-        <VStack space="3">
-          <Heading alignSelf="center">Team Name</Heading>
-          <Center mx="5">
-            <ScrollView
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-            >
-              <HStack space="2">
-                <Button
-                  variant={activeTab === "about" ? "solid" : "outline"}
-                  onPress={() => setActiveTab("about")}
+        {isTeamLoading || isMembersLoading ? (
+          <Spinner />
+        ) : (
+          <View>
+            {team.logo ? (
+              <Image
+                source={{ uri: team.logo.url }}
+                alt="image"
+                height={200}
+                mt={5}
+                resizeMode="contain"
+              />
+            ) : null}
+            <VStack space="3">
+              <Heading alignSelf="center" mt={5}>{team.name}</Heading>
+              <Button my={2} mx={4}>JOIN</Button>
+              <Center mx="5">
+                <ScrollView
+                  horizontal={true}
+                  showsHorizontalScrollIndicator={false}
                 >
-                  About
-                </Button>
-                <Button
-                  variant={activeTab === "actions" ? "solid" : "outline"}
-                  onPress={() => setActiveTab("actions")}
-                >
-                  Actions
-                </Button>
-                <Button
-                  variant={activeTab === "members" ? "solid" : "outline"}
-                  onPress={() => setActiveTab("members")}
-                >
-                  Members (65)
-                </Button>
-                <Button
-                  variant={activeTab === "subTeams" ? "solid" : "outline"}
-                  onPress={() => setActiveTab("subTeams")}
-                >
-                  Sub-teams
-                </Button>
-                <Button
-                  variant={activeTab === "contact" ? "solid" : "outline"}
-                  onPress={() => setActiveTab("contact")}
-                >
-                  Contact
-                </Button>
-              </HStack>
-            </ScrollView>
-          </Center>
-          <Tab>
-            {renderTabContent()}
-            <Button my="5">JOIN</Button>
-          </Tab>
-        </VStack>
+                  <HStack space="2">
+                    <Button
+                      variant={activeTab === "about" ? "solid" : "outline"}
+                      onPress={() => setActiveTab("about")}
+                    >
+                      About
+                    </Button>
+                    <Button
+                      variant={activeTab === "actions" ? "solid" : "outline"}
+                      onPress={() => setActiveTab("actions")}
+                    >
+                      Actions
+                    </Button>
+                    <Button
+                      variant={activeTab === "members" ? "solid" : "outline"}
+                      onPress={() => setActiveTab("members")}
+                    >
+                        {"Members (" + members.length + ")"}
+                    </Button>
+                    {
+                      subteams.length === 0 ? null :
+                      <Button
+                        variant={activeTab === "subTeams" ? "solid" : "outline"}
+                        onPress={() => setActiveTab("subTeams")}
+                      >
+                        Sub-teams
+                      </Button>
+                    }
+                    <Button
+                      variant={activeTab === "contact" ? "solid" : "outline"}
+                      onPress={() => setActiveTab("contact")}
+                    >
+                      Contact
+                    </Button>
+                  </HStack>
+                </ScrollView>
+              </Center>
+              <Tab>
+                {renderTabContent()}
+              </Tab>
+            </VStack>
+          </View>
+        )}
       </ScrollView>
     </Page>
   );
@@ -262,4 +256,8 @@ export default function TeamDetailsPage() {
 
 const Tab = ({ children }) => {
   return <Box p="5">{children}</Box>;
+};
+
+const textStyle = {
+  fontSize: "16px",
 };

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useCallback, useEffect } from "react";
+import React, { useState, useContext, useCallback } from "react";
 import {
   VStack,
   HStack,
@@ -9,7 +9,7 @@ import {
   Pressable,
   Image,
   View,
-  ScrollView
+  ScrollView,
 } from "native-base";
 import { RefreshControl } from "react-native-gesture-handler";
 
@@ -24,64 +24,86 @@ const colors = ["#DC4E34", "#64B058", "#000000"];
 
 // card that shows up to three goals on the community page
 function GoalsCard({ navigation, goals, community_id }) {
-
   // create the list of progress charts to display
   const getGoalsList = () => {
-    let goalsList = []
+    let goalsList = [];
     // don't display a chart if the goal is 0
     if (goals.target_number_of_actions != 0) {
       goalsList.push({
         nameLong: "Individual Actions Completed",
         nameShort: "Actions",
         goal: goals.target_number_of_actions,
-        current: goals.initial_number_of_actions + goals.attained_number_of_actions + goals.organic_attained_number_of_actions
-      })
+        current:
+          goals.initial_number_of_actions +
+          goals.attained_number_of_actions +
+          goals.organic_attained_number_of_actions,
+      });
     }
     if (goals.target_number_of_households != 0) {
       goalsList.push({
         nameLong: "Households Taking Action",
         nameShort: "Households",
         goal: goals.target_number_of_households,
-        current: goals.attained_number_of_households + goals.organic_attained_number_of_households
-      })
+        current:
+          goals.attained_number_of_households +
+          goals.organic_attained_number_of_households,
+      });
     }
     if (goals.target_carbon_footprint_reduction != 0) {
       goalsList.push({
         nameLong: "Carbon Reduction Impact",
         nameShort: "Trees",
         goal: goals.target_carbon_footprint_reduction / 133,
-        current: (goals.initial_carbon_footprint_reduction / 133) + (goals.organic_attained_carbon_footprint_reduction / 133)
-      })
+        current:
+          goals.initial_carbon_footprint_reduction / 133 +
+          goals.organic_attained_carbon_footprint_reduction / 133,
+      });
     }
-    return goalsList
-  }
+    return goalsList;
+  };
 
   // render a pressable card with progress charts for the available goals
   if (getGoalsList().length != 0) {
     return (
-      <Pressable onPress={() => navigation.navigate("impact", {goalsList: getGoalsList(), community_id: community_id})} mx={4} width="100%">
+      <Pressable
+        onPress={() =>
+          navigation.navigate("impact", {
+            goalsList: getGoalsList(),
+            community_id: community_id,
+          })
+        }
+        mx={4}
+        width="100%"
+      >
         <Box
-          shadow="1" 
+          shadow="1"
           bg="white"
-          alignItems="center" 
-          rounded="xl" 
+          alignItems="center"
+          rounded="xl"
           p={3}
           mx={4}
-          >
+        >
           <HStack justifyContent="space-evenly" width="100%">
-            {
-              getGoalsList().map((goal, index) => {
-                return <SmallChart goal={goal} color={colors[index]} key={index}/>
-              })
-            }
+            {getGoalsList().map((goal, index) => {
+              return (
+                <SmallChart goal={goal} color={colors[index]} key={index} />
+              );
+            })}
           </HStack>
-          <Text alignSelf="flex-end" mr={2} fontSize="sm" color="primary.400" mt={2}>Show More  {">"}</Text>
+          <Text
+            alignSelf="flex-end"
+            mr={2}
+            fontSize="sm"
+            color="primary.400"
+            mt={2}
+          >
+            Show More {">"}
+          </Text>
         </Box>
       </Pressable>
     );
-  }
-  else {
-    return <></>
+  } else {
+    return <></>;
   }
 }
 
@@ -108,95 +130,120 @@ function ShowMore({ navigation, page, text }) {
 }
 
 export default function CommunityPage({ navigation }) {
-  const { communityInfo, actions, homeSettings, fetchCommunityInfo } = useContext(CommunityContext);
-  const {community_id} = communityInfo
+  const { communityInfo, actions, homeSettings, fetchCommunityInfo } =
+    useContext(CommunityContext);
+  const { community_id } = communityInfo;
 
   const [refreshing, setRefreshing] = useState(false);
 
-  const onRefresh = useCallback (() => {
+  const onRefresh = useCallback(() => {
     setRefreshing(true);
-    fetchCommunityInfo(community_id, () => setRefreshing(false))
+    fetchCommunityInfo(community_id, () => setRefreshing(false));
   }, []);
 
   return (
     <Page>
-
-    <ScrollView 
-      nestedScrollEnabled = {true} 
-      showsVerticalScrollIndicator={false}
-      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
+      <ScrollView
+        nestedScrollEnabled={true}
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
         <VStack alignItems="center" space={3} bg="white">
           <Container maxHeight={200} width="100%" mt={3}>
             <Image
-                source={{uri: (communityInfo.logo) ? communityInfo.logo.url : null}}
-                alt="Community Logo"
-                resizeMode="contain"
-                height="full"
-                width="full"
+              source={{
+                uri: communityInfo.logo ? communityInfo.logo.url : null,
+              }}
+              alt="Community Logo"
+              resizeMode="contain"
+              height="full"
+              width="full"
             />
           </Container>
-          <GoalsCard navigation={navigation} goals={communityInfo.goal} community_id={community_id}/>
+          <GoalsCard
+            navigation={navigation}
+            goals={communityInfo.goal}
+            community_id={community_id}
+          />
           <HStack alignItems="center" pb={2} pt={3}>
-            <HeaderText text="Recommended Actions"/>
-            <Spacer/>
-            <ShowMore navigation={navigation} page="ACTIONS" text={"Show More"}/>
+            <HeaderText text="Recommended Actions" />
+            <Spacer />
+            <ShowMore
+              navigation={navigation}
+              page="ACTIONS"
+              text={"Show More"}
+            />
           </HStack>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
-            {
-              // displaay all low cost actions for v1 (recommended in the future)
-              actions
-              .filter((action) => getActionMetric(action, "Cost") === "$" || getActionMetric(action, "Cost") === "0")
-              .map((action, index) => {
-              return (
-                <ActionCard
-                  key={index}
-                  navigation={navigation}
-                  id={action.id}
-                  title={action.title}
-                  imgUrl={action.image?.url}
-                  impactMetric={getActionMetric(action, "Impact")}
-                  costMetric={getActionMetric(action, "Cost")}
-                />
-              );
-              })
-            }
+              {
+                // displaay all low cost actions for v1 (recommended in the future)
+                actions
+                  .filter(
+                    (action) =>
+                      getActionMetric(action, "Cost") === "$" ||
+                      getActionMetric(action, "Cost") === "0"
+                  )
+                  .map((action, index) => {
+                    return (
+                      <ActionCard
+                        key={index}
+                        navigation={navigation}
+                        id={action.id}
+                        title={action.title}
+                        imgUrl={action.image?.url}
+                        impactMetric={getActionMetric(action, "Impact")}
+                        costMetric={getActionMetric(action, "Cost")}
+                      />
+                    );
+                  })
+              }
             </HStack>
           </ScrollView>
-          {homeSettings.show_featured_events && homeSettings.featured_events.length !== 0 && (
-            <View width="100%">
-              <HStack alignItems="center" pb={2} pt={3}>
-                <HeaderText text="Featured Events"/>
-                <Spacer/>
-                <ShowMore navigation={navigation} page="EVENTS" text={"Show More"}/>
-              </HStack>
-              <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                <HStack space={3} mx={15}>
-                  {homeSettings.featured_events.map((event) => (
-                    <EventCard
-                      key={event.id}
-                      title={event.name}
-                      date={formatDateString(
-                        new Date(event.start_date_and_time),
-                        new Date(event.end_date_and_time)
-                      )}
-                      location = {event.location}
-                      imageUrl={event.image?.url}
-                      canRSVP={event.rsvp_enabled}
-                      isRSVPED={event.is_rsvped}
-                      isShared={event.is_shared}
-                      id={event.id}
-                      navigation={navigation}
-                      my={3}
-                      shadow={3}
-                    />
-                  ))}
+          {homeSettings.show_featured_events &&
+            homeSettings.featured_events.length !== 0 && (
+              <View width="100%">
+                <HStack alignItems="center" pb={2} pt={3}>
+                  <HeaderText text="Featured Events" />
+                  <Spacer />
+                  <ShowMore
+                    navigation={navigation}
+                    page="EVENTS"
+                    text={"Show More"}
+                  />
                 </HStack>
-              </ScrollView>
-            </View>
-          )}
+                <ScrollView
+                  horizontal={true}
+                  showsHorizontalScrollIndicator={false}
+                >
+                  <HStack space={3} mx={15}>
+                    {homeSettings.featured_events.map((event) => (
+                      <EventCard
+                        key={event.id}
+                        title={event.name}
+                        date={formatDateString(
+                          new Date(event.start_date_and_time),
+                          new Date(event.end_date_and_time)
+                        )}
+                        location={event.location}
+                        imageUrl={event.image?.url}
+                        canRSVP={event.rsvp_enabled}
+                        isRSVPED={event.is_rsvped}
+                        isShared={event.is_shared}
+                        id={event.id}
+                        navigation={navigation}
+                        my={3}
+                        shadow={3}
+                      />
+                    ))}
+                  </HStack>
+                </ScrollView>
+              </View>
+            )}
         </VStack>
-    </ScrollView>
+      </ScrollView>
     </Page>
   );
 }

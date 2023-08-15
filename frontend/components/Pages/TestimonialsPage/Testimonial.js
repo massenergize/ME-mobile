@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import Moment from 'moment';
-import { VStack, Image, Text, Spinner } from "native-base";
+import { VStack, Image, Text, Spinner, Center } from "native-base";
 import { ScrollView, View, useWindowDimensions } from "react-native";
 
 import Page from "../../Shared/Page";
 import ActionCard from "./../ActionsPage/ActionCard.js";
 import ServiceProviderCard from "./../ServiceProvidersPage/ServiceProviderCard.js";
 import HTMLParser from "../../Shared/HTMLParser";
-import { useDetails } from "../../Contexts/CommunityContext";
+import { useDetails, CommunityContext } from "../../Contexts/CommunityContext";
 import { getActionMetric } from "../../Shared/Utils";
 
 export default function Testimonial({ route, navigation }) {
@@ -15,43 +15,40 @@ export default function Testimonial({ route, navigation }) {
 
     const { testimonial_id } = route.params;
     const [testimonial, isTestimonialLoading] = useDetails("testimonials.info", {testimonial_id: testimonial_id});
+    const { vendorsSettings } = useContext(CommunityContext);
 
     return (
         <Page>  
-            <ScrollView>
-                {
-                    isTestimonialLoading
-                    ? <Spinner />
-                    :
+            {
+                isTestimonialLoading
+                ? 
+                <Center width="100%" height="100%">
+                    <Spinner size="lg"/>
+                </Center>
+                :
+                <ScrollView>
                     <VStack bg="white" px="3" pb="20">
                         {
                             (testimonial.file ) ? (
-                                // <Box
-                                //     borderRadius="xl"
-                                //     overflow="hidden"
-                                // >
-                                    <Image
-                                        source={{
-                                            // uri: "https://massenergize-prod-files.s3.amazonaws.com/media/Acton_Boxborough__BioBlitz_2023_A-230529-160415.jpg",
-                                            uri: testimonial.file.url
-                                        }}
-                                        my={3}
-                                        h={250}
-                                        w={width}
-                                        alt="image"
-                                        // borderRadius="xl"
-                                        resizeMode="contain"
-                                    />
-                                // </Box>
+                                <Image
+                                    source={{
+                                        uri: testimonial.file.url
+                                    }}
+                                    my={3}
+                                    h={250}
+                                    w={width}
+                                    alt="image"
+                                    resizeMode="contain"
+                                />
                             ) : <></>
                         }
                         <Text bold fontSize="2xl" mt={3}>{testimonial.title}</Text>
                         <Text fontSize="md" color="#BAB9C0" mb={3}>By {testimonial.preferred_name} | {Moment(testimonial.created_at).format('ll')}</Text>
                         <HTMLParser
                             htmlString={testimonial.body}
-                            baseStyle={textStyle}
-                            />
+                            baseStyle={textStyle} />
                         {
+                            // display the action associated with the testimonial if it exists
                             testimonial.action != null  
                             ?
                             <View>
@@ -68,7 +65,8 @@ export default function Testimonial({ route, navigation }) {
                             : <></>
                         }
                         {
-                            (testimonial.vendor != null)
+                            // display the vendor associated with the testimonial if it exists
+                            (vendorsSettings.is_published && testimonial.vendor != null)
                             ?
                             <View>
                                 <Text bold fontSize="lg" mb={2} mt={7}>Related Vendor</Text>
@@ -86,8 +84,8 @@ export default function Testimonial({ route, navigation }) {
                             : <></>
                         }
                     </VStack>
-                }
-            </ScrollView>
+                </ScrollView>
+            }
         </Page>
     );
 }

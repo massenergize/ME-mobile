@@ -33,7 +33,7 @@ const Stack = createNativeStackNavigator();
 const screenOptions = {
   // headerShown: false,
   headerTintColor: "black", 
-  headerBackTitleVisible: false
+  headerBackTitleVisible: false,
 };
 
 /**

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Button, Center, FlatList, Flex, Spinner } from "native-base";
+import { Button, Center, FlatList, HStack, Spinner } from "native-base";
 
 import Page from "../../Shared/Page";
 import EventCard from "./EventCard";
@@ -12,7 +12,7 @@ export default function EventsPage({ navigation }) {
   const [isLoading, setIsLoading] = useState(true);
   const [newEvents, setNewEvents] = useState([]);
 
-  const [eventFilterID, setEventFilterID] = useState(1); // 0 = upcoming, 1 = past, 2 = campaigns
+  const [eventFilterID, setEventFilterID] = useState(0); // 0 = upcoming, 1 = past, 2 = campaigns
 
   useEffect(() => {
     setIsLoading(true);
@@ -43,7 +43,7 @@ export default function EventsPage({ navigation }) {
 
   const renderHeader = () => {
     return (
-      <Flex flexDirection="row">
+      <HStack width="100%" justifyContent="center" space={1} mb={1}>
         <Button
           variant={eventFilterID === 0 ? "solid" : "outline"}
           _text={{ fontSize: "xs" }}
@@ -69,7 +69,7 @@ export default function EventsPage({ navigation }) {
         >
           Campaigns
         </Button>
-      </Flex>
+      </HStack>
     );
   };
 
@@ -102,6 +102,7 @@ export default function EventsPage({ navigation }) {
               shadow={3}
             />
           )}
+          contentContainerStyle={{ alignItems: 'center'}}
         />
       )}
     </Page>

@@ -25,9 +25,11 @@ export default function ActionsPage({ navigation }) {
         </Center>
       ) : (
         <ScrollView>
-          <Text style={styles.category}>Recommended</Text>
+          {/* Currently "All" instead of "Recommended" for v1 (v2 will have filtering) */}
+          <Text style={styles.category}>All</Text>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
+              {/* Display all actions */}
               {actions.map((action, index) => {
                 return (
                   <ActionCard
@@ -46,6 +48,7 @@ export default function ActionsPage({ navigation }) {
           <Text style={styles.category}>High Impact</Text>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
+              {/* Display all actions with high impact */}
               {actions
                 .filter(
                   (action) => getActionMetric(action, "Impact") === "High"
@@ -68,6 +71,7 @@ export default function ActionsPage({ navigation }) {
           <Text style={styles.category}>Low Cost</Text>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
+              {/* Display all actions with low cost (0 or $) */}
               {actions
                 .filter(
                   (action) =>

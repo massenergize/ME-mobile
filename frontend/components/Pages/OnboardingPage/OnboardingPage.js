@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
-  Center,
   Image,
   Box,
-  Container,
   Heading,
   Flex,
   Circle,
@@ -18,16 +16,10 @@ import { IS_ONBOARDED } from "../../Constants";
 
 const STEPS = [
   {
-    title: "Find A Community Near You",
+    title: "Take Local Climate Action",
     description:
-      "<p><strong>Connect</strong> with local communities to foster social connections, promote engagement, and achieve one common goal: take climate actions.</p>",
-    image: require("../../../assets/images/intro-step-1.png"),
-  },
-  {
-    title: "Get Involved In Actions",
-    description:
-      "<p><strong>Access</strong> a diverse range of climate actions tailored to your community.</p>",
-    image: require("../../../assets/images/intro-step-2.png"),
+      "<p><strong>MassEnergize</strong> works with community organizers and local leaders to scale household and community-level climate actions.</p>",
+    image: require("../../../assets/images/intro-step-4.png"),
   },
   {
     title: "Witness Your Impact",
@@ -36,10 +28,16 @@ const STEPS = [
     image: require("../../../assets/images/intro-step-3.png"),
   },
   {
-    title: "Take Local Climate Action",
+    title: "Collaborate With Your Neighbors",
     description:
-      "<p><strong>MassEnergize</strong> works with community organizers and local leaders to scale household and community-level <strong>climate actions</strong>.</p>",
-    image: require("../../../assets/images/intro-step-4.png"),
+      "<p><strong>Access</strong> a diverse range of climate actions tailored to your community.</p>",
+    image: require("../../../assets/images/intro-step-2.png"),
+  },
+  {
+    title: "Find A Community Near You",
+    description:
+      "<p><strong>Connect</strong> with local communities to foster social connections, promote engagement, and achieve one common goal: <strong>take climate actions</strong>.</p>",
+    image: require("../../../assets/images/intro-step-1.png"),
   },
 ];
 
@@ -79,9 +77,11 @@ export default function OnboardingPage({ navigation }) {
       >
         Skip
       </Button>
+      {/* background image */}
       <AspectRatio>
         <Image source={imgSrc} key={imgSrc} alt="image" />
       </AspectRatio>
+      {/* background overlay */}
       <Box
         width="100%"
         height="100%"
@@ -89,7 +89,8 @@ export default function OnboardingPage({ navigation }) {
         backgroundColor="primary.400"
         opacity="30"
       ></Box>
-      <Center
+      {/* main */}
+      <Box
         position="absolute"
         width="100%"
         height="55%"
@@ -97,6 +98,7 @@ export default function OnboardingPage({ navigation }) {
         pt="10"
         borderTopRadius="30"
         backgroundColor="white"
+        alignItems="center"
         style={{
           shadowColor: "#000",
           shadowRadius: 5,
@@ -107,34 +109,36 @@ export default function OnboardingPage({ navigation }) {
           },
         }}
       >
-        <Container>
-          <Heading alignSelf="center" color="primary.600">
+        <Flex flexDirection="column" flex="1" width="100%" px="6">
+          {/* Title */}
+          <Heading alignSelf="center" color="primary.600" textAlign="center">
             {STEPS[currentStep].title}
           </Heading>
-          <HTMLParser
-            htmlString={STEPS[currentStep].description}
-            baseStyle={textStyle}
-          />
-          <HStack space="5" alignSelf="center" mb="5">
-            {STEPS.map((_, index) => {
-              return (
-                <Circle
-                  key={index}
-                  mr="0.5"
-                  size="5px"
-                  backgroundColor={
-                    index === currentStep ? "primary.400" : "muted.200"
-                  }
-                />
-              );
-            })}
-          </HStack>
-          <Box>
-            <Flex
-              flexDirection="row"
-              justifyContent="space-between"
-              width="100%"
-            >
+          {/* Description */}
+          <Box flexGrow="1" justifyContent="center">
+            <HTMLParser
+              htmlString={STEPS[currentStep].description}
+              baseStyle={textStyle}
+            />
+          </Box>
+          <Box mb="5">
+            {/* Dots */}
+            <HStack space="5" alignSelf="center" mb="5" display={["none", "block"]}>
+              {STEPS.map((_, index) => {
+                return (
+                  <Circle
+                    key={index}
+                    mr="0.5"
+                    size="5px"
+                    backgroundColor={
+                      index === currentStep ? "primary.400" : "muted.200"
+                    }
+                  />
+                );
+              })}
+            </HStack>
+            {/* Buttons Group */}
+            <Flex flexDirection="row" justifyContent="space-between" width="100%">
               <Button
                 size="lg"
                 variant="ghost"
@@ -155,17 +159,14 @@ export default function OnboardingPage({ navigation }) {
               </Button>
             </Flex>
           </Box>
-        </Container>
-      </Center>
+        </Flex>
+      </Box>
     </Box>
   );
 }
 
 const textStyle = {
   textAlign: "center",
-  paddingTop: "20px",
-  marginBottom: "80px",
-  height: "40%",
   color: "#a3a3a3",
   fontSize: "16px",
   lineHeight: "2em",

@@ -187,9 +187,6 @@ export default function CommunityPage({ navigation }) {
                       isShared={event.is_shared}
                       id={event.id}
                       navigation={navigation}
-                      // set width to 250 to prevent styling error.
-                      // Bug: https://github.com/massenergize/ME-mobile/issues/38#issuecomment-1677405297
-                      width={250}
                       my={3}
                       shadow={3}
                     />

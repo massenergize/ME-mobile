@@ -40,12 +40,13 @@ export default function ActionDetails({ route, navigation }) {
   const [toDoActions, settoDoActions] = useState([])
 
 
-  const handleAddToDo = async (email, item) => {
+  const handleAddToDo = async (email) => {
     try {
-      const response = await apiCall('users.actions.todo.add', { email, item });
+      const response = await apiCall('users.actions.todo.add', { email, action_id: action_id });
       if (response.success) {
         // Update the todoList in context with the new item
-        setTodoList([...todoList, response.data]);
+        console.log("Added object to", email);
+        settoDoActions([...toDoActions, response.data]);
       } else {
         console.log('Failed to add item to todo list:', response.error);
       }

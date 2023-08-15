@@ -27,6 +27,8 @@ import ActionsFilter from "../ActionsPage/ActionsFilter";
 import { getActionMetric } from "../../Shared/Utils";
 import { CommunityContext } from "../../Contexts/CommunityContext";
 import { DashboardContext } from "../../Contexts/DashboardContext";
+import { RefreshControl } from "react-native-gesture-handler";
+
 import { useDashboardContext } from "../../Contexts/DashboardContext";
 
 const COMMUNITY = {
@@ -881,40 +883,44 @@ const CommunitiesList = ({ communityInfo }) => {
   );
 };
 
-export default function DashboardPage({ navigation }) {
-  const { communityInfo, actions, fetchCommunityInfo } = useContext(CommunityContext);
-  const {community_id} = communityInfo
-  // const { todoList, fetchDashboardInfo } = useContext(DashboardContext);
-  // fetchDashboardInfo();
-
-  // const { email } = email
-  // const { userInfo, todoList, fetchDashboardInfo } = useContext(DashboardContext);
-
-  const [refreshing, setRefreshing] = useState(false);
-  const onRefresh = useCallback (() => {
-    setRefreshing(true);
-    fetchDashboardInfo(email, () => setRefreshing(false));
-    fetchCommunityInfo(community_id, () => setRefreshing(false))
-    // setTimeout(() => setRefreshing(false), 2000);
-  }, []);
-
-
-  const route = useRoute();
-  const userEmail = route.params?.userEmail || 'No email provided';
+export default function DashboardPage({ navigation, route }) {
+  const { dashboardInfo, userInfo, infoLoaded, todoList, eventsList, householdsList, fetchDashboardInfo } = useContext(DashboardContext);
+  console.log("testing123123");
+  const userEmail = route.params?.userEmail;
   console.log(userEmail);
-  const {
-    todoList,
-    dashboardInfo,
-    householdsList,
-    eventsList,
-    userInfo,
-    infoLoaded,
-    fetchDashboardInfo
-  } = useDashboardContext();
 
-  useEffect(() => {
-    fetchDashboardInfo(userEmail);
-  }, [userEmail]);
+  const { communityInfo } = useContext(CommunityContext);
+  // // const { todoList, fetchDashboardInfo } = useContext(DashboardContext);
+  // // fetchDashboardInfo();
+
+  // // const { email } = email
+  // // const { userInfo, todoList, fetchDashboardInfo } = useContext(DashboardContext);
+
+  // const [refreshing, setRefreshing] = useState(false);
+  // const onRefresh = useCallback (() => {
+  //   setRefreshing(true);
+  //   fetchDashboardInfo(email, () => setRefreshing(false));
+  //   fetchCommunityInfo(community_id, () => setRefreshing(false))
+  //   // setTimeout(() => setRefreshing(false), 2000);
+  // }, []);
+
+
+  // // const route = useRoute();
+  // const userEmail = route.params?.userEmail;
+  // console.log(userEmail);
+  // const {
+  //   todoList,
+  //   dashboardInfo,
+  //   householdsList,
+  //   eventsList,
+  //   userInfo,
+  //   infoLoaded,
+  //   fetchDashboardInfo
+  // } = useDashboardContext();
+
+  // useEffect(() => {
+  //   fetchDashboardInfo(userEmail);
+  // }, [userEmail]);
 
 
   return (

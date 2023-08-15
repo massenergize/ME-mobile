@@ -34,9 +34,11 @@ export default function LoginPage({ route, navigation }) {
   const [errorMsg, setErrorMsg] = useState(null);
   const { user, authState, signInWithEmailAndPassword } = useAuth();
   const [isEmailVerified, setIsEmailVerified] = useState(false);
+  const [userEmail, setUserEmail] = useState(null);
+  const [userName, setUserName] = useState(null);
 
   const handleSignIn = (values) => {
-    const userEmail = values.email;
+    setUserEmail(values.email);
     setIsSubmitting(true);
     signInWithEmailAndPassword(
       values.email,
@@ -51,7 +53,8 @@ export default function LoginPage({ route, navigation }) {
           console.log("is user email verified?", userCreds.user.emailVerified);
           console.log("authState: ", authState);
           console.log("The user signed up with", values.email);
-          navigation.navigate("dashboard", { userEmail });
+          navigation.navigate("dashboard", { userEmail: userEmail });
+          console.log("testing");
         }
       }
     );
@@ -69,7 +72,7 @@ export default function LoginPage({ route, navigation }) {
     if (authState === Constants.NEEDS_REGISTRATION) {
       navigation.navigate("createProfile");
     } else if (authState === Constants.USER_IS_AUTHENTICATED) {
-      navigation.navigate("drawer", { community_id: community_id });
+      navigation.navigate("dashboard", { userEmail: userEmail, userName: userName });
     }
   }, [authState]);
 

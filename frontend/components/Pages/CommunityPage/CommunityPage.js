@@ -108,26 +108,15 @@ function ShowMore({ navigation, page, text }) {
 }
 
 export default function CommunityPage({ navigation }) {
-  const { communityInfo, actions, events, fetchCommunityInfo } = useContext(CommunityContext);
+  const { communityInfo, actions, homeSettings, fetchCommunityInfo } = useContext(CommunityContext);
   const {community_id} = communityInfo
 
-  const [featuredEvents, setFeaturedEvents] = useState([]);
-
   const [refreshing, setRefreshing] = useState(false);
-
-  const getFeaturedEvents = useCallback(() => {
-    const featured = events.filter((event) => event.is_on_home_page);
-    setFeaturedEvents(featured);
-  }, [featuredEvents])
 
   const onRefresh = useCallback (() => {
     setRefreshing(true);
     fetchCommunityInfo(community_id, () => setRefreshing(false))
   }, []);
-
-  useEffect(() => {
-    getFeaturedEvents();
-  }, [])
 
   return (
     <Page>
@@ -174,7 +163,7 @@ export default function CommunityPage({ navigation }) {
             }
             </HStack>
           </ScrollView>
-          {featuredEvents.length !== 0 && (
+          {homeSettings.show_featured_events && homeSettings.featured_events.length !== 0 && (
             <View width="100%">
               <HStack alignItems="center" pb={2} pt={3}>
                 <HeaderText text="Featured Events"/>
@@ -183,7 +172,7 @@ export default function CommunityPage({ navigation }) {
               </HStack>
               <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                 <HStack space={3} mx={15}>
-                  {featuredEvents.map((event) => (
+                  {homeSettings.featured_events.map((event) => (
                     <EventCard
                       key={event.id}
                       title={event.name}

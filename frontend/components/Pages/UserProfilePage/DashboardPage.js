@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import { useRoute } from '@react-navigation/native'
 import { useNavigation, useEffect, createContext, useContext, useCallback } from "react";
+import { useIsFocused } from "@react-navigation/native";
 import {
   Button,
   View,
@@ -650,7 +651,7 @@ const ACTION = {
   ],
 };
 
-const ProfileName = ({ navigation, communityInfo }) => {
+const ProfileName = ({ navigation, communityInfo, userName }) => {
   return (
     <Flex
       flexDirection="row"
@@ -666,7 +667,7 @@ const ProfileName = ({ navigation, communityInfo }) => {
         rounded="full"
       />
       <Box alignItems="center">
-        <Text fontSize="xl">Your Name</Text>
+        <Text fontSize="xl">{userName || "Your Name"}</Text>
         <Text>{communityInfo.name}</Text>
       </Box>
       <Pressable onPress={() => navigation.navigate("settings")}>
@@ -676,11 +677,11 @@ const ProfileName = ({ navigation, communityInfo }) => {
   );
 };
 
-const SustainScore = () => {
+const SustainScore = (CarbonSaved) => {
   return (
     <Box>
       <Text fontSize="4xl" color="primary.400" textAlign="center">
-        0.0
+        {parseFloat(50.0 + (Math.sqrt(100+CarbonSaved.CarbonSaved.length*20))).toFixed(1)}
       </Text>
       <Text fontSize="lg" fontWeight="light" textAlign="center">
         Sustainability Score
@@ -689,26 +690,27 @@ const SustainScore = () => {
   );
 };
 
-const CarbonSaved = () => {
+const CarbonSaved = (CarbonSaved) => {
+  console.log("HERE: ", CarbonSaved.CarbonSaved.length);
   return (
     <Flex flexDirection="row" justifyContent="space-evenly" width="full">
       <Box alignItems="center">
         <Text fontSize="lg" fontWeight="medium">
-          0
+          {CarbonSaved.CarbonSaved.length}
         </Text>
         <Text>CO2 Saved</Text>
       </Box>
       <Divider orientation="vertical" />
       <Box alignItems="center">
         <Text fontSize="lg" fontWeight="medium">
-          0
+          {CarbonSaved.CarbonSaved.length/10}
         </Text>
         <Text>Trees</Text>
       </Box>
       <Divider orientation="vertical" />
       <Box alignItems="center">
         <Text fontSize="lg" fontWeight="medium">
-          0
+          {CarbonSaved.CarbonSaved.length*10}
         </Text>
         <Text>Points</Text>
       </Box>
@@ -718,7 +720,7 @@ const CarbonSaved = () => {
 
 const ActionsList = ({ navigation, list }) => {
   // const [toDoList, setToDoList] = useState([]);
-  // // apiCall("users.actions.todo.list").then((json) => {
+  // // apiCall("users.actions.todo.list").then((json) => {s
   // //   if (json.success) {
   // //     console.log(json.data);
   // //     // const actionTitles = json.data.map(item=>item.action.title);
@@ -919,8 +921,10 @@ const CommunitiesList = ({ communityInfo }) => {
 };
 
 export default function DashboardPage({ navigation, route }) {
+  const isFocused = useIsFocused();
   const { dashboardInfo, userInfo, infoLoaded, todoList, eventsList, householdsList, fetchDashboardInfo } = useContext(DashboardContext);
   const [toDoList, setToDoList] = useState([]);
+  const [completedList, setCompletedList] = useState([]);
   const [userEmail, setUserEmail] = useState("");
   // apiCall("users.info").then((json) => {
   //   if (json.success) {
@@ -950,15 +954,22 @@ export default function DashboardPage({ navigation, route }) {
   
   // console.log("Num actions", toDoList.length);
   console.log(userEmail);
-
   const { communityInfo } = useContext(CommunityContext);
+  const [refreshing, setRefreshing] = useState(false);
+  const [userName, setUserName] = useState("");
+  const [carbonSaved, setCarbonSaved] = useState(0); 
   // // const { todoList, fetchDashboardInfo } = useContext(DashboardContext);
   // // fetchDashboardInfo();
 
   // // const { email } = email
   // // const { userInfo, todoList, fetchDashboardInfo } = useContext(DashboardContext);
 
-
+  useEffect(() => {
+    if (isFocused) {
+      onRefresh();
+      setRefreshing(false);
+    }
+  }, [isFocused]);
 
   useEffect(() => {
     async function captureInfo() {
@@ -966,6 +977,7 @@ export default function DashboardPage({ navigation, route }) {
         apiCall("users.info").then((json) => {
           if (json.success) {
             setUserEmail(json.data.email);
+            setUserName(json.data.full_name);
             console.log("Fetched email: ", userEmail, " Completed")
           } else {
             console.log("User Info Failed");
@@ -986,6 +998,21 @@ export default function DashboardPage({ navigation, route }) {
             console.log(json);
             if (callBackFn) callBackFn(null, json.error);
           }
+        }),
+        apiCall("users.actions.completed.list").then((json) => {
+          if (json.success) {
+            // console.log(json.data);
+            const completedTitles = json.data;
+            // console.log(json.data[0].action.title);
+            console.log("Completed List Fetched");
+            setCarbonSaved(completedTitles.length);
+            setCompletedList(completedTitles);
+            console.log(completedList.length);
+          } else {
+            console.log("Action Completed List Failed");
+            console.log(json);
+            if (callBackFn) callBackFn(null, json.error);
+          }
         })
       ]).then(() => {
         console.log("Fetch finished");
@@ -997,15 +1024,12 @@ export default function DashboardPage({ navigation, route }) {
 
 
 
-  const [refreshing, setRefreshing] = useState(false);
-
-
-
   const onRefresh = useCallback (() => {
     setRefreshing(false);
     apiCall("users.info").then((json) => {
       if (json.success) {
         setUserEmail(json.data.email);
+        console.log(json);
         console.log("Fetched email: ", userEmail, " Completed")
       } else {
         console.log("User Info Failed");
@@ -1023,6 +1047,21 @@ export default function DashboardPage({ navigation, route }) {
         // console.log(toDoList.length);
       } else {
         console.log("Action Todo List Failed");
+        console.log(json);
+        if (callBackFn) callBackFn(null, json.error);
+      }
+    });
+    apiCall("users.actions.completed.list").then((json) => {
+      if (json.success) {
+        // console.log(json.data);
+        const completedTitles = json.data;
+        // console.log(json.data[0].action.title);
+        console.log("Completed List Fetched");
+        setCarbonSaved(completedTitles.length);
+        setCompletedList(completedTitles);
+        // console.log(toDoList.length);
+      } else {
+        console.log("Action Completed List Failed");
         console.log(json);
         if (callBackFn) callBackFn(null, json.error);
       }
@@ -1065,9 +1104,9 @@ export default function DashboardPage({ navigation, route }) {
       showsVerticalScrollIndicator={false}
       refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
         <VStack space={10} mb="20">
-          <ProfileName navigation={navigation} communityInfo = {communityInfo} /*userInfo={userInfo}*//>
-          <SustainScore />
-          <CarbonSaved />
+          <ProfileName navigation={navigation} communityInfo = {communityInfo} userName = {userName}/*userInfo={userInfo}*//>
+          <SustainScore CarbonSaved = {completedList}/>
+          <CarbonSaved CarbonSaved = {completedList}/>
           <ActionsList navigation={navigation} list = {toDoList}/>
           <BadgesList />
           <TeamsList />

@@ -37,8 +37,8 @@ export default function ActionDetails({ route, navigation }) {
 
   const [isDoneOpen, setIsDoneOpen] = useState(false)
   const [isToDoOpen, setIsToDoOpen] = useState(false)
-  const [completedActions, setcompletedActions] = useState([])
-  const [toDoActions, settoDoActions] = useState([])
+  const [completedActions, setCompletedActions] = useState([])
+  const [toDoActions, setToDoActions] = useState([])
   const [userEmail, setUserEmail] = useState("");
 
   apiCall("users.info").then((json) => {
@@ -59,7 +59,22 @@ export default function ActionDetails({ route, navigation }) {
       if (response.success) {
         // Update the todoList in context with the new item
         console.log("Added object to", email);
-        settoDoActions([...toDoActions, response.data]);
+        setToDoActions([...toDoActions, response.data]);
+      } else {
+        console.log('Failed to add item to todo list:', response.error);
+      }
+    } catch (error) {
+      console.log('API Error:', error);
+    }
+  };
+  const handleCompleted = async (email) => {
+    try {
+      
+      const response = await apiCall('users.actions.completed.add', { action_id: action_id, hid: 1 });
+      if (response.success) {
+        // Update the todoList in context with the new item
+        console.log("Completed object to", email);
+        setCompletedActions([...toDoActions, response.data]);
       } else {
         console.log('Failed to add item to todo list:', response.error);
       }
@@ -230,7 +245,7 @@ export default function ActionDetails({ route, navigation }) {
                         color: "white",
                         fontWeight: "bold",
                       }}
-                      onPress={() => {setIsDoneOpen(true), completedActions.push({name: action}), console.log("Added " + action.title + " Completed")}}
+                      onPress={() => {handleCompleted(userEmail, action), setIsDoneOpen(true), completedActions.push({name: action}), console.log("Added " + action.title + " Completed")}}
                     >
                       Done
                     </Button>

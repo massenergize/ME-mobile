@@ -26,6 +26,7 @@ export const DashboardProvider = ({ children }) => {
             setDashboardInfo({ ...json.data, email: email});
             setInfoLoaded(infoLoaded => infoLoaded + 1);
             console.log("User Info Fetched")
+            console.log("Fetched email: ", json.data.email, " Completed")
           }
         } else {
           console.log("User Info Failed");

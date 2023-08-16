@@ -30,6 +30,9 @@ import { DashboardContext } from "../../Contexts/DashboardContext";
 import { RefreshControl } from "react-native-gesture-handler";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useDashboardContext } from "../../Contexts/DashboardContext";
+import { apiCall } from "../../../api/functions";
+// import { convertAbsoluteToRem } from "native-base/lib/typescript/theme/tools";
+
 
 const COMMUNITY = {
   id: 3,
@@ -885,8 +888,34 @@ const CommunitiesList = ({ communityInfo }) => {
 
 export default function DashboardPage({ navigation, route }) {
   const { dashboardInfo, userInfo, infoLoaded, todoList, eventsList, householdsList, fetchDashboardInfo } = useContext(DashboardContext);
-  console.log("testing123123");
-  const userEmail = route.params?.userEmail;
+  const [toDoList, setToDoList] = useState([]);
+
+  const [userEmail, setUserEmail] = useState("");
+  apiCall("users.info").then((json) => {
+    if (json.success) {
+      setUserEmail(json.data.email);
+      console.log("Fetched email: ", userEmail, " Completed")
+    } else {
+      console.log("User Info Failed");
+      console.log(json);
+      if (callBackFn) callBackFn(null, json.error);
+    }
+  });
+  apiCall("users.actions.todo.list").then((json) => {
+    if (json.success) {
+      console.log(json.data);
+      const actionTitles = json.data.map(item=>item.action.title);
+      console.log(json.data[0].action.title);
+      console.log("Todo List Fetched");
+      setToDoList(actionTitles);
+      // console.log(toDoList.length);
+    } else {
+      console.log("Action Todo List Failed");
+      console.log(json);
+      if (callBackFn) callBackFn(null, json.error);
+    }
+  });
+  console.log(toDoList.length);
   console.log(userEmail);
 
   const { communityInfo } = useContext(CommunityContext);
@@ -900,15 +929,15 @@ export default function DashboardPage({ navigation, route }) {
 
   const onRefresh = useCallback (() => {
     setRefreshing(false);
-    todoList = useContext(DashboardContext);
+    // todoList = useContext(DashboardContext);
     // // userInfo = useContext(DashboardContext);
     // // infoLoaded = useContext(DashboardContext);
     // // todoList = useContext(DashboardContext);  
     // // eventsList = useContext(DashboardContext);
     // // householdsList = useContext(DashboardContext);
 
-    // fetchDashboardInfo(() => setRefreshing(false))
-    // setTimeout(() => setRefreshing(false), 10000);
+    fetchDashboardInfo(() => setRefreshing(false))
+    setTimeout(() => setRefreshing(false), 10000);
   }, []);
   //   fetchCommunityInfo(community_id, () => setRefreshing(false))
   //   // setTimeout(() => setRefreshing(false), 2000);
@@ -943,12 +972,12 @@ export default function DashboardPage({ navigation, route }) {
           <ProfileName navigation={navigation} communityInfo = {communityInfo} /*userInfo={userInfo}*//>
           <SustainScore />
           <CarbonSaved />
-          <ActionsList navigation={navigation} list = {todoList}/>
+          <ActionsList navigation={navigation} list = {toDoList}/>
           <BadgesList />
           <TeamsList />
           <HousesList />
           <CommunitiesList communityInfo = {communityInfo}/>
-          <View>
+          {/* <View>
             <Text>User Info: {dashboardInfo ? dashboardInfo.name : 'Loading...'}</Text>
             <Text>Todo List Length: {todoList.length}</Text>
             <Text>Households List Length: {householdsList.length}</Text>
@@ -956,7 +985,7 @@ export default function DashboardPage({ navigation, route }) {
             <Text>User Info Value: {userInfo}</Text>
             <Text>Info Loaded Value: {infoLoaded}</Text>
             <Button title="Fetch Dashboard Info" onPress={() => fetchDashboardInfo(userEmail)} />
-          </View>
+          </View> */}
         </VStack>
       </ScrollView>
     </GestureHandlerRootView>

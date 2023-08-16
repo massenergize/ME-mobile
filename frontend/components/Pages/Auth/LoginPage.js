@@ -34,10 +34,11 @@ export default function LoginPage({ route, navigation }) {
   const [errorMsg, setErrorMsg] = useState(null);
   const { user, authState, signInWithEmailAndPassword } = useAuth();
   const [isEmailVerified, setIsEmailVerified] = useState(false);
-  const [userEmail, setUserEmail] = useState(null);
+  const [userEmail, setUserEmail] = useState("");
   const [userName, setUserName] = useState(null);
 
   const handleSignIn = (values) => {
+    // const [userEmail, setUserEmail] = useState("");
     setUserEmail(values.email);
     setIsSubmitting(true);
     signInWithEmailAndPassword(
@@ -49,11 +50,12 @@ export default function LoginPage({ route, navigation }) {
         if (error) {
           setErrorMsg(error);
         } else {
+          setUserEmail(values.email);
           console.log("User signed in successfully!");
           console.log("is user email verified?", userCreds.user.emailVerified);
           console.log("authState: ", authState);
-          console.log("The user signed up with", values.email);
-          navigation.navigate("dashboard", { userEmail: userEmail });
+          console.log("The user signed up with", values.email, " " , userEmail, " ", userCreds.user.email);
+          navigation.navigate("dashboard", { userEmail: userCreds.user.email });
           console.log("testing");
         }
       }

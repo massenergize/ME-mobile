@@ -27,6 +27,7 @@ import { apiCall } from "../../../api/functions";
 export default function ActionDetails({ route, navigation }) {
   const { action_id } = route.params;
 
+  
   const [activeTab, setActiveTab] = useState("description");
 
   const [action, isActionLoading] = useDetails("actions.info", {
@@ -38,10 +39,22 @@ export default function ActionDetails({ route, navigation }) {
   const [isToDoOpen, setIsToDoOpen] = useState(false)
   const [completedActions, setcompletedActions] = useState([])
   const [toDoActions, settoDoActions] = useState([])
+  const [userEmail, setUserEmail] = useState("");
 
+  apiCall("users.info").then((json) => {
+    if (json.success) {
+      setUserEmail(json.data.email);
+      console.log("Fetched email: ", userEmail, " Completed")
+    } else {
+      console.log("User Info Failed");
+      console.log(json);
+      if (callBackFn) callBackFn(null, json.error);
+    }
+  });
 
   const handleAddToDo = async (email) => {
     try {
+      
       const response = await apiCall('users.actions.todo.add', { action_id: action_id, hid: 1 });
       if (response.success) {
         // Update the todoList in context with the new item
@@ -206,7 +219,7 @@ export default function ActionDetails({ route, navigation }) {
                         color: "white",
                         fontWeight: "bold",
                       }}
-                      onPress={() => {handleAddToDo('tianyi.evans@gmail.com', action), setIsToDoOpen(true), toDoActions.push({name: action}), console.log("Added " + action.title + " to To-do")}}
+                      onPress={() => {handleAddToDo(userEmail, action), setIsToDoOpen(true), toDoActions.push({name: action}), console.log("Added " + action.title + " to To-do")}}
                     >
                       Add to To-Do
                     </Button>

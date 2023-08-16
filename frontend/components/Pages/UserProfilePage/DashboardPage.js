@@ -896,10 +896,11 @@ export default function DashboardPage({ navigation, route }) {
   // // const { email } = email
   // // const { userInfo, todoList, fetchDashboardInfo } = useContext(DashboardContext);
 
-  // const [refreshing, setRefreshing] = useState(false);
-  // const onRefresh = useCallback (() => {
-  //   setRefreshing(true);
-  //   fetchDashboardInfo(email, () => setRefreshing(false));
+  const [refreshing, setRefreshing] = useState(false);
+  const onRefresh = useCallback (() => {
+    setRefreshing(true);
+    fetchDashboardInfo(userEmail, () => setRefreshing(false))
+  }, []);
   //   fetchCommunityInfo(community_id, () => setRefreshing(false))
   //   // setTimeout(() => setRefreshing(false), 2000);
   // }, []);
@@ -927,7 +928,9 @@ export default function DashboardPage({ navigation, route }) {
 
     
     <Page>
-      <ScrollView padding="5">
+      <ScrollView padding="5" nestedScrollEnabled = {true} 
+      showsVerticalScrollIndicator={false}
+      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
         <VStack space={10} mb="20">
           <ProfileName navigation={navigation} communityInfo = {communityInfo} /*userInfo={userInfo}*//>
           <SustainScore />

@@ -7,6 +7,8 @@ import {
   Pressable,
   Text,
   Spacer,
+  Center,
+  Spinner,
 } from "native-base";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Page from "../../Shared/Page";
@@ -17,6 +19,7 @@ export default function TeamsPage({ navigation }) {
   const { teams } = useContext(CommunityContext);
   const [subteamsExpanded, setSubteamsExpanded] = useState({});
   const [teamsList, setTeamsList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   // get a list of teams where subteams are nested under their parent team
   const getTeams = () => {
@@ -36,6 +39,7 @@ export default function TeamsPage({ navigation }) {
     }
     setTeamsList(Object.values(teamsDict));
     setSubteamsExpanded(expanded);
+    setIsLoading(false);
   };
 
   // update the state of whether a team's subteams are expanded or not
@@ -52,6 +56,12 @@ export default function TeamsPage({ navigation }) {
 
   return (
     <Page>
+      {isLoading ? (
+        <Center flex={1}>
+          <Spinner />
+        </Center>
+      ) : (
+
       <ScrollView showsVerticalScrollIndicator={false}>
         <VStack space={5} p={5}>
           {teamsList.map((team, i) => {
@@ -104,6 +114,7 @@ export default function TeamsPage({ navigation }) {
           })}
         </VStack>
       </ScrollView>
+      )}
     </Page>
   );
 }

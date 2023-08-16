@@ -37,7 +37,7 @@ function GoalsCard({ navigation, goals, community_id }) {
         nameLong: "Individual Actions Completed",
         nameShort: "Actions",
         goal: goals.target_number_of_actions,
-        current: goals.initial_number_of_actions + goals.attained_number_of_actions + goals.organic_attained_number_of_actions
+        current: goals.displayed_number_of_actions
       })
     }
     if (goals.target_number_of_households != 0) {
@@ -45,7 +45,7 @@ function GoalsCard({ navigation, goals, community_id }) {
         nameLong: "Households Taking Action",
         nameShort: "Households",
         goal: goals.target_number_of_households,
-        current: goals.attained_number_of_households + goals.organic_attained_number_of_households
+        current: goals.displayed_number_of_households
       })
     }
     if (goals.target_carbon_footprint_reduction != 0) {
@@ -53,7 +53,7 @@ function GoalsCard({ navigation, goals, community_id }) {
         nameLong: "Carbon Reduction Impact",
         nameShort: "Trees",
         goal: goals.target_carbon_footprint_reduction / 133,
-        current: (goals.initial_carbon_footprint_reduction / 133) + (goals.organic_attained_carbon_footprint_reduction / 133)
+        current: (goals.displayed_carbon_footprint_reduction / 133)
       })
     }
     return goalsList

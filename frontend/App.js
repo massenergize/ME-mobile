@@ -15,14 +15,15 @@ export default function App() {
   return (
     <NativeBaseProvider theme={Theme}>
       <StatusBar barStyle="dark-content" />
-      <CommunityProvider>
-        <DashboardProvider>
-          <NavigationContainer>
-            <AuthModal />
-            <MainNavigator />
-          </NavigationContainer>
-        </DashboardProvider>
-      </CommunityProvider>
+        <CommunityProvider>
+          <DashboardProvider>
+            <NavigationContainer>
+              <AuthModal />
+              <MainNavigator />
+            </NavigationContainer>
+          </DashboardProvider>
+        </CommunityProvider>
     </NativeBaseProvider>
+
   );
 }

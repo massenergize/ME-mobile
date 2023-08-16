@@ -28,7 +28,7 @@ import { getActionMetric } from "../../Shared/Utils";
 import { CommunityContext } from "../../Contexts/CommunityContext";
 import { DashboardContext } from "../../Contexts/DashboardContext";
 import { RefreshControl } from "react-native-gesture-handler";
-
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useDashboardContext } from "../../Contexts/DashboardContext";
 
 const COMMUNITY = {
@@ -897,9 +897,18 @@ export default function DashboardPage({ navigation, route }) {
   // // const { userInfo, todoList, fetchDashboardInfo } = useContext(DashboardContext);
 
   const [refreshing, setRefreshing] = useState(false);
+
   const onRefresh = useCallback (() => {
-    setRefreshing(true);
-    fetchDashboardInfo(userEmail, () => setRefreshing(false))
+    setRefreshing(false);
+    todoList = useContext(DashboardContext);
+    // // userInfo = useContext(DashboardContext);
+    // // infoLoaded = useContext(DashboardContext);
+    // // todoList = useContext(DashboardContext);  
+    // // eventsList = useContext(DashboardContext);
+    // // householdsList = useContext(DashboardContext);
+
+    // fetchDashboardInfo(() => setRefreshing(false))
+    // setTimeout(() => setRefreshing(false), 10000);
   }, []);
   //   fetchCommunityInfo(community_id, () => setRefreshing(false))
   //   // setTimeout(() => setRefreshing(false), 2000);
@@ -925,10 +934,9 @@ export default function DashboardPage({ navigation, route }) {
 
 
   return (
-
-    
-    <Page>
-      <ScrollView padding="5" nestedScrollEnabled = {true} 
+    <GestureHandlerRootView backgroundColor="white" flex="1">
+      <ScrollView  padding="5"
+      nestedScrollEnabled = {true} 
       showsVerticalScrollIndicator={false}
       refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
         <VStack space={10} mb="20">
@@ -941,17 +949,18 @@ export default function DashboardPage({ navigation, route }) {
           <HousesList />
           <CommunitiesList communityInfo = {communityInfo}/>
           <View>
-      <Text>User Info: {dashboardInfo ? dashboardInfo.name : 'Loading...'}</Text>
-      <Text>Todo List Length: {todoList.length}</Text>
-      <Text>Households List Length: {householdsList.length}</Text>
-      <Text>Events List Length: {eventsList.length}</Text>
-      <Text>User Info Value: {userInfo}</Text>
-      <Text>Info Loaded Value: {infoLoaded}</Text>
-      <Button title="Fetch Dashboard Info" onPress={() => fetchDashboardInfo(userEmail)} />
-    </View>
+            <Text>User Info: {dashboardInfo ? dashboardInfo.name : 'Loading...'}</Text>
+            <Text>Todo List Length: {todoList.length}</Text>
+            <Text>Households List Length: {householdsList.length}</Text>
+            <Text>Events List Length: {eventsList.length}</Text>
+            <Text>User Info Value: {userInfo}</Text>
+            <Text>Info Loaded Value: {infoLoaded}</Text>
+            <Button title="Fetch Dashboard Info" onPress={() => fetchDashboardInfo(userEmail)} />
+          </View>
         </VStack>
       </ScrollView>
-    </Page>
+    </GestureHandlerRootView>
+
   );
 }
 

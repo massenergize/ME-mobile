@@ -42,7 +42,7 @@ export default function ActionDetails({ route, navigation }) {
 
   const handleAddToDo = async (email) => {
     try {
-      const response = await apiCall('users.actions.todo.add', { email, action_id: action_id });
+      const response = await apiCall('users.actions.todo.add', { action_id: action_id, hid: 1 });
       if (response.success) {
         // Update the todoList in context with the new item
         console.log("Added object to", email);

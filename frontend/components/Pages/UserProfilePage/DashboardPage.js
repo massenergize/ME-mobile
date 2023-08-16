@@ -717,9 +717,50 @@ const CarbonSaved = () => {
 };
 
 const ActionsList = ({ navigation, list }) => {
-  const todoList = list;
+  // const [toDoList, setToDoList] = useState([]);
+  // // apiCall("users.actions.todo.list").then((json) => {
+  // //   if (json.success) {
+  // //     console.log(json.data);
+  // //     // const actionTitles = json.data.map(item=>item.action.title);
+  // //     const actionTitles = json.data;
+  // //     console.log(json.data[0].action.title);
+  // //     console.log("Todo List Fetched");
+  // //     setToDoList(actionTitles);
+  // //     // console.log(actionTitles);
+  // //     // console.log(toDoList.length);
+  // //   } else {
+  // //     console.log("Action Todo List Failed");
+  // //     console.log(json);
+  // //     if (callBackFn) callBackFn(null, json.error);
+  // //   }
+  // // });
+  // setToDoList(list);
+  // // const { actions } = userInfo.completedList;
+  // const { actions } = useContext(CommunityContext);
+  // const [isLoading, setIsLoading] = useState(true);
+
+  // useEffect(() => {
+  //   if (toDoList) {
+  //     setIsLoading(false);
+  //   }
+  // }, []);  
+  // // const actions = useContext(CommunityContext);
+  // // const [actions, setActions] = useState([
+  // //   ACTION,
+  // //   ACTION,
+  // //   ACTION,
+  // //   ACTION,
+  // //   ACTION,
+  // //   ACTION,
+  // // ]);
+
+  const todoList = list.map(item => item.action);
   // const { actions } = userInfo.completedList;
   const { actions } = useContext(CommunityContext);
+  // console.log(actions[0]);
+  // console.log(list[0].action);
+  // console.log(list[1]);
+  // console.log(todoList[0]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -727,15 +768,6 @@ const ActionsList = ({ navigation, list }) => {
       setIsLoading(false);
     }
   }, []);  
-  // const actions = useContext(CommunityContext);
-  // const [actions, setActions] = useState([
-  //   ACTION,
-  //   ACTION,
-  //   ACTION,
-  //   ACTION,
-  //   ACTION,
-  //   ACTION,
-  // ]);
 
   return (
     <Box>
@@ -889,33 +921,34 @@ const CommunitiesList = ({ communityInfo }) => {
 export default function DashboardPage({ navigation, route }) {
   const { dashboardInfo, userInfo, infoLoaded, todoList, eventsList, householdsList, fetchDashboardInfo } = useContext(DashboardContext);
   const [toDoList, setToDoList] = useState([]);
-
   const [userEmail, setUserEmail] = useState("");
-  apiCall("users.info").then((json) => {
-    if (json.success) {
-      setUserEmail(json.data.email);
-      console.log("Fetched email: ", userEmail, " Completed")
-    } else {
-      console.log("User Info Failed");
-      console.log(json);
-      if (callBackFn) callBackFn(null, json.error);
-    }
-  });
-  apiCall("users.actions.todo.list").then((json) => {
-    if (json.success) {
-      console.log(json.data);
-      const actionTitles = json.data.map(item=>item.action.title);
-      console.log(json.data[0].action.title);
-      console.log("Todo List Fetched");
-      setToDoList(actionTitles);
-      // console.log(toDoList.length);
-    } else {
-      console.log("Action Todo List Failed");
-      console.log(json);
-      if (callBackFn) callBackFn(null, json.error);
-    }
-  });
-  console.log(toDoList.length);
+  // apiCall("users.info").then((json) => {
+  //   if (json.success) {
+  //     setUserEmail(json.data.email);
+  //     console.log("Fetched email: ", userEmail, " Completed")
+  //   } else {
+  //     console.log("User Info Failed");
+  //     console.log(json);
+  //     if (callBackFn) callBackFn(null, json.error);
+  //   }
+  // });
+  // apiCall("users.actions.todo.list").then((json) => {
+  //   if (json.success) {
+  //     // console.log(json.data);
+  //     const actionTitles = json.data.map(item=>item.action.title);
+  //     // console.log(json.data[0].action.title);
+  //     console.log("Todo List Fetched");
+  //     setToDoList(actionTitles);
+  //     // console.log(toDoList.length);
+  //   } else {
+  //     console.log("Action Todo List Failed");
+  //     console.log(json);
+  //     if (callBackFn) callBackFn(null, json.error);
+  //   }
+  // });
+ 
+  
+  // console.log("Num actions", toDoList.length);
   console.log(userEmail);
 
   const { communityInfo } = useContext(CommunityContext);
@@ -925,19 +958,82 @@ export default function DashboardPage({ navigation, route }) {
   // // const { email } = email
   // // const { userInfo, todoList, fetchDashboardInfo } = useContext(DashboardContext);
 
+
+
+  useEffect(() => {
+    async function captureInfo() {
+      await Promise.all([
+        apiCall("users.info").then((json) => {
+          if (json.success) {
+            setUserEmail(json.data.email);
+            console.log("Fetched email: ", userEmail, " Completed")
+          } else {
+            console.log("User Info Failed");
+            console.log(json);
+            if (callBackFn) callBackFn(null, json.error);
+          }
+        }),
+        apiCall("users.actions.todo.list").then((json) => {
+          if (json.success) {
+            // console.log(json.data);
+            const actionTitles = json.data;
+            // console.log(json.data[0].action.title);
+            console.log("Todo List Fetched");
+            setToDoList(actionTitles);
+            // console.log(toDoList.length);
+          } else {
+            console.log("Action Todo List Failed");
+            console.log(json);
+            if (callBackFn) callBackFn(null, json.error);
+          }
+        })
+      ]).then(() => {
+        console.log("Fetch finished");
+      })
+  }
+
+  captureInfo();
+  }, []); 
+
+
+
   const [refreshing, setRefreshing] = useState(false);
+
+
 
   const onRefresh = useCallback (() => {
     setRefreshing(false);
+    apiCall("users.info").then((json) => {
+      if (json.success) {
+        setUserEmail(json.data.email);
+        console.log("Fetched email: ", userEmail, " Completed")
+      } else {
+        console.log("User Info Failed");
+        console.log(json);
+        if (callBackFn) callBackFn(null, json.error);
+      }
+    });
+    apiCall("users.actions.todo.list").then((json) => {
+      if (json.success) {
+        // console.log(json.data);
+        const actionTitles = json.data;
+        // console.log(json.data[0].action.title);
+        console.log("Todo List Fetched");
+        setToDoList(actionTitles);
+        // console.log(toDoList.length);
+      } else {
+        console.log("Action Todo List Failed");
+        console.log(json);
+        if (callBackFn) callBackFn(null, json.error);
+      }
+    });
     // todoList = useContext(DashboardContext);
     // // userInfo = useContext(DashboardContext);
     // // infoLoaded = useContext(DashboardContext);
     // // todoList = useContext(DashboardContext);  
     // // eventsList = useContext(DashboardContext);
     // // householdsList = useContext(DashboardContext);
-
-    fetchDashboardInfo(() => setRefreshing(false))
-    setTimeout(() => setRefreshing(false), 10000);
+    setTimeout(() => setRefreshing(false), 5000);
   }, []);
   //   fetchCommunityInfo(community_id, () => setRefreshing(false))
   //   // setTimeout(() => setRefreshing(false), 2000);

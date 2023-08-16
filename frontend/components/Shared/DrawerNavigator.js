@@ -372,7 +372,7 @@ export default function DrawerNavigator({ route, navigation }) {
       return <Center alignContent="center" height="100%" justifyContent="center">
         <Text bold mb={3} fontSize="lg">Loading Community...</Text>
         <Box width="50%">
-          <Progress value={(infoLoaded/12)*100} />
+          <Progress value={(infoLoaded/13)*100} />
         </Box>
       </Center>
     }

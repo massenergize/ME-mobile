@@ -108,7 +108,7 @@ export default function OnboardingPage({ navigation }) {
       >
         <Flex flexDirection="column" flex="1" width="100%" px="6">
           {/* Title */}
-          <Heading alignSelf="center" color="primary.600" textAlign="center">
+          <Heading fontSize={["sm", "2xl"]} alignSelf="center" color="primary.600" textAlign="center">
             {STEPS[currentStep].title}
           </Heading>
           {/* Description */}

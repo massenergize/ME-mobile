@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import _ from 'lodash'
 
 import { apiCall } from "../../api/functions";
@@ -6,6 +6,7 @@ import { apiCall } from "../../api/functions";
 export const CommunityContext = createContext();
 
 export const CommunityProvider = ({ children }) => {
+  // state hooks for all of the community data
   const [communityInfo, setCommunityInfo] = useState(null);
   const [actions, setActions] = useState([]);
   const [events, setEvents] = useState([]);
@@ -18,8 +19,10 @@ export const CommunityProvider = ({ children }) => {
   const [vendorsSettings, setVendorsSettings] = useState(null);
   const [testimonialsSettings, setTestimonialsSettings] = useState(null);
   const [teamsSettings, setTeamsSettings] = useState(null);
+  const [homeSettings, setHomeSettings] = useState(null);
   const [infoLoaded, setInfoLoaded] = useState(0);
 
+  // create a single promise that resolves when all the data is fetched
   const fetchCommunityInfo = async (community_id, callBackFn = null) => {
     await Promise.all([
       apiCall("communities.info", { community_id: community_id }).then((json) => {
@@ -139,6 +142,19 @@ export const CommunityProvider = ({ children }) => {
           if (callBackFn) callBackFn(null, json.error);
         }
       }),
+      apiCall("home_page_settings.info", { community_id: community_id }).then((json) => {
+        if (json.success) {
+          const newHomeSettings = json.data;
+          if (!homeSettings || !_.isEqual(homeSettings, newHomeSettings)) {
+            setHomeSettings(json.data);
+            setInfoLoaded(infoLoaded => infoLoaded + 1);
+            console.log("Home Page Settings Fetched")
+          }
+        } else {
+          console.log(json);
+          if (callBackFn) callBackFn(null, json.error);
+        }
+      }),
       apiCall("vendors_page_settings.info", { community_id: community_id }).then((json) => {
         if (json.success) {
           const newVendorsSettings = json.data;
@@ -200,6 +216,7 @@ export const CommunityProvider = ({ children }) => {
         vendorsSettings,
         testimonialsSettings,
         teamsSettings,
+        homeSettings,
         infoLoaded,
         fetchCommunityInfo }}>
       {children}
@@ -207,27 +224,8 @@ export const CommunityProvider = ({ children }) => {
   );
 };
 
-export const useUpcomingEvent = () => {
-  const context = useContext(CommunityContext);
-
-  if (context === undefined) {
-    throw new Error("useUpcomingEvent must be used within a CommunityProvider");
-  }
-
-  const upcoming = context.events.filter((event) => {
-    const eventDate = new Date(event.start_date_and_time);
-    const now = new Date();
-    return eventDate > now;
-  });
-
-  if (upcoming.length > 0) {
-    return upcoming[0]
-  }
-  else {
-    return null
-  }
-}
-
+// custom hook to get information from a single API call, takes a route and any arguments
+// often used for details pages (ie. actions, events, vendors, testimonials, teams)
 export const useDetails = (route, args) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -244,5 +242,5 @@ export const useDetails = (route, args) => {
     });
   }, [])
 
-  return [data, isLoading]
+  return [data, isLoading];
 }

@@ -1,6 +1,6 @@
-import { View, useWindowDimensions } from "react-native";
 import React, { useState, useEffect, useContext } from "react";
 import {
+  View,
   Text,
   Box,
   Image,
@@ -13,7 +13,6 @@ import {
   Spinner,
   Center,
   Modal,
-  Icon
 } from "native-base";
 
 import Page from "../../Shared/Page";
@@ -25,13 +24,14 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { getActionMetric } from "../../Shared/Utils";
 import { apiCall } from "../../../api/functions";
 
-
 export default function ActionDetails({ route, navigation }) {
   const { action_id } = route.params;
 
-  const [activeTab, setActiveTab] = useState("description")
+  const [activeTab, setActiveTab] = useState("description");
 
-  const [action, isActionLoading] = useDetails("actions.info", {action_id: action_id});
+  const [action, isActionLoading] = useDetails("actions.info", {
+    action_id: action_id,
+  });
   const { testimonials, testimonialsSettings, vendorsSettings } = useContext(CommunityContext);
 
   const [isDoneOpen, setIsDoneOpen] = useState(false)
@@ -54,44 +54,29 @@ export default function ActionDetails({ route, navigation }) {
       console.log('API Error:', error);
     }
   };
-
-
+  // individual functions to render the context for each tab in the action details page
   const generateDescriptionTab = () => {
-    return (
-      <HTMLParser
-        htmlString={action.about}
-        baseStyle={textStyle}
-      />
-    )
-  }
+    return <HTMLParser htmlString={action.about} baseStyle={textStyle} />;
+  };
 
   const generateStepsTab = () => {
     return (
-      <HTMLParser
-        htmlString={action.steps_to_take}
-        baseStyle={textStyle}
-      />
-    )
-  }
+      <HTMLParser htmlString={action.steps_to_take} baseStyle={textStyle} />
+    );
+  };
 
   const generateDeepDiveTab = () => {
     if (action.deep_dive === "") {
-      return (
-        <Text>No information available.</Text>
-      )
-    } 
-    else {
-      return (
-        <HTMLParser
-          htmlString={action.deep_dive}
-          baseStyle={textStyle}
-        />
-      )
+      return <Text>No information available.</Text>;
+    } else {
+      return <HTMLParser htmlString={action.deep_dive} baseStyle={textStyle} />;
     }
-  }
+  };
 
-  const [actionTestimonials, setActionTestimonials] = useState([])
+  // for the testimonials associated with this action
+  const [actionTestimonials, setActionTestimonials] = useState([]);
 
+  // get testimonials related to this action
   const getTestimonials = () => {
     if (testimonialsSettings.is_published) {
       const relatedTestimonials = [];
@@ -100,67 +85,67 @@ export default function ActionDetails({ route, navigation }) {
           relatedTestimonials.push(testimonials[i]);
         }
       }
-      console.log(relatedTestimonials)
+      console.log(relatedTestimonials);
       setActionTestimonials(relatedTestimonials);
     }
-  }
+  };
 
+  // only retrieve associated testimonials once
   useEffect(() => {
     getTestimonials();
-  }, [])
+  }, []);
 
   const generateTestimonialsTab = () => {
-    return (
-      actionTestimonials.length === 0 
-      ? <Text>No testimonials available.</Text> 
-      :
+    return actionTestimonials.length === 0 ? (
+      <Text>No testimonials available.</Text>
+    ) : (
       actionTestimonials.map((testimonial, index) => {
         return (
-          <TestimonialCard navigation={navigation} data={testimonial} key={index} picture={testimonial.file != null}/>
-        )
+          <TestimonialCard
+            navigation={navigation}
+            data={testimonial}
+            key={index}
+            picture={testimonial.file != null}
+          />
+        );
       })
-      
-    )
-  }
-
+    );
+  };
 
   const generateServiceProvidersTab = () => {
     if (action.vendors.length === 0) {
-      return (
-        <Text>No associated service providers.</Text>
-      )
+      return <Text>No associated service providers.</Text>;
     }
-    return (
-      action.vendors.map((vendor, index) => {
-        return <ServiceProviderCard 
+    return action.vendors.map((vendor, index) => {
+      return (
+        <ServiceProviderCard
           id={vendor.id}
-          direction="row" 
+          direction="row"
           description=""
           imageURI={vendor.logo.url}
           name={vendor.name}
-          // onPress={() =>
-          //   navigation.navigate("serviceProviderDetails")
-          // }
           navigation={navigation}
-          key={index}/>
-      })
-    )
-  }
+          key={index}
+        />
+      );
+    });
+  };
 
   function TabButton({ label, name }) {
     return (
-      <Button 
+      <Button
         variant={activeTab === name ? "solid" : "outline"}
         onPress={() => setActiveTab(name)}
         mr={2}
-        >
+      >
         {label}
       </Button>
-    )
+    );
   }
 
+  // render the appropriate tab content based on the active tab
   const renderTabContent = () => {
-    switch(activeTab) {
+    switch (activeTab) {
       case "description":
         return generateDescriptionTab();
       case "steps":
@@ -174,44 +159,43 @@ export default function ActionDetails({ route, navigation }) {
       default:
         return generateDescriptionTab();
     }
-  }
+  };
 
   return (
     <Page>
-      {
-        isActionLoading 
-        ? 
+      {isActionLoading ? (
         <Center width="100%" height="100%">
-          <Spinner size="lg"/>
+          <Spinner size="lg" />
         </Center>
-        :
+      ) : (
         <View>
-
           <ScrollView showsVerticalScrollIndicator={false}>
             <VStack style={{ flex: 1 }}>
               <Image
                 source={{
-                    // uri: "https://m.media-amazon.com/images/I/61JhlT09xiL._AC_SX679_.jpg",
-                  uri: (action.image != null) ? action.image.url : null,
+                  uri: action.image != null ? action.image.url : null,
                 }}
                 m={3}
                 h={250}
-                // w={width}
                 alt="image"
-                // borderRadius="xl"
                 resizeMode="contain"
-            />
+              />
               <Box bg="white" borderRadius="3xl" shadow={5} height="100%">
                 <VStack>
-                  <Text bold fontSize="2xl" m={4}>{action.title}</Text>
-                  <HStack alignItems="center" mx={4}>
-                    <Text bold fontSize="lg">Impact</Text>
+                  <Text bold fontSize="2xl" m={4}>
+                    {action.title}
+                  </Text>
+                  <HStack alignItems="center" mx={4} mb={4}>
+                    <Text bold fontSize="lg">
+                      Impact -{" "}
+                    </Text>
+                    <Text fontSize="lg">
+                      {getActionMetric(action, "Impact")}
+                    </Text>
                     <Spacer />
-                    <Text fontSize="lg">{getActionMetric(action, "Impact")}</Text>
-                  </HStack>
-                  <HStack alignItems="center" mx={4} mt={2} mb={1}>
-                    <Text bold fontSize="lg">Cost</Text>
-                    <Spacer />
+                    <Text bold fontSize="lg">
+                      Cost -{" "}
+                    </Text>
                     <Text fontSize="lg">{getActionMetric(action, "Cost")}</Text>
                   </HStack>
                   <HStack space={2} justifyContent="center" width="100%" mb={3}>
@@ -238,33 +222,34 @@ export default function ActionDetails({ route, navigation }) {
                       Done
                     </Button>
                   </HStack>
-                  <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} px={3}>
+                  <ScrollView
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                    px={3}
+                  >
                     <TabButton label="Description" name="description" />
                     <TabButton label="Steps" name="steps" />
                     <TabButton label="Deep Dive" name="deep_dive" />
-                    {
-                      testimonialsSettings.is_published ? <TabButton label="Testimonials" name="testimonials" /> : null
-                    }
-                    {
-                      vendorsSettings.is_published ? <TabButton label="Service Providers" name="service_providers" /> : null
-                    }
+                    {testimonialsSettings.is_published ? (
+                      <TabButton label="Testimonials" name="testimonials" />
+                    ) : null}
+                    {vendorsSettings.is_published ? (
+                      <TabButton
+                        label="Service Providers"
+                        name="service_providers"
+                      />
+                    ) : null}
                     <Container width={5}></Container>
                   </ScrollView>
-                  <Box m={15}>
-                    {renderTabContent()}
-                  </Box>
+                  {/* Display the tab content */}
+                  <Box m={15}>{renderTabContent()}</Box>
                 </VStack>
-                <Container
-                  // style={{ flexDirection: "row", position: "absolute", bottom: 35 }}
-                  // position="absolute"
-                  // bottom={15}
-                >
-                </Container>
+                <Container></Container>
               </Box>
             </VStack>
             <Container height={20}></Container>
           </ScrollView>
-
+          {/* Modal for when the user marks the action as done */}
           <Modal isOpen={isDoneOpen} onClose={() => {}}>
             <Modal.Content maxWidth="400px">
               <Modal.Body>
@@ -274,24 +259,34 @@ export default function ActionDetails({ route, navigation }) {
                     Congratulations!
                   </Text>
                   <Text textAlign="center" fontSize="lg">
-                    You just completed <Text bold color="primary.600">{action.title}</Text>!
+                    You just completed{" "}
+                    <Text bold color="primary.600">
+                      {action.title}
+                    </Text>
+                    !
                   </Text>
                 </Center>
                 <HStack width="100%" justifyContent={"center"}>
+                  {/* Testimonial button temporarily disabled while waiting for user funcitonality */}
                   <Button 
                     color={"primary.600"} 
                     onPress={() => {setIsDoneOpen(false), navigation.navigate("addTestimonial")}} 
                     mr={3}
                   >
                     Leave a Testimonial
-                  </Button>
-                  <Button variant={"outline"} px={5} onPress={() => setIsDoneOpen(false)}>
-                    Exit
+                  </Button> 
+                  <Button
+                    variant={"outline"}
+                    px={5}
+                    onPress={() => setIsDoneOpen(false)}
+                  >
+                    Close
                   </Button>
                 </HStack>
               </Modal.Body>
             </Modal.Content>
           </Modal>
+      
           <Modal isOpen={isToDoOpen} onClose={() => {}}>
             <Modal.Content maxWidth="400px">
               <Modal.Body>
@@ -313,7 +308,7 @@ export default function ActionDetails({ route, navigation }) {
             </Modal.Content>
           </Modal>
         </View>
-      }
+      )}
     </Page>
   );
 }

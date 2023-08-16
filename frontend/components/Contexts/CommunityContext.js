@@ -19,6 +19,7 @@ export const CommunityProvider = ({ children }) => {
   const [vendorsSettings, setVendorsSettings] = useState(null);
   const [testimonialsSettings, setTestimonialsSettings] = useState(null);
   const [teamsSettings, setTeamsSettings] = useState(null);
+  const [homeSettings, setHomeSettings] = useState(null);
   const [infoLoaded, setInfoLoaded] = useState(0);
 
   // create a single promise that resolves when all the data is fetched
@@ -141,6 +142,19 @@ export const CommunityProvider = ({ children }) => {
           if (callBackFn) callBackFn(null, json.error);
         }
       }),
+      apiCall("home_page_settings.info", { community_id: community_id }).then((json) => {
+        if (json.success) {
+          const newHomeSettings = json.data;
+          if (!homeSettings || !_.isEqual(homeSettings, newHomeSettings)) {
+            setHomeSettings(json.data);
+            setInfoLoaded(infoLoaded => infoLoaded + 1);
+            console.log("Home Page Settings Fetched")
+          }
+        } else {
+          console.log(json);
+          if (callBackFn) callBackFn(null, json.error);
+        }
+      }),
       apiCall("vendors_page_settings.info", { community_id: community_id }).then((json) => {
         if (json.success) {
           const newVendorsSettings = json.data;
@@ -202,6 +216,7 @@ export const CommunityProvider = ({ children }) => {
         vendorsSettings,
         testimonialsSettings,
         teamsSettings,
+        homeSettings,
         infoLoaded,
         fetchCommunityInfo }}>
       {children}

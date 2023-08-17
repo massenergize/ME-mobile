@@ -1108,7 +1108,7 @@ export default function DashboardPage({ navigation, route }) {
           <SustainScore CarbonSaved = {completedList}/>
           <CarbonSaved CarbonSaved = {completedList}/>
           <ActionsList navigation={navigation} list = {toDoList}/>
-          <BadgesList />
+          {/* <BadgesList /> */}
           <TeamsList />
           <HousesList />
           <CommunitiesList communityInfo = {communityInfo}/>

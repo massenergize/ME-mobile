@@ -117,6 +117,20 @@ export default function useAuth() {
     }
   };
 
+  const sendPasswordResetEmail = (email, callBackFn = null) => {
+    AUTH.sendPasswordResetEmail(email)
+      .then(() => {
+        if (callBackFn) {
+          callBackFn(null);
+        }
+      })
+      .catch((error) => {
+        if (callBackFn) {
+          callBackFn(translateFirebaseError(error?.toString()));
+        }
+      });
+  }
+
   return {
     user,
     setUser,
@@ -126,5 +140,6 @@ export default function useAuth() {
     signInWithEmailAndPassword,
     registerWithEmailAndPassword,
     sendVerificationEmail,
+    sendPasswordResetEmail,
   };
 }

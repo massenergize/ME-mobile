@@ -8,6 +8,7 @@ import "react-native-gesture-handler";
 import Theme from "./components/Shared/Theme";
 import AuthModal from "./components/Pages/Auth/AuthModal";
 import MainNavigator from "./components/Navigation";
+import Confetti from "./components/Shared/Confetti/Confetti";
 import { CommunityProvider } from "./components/Contexts/CommunityContext";
 
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
       <CommunityProvider>
         <NavigationContainer>
           <AuthModal />
+          <Confetti />
           <MainNavigator />
         </NavigationContainer>
       </CommunityProvider>

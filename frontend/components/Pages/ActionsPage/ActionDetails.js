@@ -22,6 +22,7 @@ import { CommunityContext, useDetails } from "../../Contexts/CommunityContext";
 import { TestimonialCard } from "../TestimonialsPage/TestimonialsCard";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { getActionMetric } from "../../Shared/Utils";
+import ConfettiController from "../../Shared/Confetti/ConfettiController";
 
 export default function ActionDetails({ route, navigation }) {
   const { action_id } = route.params;
@@ -142,6 +143,11 @@ export default function ActionDetails({ route, navigation }) {
     }
   };
 
+  const completeThisAction = () => {
+    setIsDoneOpen(true);
+    ConfettiController.startConfetti();
+  }
+
   return (
     <Page>
       {isActionLoading ? (
@@ -197,7 +203,7 @@ export default function ActionDetails({ route, navigation }) {
                         color: "white",
                         fontWeight: "bold",
                       }}
-                      onPress={() => setIsDoneOpen(true)}
+                      onPress={completeThisAction}
                     >
                       Done
                     </Button>

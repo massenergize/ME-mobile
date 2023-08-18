@@ -24,6 +24,7 @@ import TeamDetailsPage from "./Pages/TeamsPage/TeamDetailsPage";
 import TabNavigator from "./Shared/TabNavigator";
 import SettingsPage from "./Pages/SettingsPage/SettingsPage";
 import DashboardPage from "./Pages/UserProfilePage/DashboardPage";
+import ResetPasswordPage from "./Pages/Auth/ResetPasswordPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -53,6 +54,7 @@ const MainNavigator = () => {
       />
       <Stack.Screen name="signup" component={SignupPage} />
       <Stack.Screen name="withEmailOnly" component={WithEmailOnlyPage} />
+      <Stack.Screen name="resetPassword" component={ResetPasswordPage} options={{ headerShown: false }}/>
       <Stack.Screen name="about" component={AboutPage} />
       <Stack.Screen name="events" component={EventsPage} />
       <Stack.Screen

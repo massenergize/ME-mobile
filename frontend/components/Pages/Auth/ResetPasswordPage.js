@@ -21,7 +21,7 @@ const validationSchema = Yup.object().shape({
     .required("Email is required"),
 });
 
-export default function WithEmailOnlyPage() {
+export default function ResetPasswordPage({ navigation }) {
   const {sendPasswordResetEmail} = useAuth();
   const [isSending, setIsSending] = useState(false);
 
@@ -34,7 +34,8 @@ export default function WithEmailOnlyPage() {
         } else {
             // TODO: Create a custom alert system to display messages like this.
             alert("password reset email sent successfully");
-            // TODO: Navigate to the login page.
+            // Assume previous page is the login page.
+            navigation.goBack();
         }
     })
   };
@@ -90,7 +91,7 @@ export default function WithEmailOnlyPage() {
                 >
                   Send Me A Link
                 </Button>
-                <Button backgroundColor="muted.400">Back</Button>
+                <Button backgroundColor="muted.400" onPress={() => navigation.goBack()}>Back</Button>
               </VStack>
             )}
           </Formik>

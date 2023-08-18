@@ -1,17 +1,20 @@
-import React, { useState, useContext, useCallback, useEffect } from "react";
+import React, { useState, useContext, useCallback } from "react";
 import {
   VStack,
   HStack,
   Box,
   Text,
   Spacer,
-  Container,
   Pressable,
-  Image,
   View,
-  ScrollView
+  ScrollView,
+  Center,
+  Heading,
+  Image,
+  AspectRatio
 } from "native-base";
 import { RefreshControl } from "react-native-gesture-handler";
+import Carousel from 'pinar'
 
 import ActionCard from "./../ActionsPage/ActionCard";
 import EventCard from "./../EventsPage/EventCard";
@@ -34,7 +37,7 @@ function GoalsCard({ navigation, goals, community_id }) {
         nameLong: "Individual Actions Completed",
         nameShort: "Actions",
         goal: goals.target_number_of_actions,
-        current: goals.initial_number_of_actions + goals.attained_number_of_actions + goals.organic_attained_number_of_actions
+        current: goals.displayed_number_of_actions
       })
     }
     if (goals.target_number_of_households != 0) {
@@ -42,7 +45,7 @@ function GoalsCard({ navigation, goals, community_id }) {
         nameLong: "Households Taking Action",
         nameShort: "Households",
         goal: goals.target_number_of_households,
-        current: goals.attained_number_of_households + goals.organic_attained_number_of_households
+        current: goals.displayed_number_of_households
       })
     }
     if (goals.target_carbon_footprint_reduction != 0) {
@@ -50,7 +53,7 @@ function GoalsCard({ navigation, goals, community_id }) {
         nameLong: "Carbon Reduction Impact",
         nameShort: "Trees",
         goal: goals.target_carbon_footprint_reduction / 133,
-        current: (goals.initial_carbon_footprint_reduction / 133) + (goals.organic_attained_carbon_footprint_reduction / 133)
+        current: (goals.displayed_carbon_footprint_reduction / 133)
       })
     }
     return goalsList
@@ -107,27 +110,40 @@ function ShowMore({ navigation, page, text }) {
   );
 }
 
+function BackgroundCarousel({data}) {
+  return (
+    <Box height="100%" bgColor={"amber.100"}>
+      <Carousel showsControls={false} showsDots={false} autoplay={true} loop={true}>
+        {data.map((item) => (
+          <View key={item.id} flex={1} backgroundColor={"amber.400"}>
+            <AspectRatio width="100%" backgroundColor={"amber.700"}>
+              <Image source={{ uri: item.url }} alt={item.name} />
+            </AspectRatio>
+          </View>
+        ))}
+      </Carousel>
+      {/* background overlay */}
+      <Box
+        position="absolute"
+        width="100%"
+        height="100%"
+        backgroundColor="black"
+        opacity="30"
+      ></Box>
+    </Box>
+  );
+}
+
 export default function CommunityPage({ navigation }) {
-  const { communityInfo, actions, events, fetchCommunityInfo } = useContext(CommunityContext);
+  const { communityInfo, actions, homeSettings, fetchCommunityInfo } = useContext(CommunityContext);
   const {community_id} = communityInfo
 
-  const [featuredEvents, setFeaturedEvents] = useState([]);
-
   const [refreshing, setRefreshing] = useState(false);
-
-  const getFeaturedEvents = useCallback(() => {
-    const featured = events.filter((event) => event.is_on_home_page);
-    setFeaturedEvents(featured);
-  }, [featuredEvents])
 
   const onRefresh = useCallback (() => {
     setRefreshing(true);
     fetchCommunityInfo(community_id, () => setRefreshing(false))
   }, []);
-
-  useEffect(() => {
-    getFeaturedEvents();
-  }, [])
 
   return (
     <Page>
@@ -136,16 +152,14 @@ export default function CommunityPage({ navigation }) {
       nestedScrollEnabled = {true} 
       showsVerticalScrollIndicator={false}
       refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
-        <VStack alignItems="center" space={3} bg="white">
-          <Container maxHeight={200} width="100%" mt={3}>
-            <Image
-                source={{uri: (communityInfo.logo) ? communityInfo.logo.url : null}}
-                alt="Community Logo"
-                resizeMode="contain"
-                height="full"
-                width="full"
-            />
-          </Container>
+          <Box maxHeight={[200, 300]} width="100%">
+            <Center position="absolute" zIndex={1} height="100%" width="100%" px="2">
+              <Heading color="white" fontWeight="bold" size="xl" textAlign="center">{communityInfo.name}</Heading>
+              <Text color="white" textAlign="center" fontSize={["xs", "sm"]}>{homeSettings.sub_title}</Text>
+            </Center>
+            <BackgroundCarousel data={homeSettings.images} />
+          </Box>
+        <VStack alignItems="center" space={3} bg="white" top="-3%" borderTopRadius={30} pt="5">
           <GoalsCard navigation={navigation} goals={communityInfo.goal} community_id={community_id}/>
           <HStack alignItems="center" pb={2} pt={3}>
             <HeaderText text="Recommended Actions"/>
@@ -174,7 +188,7 @@ export default function CommunityPage({ navigation }) {
             }
             </HStack>
           </ScrollView>
-          {featuredEvents.length !== 0 && (
+          {homeSettings.show_featured_events && homeSettings.featured_events.length !== 0 && (
             <View width="100%">
               <HStack alignItems="center" pb={2} pt={3}>
                 <HeaderText text="Featured Events"/>
@@ -183,7 +197,7 @@ export default function CommunityPage({ navigation }) {
               </HStack>
               <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                 <HStack space={3} mx={15}>
-                  {featuredEvents.map((event) => (
+                  {homeSettings.featured_events.map((event) => (
                     <EventCard
                       key={event.id}
                       title={event.name}
@@ -198,9 +212,6 @@ export default function CommunityPage({ navigation }) {
                       isShared={event.is_shared}
                       id={event.id}
                       navigation={navigation}
-                      // set width to 250 to prevent styling error.
-                      // Bug: https://github.com/massenergize/ME-mobile/issues/38#issuecomment-1677405297
-                      width={250}
                       my={3}
                       shadow={3}
                     />

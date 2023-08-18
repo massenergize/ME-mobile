@@ -23,6 +23,9 @@
             "organic_attained_number_of_households": 295,
             "organic_attained_number_of_actions": 1381,
             "organic_attained_carbon_footprint_reduction": 2108429,
+            "displayed_number_of_households": 295,
+            "displayed_number_of_actions": 1381,
+            "displayed_carbon_footprint_reduction": 2108429,
             "target_date": null,
             "more_info": null
         },

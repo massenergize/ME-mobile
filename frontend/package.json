@@ -21,6 +21,7 @@
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "native-base": "^3.4.28",
+    "pinar": "^0.12.2",
     "react": "18.2.0",
     "react-native": "0.72.3",
     "react-native-confetti-cannon": "^1.5.2",

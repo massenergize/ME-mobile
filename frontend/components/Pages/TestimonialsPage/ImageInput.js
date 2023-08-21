@@ -13,6 +13,45 @@ import {
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import * as ImagePicker from "expo-image-picker";
 
+const ImageContainer = ({ uri, onDelete, onEdit }) => {
+  return (
+    <Box
+      height="150"
+      borderColor="muted.300"
+      borderRadius="lg"
+      borderWidth="1"
+    >
+      <Image
+        source={{ uri }}
+        resizeMode="contain"
+        height="100%"
+        width="100%"
+        alt="image"
+      />
+      <Icon
+        as={FontAwesome}
+        name="pencil"
+        size="lg"
+        color="muted.400"
+        position="absolute"
+        bottom="5"
+        right="5"
+        onPress={onEdit}
+      />
+      <Icon
+        as={FontAwesome}
+        name="trash"
+        size="lg"
+        color="muted.400"
+        position="absolute"
+        bottom="5"
+        left="5"
+        onPress={onDelete}
+      />
+    </Box>
+  );
+}
+
 const ImageInput = ({ onChange, value = null }) => {
   const { isOpen, onOpen, onClose } = useDisclose();
   const [status, requestPermission] = ImagePicker.useCameraPermissions();
@@ -62,33 +101,7 @@ const ImageInput = ({ onChange, value = null }) => {
           borderWidth="1"
         >
           {value ? (
-            <>
-              <Image
-                source={{ uri: value }}
-                resizeMode="contain"
-                height="100%"
-                width="100%"
-                alt="image"
-              />
-              <Icon
-                as={FontAwesome}
-                name="pencil"
-                size="lg"
-                color="muted.400"
-                position="absolute"
-                bottom="5"
-                right="5"
-              />
-              <Icon
-                as={FontAwesome}
-                name="trash"
-                size="lg"
-                color="muted.400"
-                position="absolute"
-                bottom="5"
-                left="5"
-              />
-            </>
+            <ImageContainer uri={value} onDelete={() => onChange("")} onEdit={onOpen} />
           ) : (
             <Box
               width="100%"

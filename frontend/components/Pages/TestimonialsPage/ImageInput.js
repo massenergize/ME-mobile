@@ -110,7 +110,7 @@ const ImageInput = ({ onChange, value = null }) => {
               justifyContent="center"
             >
               <Text color="muted.400" mb="2">
-                Upload your image here
+                Upload your own image here
               </Text>
               <Text>
                 <Icon

@@ -6,7 +6,7 @@ import styles from './styles'
 
 export default ActionCard = React.memo(
   ({
-    navigation,
+    navigation = null,
     id,
     title,
     imgUrl,
@@ -17,7 +17,7 @@ export default ActionCard = React.memo(
     return (
       <Pressable
         onPress={() => {
-          navigation.navigate("actiondetails", { action_id: id });
+          navigation && navigation.navigate("actiondetails", { action_id: id });
         }}
         {...props}
       >

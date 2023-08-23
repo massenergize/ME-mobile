@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 
 import * as Yup from "yup";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
@@ -21,95 +21,87 @@ import ImageInput from "./ImageInput";
 import Page from "../../Shared/Page";
 import ListResources from "./ListResources";
 import { CommunityContext } from "../../Contexts/CommunityContext";
-import ActionCard from "../ActionsPage/ActionCard";
-import ServiceProviderCard from "../ServiceProvidersPage/ServiceProviderCard";
 
-const ActionInput = ({ data }) => {
+const ActionInput = ({ data, onChange, value }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [dataToRender, setDataToRender] = useState([]);
 
-  useEffect(() => {
-    data.map((action) => {
-      return setDataToRender((dataToRender) => [
-        ...dataToRender,
-        () => {
-          return (
-            <ActionCard
-              id={action.id}
-              title={action.title}
-              imgUrl={action.image?.url}
-            />
-          );
-        },
-      ]);
-    });
-  }, []);
+  const onSelect = (id) => {
+    setIsOpen(false);
+    onChange(id)
+  }
+
+  const renderAction = (id) => {
+    const action = data.find((i) => i.id === id);
+    return action.title;
+  }
 
   return (
     <View>
       <TouchableOpacity onPress={() => setIsOpen(true)}>
         <Box
-          height={actionStyles.imageSize}
-          width={actionStyles.imageSize}
+          p="2"
           alignItems="center"
           justifyContent="center"
           borderWidth="1"
           borderColor="muted.300"
           borderRadius="lg"
         >
+          {value ? (
+            <Text>{renderAction(value)}</Text>
+          ): (
+
           <Icon as={FontAwesome} name="plus" size="lg" color="muted.400" />
+          )}
         </Box>
       </TouchableOpacity>
       <ListResources
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         title={"Actions"}
-        componentsToRender={dataToRender}
+        data={data}
+        onSelect={onSelect}
       />
     </View>
   );
 };
 
-const SPInput = ({ data }) => {
+const SPInput = ({ data, onChange, value }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [dataToRender, setDataToRender] = useState([]);
 
-  useEffect(() => {
-    data.map((sp) => {
-      return setDataToRender((dataToRender) => [
-        ...dataToRender,
-        () => {
-          return (
-            <ServiceProviderCard
-              id={sp.id}
-              direction="row"
-              name={sp.name}
-              imageURI={sp.logo ? sp.logo.url : null}
-            />
-          );
-        },
-      ]);
-    });
-  }, []);
+  const onSelect = (id) => {
+    setIsOpen(false);
+    onChange(id)
+  }
+
+  const renderSP = (id) => {
+    const sp = data.find((i) => i.id === id);
+    return sp.name;
+  }
+
   return (
     <View>
       <TouchableOpacity onPress={() => setIsOpen(true)}>
         <Box
-          height="100"
+          p="2"
           alignItems="center"
           justifyContent="center"
           borderWidth="1"
           borderColor="muted.300"
           borderRadius="lg"
         >
-          <Icon as={FontAwesome} name="plus" size="lg" color="muted.400" />
+          {value ? (
+            <Text>{renderSP(value)}</Text>
+          ): (
+            <Icon as={FontAwesome} name="plus" size="lg" color="muted.400" />
+          )}
         </Box>
       </TouchableOpacity>
       <ListResources
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         title={"Service Providers"}
-        componentsToRender={dataToRender}
+        data={data}
+        onSelect={onSelect}
       />
     </View>
   );
@@ -119,8 +111,8 @@ const validationSchema = Yup.object().shape({
   image: Yup.mixed().nullable(),
   title: Yup.string().required("Title is required"),
   description: Yup.string().required("Description is required"),
-  action: Yup.mixed().nullable(),
-  serviceProvider: Yup.mixed().nullable(),
+  action: Yup.string().nullable(),
+  vendor: Yup.string().nullable(),
 });
 
 export default function AddTestimonial() {
@@ -136,7 +128,7 @@ export default function AddTestimonial() {
             title: "",
             description: "",
             action: null,
-            serviceProvider: null,
+            vendor: null,
           }}
           validationSchema={validationSchema}
           onSubmit={(values) => console.log(values)}
@@ -145,6 +137,7 @@ export default function AddTestimonial() {
             handleChange,
             handleBlur,
             handleSubmit,
+            setFieldValue,
             values,
             errors,
             touched,
@@ -205,11 +198,11 @@ export default function AddTestimonial() {
               </FormControl>
               <Text>Which action is this testimonial about?</Text>
               <FormControl>
-                <ActionInput data={actions} />
+                <ActionInput data={actions} onChange={(value) => setFieldValue("action", value)} value={values.action}/>
               </FormControl>
               <Text>Who helped you complete this action?</Text>
               <FormControl>
-                <SPInput data={vendors} />
+                <SPInput data={vendors} onChange={(value) => setFieldValue("vendor", value)} value={values.vendor}/>
               </FormControl>
               <Button my="10" onPress={handleSubmit}>
                 Share

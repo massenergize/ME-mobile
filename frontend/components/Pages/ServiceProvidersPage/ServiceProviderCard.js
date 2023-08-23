@@ -9,13 +9,13 @@ export default function ServiceProviderCard({
   description,
   imageURI,
   onPress,
-  navigation,
+  navigation = null,
   ...props
 }) {
   return (
     <Pressable
       onPress={() =>
-        navigation.navigate("serviceProviderDetails", { vendor_id: id })
+        navigation && navigation.navigate("serviceProviderDetails", { vendor_id: id })
       }
     >
       <Flex

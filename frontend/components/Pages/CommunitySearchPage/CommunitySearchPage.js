@@ -163,6 +163,7 @@ export default function CommunitySearchPage({ navigation }) {
                 variant="rounded"
                 value={zipCode}
                 onChangeText={(text) => setZipCode(text)}
+                onSubmitEditing={handleZipCodeSubmit}
               />
             </Center>
             <Button

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
@@ -6,6 +6,9 @@ import ActionsPage from "../Pages/ActionsPage/ActionsPage";
 import CommunityPage from "../Pages/CommunityPage/CommunityPage";
 import DashboardPage from "../Pages/UserProfilePage/DashboardPage";
 import EventsPage from "../Pages/EventsPage/EventsPage";
+import { useNavigation } from "@react-navigation/native";
+import { getSiso } from "../SisoManager";
+import AuthModalController from "../Pages/Auth/AuthModalController";
 
 const Tab = createBottomTabNavigator();
 
@@ -53,9 +56,40 @@ export default function TabNavigator() {
         name="EVENTS" 
         component={EventsPage} 
         />
-      <Tab.Screen 
-        name="PROFILE" 
-        component={DashboardPage} />
+      <Tab.Screen name="PROFILE" component={ProfileScreenWithNavigationCheck} />
   </Tab.Navigator>
   )
+}
+
+
+function ProfileScreenWithNavigationCheck() {
+  const navigation = useNavigation();
+  const [showAuthModal, setShowAuthModal] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("tabPress", (e) => {
+      if (e.target === "PROFILE" && !getSiso()) {
+        setShowAuthModal(true);
+        e.preventDefault(); // Prevent the default navigation action
+      }
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
+  const handleNavigationAfterModal = () => {
+    setShowAuthModal(false); // Hide the modal
+    // Navigate to the Dashboard screen here
+    // For example, navigation.navigate("Dashboard");
+  };
+
+  if (showAuthModal) {
+    return (
+      <AuthModalController.showModal
+        onClose={handleNavigationAfterModal}
+      />
+    );
+  }
+
+  return <DashboardPage />;
 }

@@ -310,6 +310,7 @@ export default function DashboardPage({ navigation, route }) {
   const [toDoList, setToDoList] = useState([]);
   const [completedList, setCompletedList] = useState([]);
   const [userEmail, setUserEmail] = useState("");
+  
   // apiCall("users.info").then((json) => {
   //   if (json.success) {
   //     setUserEmail(json.data.email);

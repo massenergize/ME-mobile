@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
@@ -6,9 +6,6 @@ import ActionsPage from "../Pages/ActionsPage/ActionsPage";
 import CommunityPage from "../Pages/CommunityPage/CommunityPage";
 import DashboardPage from "../Pages/UserProfilePage/DashboardPage";
 import EventsPage from "../Pages/EventsPage/EventsPage";
-import { useNavigation } from "@react-navigation/native";
-import { getSiso } from "../SisoManager";
-import AuthModalController from "../Pages/Auth/AuthModalController";
 
 const Tab = createBottomTabNavigator();
 
@@ -56,12 +53,13 @@ export default function TabNavigator() {
         name="EVENTS" 
         component={EventsPage} 
         />
-      <Tab.Screen name="PROFILE" component={ProfileScreenWithNavigationCheck} />
+      <Tab.Screen 
+        name="PROFILE" 
+        component={DashboardPage} />
+      {/* <Tab.Screen name="PROFILE" component={ProfileScreenWithNavigationCheck} /> */}
   </Tab.Navigator>
   )
 }
-
-
 function ProfileScreenWithNavigationCheck() {
   const navigation = useNavigation();
   const [showAuthModal, setShowAuthModal] = useState(false);

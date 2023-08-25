@@ -33,31 +33,7 @@ export default function CreateProfilePage({ route, navigation }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { user, authState, setUser, signOut, setAuthState, signInWithEmailAndPassword } = useAuth();
   const { createUserProfile } = useME();
-  const handleSignIn = (values) => {
-    const [userEmail, setUserEmail] = useState("");
-    setUserEmail(values.email);
-    setIsSubmitting(true);
-    signInWithEmailAndPassword(
-      values.email,
-      values.password,
-      (userCreds, error) => {
-        // useAuth.signInWithEmailAndPassword is fetching ME's token behind the scenes.
-        setIsSubmitting(false);
-        if (error) {
-          setErrorMsg(error);
-        } else {
-          setUserEmail(values.email);
-          console.log("User signed in successfully!");
-          console.log("is user email verified?", userCreds.user.emailVerified);
-          console.log("authState: ", authState);
-          console.log("The user signed up with", values.email, " " , userEmail, " ", userCreds.user.email);
-          navigation.navigate("dashboard", { userEmail: userCreds.user.email });
-          console.log("testing");
-        }
-      }
-    );
-    
-  };
+  
   const handleCreateProfile = async (values) => {
     setIsSubmitting(true);
 

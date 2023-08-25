@@ -260,7 +260,7 @@ export default function ActionDetails({ route, navigation }) {
                       }}
                       onPress={() => {
                         if (getSiso() === true) { // Replace "condition" with your actual condition
-                          handleAddToDo(userEmail, action);
+                          handleCompleted(userEmail, action);
                           setIsDoneOpen(true);
                           completedActions.push({name: action});
                           console.log("Added " + action.title + " Completed");

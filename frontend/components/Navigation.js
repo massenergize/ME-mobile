@@ -85,7 +85,7 @@ const MainNavigator = () => {
       />
       <Stack.Screen name="teamDetails" component={TeamDetailsPage} options={{ headerTitle: "TEAM", headerTitleAlign: "center" }}/>
       <Stack.Screen name="subteamDetails" component={TeamDetailsPage} options={{ headerTitle: "TEAM", headerTitleAlign: "center" }}/>
-      <Stack.Screen name="dashboard" component={DashboardPage} />
+      <Stack.Screen name="dashboard" component={DashboardPage} option={{ headerTitle: "DASHBOARD", headerTitleAlign: "center" }}/>
       <Stack.Screen
         name="createProfile"
         component={CreateProfilePage}

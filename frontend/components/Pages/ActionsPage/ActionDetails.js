@@ -23,11 +23,14 @@ import { TestimonialCard } from "../TestimonialsPage/TestimonialsCard";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { getActionMetric } from "../../Shared/Utils";
 import { apiCall } from "../../../api/functions";
+import useAuth from "../../Hooks/useAuth";
+import Constants from "../../Constants";
+import { getSiso } from "../../SisoManager";
+import AuthModalController from "../../Pages/Auth/AuthModalController";
 
 export default function ActionDetails({ route, navigation }) {
   const { action_id } = route.params;
-
-  
+  console.log("siso", getSiso());
   const [activeTab, setActiveTab] = useState("description");
 
   const [action, isActionLoading] = useDetails("actions.info", {
@@ -234,8 +237,18 @@ export default function ActionDetails({ route, navigation }) {
                         color: "white",
                         fontWeight: "bold",
                       }}
-                      onPress={() => {handleAddToDo(userEmail, action), setIsToDoOpen(true), toDoActions.push({name: action}), console.log("Added " + action.title + " to To-do")}}
-                    >
+                      onPress={() => {
+                        if (getSiso() === true) { // Replace "condition" with your actual condition
+                          handleAddToDo(userEmail, action);
+                          setIsToDoOpen(true);
+                          toDoActions.push({ name: action });
+                          console.log("Added " + action.title + " to To-do");
+                        }
+                        else 
+                        {
+                          AuthModalController.showModal();
+                        }
+                      }}>
                       Add to To-Do
                     </Button>
                     <Button
@@ -245,8 +258,18 @@ export default function ActionDetails({ route, navigation }) {
                         color: "white",
                         fontWeight: "bold",
                       }}
-                      onPress={() => {handleCompleted(userEmail, action), setIsDoneOpen(true), completedActions.push({name: action}), console.log("Added " + action.title + " Completed")}}
-                    >
+                      onPress={() => {
+                        if (getSiso() === true) { // Replace "condition" with your actual condition
+                          handleAddToDo(userEmail, action);
+                          setIsDoneOpen(true);
+                          completedActions.push({name: action});
+                          console.log("Added " + action.title + " Completed");
+                        }
+                        else 
+                        {
+                          AuthModalController.showModal();
+                        }
+                      }}>
                       Done
                     </Button>
                   </HStack>

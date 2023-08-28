@@ -77,7 +77,7 @@ export default function LoginPage({ route, navigation }) {
         }
       }
     }
-  }, [user, authState]);
+  }, [user, authState, isEmailVerified]);
 
   if (user && !isEmailVerified) {
     return <EmailVerificationPage onRefresh={() => refreshUser()} />;

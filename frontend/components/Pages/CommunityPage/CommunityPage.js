@@ -168,6 +168,15 @@ export default function CommunityPage({ navigation }) {
           </HStack>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             <HStack space={2} justifyContent="center" mx={15} marginBottom={15}>
+            {actions.length === 0 && (
+              <Center width="100%" flex="1">
+                <Box w="100%" maxW="300">
+                  <Text mt="1" color="coolGray.600">
+                    No actions found!
+                  </Text>
+                </Box>
+              </Center>
+            )}
             {
               // displaay all low cost actions for v1 (recommended in the future)
               actions

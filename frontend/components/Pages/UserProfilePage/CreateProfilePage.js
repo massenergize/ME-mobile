@@ -8,9 +8,12 @@ import {
   FormControl,
   Input,
   Button,
+  Spinner,
+  Icon,
 } from "native-base";
 import * as Yup from "yup";
 import { Formik } from "formik";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 import Page from "../../Shared/Page";
 import useAuth from "../../Hooks/useAuth";
@@ -29,10 +32,13 @@ const validationSchema = Yup.object().shape({
 
 export default function CreateProfilePage({ route, navigation }) {
   const { communityInfo } = useContext(CommunityContext);
+  const { user, setUser, signOut, setAuthState } = useAuth();
+  const { validateUsername, createUserProfile } = useME();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { user, setUser, signOut, setAuthState } = useAuth();
-  const { createUserProfile } = useME();
+  const [isValidating, setIsValidating] = useState(null);
+  const [isUsernameValid, setIsUsernameValid] = useState(null);
+  const [usernameError, setUsernameError] = useState(null);
 
   const handleCreateProfile = async (values) => {
     setIsSubmitting(true);
@@ -61,6 +67,28 @@ export default function CreateProfilePage({ route, navigation }) {
         navigation.navigate("drawer", { ...route.params });
       }
     });
+  };
+
+  const handleUsernameBlur = (username) => {
+    if (username) {
+      setIsValidating(true);
+      setIsUsernameValid(null);
+      validateUsername(username, (response, error) => {
+        if (error) {
+          setIsUsernameValid(false);
+          setUsernameError(error)
+        } else {
+          if (response.valid) {
+            setIsUsernameValid(true);
+            setUsernameError(null);
+          } else {
+            setIsUsernameValid(false);
+            setUsernameError(response.data)
+          }
+        }
+        setIsValidating(false);
+      });
+    }
   };
 
   return (
@@ -129,12 +157,19 @@ export default function CreateProfilePage({ route, navigation }) {
                     size="lg"
                     placeholder="Username..."
                     onChangeText={handleChange("username")}
-                    onBlur={handleBlur("username")}
+                    onBlur={() => {
+                      handleBlur("username");
+                      handleUsernameBlur(values.username)
+                    }}
                     value={values.username}
                   />
-                  {errors.username && touched.username && (
-                    <Text color="red.500">{errors.username}</Text>
-                  )}
+                  <Box position="absolute" right="3" top="3" >
+                    <Spinner display={isValidating ? "flex" : "none"}/>
+                    <Icon as={FontAwesome} name="check" color="primary.400" display={isUsernameValid ? "flex" : "none"}/>
+                    {/* ignore below icon if isUsernameValid is null */}
+                    <Icon as={FontAwesome} name="times" color="red.400" display={isUsernameValid === false ? "flex" : "none"}/>
+                  </Box>
+                  {usernameError && <Text color="red.500">{usernameError}</Text>}
                 </FormControl>
                 <FormControl
                   isRequired

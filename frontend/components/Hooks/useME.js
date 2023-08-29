@@ -36,5 +36,26 @@ export default function useME() {
       });
   };
 
-  return { fetchToken, createUserProfile };
+  const validateUsername = (username, callBackFn = null) => {
+    apiCall("users.validate.username", {username})
+      .then((response) => {
+        if (response.success) {
+          const {valid, code, suggested_username, message = null} = response.data;
+          if (valid) {
+            if (callBackFn) callBackFn({valid, data: suggested_username}, null);
+          } else if (code === 911) {
+            if (callBackFn) callBackFn({valid, data: message}, null);
+          } else {
+            if (callBackFn) callBackFn({valid, data: `Try ${suggested_username}`}, null);
+          }
+        } else {
+          if (callBackFn) callBackFn(null, response.error);
+        }
+      })
+      .catch((error) => {
+        if (callBackFn) callBackFn(null, error?.toString());
+      })
+  };
+
+  return { fetchToken, validateUsername, createUserProfile };
 }

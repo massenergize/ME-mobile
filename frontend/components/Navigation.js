@@ -47,16 +47,16 @@ const MainNavigator = () => {
     try {
       const onboarded = await AsyncStorage.getItem("@IsOnboarded");
       if (onboarded) {
-        // const lastVisitedCommunityId = await AsyncStorage.getItem(
-        //   "@LastVisitedCommunityId"
-        // );
-        // if (lastVisitedCommunityId) {
-        //   // set the initial route param to drawer
-        //   setInitialRouteParams({ community_id: lastVisitedCommunityId });
-        //   setInitialRouteName("drawer");
-        // } else {
-        //   setInitialRouteName("communitySearch");
-        // }
+        const lastVisitedCommunityId = await AsyncStorage.getItem(
+          "@LastVisitedCommunityId"
+        );
+        if (lastVisitedCommunityId) {
+          // set the initial route param to drawer
+          setInitialRouteParams({ community_id: lastVisitedCommunityId });
+          setInitialRouteName("drawer");
+        } else {
+          setInitialRouteName("communitySearch");
+        }
         setInitialRouteName("communitySearch")
       } else {
         setInitialRouteName("onboarding");

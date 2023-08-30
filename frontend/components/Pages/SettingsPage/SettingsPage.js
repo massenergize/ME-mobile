@@ -7,6 +7,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Page from "../../Shared/Page";
 import EditProfileModal from "./EditProfileModal";
 import ChangeEmailModal from "./ChangeEmailModal";
+import ChangePasswordModal from "./ChangePasswordModal";
 
 const SettingOptions = [
   {
@@ -39,12 +40,15 @@ const SettingOptions = [
 export default function SettingsPage() {
   const [isEMPOpen, setIsEMPOpen] = useState(false);
   const [isCMEOpen, setIsCMEOpen] = useState(false);
+  const [isCMPOpen, setIsCMPOpen] = useState(false);
 
   const handleOpenModal = (name) => {
     if (name === "profile") {
       setIsEMPOpen(true);
     } else if (name === "email") {
       setIsCMEOpen(true);
+    } else if (name === "password") {
+      setIsCMPOpen(true);
     }
   };
 
@@ -79,6 +83,7 @@ export default function SettingsPage() {
         ))}
         <EditProfileModal isOpen={isEMPOpen} setIsOpen={setIsEMPOpen} />
         <ChangeEmailModal isOpen={isCMEOpen} setIsOpen={setIsCMEOpen} />
+        <ChangePasswordModal isOpen={isCMPOpen} setIsOpen={setIsCMPOpen} />
       </VStack>
     </Page>
   );

@@ -9,6 +9,7 @@ import EditProfileModal from "./EditProfileModal";
 import ChangeEmailModal from "./ChangeEmailModal";
 import ChangePasswordModal from "./ChangePasswordModal";
 import ChangeNotificationModal from "./ChangeNotificationModal";
+import DeleteAccountModal from "./DeleteAccountModal";
 
 const SettingOptions = [
   {
@@ -43,6 +44,7 @@ export default function SettingsPage() {
   const [isCMEOpen, setIsCMEOpen] = useState(false);
   const [isCMPOpen, setIsCMPOpen] = useState(false);
   const [isNPOpen, setIsNPOpen] = useState(false);
+  const [isDAOpen, setIsDAOpen] = useState(false);
 
   const handleOpenModal = (name) => {
     if (name === "profile") {
@@ -53,6 +55,8 @@ export default function SettingsPage() {
       setIsCMPOpen(true);
     } else if (name === "notification") {
       setIsNPOpen(true);
+    } else if (name === "delete") {
+      setIsDAOpen(true);
     }
   };
 
@@ -89,6 +93,7 @@ export default function SettingsPage() {
         <ChangeEmailModal isOpen={isCMEOpen} setIsOpen={setIsCMEOpen} />
         <ChangePasswordModal isOpen={isCMPOpen} setIsOpen={setIsCMPOpen} />
         <ChangeNotificationModal isOpen={isNPOpen} setIsOpen={setIsNPOpen} />
+        <DeleteAccountModal isOpen={isDAOpen} setIsOpen={setIsDAOpen} />
       </VStack>
     </Page>
   );

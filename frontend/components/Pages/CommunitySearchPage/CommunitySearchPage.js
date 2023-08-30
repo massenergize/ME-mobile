@@ -6,7 +6,6 @@ import {
   Box,
   VStack,
   Input,
-  ScrollView,
   HStack,
   Icon,
   Modal,
@@ -14,6 +13,7 @@ import {
   Pressable,
   Spinner,
   Slider,
+  SectionList,
 } from "native-base";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
@@ -22,12 +22,11 @@ import CommunityCard from "./CommunityCard";
 import { apiCall } from "../../../api/functions";
 import styles from "./styles";
 
-
 export default function CommunitySearchPage({ navigation }) {
   const [communities, setCommunities] = useState([]);
   const [zipCode, setZipCode] = useState("");
   const [showModal, setShowModal] = useState(true);
-  const [maxDistance, setMaxDistance] = useState(25); // in miles
+  const [maxDistance, setMaxDistance] = useState(5); // in miles
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -50,7 +49,18 @@ export default function CommunitySearchPage({ navigation }) {
       max_distance: maxDistance,
     }).then((json) => {
       if (json.success) {
-        setCommunities(json.data);
+        let communities = json.data;
+        communities = communities.filter((c) => c.is_geographically_focused);
+        matched_communities = communities.filter(
+          (c) => c.location.distance === 0
+        );
+        nearby_communities = communities
+          .filter((c) => c.location.distance !== 0)
+          .sort((a, b) => a.location.distance - b.location.distance);
+        setCommunities([
+          { title: "Matched Communities", data: matched_communities },
+          { title: "Nearby Communities", data: nearby_communities },
+        ]);
       } else {
         console.log(json);
       }
@@ -64,7 +74,12 @@ export default function CommunitySearchPage({ navigation }) {
     <Page>
       <Box height="30%" backgroundColor={"primary.50"}>
         <Center h="full">
-          <Icon as={FontAwesome} name="users" size={styles.backgroundIconSize} color="white" />
+          <Icon
+            as={FontAwesome}
+            name="users"
+            size={styles.backgroundIconSize}
+            color="white"
+          />
           <Heading py="5" textAlign="center" color="white">
             BECOME PART OF A COMMUNITY
           </Heading>
@@ -82,7 +97,11 @@ export default function CommunitySearchPage({ navigation }) {
           <Text>Communities near: </Text>
           <Pressable onPress={() => setShowModal(true)}>
             <HStack space="1" alignItems="center">
-              <Text fontSize={styles.zipCodeInputSize} fontWeight="bold" color="primary.400">
+              <Text
+                fontSize={styles.zipCodeInputSize}
+                fontWeight="bold"
+                color="primary.400"
+              >
                 {zipCode ? zipCode : "0000"}
               </Text>
               <Icon as={FontAwesome} name="pencil" color="primary.400" />
@@ -109,39 +128,33 @@ export default function CommunitySearchPage({ navigation }) {
         {isLoading ? (
           <Spinner />
         ) : (
-          <ScrollView showsVerticalScrollIndicator={false}>
-            {communities.length === 0 ? (
-              <Text textAlign="center" color="muted.400">
-                Please enter a zip code to find communities.
-              </Text>
-            ) : (
-              <VStack space="2">
-                <Text textAlign="center" color="muted.400">
-                  Found {communities.length} communities
-                </Text>
-                {communities
-                  // sort by geographically focused first, then by distance
-                  .sort((a, b) =>
-                    a.is_geographically_focused && !b.is_geographically_focused
-                      ? -1
-                      : 1
-                  )
-                  .sort((a, b) => a.location?.distance - b.location?.distance)
-                  .map((community) => (
-                    <CommunityCard
-                      py="2"
-                      community={community}
-                      key={community.id}
-                      onPress={() =>
-                        navigation.navigate("drawer", {
-                          community_id: community.id,
-                        })
-                      }
-                    />
-                  ))}
-              </VStack>
+          <SectionList
+            sections={communities}
+            initialNumToRender={4}
+            keyExtractor={(item, index) => item + index}
+            renderItem={({ item }) => (
+              <CommunityCard
+                py="2"
+                community={item}
+                key={item.id}
+                onPress={() =>
+                  navigation.navigate("drawer", {
+                    community_id: item.id,
+                  })
+                }
+              />
             )}
-          </ScrollView>
+            renderSectionHeader={({ section: { title } }) => (
+              <Box backgroundColor="white" py="2">
+                <Text>{title}</Text>
+              </Box>
+            )}
+            ListEmptyComponent={
+              <Text textAlign="center" color="muted.400">
+                No community found with the given zipcode
+              </Text>
+            }
+          />
         )}
       </Box>
       {/* Modal for inputting zip code */}

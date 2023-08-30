@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { TouchableWithoutFeedback } from "react-native";
+import { TouchableOpacity } from "react-native";
 
 import { Flex, Icon, Text, VStack } from "native-base";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 import Page from "../../Shared/Page";
 import EditProfileModal from "./EditProfileModal";
+import ChangeEmailModal from "./ChangeEmailModal";
 
 const SettingOptions = [
   {
@@ -37,10 +38,13 @@ const SettingOptions = [
 
 export default function SettingsPage() {
   const [isEMPOpen, setIsEMPOpen] = useState(false);
+  const [isCMEOpen, setIsCMEOpen] = useState(false);
 
   const handleOpenModal = (name) => {
     if (name === "profile") {
       setIsEMPOpen(true);
+    } else if (name === "email") {
+      setIsCMEOpen(true);
     }
   };
 
@@ -48,7 +52,7 @@ export default function SettingsPage() {
     <Page>
       <VStack space="5" pt="10" padding="5">
         {SettingOptions.map((option, index) => (
-          <TouchableWithoutFeedback
+          <TouchableOpacity
             key={index}
             onPress={() => handleOpenModal(option.name)}
           >
@@ -71,9 +75,10 @@ export default function SettingsPage() {
                 color="primary.600"
               />
             </Flex>
-          </TouchableWithoutFeedback>
+          </TouchableOpacity>
         ))}
         <EditProfileModal isOpen={isEMPOpen} setIsOpen={setIsEMPOpen} />
+        <ChangeEmailModal isOpen={isCMEOpen} setIsOpen={setIsCMEOpen} />
       </VStack>
     </Page>
   );

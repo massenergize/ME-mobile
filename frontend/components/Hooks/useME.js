@@ -13,8 +13,6 @@ export default function useME( ) {
   const fetchToken = (fbToken, callBackFn = null, moreInfo = {}) => {
     apiCall("auth.login", { idToken: fbToken })
       .then((response) => {
-        console.log("123authenticated");
-        console.log(route.params?.userPass);
         if (callBackFn) callBackFn(response, null, userEmail, userPass);
       })
       .catch((error) => {
@@ -33,8 +31,6 @@ export default function useME( ) {
         if (response?.success && response?.data) {
           // TODO: figure out what to do with the response
           // handleSignIn();
-          console.log(profile, userEmail, userPass);
-          console.log("Success!!");
           // navigation.navigate("dashboard", { userEmail: userEmail, userName: userName });
           
           if (callBackFn) callBackFn(response, null, userEmail, userPass);

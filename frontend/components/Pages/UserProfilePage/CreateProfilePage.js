@@ -67,7 +67,6 @@ export default function CreateProfilePage({ route, navigation }) {
           console.log("authState: ", authState);
           console.log("The user signed up with", userEmail);
           navigation.navigate("dashboard", { userEmail: userEmail });
-          console.log("testing");
         } catch (error) {
           // Handle sign-in error
           console.error("Error signing in: ", error);

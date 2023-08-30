@@ -30,7 +30,6 @@ import AuthModalController from "../../Pages/Auth/AuthModalController";
 
 export default function ActionDetails({ route, navigation }) {
   const { action_id } = route.params;
-  console.log("siso", getSiso());
   const [activeTab, setActiveTab] = useState("description");
 
   const [action, isActionLoading] = useDetails("actions.info", {

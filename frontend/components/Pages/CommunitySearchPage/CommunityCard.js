@@ -30,7 +30,7 @@ export default function CommunityCard({ community, ...props }) {
               </Text>
               <Text fontSize="sm" color="muted.400">
                 {Math.round(community.location.distance)} miles away
-              </Text>
+              </Text> 
             </View>
           ) : (
             <View>

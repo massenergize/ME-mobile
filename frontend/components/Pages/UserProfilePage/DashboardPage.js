@@ -75,7 +75,6 @@ const SustainScore = (CarbonSaved) => {
 };
 
 const CarbonSaved = (CarbonSaved) => {
-  console.log("HERE: ", CarbonSaved.CarbonSaved.length);
   return (
     <Flex flexDirection="row" justifyContent="space-evenly" width="full">
       <Box alignItems="center">

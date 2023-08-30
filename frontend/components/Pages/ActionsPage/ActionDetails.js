@@ -35,6 +35,7 @@ export default function ActionDetails({ route, navigation }) {
   const { testimonials, testimonialsSettings, vendorsSettings } = useContext(CommunityContext);
 
   const [showSelectDateModal, setShowSelectDateModal] = useState(false);
+  const [dateAction, setDateAction] = useState(null);
   const [isDoneOpen, setIsDoneOpen] = useState(false);
 
   // individual functions to render the context for each tab in the action details page
@@ -144,9 +145,14 @@ export default function ActionDetails({ route, navigation }) {
     }
   };
 
-  const handleCompletedActionSubmit = (date) => {
+  // TODO: add functionality to handle the action submission
+  const handleActionSubmit = (date) => {
     console.log(date);
-    setIsDoneOpen(true);
+    if (dateAction === "DONE") {
+      setIsDoneOpen(true);
+    } else {
+      console.log("Nicely done! You have now added this action to your todo list.")
+    }
   }
 
   return (
@@ -194,6 +200,7 @@ export default function ActionDetails({ route, navigation }) {
                         color: "white",
                         fontWeight: "bold",
                       }}
+                      onPress={() => {setDateAction("TODO"); setShowSelectDateModal(true)}}
                     >
                       Add to To-Do
                     </Button>
@@ -204,7 +211,7 @@ export default function ActionDetails({ route, navigation }) {
                         color: "white",
                         fontWeight: "bold",
                       }}
-                      onPress={() => setShowSelectDateModal(true)}
+                      onPress={() => {setDateAction("DONE"); setShowSelectDateModal(true)}}
                     >
                       Done
                     </Button>
@@ -237,10 +244,11 @@ export default function ActionDetails({ route, navigation }) {
             <Container height={20}></Container>
           </ScrollView>
           <ActionSelectDateModal
+            action={dateAction}
             isOpen={showSelectDateModal}
             setIsOpen={setShowSelectDateModal}
             title={action.title}
-            handleSubmit={handleCompletedActionSubmit}
+            handleSubmit={handleActionSubmit}
           />
           {/* Modal for when the user marks the action as done */}
           <Modal isOpen={isDoneOpen} onClose={() => {}}>

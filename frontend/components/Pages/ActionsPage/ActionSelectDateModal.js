@@ -3,8 +3,25 @@ import moment from "moment";
 
 import { Button, Modal, Select } from "native-base";
 
-const ActionSelectDateModal = ({ isOpen, setIsOpen, title, handleSubmit }) => {
+const ActionSelectDateModal = ({ action, isOpen, setIsOpen, title, handleSubmit }) => {
   const [completionDate, setCompletionDate] = useState(null);
+
+  const renderOptions = () => {
+    if (action === "DONE") {
+      return [
+        "Just completed it!",
+        `Earlier this year (${moment().format("YYYY")})`,
+        `Last year (${moment().subtract(1, "years").format("YYYY")})`,
+        "Before last year",
+      ]
+    }
+
+    return [
+      "Very soon",
+      `Later this year (${moment().format("YYYY")})`,
+      "Next few years",
+    ]
+  }
 
   return (
     <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
@@ -23,23 +40,9 @@ const ActionSelectDateModal = ({ isOpen, setIsOpen, title, handleSubmit }) => {
               bg: "primary.100",
             }}
           >
-            <Select.Item
-              label="Just completed it!"
-              value="Just completed it!"
-            />
-            <Select.Item
-              label={`Earlier this year (${moment().format("YYYY")})`}
-              value={`Earlier this year (${moment().format("YYYY")})`}
-            />
-            <Select.Item
-              label={`Last year (${moment()
-                .subtract(1, "years")
-                .format("YYYY")})`}
-              value={`Last year (${moment()
-                .subtract(1, "years")
-                .format("YYYY")})`}
-            />
-            <Select.Item label="Before last year" value="Before last year" />
+            {renderOptions().map((option, index) => (
+              <Select.Item key={index} label={option} value={option} />
+            ))}
           </Select>
         </Modal.Body>
         <Modal.Footer>

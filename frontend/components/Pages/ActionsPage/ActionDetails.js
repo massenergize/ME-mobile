@@ -22,6 +22,7 @@ import { CommunityContext, useDetails } from "../../Contexts/CommunityContext";
 import { TestimonialCard } from "../TestimonialsPage/TestimonialsCard";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { getActionMetric } from "../../Shared/Utils";
+import ActionSelectDateModal from "./ActionSelectDateModal";
 
 export default function ActionDetails({ route, navigation }) {
   const { action_id } = route.params;
@@ -33,6 +34,7 @@ export default function ActionDetails({ route, navigation }) {
   });
   const { testimonials, testimonialsSettings, vendorsSettings } = useContext(CommunityContext);
 
+  const [showSelectDateModal, setShowSelectDateModal] = useState(false);
   const [isDoneOpen, setIsDoneOpen] = useState(false);
 
   // individual functions to render the context for each tab in the action details page
@@ -142,6 +144,11 @@ export default function ActionDetails({ route, navigation }) {
     }
   };
 
+  const handleCompletedActionSubmit = (date) => {
+    console.log(date);
+    setIsDoneOpen(true);
+  }
+
   return (
     <Page>
       {isActionLoading ? (
@@ -197,7 +204,7 @@ export default function ActionDetails({ route, navigation }) {
                         color: "white",
                         fontWeight: "bold",
                       }}
-                      onPress={() => setIsDoneOpen(true)}
+                      onPress={() => setShowSelectDateModal(true)}
                     >
                       Done
                     </Button>
@@ -229,6 +236,12 @@ export default function ActionDetails({ route, navigation }) {
             </VStack>
             <Container height={20}></Container>
           </ScrollView>
+          <ActionSelectDateModal
+            isOpen={showSelectDateModal}
+            setIsOpen={setShowSelectDateModal}
+            title={action.title}
+            handleSubmit={handleCompletedActionSubmit}
+          />
           {/* Modal for when the user marks the action as done */}
           <Modal isOpen={isDoneOpen} onClose={() => {}}>
             <Modal.Content maxWidth="400px">

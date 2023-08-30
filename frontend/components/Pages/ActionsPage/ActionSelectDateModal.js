@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import moment from "moment";
 
-import { Button, Modal, Select } from "native-base";
+import { Button, Modal, Select, Text } from "native-base";
 
 const ActionSelectDateModal = ({ action, isOpen, setIsOpen, title, handleSubmit }) => {
   const [completionDate, setCompletionDate] = useState(null);
@@ -31,6 +31,7 @@ const ActionSelectDateModal = ({ action, isOpen, setIsOpen, title, handleSubmit 
           {title.length > 20 ? title.substring(0, 20) + "..." : title}
         </Modal.Header>
         <Modal.Body>
+          <Text mb={4}>Click "Apply" after making changes</Text>
           <Select
             selectedValue={completionDate}
             accessibilityLabel="Select completion date"

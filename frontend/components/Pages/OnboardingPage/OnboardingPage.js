@@ -11,6 +11,8 @@ import {
 } from "native-base";
 
 import HTMLParser from "../../Shared/HTMLParser";
+import { setAsyncStorageItem } from "../../Shared/Utils";
+import { IS_ONBOARDED } from "../../Constants";
 
 const STEPS = [
   {
@@ -47,6 +49,7 @@ export default function OnboardingPage({ navigation }) {
     if (currentStep < STEPS.length - 1) {
       setCurrentStep(currentStep + 1);
     } else {
+      setAsyncStorageItem(IS_ONBOARDED, "true")
       navigation.navigate("communitySearch");
     }
   };

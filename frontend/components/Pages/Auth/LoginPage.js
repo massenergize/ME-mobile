@@ -31,8 +31,9 @@ export default function LoginPage({ route, navigation }) {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
-  const { user, authState, signInWithEmailAndPassword } = useAuth();
-  const [isEmailVerified, setIsEmailVerified] = useState(false);
+  const { user, authState, signInWithEmailAndPassword, fetchMEToken } =
+    useAuth();
+  const [isEmailVerified, setIsEmailVerified] = useState(true);
 
   const handleSignIn = (values) => {
     setIsSubmitting(true);
@@ -40,15 +41,13 @@ export default function LoginPage({ route, navigation }) {
       values.email,
       values.password,
       (userCreds, error) => {
-        // useAuth.signInWithEmailAndPassword is fetching ME's token behind the scenes.
         setIsSubmitting(false);
         if (error) {
           setErrorMsg(error);
         } else {
           console.log("User signed in successfully!");
-          console.log("is user email verified?", userCreds.user.emailVerified);
-          console.log("authState: ", authState);
         }
+        setIsEmailVerified(userCreds.user.emailVerified);
       }
     );
   };
@@ -59,21 +58,26 @@ export default function LoginPage({ route, navigation }) {
     setIsEmailVerified(user.emailVerified);
   };
 
-  // Hacky way to redirect to createProfile page if user is not registered in ME yet.
-  useEffect(() => {
-    if (authState === Constants.NEEDS_REGISTRATION) {
-      navigation.navigate("createProfile");
-    } else if (authState === Constants.USER_IS_AUTHENTICATED) {
-      navigation.navigate("drawer", { community_id: community_id });
-    }
-  }, [authState]);
-
-  // display email verification page if user is not verified.
   useEffect(() => {
     if (user) {
-      setIsEmailVerified(user.emailVerified);
+      if (user?.getIdTokenResult) {
+        fetchMEToken();
+      }
+
+      setIsEmailVerified(user?.emailVerified);
+
+      if (isEmailVerified) {
+        // Hacky way to redirect to createProfile page if user is not registered in ME yet.
+        if (authState === Constants.NEEDS_REGISTRATION) {
+          navigation.navigate("createProfile");
+        } else if (authState === Constants.USER_IS_AUTHENTICATED) {
+          navigation.navigate("drawer", { community_id: community_id });
+        } else if (authState === Constants.SERVER_ERROR) {
+          setErrorMsg("Something went wrong. Please try again later.");
+        }
+      }
     }
-  }, [user]);
+  }, [user, authState, isEmailVerified]);
 
   if (user && !isEmailVerified) {
     return <EmailVerificationPage onRefresh={() => refreshUser()} />;

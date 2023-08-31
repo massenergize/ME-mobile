@@ -1,28 +1,78 @@
 import { useState, useEffect } from "react";
 
+import { GoogleAuthProvider } from "firebase/auth";
+import {
+  GoogleSignin,
+  statusCodes,
+} from "@react-native-google-signin/google-signin";
+
 import useME from "./useME";
-import Constants from "../Constants";
+import Constants, { FB_USER } from "../Constants";
 import { AUTH } from "../../config/firebaseConfig";
-import { translateFirebaseError } from "../Shared/Utils";
+import { getAsyncStorageItem, removeAsyncStorageItem, setAsyncStorageItem, translateFirebaseError } from "../Shared/Utils";
 
 export default function useAuth() {
   const [user, setUser] = useState(null);
   const [authState, setAuthState] = useState(
     Constants.USER_IS_NOT_AUTHENTICATED
   );
+
   const { fetchToken } = useME();
 
   useEffect(() => {
-    const unsubscribe = AUTH.onAuthStateChanged((user) => {
+    _fetchUserFromStorage();
+    const unsubscribe = AUTH.onAuthStateChanged(async (user) => {
       if (user) {
         setUser(user);
+        await setAsyncStorageItem(FB_USER, JSON.stringify(user))
       } else {
         setUser(null);
+        setAuthState(Constants.USER_IS_NOT_AUTHENTICATED);
       }
     });
 
     return () => unsubscribe();
   }, []);
+
+  /**
+   * Fetches the user from the local storage.
+   * reference: https://docs.expo.dev/guides/authentication/#storing-data
+   */
+  const _fetchUserFromStorage = async () => {
+    try {
+      const user = await getAsyncStorageItem(FB_USER)
+      const userData = user ? JSON.parse(user) : null;
+      if (userData?.emailVerified) {
+        setUser(userData);
+      }
+    } catch (error) {
+      console.log("error fetching user from storage: ", error);
+    }
+  };
+
+  /**
+   * Fetches the token from the backend and calls the callback function with the response.
+   */
+  const fetchMEToken = async () => {
+    const _fbToken = await user?.getIdTokenResult();
+    fetchToken(_fbToken.token, (response, error) => {
+      if (error) {
+        console.log("error fetching API to get token: ", error);
+        setAuthState(Constants.SERVER_ERROR);
+      } else {
+        if (!response.success) {
+          if (response.error === Constants.NEEDS_REGISTRATION) {
+            setAuthState(Constants.NEEDS_REGISTRATION);
+          } else {
+            console.log("error fetching token result: ", response.error);
+            setAuthState(Constants.SERVER_ERROR);
+          }
+        } else {
+          setAuthState(Constants.USER_IS_AUTHENTICATED);
+        }
+      }
+    });
+  };
 
   /**
    * Wrapper function for firebase sign up with email and password.
@@ -31,7 +81,7 @@ export default function useAuth() {
    * @param {CallableFunction} callBackFn callback function to be called after the user is created or if there is an error.
    * callBackFn(userCredential, error)
    */
-  const registerWithEmailAndPassword = (email, password, callBackFn = null) => {
+  const registerWithEmailAndPassword = (email, password, callBackFn) => {
     AUTH.createUserWithEmailAndPassword(email, password)
       .then((userCredentials) => {
         // Registered and signed in
@@ -53,23 +103,11 @@ export default function useAuth() {
    * @param {CallableFunction} callBackFn callback function to be called after the user is logged in or if there is an error.
    * callBackFn(userCredential, error)
    */
-  const signInWithEmailAndPassword = (email, password, callBackFn = null) => {
+  const signInWithEmailAndPassword = (email, password, callBackFn) => {
     AUTH.signInWithEmailAndPassword(email, password)
-      .then(async (userCredentials) => {
+      .then((userCredentials) => {
         // Signed in
-        const _fbToken = await userCredentials.user?.getIdTokenResult();
-        fetchToken(_fbToken.token, (response) => {
-          if (!response.success) {
-            if (response.error === Constants.NEEDS_REGISTRATION) {
-              setAuthState(Constants.NEEDS_REGISTRATION);
-            } else {
-              console.log("error fetching token: ", response.error);
-            }
-            return callBackFn(null, "Server error. Please contact support.");
-          } else {
-            setAuthState(Constants.USER_IS_AUTHENTICATED);
-          }
-        });
+        setAuthState(Constants.CHECK_MASS_ENERGIZE);
 
         if (callBackFn) {
           callBackFn(userCredentials, null);
@@ -83,12 +121,59 @@ export default function useAuth() {
   };
 
   /**
+   * Wrapper function for firebase sign in with Google.
+   * @param {CallableFunction} callBackFn
+   */
+  const authenticateWithGoogle = async (callBackFn) => {
+    try {
+      // presence of up-to-date Google Play Services is required to show the sign in modal.
+      // reference: https://github.com/react-native-google-signin/google-signin#hasplayservicesoptions
+      await GoogleSignin.hasPlayServices();
+      const { idToken } = await GoogleSignin.signIn();
+
+      const googleCredential = GoogleAuthProvider.credential(idToken);
+
+      AUTH.signInWithCredential(googleCredential)
+        .then((userCredential) => {
+          // Signed in
+          setAuthState(Constants.CHECK_MASS_ENERGIZE);
+          if (callBackFn) {
+            callBackFn(userCredential, null);
+          }
+        })
+        .catch((error) => {
+          if (callBackFn) {
+            callBackFn(null, translateFirebaseError(error?.toString()));
+          }
+        });
+    } catch (error) {
+      // TODO: figure out what to do with these errors.
+      if (error.code === "auth/account-exists-with-different-credential") {
+        //xx
+      } else if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        // user cancelled the login flow
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        // operation (e.g. sign in) is in progress already
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        // play services not available or outdated
+      } else {
+        // some other error happened
+        console.log("error signing in with google: ", error);
+      }
+    }
+  };
+
+  /**
    * Wrapper function for firebase sign out.
    */
-  const signOut = () => {
-    console.log("signing out...");
-    setAuthState(Constants.USER_IS_NOT_AUTHENTICATED);
-    AUTH.signOut();
+  const signOut = async () => {
+    console.log("signing out user: ", user?.email);
+    await AUTH.signOut().then(() => setUser(null));
+    // TODO: this line deletes the information that the app obtained from the Google APIs.
+    // maybe implement this feature when user wants to delete their account?
+    // GoogleSignin.revokeAccess();
+    GoogleSignin.signOut();
+    await removeAsyncStorageItem(FB_USER)
   };
 
   /**
@@ -125,6 +210,8 @@ export default function useAuth() {
     signOut,
     signInWithEmailAndPassword,
     registerWithEmailAndPassword,
+    authenticateWithGoogle,
     sendVerificationEmail,
+    fetchMEToken,
   };
 }

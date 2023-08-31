@@ -1,3 +1,5 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 /**
  * get the metric of an action
  * @param {Object} action
@@ -96,3 +98,15 @@ export const translateFirebaseError = (error) => {
     return "Hi, it looks like you do not have an account with this email yet.. :(";
   return error?.toString();
 };
+
+export const setAsyncStorageItem = async (key, value) => {
+  await AsyncStorage.setItem(key, value);
+}
+
+export const getAsyncStorageItem = async (key) => {
+  return await AsyncStorage.getItem(key);
+}
+
+export const removeAsyncStorageItem = async (key) => {
+  await AsyncStorage.removeItem(key);
+}

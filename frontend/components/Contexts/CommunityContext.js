@@ -2,6 +2,8 @@ import React, { createContext, useEffect, useState } from "react";
 import _ from 'lodash'
 
 import { apiCall } from "../../api/functions";
+import { setAsyncStorageItem } from "../Shared/Utils";
+import { LAST_VISITED_COMMUNITY_ID } from "../Constants";
 
 export const CommunityContext = createContext();
 
@@ -33,6 +35,7 @@ export const CommunityProvider = ({ children }) => {
             setInfoLoaded(infoLoaded => infoLoaded + 1);
             console.log("Community Info Fetched")
           }
+          setAsyncStorageItem(LAST_VISITED_COMMUNITY_ID, community_id.toString())
         } else {
           console.log(json);
           if (callBackFn) callBackFn(null, json.error);

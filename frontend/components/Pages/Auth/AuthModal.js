@@ -10,12 +10,15 @@ import { Modal, VStack, Button } from "native-base";
 import AuthModalController from "./AuthModalController";
 import { useNavigation } from "@react-navigation/native";
 import { CommunityContext } from "../../Contexts/CommunityContext";
+import useAuth from "../../Hooks/useAuth";
 
 function AuthModal() {
-  const { communityInfo } = useContext(CommunityContext);
-  const [isModalVisible, setIsModalVisible] = useState(false);
   const modalRef = useRef();
   const navigation = useNavigation();
+  const { communityInfo } = useContext(CommunityContext);
+  const { authenticateWithGoogle } = useAuth();
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   useLayoutEffect(() => {
     AuthModalController.setModalRef(modalRef);
@@ -43,7 +46,7 @@ function AuthModal() {
         <Modal.Header alignSelf="center">Sign In or Join</Modal.Header>
         <Modal.Body>
           <VStack space="4">
-            <Button
+            {/* <Button
               shadow="5"
               size="lg"
               backgroundColor="primary.400"
@@ -53,7 +56,7 @@ function AuthModal() {
               }}
             >
               With email only
-            </Button>
+            </Button> */}
             <Button
               shadow="5"
               size="lg"
@@ -67,13 +70,26 @@ function AuthModal() {
             >
               With email and password
             </Button>
-            <Button shadow="5" size="lg" backgroundColor="red.400">
+            <Button
+              shadow="5"
+              size="lg"
+              backgroundColor="red.400"
+              onPress={() => {
+                authenticateWithGoogle(() =>
+                  navigation.navigate("login", {
+                    community_id: communityInfo.community_id,
+                  })
+                );
+
+                AuthModalController.hideModal();
+              }}
+            >
               With Google
             </Button>
-            <Button shadow="5" size="lg" backgroundColor="blue.400">
+            {/* <Button shadow="5" size="lg" backgroundColor="blue.400">
               With Facebook
-            </Button>
-            <Button
+            </Button> */}
+            {/* <Button
               size="lg"
               variant="ghost"
               onPress={() => {
@@ -82,7 +98,7 @@ function AuthModal() {
               }}
             >
               Proceed as guest
-            </Button>
+            </Button> */}
           </VStack>
         </Modal.Body>
       </Modal.Content>

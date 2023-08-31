@@ -13,7 +13,7 @@ const tabBarLabels = {
   COMMUNITY: "Community",
   ACTIONS: "Actions",
   EVENTS: "Events",
-  PROFILE: "Profile",
+  DASHBOARD: "Dashboard",
 };
 
 export default function TabNavigator() {
@@ -29,7 +29,7 @@ export default function TabNavigator() {
             iconName = "flash";
           } else if (route.name === "EVENTS") {
             iconName = "calendar";
-          } else if (route.name === "PROFILE") {
+          } else if (route.name === "DASHBOARD") {
             iconName = "person-circle";
           }
 

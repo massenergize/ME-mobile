@@ -1,6 +1,5 @@
 import { useCallback, useState, useEffect } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Spinner } from "native-base";
 
 import LoginPage from "./Pages/Auth/LoginPage";
@@ -27,12 +26,14 @@ import TeamDetailsPage from "./Pages/TeamsPage/TeamDetailsPage";
 import TabNavigator from "./Shared/TabNavigator";
 import SettingsPage from "./Pages/SettingsPage/SettingsPage";
 import DashboardPage from "./Pages/UserProfilePage/DashboardPage";
+import { getAsyncStorageItem } from "./Shared/Utils";
+import { IS_ONBOARDED } from "./Constants";
 
 const Stack = createNativeStackNavigator();
 
 const screenOptions = {
   // headerShown: false,
-  headerTintColor: "black", 
+  headerTintColor: "black",
   headerBackTitleVisible: false,
 };
 
@@ -41,22 +42,15 @@ const screenOptions = {
  */
 const MainNavigator = () => {
   const [initialRouteName, setInitialRouteName] = useState("");
-  const [initialRouteParams, setInitialRouteParams] = useState({});
 
   const _fetchOnboardingFlagsFromAsyncStorage = useCallback(async () => {
     try {
-      const onboarded = await AsyncStorage.getItem("@IsOnboarded");
+      const onboarded = await getAsyncStorageItem(IS_ONBOARDED);
       if (onboarded) {
-        const lastVisitedCommunityId = await AsyncStorage.getItem(
-          "@LastVisitedCommunityId"
-        );
-        if (lastVisitedCommunityId) {
-          // set the initial route param to drawer
-          setInitialRouteParams({ community_id: lastVisitedCommunityId });
-          setInitialRouteName("drawer");
-        } else {
-          setInitialRouteName("communitySearch");
-        }
+        // NOTE: Why can't we check for last visited community here then navigate to the community page directly?
+        // TODO: This is a hacky solution, we should find a better way to do this.
+        // ANS: Due to navigation lifecycle, if the community page is the initial route, then CommunitySearchPage
+        // will be unmounted and remounted whenever we navigate to it.
         setInitialRouteName("communitySearch")
       } else {
         setInitialRouteName("onboarding");
@@ -147,7 +141,6 @@ const MainNavigator = () => {
           name="drawer"
           component={DrawerNavigator}
           options={{ headerShown: false }}
-          initialParams={initialRouteParams}
         />
       </Stack.Navigator>
     );

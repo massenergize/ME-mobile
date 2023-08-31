@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Center,
@@ -21,13 +21,15 @@ import Page from "../../Shared/Page";
 import CommunityCard from "./CommunityCard";
 import { apiCall } from "../../../api/functions";
 import styles from "./styles";
+import { getAsyncStorageItem } from "../../Shared/Utils";
+import { LAST_VISITED_COMMUNITY_ID } from "../../Constants";
 
 
 export default function CommunitySearchPage({ navigation }) {
   const [communities, setCommunities] = useState([]);
   const [zipCode, setZipCode] = useState("");
-  const [showModal, setShowModal] = useState(true);
-  const [maxDistance, setMaxDistance] = useState(25); // in miles
+  const [showModal, setShowModal] = useState(false);
+  const [maxDistance, setMaxDistance] = useState(5); // in miles
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -59,6 +61,22 @@ export default function CommunitySearchPage({ navigation }) {
 
     setShowModal(false);
   };
+
+  const checkLastVisitedCommunity = async () => {
+    const lastVisited = await getAsyncStorageItem(LAST_VISITED_COMMUNITY_ID);
+    if (lastVisited) {
+      navigation.navigate("drawer", {
+        community_id: lastVisited,
+      });
+    } else {
+      // only display modal if user has not visited a community before
+      setShowModal(true);
+    }
+  };
+
+  useEffect(() => {
+    checkLastVisitedCommunity();
+  }, [])
 
   return (
     <Page>

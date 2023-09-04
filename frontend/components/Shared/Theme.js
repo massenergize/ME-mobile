@@ -39,10 +39,5 @@ export default Theme = extendTheme({
     '2xl': 1281,
   },
   components: {
-    Heading: {
-      defaultProps: {
-        fontSize: {base: 'md', sm: 'xl'},
-      },
-    },
   },
 });

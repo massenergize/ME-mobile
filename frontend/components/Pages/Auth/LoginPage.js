@@ -166,6 +166,9 @@ export default function LoginPage({ route, navigation }) {
                       alignSelf="flex-end"
                       mt="1"
                       mr="2"
+                      onPress={() =>
+                        navigation.navigate("resetPassword")
+                      }
                     >
                       Forgot Password?
                     </Link>

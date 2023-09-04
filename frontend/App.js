@@ -9,17 +9,21 @@ import Theme from "./components/Shared/Theme";
 import AuthModal from "./components/Pages/Auth/AuthModal";
 import MainNavigator from "./components/Navigation";
 import { CommunityProvider } from "./components/Contexts/CommunityContext";
+import { DashboardContext, DashboardProvider } from "./components/Contexts/DashboardContext";
 
 export default function App() {
   return (
     <NativeBaseProvider theme={Theme}>
       <StatusBar barStyle="dark-content" />
-      <CommunityProvider>
-        <NavigationContainer>
-          <AuthModal />
-          <MainNavigator />
-        </NavigationContainer>
-      </CommunityProvider>
+        <CommunityProvider>
+          <DashboardProvider>
+            <NavigationContainer>
+              <AuthModal />
+              <MainNavigator />
+            </NavigationContainer>
+          </DashboardProvider>
+        </CommunityProvider>
     </NativeBaseProvider>
+
   );
 }

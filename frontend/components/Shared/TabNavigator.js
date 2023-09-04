@@ -56,6 +56,38 @@ export default function TabNavigator() {
       <Tab.Screen 
         name="PROFILE" 
         component={DashboardPage} />
+      {/* <Tab.Screen name="PROFILE" component={ProfileScreenWithNavigationCheck} /> */}
   </Tab.Navigator>
   )
+}
+function ProfileScreenWithNavigationCheck() {
+  const navigation = useNavigation();
+  const [showAuthModal, setShowAuthModal] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("tabPress", (e) => {
+      if (e.target === "PROFILE" && !getSiso()) {
+        setShowAuthModal(true);
+        e.preventDefault(); // Prevent the default navigation action
+      }
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
+  const handleNavigationAfterModal = () => {
+    setShowAuthModal(false); // Hide the modal
+    // Navigate to the Dashboard screen here
+    // For example, navigation.navigate("Dashboard");
+  };
+
+  if (showAuthModal) {
+    return (
+      <AuthModalController.showModal
+        onClose={handleNavigationAfterModal}
+      />
+    );
+  }
+
+  return <DashboardPage />;
 }

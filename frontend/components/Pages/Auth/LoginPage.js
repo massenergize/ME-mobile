@@ -18,6 +18,7 @@ import Page from "../../Shared/Page";
 import EmailVerificationPage from "./EmailVerificationPage";
 import useAuth from "../../Hooks/useAuth";
 import Constants from "../../Constants";
+import { DashboardContext, useDashboardContext } from "../../Contexts/DashboardContext";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -33,8 +34,14 @@ export default function LoginPage({ route, navigation }) {
   const [errorMsg, setErrorMsg] = useState(null);
   const { user, authState, signInWithEmailAndPassword } = useAuth();
   const [isEmailVerified, setIsEmailVerified] = useState(false);
+  const [userEmail, setUserEmail] = useState("");
+  const [userName, setUserName] = useState(null);
+  const [userPass, setUserPass] = useState("");
 
   const handleSignIn = (values) => {
+    // const [userEmail, setUserEmail] = useState("");
+    setUserEmail(values.email);
+    setUserPass(values.password);
     setIsSubmitting(true);
     signInWithEmailAndPassword(
       values.email,
@@ -45,12 +52,19 @@ export default function LoginPage({ route, navigation }) {
         if (error) {
           setErrorMsg(error);
         } else {
+          setUserEmail(values.email);
           console.log("User signed in successfully!");
           console.log("is user email verified?", userCreds.user.emailVerified);
           console.log("authState: ", authState);
+          console.log("The user signed up with", values.email, " " , userEmail, " ", userCreds.user.email);
+          if (authState === Constants.USER_IS_AUTHENTICATED) {
+            navigation.navigate("dashboard", { userEmail: userCreds.user.email });
+          }
+          console.log("testing");
         }
       }
     );
+    
   };
 
   const refreshUser = async () => {
@@ -62,9 +76,9 @@ export default function LoginPage({ route, navigation }) {
   // Hacky way to redirect to createProfile page if user is not registered in ME yet.
   useEffect(() => {
     if (authState === Constants.NEEDS_REGISTRATION) {
-      navigation.navigate("createProfile");
+      navigation.navigate("createProfile", { userEmail: userEmail, userPass: userPass });
     } else if (authState === Constants.USER_IS_AUTHENTICATED) {
-      navigation.navigate("drawer", { community_id: community_id });
+      navigation.navigate("dashboard", { userEmail: userEmail, userName: userName });
     }
   }, [authState]);
 

@@ -22,10 +22,14 @@ import { CommunityContext, useDetails } from "../../Contexts/CommunityContext";
 import { TestimonialCard } from "../TestimonialsPage/TestimonialsCard";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { getActionMetric } from "../../Shared/Utils";
+import { apiCall } from "../../../api/functions";
+import useAuth from "../../Hooks/useAuth";
+import Constants from "../../Constants";
+import { getSiso } from "../../SisoManager";
+import AuthModalController from "../../Pages/Auth/AuthModalController";
 
 export default function ActionDetails({ route, navigation }) {
   const { action_id } = route.params;
-
   const [activeTab, setActiveTab] = useState("description");
 
   const [action, isActionLoading] = useDetails("actions.info", {
@@ -33,8 +37,53 @@ export default function ActionDetails({ route, navigation }) {
   });
   const { testimonials, testimonialsSettings, vendorsSettings } = useContext(CommunityContext);
 
-  const [isDoneOpen, setIsDoneOpen] = useState(false);
+  const [isDoneOpen, setIsDoneOpen] = useState(false)
+  const [isToDoOpen, setIsToDoOpen] = useState(false)
+  const [completedActions, setCompletedActions] = useState([])
+  const [toDoActions, setToDoActions] = useState([])
+  const [userEmail, setUserEmail] = useState("");
 
+  apiCall("users.info").then((json) => {
+    if (json.success) {
+      setUserEmail(json.data.email);
+      console.log("Fetched email: ", userEmail, " Completed")
+    } else {
+      console.log("User Info Failed");
+      console.log(json);
+      if (callBackFn) callBackFn(null, json.error);
+    }
+  });
+
+  const handleAddToDo = async (email) => {
+    try {
+      
+      const response = await apiCall('users.actions.todo.add', { action_id: action_id, hid: 1 });
+      if (response.success) {
+        // Update the todoList in context with the new item
+        console.log("Added object to", email);
+        setToDoActions([...toDoActions, response.data]);
+      } else {
+        console.log('Failed to add item to todo list:', response.error);
+      }
+    } catch (error) {
+      console.log('API Error:', error);
+    }
+  };
+  const handleCompleted = async (email) => {
+    try {
+      
+      const response = await apiCall('users.actions.completed.add', { action_id: action_id, hid: 1 });
+      if (response.success) {
+        // Update the todoList in context with the new item
+        console.log("Completed object to", email);
+        setCompletedActions([...toDoActions, response.data]);
+      } else {
+        console.log('Failed to add item to todo list:', response.error);
+      }
+    } catch (error) {
+      console.log('API Error:', error);
+    }
+  };
   // individual functions to render the context for each tab in the action details page
   const generateDescriptionTab = () => {
     return <HTMLParser htmlString={action.about} baseStyle={textStyle} />;
@@ -187,7 +236,18 @@ export default function ActionDetails({ route, navigation }) {
                         color: "white",
                         fontWeight: "bold",
                       }}
-                    >
+                      onPress={() => {
+                        if (getSiso() === true) { // Replace "condition" with your actual condition
+                          handleAddToDo(userEmail, action);
+                          setIsToDoOpen(true);
+                          toDoActions.push({ name: action });
+                          console.log("Added " + action.title + " to To-do");
+                        }
+                        else 
+                        {
+                          AuthModalController.showModal();
+                        }
+                      }}>
                       Add to To-Do
                     </Button>
                     <Button
@@ -197,8 +257,18 @@ export default function ActionDetails({ route, navigation }) {
                         color: "white",
                         fontWeight: "bold",
                       }}
-                      onPress={() => setIsDoneOpen(true)}
-                    >
+                      onPress={() => {
+                        if (getSiso() === true) { // Replace "condition" with your actual condition
+                          handleCompleted(userEmail, action);
+                          setIsDoneOpen(true);
+                          completedActions.push({name: action});
+                          console.log("Added " + action.title + " Completed");
+                        }
+                        else 
+                        {
+                          AuthModalController.showModal();
+                        }
+                      }}>
                       Done
                     </Button>
                   </HStack>
@@ -248,19 +318,40 @@ export default function ActionDetails({ route, navigation }) {
                 </Center>
                 <HStack width="100%" justifyContent={"center"}>
                   {/* Testimonial button temporarily disabled while waiting for user funcitonality */}
-                  {/* <Button 
+                  <Button 
                     color={"primary.600"} 
                     onPress={() => {setIsDoneOpen(false), navigation.navigate("addTestimonial")}} 
                     mr={3}
                   >
                     Leave a Testimonial
-                  </Button> */}
+                  </Button> 
                   <Button
                     variant={"outline"}
                     px={5}
                     onPress={() => setIsDoneOpen(false)}
                   >
                     Close
+                  </Button>
+                </HStack>
+              </Modal.Body>
+            </Modal.Content>
+          </Modal>
+      
+          <Modal isOpen={isToDoOpen} onClose={() => {}}>
+            <Modal.Content maxWidth="400px">
+              <Modal.Body>
+                <Center mb="5">
+                  <Ionicons name={"ribbon-outline"} size={90} color="#64B058" />
+                  <Text fontSize="xl" fontWeight="bold" py={2}>
+                    Nice!
+                  </Text>
+                  <Text textAlign="center" fontSize="lg">
+                    You just added  <Text bold color="primary.600">{action.title}</Text> to your To-Do list!
+                  </Text>
+                </Center>
+                <HStack width="100%" justifyContent={"center"}>
+                  <Button variant={"outline"} px={5} onPress={() => setIsToDoOpen(false)}>
+                    Exit
                   </Button>
                 </HStack>
               </Modal.Body>

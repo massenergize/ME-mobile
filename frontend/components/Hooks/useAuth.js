@@ -4,7 +4,7 @@ import useME from "./useME";
 import Constants from "../Constants";
 import { AUTH } from "../../config/firebaseConfig";
 import { translateFirebaseError } from "../Shared/Utils";
-
+import { getSiso, setSiso } from "../SisoManager";
 export default function useAuth() {
   const [user, setUser] = useState(null);
   const [authState, setAuthState] = useState(
@@ -59,6 +59,11 @@ export default function useAuth() {
         // Signed in
         const _fbToken = await userCredentials.user?.getIdTokenResult();
         fetchToken(_fbToken.token, (response) => {
+          if (!response || response.success === undefined) {
+            // Handle invalid response or null response
+            console.log("Invalid response from fetchToken:", response);
+            return callBackFn(null, "Server error. Please contact support.");
+          }
           if (!response.success) {
             if (response.error === Constants.NEEDS_REGISTRATION) {
               setAuthState(Constants.NEEDS_REGISTRATION);
@@ -67,6 +72,7 @@ export default function useAuth() {
             }
             return callBackFn(null, "Server error. Please contact support.");
           } else {
+            setSiso(true);
             setAuthState(Constants.USER_IS_AUTHENTICATED);
           }
         });
@@ -81,13 +87,13 @@ export default function useAuth() {
         }
       });
   };
-
   /**
    * Wrapper function for firebase sign out.
    */
   const signOut = () => {
     console.log("signing out...");
     setAuthState(Constants.USER_IS_NOT_AUTHENTICATED);
+    setSiso(false);
     AUTH.signOut();
   };
 

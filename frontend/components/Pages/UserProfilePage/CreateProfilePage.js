@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   Center,
   Text,
@@ -31,9 +31,9 @@ export default function CreateProfilePage({ route, navigation }) {
   const { communityInfo } = useContext(CommunityContext);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { user, setUser, signOut, setAuthState } = useAuth();
+  const { user, authState, setUser, signOut, setAuthState, signInWithEmailAndPassword } = useAuth();
   const { createUserProfile } = useME();
-
+  
   const handleCreateProfile = async (values) => {
     setIsSubmitting(true);
 
@@ -50,15 +50,30 @@ export default function CreateProfilePage({ route, navigation }) {
       color: "#000000",
     };
 
-    createUserProfile(profile, (response, error) => {
+    createUserProfile(profile, (response, error, userEmail, userPass) => {
       setIsSubmitting(false);
       if (error) {
         console.log("Error creating profile: ", error);
       } else {
-        console.log("Profile created successfully!", response.data.email);
+        console.log("Profile created successfully!", response.data.email, response.data.password);
         setUser({ ...user, profile: response.data });
+        console.log(response);
         setAuthState(Constants.USER_IS_AUTHENTICATED);
-        navigation.navigate("drawer", { ...route.params });
+        try {
+          // Sign in the user
+          signInWithEmailAndPassword(userEmail, userPass);
+          console.log("User signed in successfully!");
+          console.log("is user email verified?", userEmail);
+          console.log("authState: ", authState);
+          console.log("The user signed up with", userEmail);
+          navigation.navigate("dashboard", { userEmail: userEmail });
+        } catch (error) {
+          // Handle sign-in error
+          console.error("Error signing in: ", error);
+        }
+        // handleSignIn();
+        // console.log("attempted sign in w/ new");
+        // navigation.navigate("drawer", { ...route.params });
       }
     });
   };
@@ -167,7 +182,7 @@ export default function CreateProfilePage({ route, navigation }) {
                   isLoadingText="Completing registration..."
                   onPress={handleSubmit}
                 >
-                  Finish Singing Up
+                  Finish Signing Up
                 </Button>
                 <Button
                   size="lg"

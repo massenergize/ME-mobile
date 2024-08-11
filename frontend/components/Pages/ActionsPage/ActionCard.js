@@ -2,9 +2,11 @@ import React from "react";
 import { Text, Pressable } from "react-native";
 import { Box, Heading, Image, Stack } from "native-base";
 
+import styles from './styles'
+
 export default ActionCard = React.memo(
   ({
-    navigation,
+    navigation = null,
     id,
     title,
     imgUrl,
@@ -15,11 +17,11 @@ export default ActionCard = React.memo(
     return (
       <Pressable
         onPress={() => {
-          navigation.navigate("actiondetails", { action_id: id });
+          navigation && navigation.navigate("actiondetails", { action_id: id });
         }}
         {...props}
       >
-        <Box bg="white" borderRadius="xl" shadow={2} width={180} {...props}>
+        <Box bg="white" borderRadius="xl" shadow={2} width={styles.cardWidth} {...props}>
           <Box>
             {imgUrl ? (
               <Image
@@ -27,11 +29,11 @@ export default ActionCard = React.memo(
                 alt="image"
                 borderTopRadius="xl"
                 resizeMode="cover"
-                height={120}
+                height={styles.imageSize}
                 bg="gray.300"
               />
             ) : (
-              <Box height={120} bg="gray.300"></Box>
+              <Box height={styles.imageSize} bg="gray.300"></Box>
             )}
           </Box>
           <Stack p={3} space={3}>
